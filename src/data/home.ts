@@ -1,425 +1,433 @@
 /**
- * Homepage section content.
+ * Copy and media for the home page (`src/app/(site)/page.tsx`).
  *
- * Every string here is drawn from, or faithfully paraphrases, the client's
- * source document — the hero, "Why OneVoice?", the core offerings, the OneVoice
- * Journey, "Who we support", "Work with us", the impact framework and the final
- * call to action. No impact numbers, participant stories, partner names, dates
- * or availability are included, because none are confirmed in the source.
+ * Every line of copy comes from the brief's homepage block (HOMEPAGE HERO to
+ * FINAL CALL TO ACTION), in the brief's order. Where a section needed a title
+ * the brief does not give, it borrows one of the brief's own lines from the
+ * matching page (noted beside it).
+ *
+ * IMAGES. The six photographs under /images/home/ come from the brief; the
+ * rest are the existing photographs in /images/. A slot marked `pending` is
+ * waiting for a generated image (file name, pixel size and prompt are in
+ * `_source/home-media-brief.md`); until it arrives `src` is the closest
+ * existing photograph as a stand-in, and swapping it is a one-line change to
+ * `src`. Alt text describes only what the frame shows: none of these people
+ * is presented as a OneVoice participant, volunteer or member of staff.
  */
 
-import type {
-  CorePillar,
-  HelpPathway,
-  ImpactStage,
-  JourneyStep,
-  PartnerAudience,
-} from "@/types/content";
-import { programmes } from "@/data/programmes";
-import { serviceAreas } from "@/data/services";
+import { brand, ctas, routes } from "@/data/site";
 
-/* -------------------------------------------------------------------------- */
-/*  Approved image assets                                                      */
-/*  The only photographs and logo supplied by the client. Nothing else is      */
-/*  presented as a real OneVoice participant or asset.                         */
-/* -------------------------------------------------------------------------- */
+export type HomeImage = {
+  src: string;
+  alt: string;
+  /** CSS object-position, for steering the crop. */
+  position?: string;
+  /** The generated file this slot is waiting for, under /images/home/. */
+  pending?: string;
+};
 
-export const assets = {
-  logo: "/images/Logo.png",
-  /** Hero photograph — a community food distribution. */
-  heroPhoto: "/images/HomePageHeroSection2.png",
-  /**
-   * Community learning-space photograph. Kept as its own asset because the
-   * sections that use it (the Skills & Education card, Who We Support)
-   * describe a learning session in their alt text, and that description has to
-   * keep matching the picture on screen.
-   */
-  learningPhoto: "/images/HomePageHeroSectionOrignal.png",
-  /**
-   * The three Our Work hero slides. The filenames are inconsistent on disk
-   * (`OurWorkPageHeroSection3` vs `OurWorkHeroSection1/2`); they are mapped
-   * here so the rest of the code refers to slide 1/2/3, not to spellings.
-   */
-  ourWorkSlide1: "/images/OurWorkHeroSection1.png",
-  ourWorkSlide2: "/images/OurWorkHeroSection2.png",
-  ourWorkSlide3: "/images/OurWorkPageHeroSection3.png",
-  /** Community outreach / distribution scene. */
-  outreachPhoto: "/images/HomePageHeroSection1.png",
-  secondaryPhoto: "/images/Photo 1.png",
+const photo = {
+  learningLaptop: {
+    src: "/images/Photo 1.png",
+    alt: "A woman in a pink headscarf working on a laptop beside a smiling tutor at a shared desk",
+    position: "40% 50%",
+  },
+  teamPlanning: {
+    src: "/images/OurWorkHeroSection2.png",
+    alt: "A small team leaning over a table of plans and notes in a bright office",
+    position: "62% 40%",
+  },
+  groupLaptop: {
+    src: "/images/HomePageHeroSectionOrignal.png",
+    alt: "A smiling group gathered around a laptop at a table in a busy learning space",
+    position: "55% 45%",
+  },
+  teamDocuments: {
+    src: "/images/OurWorkPageHeroSection3.png",
+    alt: "Colleagues standing around a table, reviewing printed documents together",
+    position: "50% 40%",
+  },
+  youngLaptops: {
+    src: "/images/OurWorkHeroSection1.png",
+    alt: "Young adults working together on laptops around an office table",
+    position: "50% 35%",
+  },
+  laptopsWorkshop: {
+    src: "/images/OurWorkPageHeroSection1.jpg",
+    alt: "A group of young adults sharing laptops during a workshop",
+    position: "40% 50%",
+  },
+  foodSupport: {
+    src: "/images/HomePageHeroSection1.png",
+    alt: "A smiling volunteer handing a box of food and clothing across a counter",
+    position: "45% 40%",
+  },
+  communityPantry: {
+    src: "/images/HomePageHeroSection2.png",
+    alt: "Volunteers handing a box of groceries to a woman at a community food distribution",
+    position: "40% 40%",
+  },
+  communityForum: {
+    src: "/images/home/community-forum.jpg",
+    alt: "People of different ages and backgrounds talking together around tables at a community meeting",
+    position: "50% 40%",
+  },
+  communityMeeting: {
+    src: "/images/home/community-meeting.jpg",
+    alt: "A woman speaking while others listen around tables in a library meeting room",
+    position: "45% 45%",
+  },
+  digitalClass: {
+    src: "/images/home/digital-skills-class.jpg",
+    alt: "A tutor helping two women at computers in a learning room",
+    position: "40% 50%",
+  },
+  consultation: {
+    src: "/images/home/community-consultation.jpg",
+    alt: "Community members seated along a long table during a consultation session",
+    position: "50% 55%",
+  },
+  womenGroup: {
+    src: "/images/home/women-learning-group.jpg",
+    alt: "A group of young women with laptops listening to a facilitator",
+    position: "50% 45%",
+  },
+  international: {
+    src: "/images/home/international-meeting.jpg",
+    alt: "Delegates from different countries around a meeting table with a presentation screen",
+    position: "50% 50%",
+  },
+} satisfies Record<string, HomeImage>;
+
+/** A stand-in for a slot still waiting for its own photograph. */
+const standIn = (image: HomeImage, pending: string, alt?: string): HomeImage => ({
+  ...image,
+  alt: alt ?? image.alt,
+  pending,
+});
+
+/* -------------------------------------------------------------------------
+   HOMEPAGE HERO
+   ------------------------------------------------------------------------- */
+
+export const homeHero = {
+  kicker: brand.centre,
+  /** The brief's headline, one line per phrase. */
+  title: ["Empowering People.", "Building Skills.", "Creating Opportunities."],
+  description:
+    "OneVoice Skill Development Centre supports people from ethnic minority, disadvantaged and underserved communities across London to develop skills, build confidence, access employment, explore enterprise, improve digital capability, strengthen wellbeing and connect with their communities.",
+  primaryCta: ctas.support,
+  secondaryCta: ctas.services,
+  /** One slide per word of the brief's motto, Learn. Develop. Connect. Progress. */
+  slides: [
+    { word: "Learn", image: photo.learningLaptop },
+    { word: "Develop", image: photo.teamPlanning },
+    { word: "Connect", image: photo.groupLaptop },
+    {
+      word: "Progress",
+      image: standIn(photo.teamDocuments, "hero-progress.jpg"),
+    },
+  ],
 } as const;
 
-/* --- Hero (source: "HOMEPAGE HERO") --------------------------------------- */
+/* The hero's opening paragraph, given a band of its own under the hero. */
+export type ConnectIcon = "residents" | "organisations" | "authorities" | "education" | "charities" | "employers";
 
-export const hero = {
-  label: "OneVoice Global Foundation",
-  /** Rendered one sentence per line, as in the approved design. */
-  headlineLines: [
-    "Empowering People.",
-    "Building Skills.",
-    "Creating Opportunities.",
-  ],
-  description:
-    "Helping people across London develop skills, build confidence, access employment and connect with their communities.",
-  supporting: "Learn. Develop. Connect. Progress.",
-  primaryCta: { label: "Get Support", href: "#contact" },
-  secondaryCta: { label: "Explore Our Services", href: "#areas" },
-  image: {
-    src: assets.heroPhoto,
-    // Describes the scene only. The people shown are not presented as OneVoice
-    // participants, staff or volunteers (spec §6.6).
-    alt: "Volunteers at a community food distribution handing a box of groceries to a woman, with others sorting supplies at tables behind them.",
+export const homeIntro = {
+  kicker: brand.name,
+  /** The statement, split so its key phrase can be set in italic. */
+  statement: {
+    before: "OneVoice Global Foundation is a ",
+    accent: "community empowerment and partnership platform",
+    after:
+      " to connect residents, community organisations, local authorities, education providers, charities and employers.",
+  },
+  purpose:
+    "Its purpose is to help communities access opportunities, strengthen participation and turn identified local needs into practical, measurable action.",
+  /** The six groups the statement names. */
+  connects: [
+    { label: "Residents", icon: "residents" },
+    { label: "Community Organisations", icon: "organisations" },
+    { label: "Local Authorities", icon: "authorities" },
+    { label: "Education Providers", icon: "education" },
+    { label: "Charities", icon: "charities" },
+    { label: "Employers", icon: "employers" },
+  ] satisfies { label: string; icon: ConnectIcon }[],
+  /** The card over the collage: the brief's subtitle for the Foundation. */
+  badge: brand.initiative,
+  images: {
+    main: standIn(photo.communityForum, "intro-community.jpg"),
+    inset: standIn(photo.international, "intro-partnership.jpg"),
   },
 } as const;
 
-/* --- About OneVoice (source: "WHO WE ARE") -------------------------------- */
+/* -------------------------------------------------------------------------
+   WHY ONEVOICE?
+   ------------------------------------------------------------------------- */
 
-export const aboutContent = {
-  eyebrow: "One Organisation. Many Pathways.",
-  heading: "Stronger Communities, Shared Opportunities, One World.",
-  intro:
-    "OneVoice Global Foundation connects people and organisations to build stronger, more inclusive communities.",
-  lead: "Creating Opportunities. Strengthening Communities.",
-  body: "Through skills, employment support and mentoring, we help people overcome barriers and move forward with confidence.",
-  mission:
-    "We listen, understand your needs and connect you with the right support.",
-  cta: { label: "Learn About OneVoice", href: "#areas" },
-  imageAlt:
-    "A mentor and learner working side by side at a laptop during a community digital-skills session.",
-} as const;
-
-/**
- * Short positioning markers shown beneath the About copy.
- *
- * All three restate the client's own positioning: the "One Organisation. Many
- * Pathways." differentiator, the listen-first approach, and the source's
- * explicit constraint that OneVoice is a community partnership platform and
- * NOT a political body. Nothing here is a claim about delivery or results.
- */
-export const aboutMarkers: string[] = [
-  "One organisation, many pathways",
-  "We listen first",
-  "A partnership platform, not a political body",
-];
-
-/** The three strands of work, shown as a checklist on the About composition. */
-export const aboutPillars: string[] = [
-  "Education, skills and digital confidence",
-  "Employment, enterprise and mentoring",
-  "Wellbeing, community and participation",
-];
-
-/* --- "How can we help?" quick pathways (spec H-03, proposed) --------------- */
-
-export const helpPathways: HelpPathway[] = [
-  { label: "Find work", href: "#programmes", icon: "briefcase" },
-  { label: "Learn skills", href: "#programmes", icon: "graduation-cap" },
-  { label: "Improve English", href: "#programmes", icon: "messages-square" },
-  { label: "Build digital confidence", href: "#programmes", icon: "monitor-smartphone" },
-  { label: "Explore enterprise", href: "#programmes", icon: "lightbulb" },
-  { label: "Get connected to support", href: "#contact", icon: "hand-heart" },
-];
-
-/* --- Why OneVoice? (source: "WHY ONEVOICE?") ------------------------------ */
-/* The emotional core of the brand. Verbatim rhythm from the source. */
-
-export const whyOneVoice = {
-  differentiator: "One Organisation. Many Pathways.",
+export const homeWhy = {
+  kicker: "Why OneVoice?",
+  titleLead: "One Organisation.",
+  titleAccent: "Many Pathways.",
+  /** The brief's sequence, one line per frame, each with its own photograph. */
   lines: [
-    "Someone may come to us looking for a job.",
-    "They may actually need digital skills.",
-    "They may need English.",
-    "They may need confidence.",
-    "They may need someone to listen.",
-    "They may need enterprise support.",
-    "They may need access to a specialist service.",
+    {
+      text: "Someone may come to us looking for a job.",
+      key: "looking for a job",
+      image: standIn(photo.teamDocuments, "why-job.jpg"),
+    },
+    { text: "They may actually need digital skills.", key: "digital skills", image: photo.laptopsWorkshop },
+    { text: "They may need English.", key: "English", image: photo.womenGroup },
+    {
+      text: "They may need confidence.",
+      key: "confidence",
+      image: standIn(photo.foodSupport, "why-confidence.jpg"),
+    },
+    { text: "They may need someone to listen.", key: "someone to listen", image: photo.communityMeeting },
+    { text: "They may need enterprise support.", key: "enterprise support", image: photo.youngLaptops },
+    {
+      text: "They may need access to a specialist service.",
+      key: "a specialist service",
+      image: photo.consultation,
+    },
   ],
   conclusion: "That's why our approach is holistic.",
-  threads: [
-    "Skills",
-    "Employment",
-    "Digital",
-    "Enterprise",
-    "Education",
-    "Wellbeing",
-    "Mentoring",
-    "Community",
-  ],
+  formula: ["Skills", "Employment", "Digital", "Enterprise", "Education", "Wellbeing", "Mentoring", "Community"],
 } as const;
 
-/* --- Support approach (source: "Our Approach", "Our Values", "What We Do") */
-export const supportAdvantage = {
-  eyebrow: "The OneVoice difference",
-  heading: "Support Built Around You",
-  description:
-    "Everyone starts somewhere different. Our approach begins with listening, understanding your goals and helping you find a practical way forward.",
-  points: [
-    "A conversation that starts with listening",
-    "Guidance shaped around your goals",
-    "Practical skills for life and work",
-    "English and digital confidence",
-    "Pathways into employment and enterprise",
-    "Mentoring and personal development",
-    "An inclusive, respectful approach",
-    "Connections with community and partners",
-    "Signposting to specialist support",
-    "Safety, privacy and wellbeing at the heart",
-  ],
-  badge: "One person. Many possibilities.",
-  badgeCaption: "Learn. Develop. Connect. Progress.",
-} as const;
+/* -------------------------------------------------------------------------
+   OUR CORE PROGRAMMES
+   ------------------------------------------------------------------------- */
 
-/* --- Eight core offerings (source: "OUR CORE PROGRAMMES") ------------------ */
-/* These are offer areas, not courses, so they carry no availability claim. */
+export type ProgrammeIcon =
+  "skills" | "employability" | "digital" | "enterprise" | "english" | "mentoring" | "wellbeing" | "community";
 
-export const corePillars: CorePillar[] = [
-  { icon: "wrench", title: "Skills Development", description: "Develop practical skills for life and work." },
-  { icon: "briefcase", title: "Employability", description: "Become job ready and access employment opportunities." },
-  { icon: "monitor-smartphone", title: "Digital OneVoice", description: "Build confidence in the digital world." },
-  { icon: "lightbulb", title: "OneVoice Enterprise", description: "Turn ideas into opportunities." },
-  { icon: "messages-square", title: "English & Communication", description: "Develop English and communication skills." },
-  { icon: "users", title: "Mentoring", description: "Get guidance and support from experienced people." },
-  { icon: "heart-pulse", title: "Wellbeing", description: "Build resilience, confidence and social connection." },
-  { icon: "handshake", title: "Community", description: "Connect, participate and build relationships." },
-];
-
-/* -------------------------------------------------------------------------- */
-/*  Support programmes — homepage presentation layer (brief section 04)        */
-/*  Three editorial category features. The full programme directory lives in   */
-/*  src/data/programmes.ts; these three are only how the homepage groups them  */
-/*  for a first-time visitor. No availability is claimed.                      */
-/* -------------------------------------------------------------------------- */
-
-export interface ProgrammeFeature {
-  id: "skills-education" | "employment-enterprise" | "community-wellbeing";
-  /** Lucide icon name, resolved by the rendering component. */
-  icon: string;
+export type HomeProgramme = {
   title: string;
-  description: string;
-  topics: string[];
+  line: string;
+  icon: ProgrammeIcon;
   href: string;
-  imageCaption: string;
-}
+  image: HomeImage;
+};
 
-export const programmeFeatures: ProgrammeFeature[] = [
-  {
-    id: "skills-education",
-    icon: "graduation-cap",
-    title: "Skills & Education",
-    description:
-      "Build the everyday skills and confidence to learn, work and take part — from English and communication to practical digital literacy.",
-    topics: [
-      "Education & skills development",
-      "Digital OneVoice",
-      "English & communication",
-      "Digital literacy",
-      "Career guidance",
-    ],
-    href: "/our-work#skills-education",
-    imageCaption: "An adult learner building digital confidence at a laptop.",
-  },
-  {
-    id: "employment-enterprise",
-    icon: "briefcase",
-    title: "Employment & Enterprise",
-    description:
-      "Practical pathways into work and self-employment — becoming job ready, returning after a break, or turning an idea into a business.",
-    topics: [
-      "Employability",
-      "Return to work",
-      "Business development",
-      "Enterprise support",
-      "Mentoring",
-      "Financial capability",
-    ],
-    href: "/our-work#skills-education",
-    imageCaption: "A career-guidance conversation between two people.",
-  },
-  {
-    id: "community-wellbeing",
-    icon: "heart-handshake",
-    title: "Community & Wellbeing",
-    description:
-      "Support to connect, participate and feel well — community programmes, youth and women's development, and trusted signposting.",
-    topics: [
-      "Community programmes",
-      "Youth development",
-      "Women's development",
-      "Men's development",
+export const homeProgrammes = {
+  // The label is the brief's line from its Education & Skills Development page.
+  kicker: "Skills for Life. Skills for Work. Skills for the Future.",
+  titleLead: "Our Core",
+  titleAccent: "Programmes",
+  // Both paragraphs: the brief's Education & Skills Development page.
+  description: [
+    "OneVoice provides accessible skills-development programmes designed around the needs of individuals and communities.",
+    "Where formal accreditation is required, OneVoice can work with appropriately accredited training and education partners.",
+  ],
+  cta: { label: "View All Programmes", href: routes.programmes },
+  feature: standIn(photo.groupLaptop, "programmes-feature.jpg"),
+  items: [
+    {
+      title: "Skills Development",
+      line: "Develop practical skills for life and work.",
+      icon: "skills",
+      href: `${routes.programmes}#it-digital-literacy-and-skills-development`,
+      image: photo.digitalClass,
+    },
+    {
+      title: "Employability",
+      line: "Become job ready and access employment opportunities.",
+      icon: "employability",
+      href: `${routes.programmes}#employability-and-employment-events`,
+      image: standIn(photo.teamDocuments, "programme-employability.jpg"),
+    },
+    {
+      title: "Digital OneVoice",
+      line: "Build confidence in the digital world.",
+      icon: "digital",
+      href: `${routes.programmes}#it-digital-literacy-and-skills-development`,
+      image: standIn(photo.laptopsWorkshop, "programme-digital.jpg"),
+    },
+    {
+      title: "OneVoice Enterprise",
+      line: "Turn ideas into opportunities.",
+      icon: "enterprise",
+      href: `${routes.programmes}#enterprise-and-mentoring`,
+      image: standIn(photo.youngLaptops, "programme-enterprise.jpg"),
+    },
+    {
+      title: "English & Communication",
+      line: "Develop English and communication skills.",
+      icon: "english",
+      href: `${routes.programmes}#education-and-everyday-english-esol`,
+      image: standIn(photo.womenGroup, "programme-english.jpg"),
+    },
+    {
+      title: "Mentoring",
+      line: "Get guidance and support from experienced people.",
+      icon: "mentoring",
+      href: `${routes.programmes}#enterprise-and-mentoring`,
+      image: standIn(photo.learningLaptop, "programme-mentoring.jpg"),
+    },
+    {
+      title: "Wellbeing",
+      line: "Build resilience, confidence and social connection.",
+      icon: "wellbeing",
+      href: `${routes.programmes}#mental-health-and-wellbeing`,
+      image: standIn(photo.communityMeeting, "programme-wellbeing.jpg"),
+    },
+    {
+      title: "Community",
+      line: "Connect, participate and build relationships.",
+      icon: "community",
+      href: `${routes.programmes}#community-support`,
+      image: photo.communityForum,
+    },
+  ] satisfies HomeProgramme[],
+} as const;
+
+/* -------------------------------------------------------------------------
+   OUR JOURNEY
+   ------------------------------------------------------------------------- */
+
+export const homeJourney = {
+  kicker: "Our Journey",
+  titleLead: "Your OneVoice",
+  titleAccent: "Journey",
+  // The brief's line from its OneVoice Journey page.
+  lead: "One Person. One Goal. One Step at a Time.",
+  steps: [
+    { title: "Connect", line: "Start with a conversation.", icon: "message" },
+    { title: "Discover", line: "Identify your goals and needs.", icon: "compass" },
+    { title: "Develop", line: "Build skills and confidence.", icon: "sprout" },
+    {
+      title: "Connect",
+      line: "Access employers, education, enterprise and community opportunities.",
+      icon: "handshake",
+    },
+    {
+      title: "Progress",
+      line: "Move towards employment, education, enterprise or greater independence.",
+      icon: "trending",
+    },
+  ],
+  cta: ctas.support,
+} as const;
+
+export type JourneyIcon = (typeof homeJourney.steps)[number]["icon"];
+
+/* -------------------------------------------------------------------------
+   WHO WE SUPPORT
+   ------------------------------------------------------------------------- */
+
+const person = (label: string, image: HomeImage, file: string, alt: string) => ({
+  label,
+  image: standIn(image, file, alt),
+});
+
+export const homeWhoWeSupport = {
+  kicker: "Who We Support",
+  titleLead: "OneVoice is for",
+  titleAccent: "Everyone",
+  lead: "Our programmes can support:",
+  groups: [
+    person("Women", photo.womenGroup, "support-women.jpg", photo.womenGroup.alt),
+    person("Men", photo.youngLaptops, "support-men.jpg", photo.youngLaptops.alt),
+    person("Young People", photo.laptopsWorkshop, "support-young-people.jpg", photo.laptopsWorkshop.alt),
+    person("Jobseekers", photo.teamDocuments, "support-jobseekers.jpg", photo.teamDocuments.alt),
+    person("Career Changers", photo.teamPlanning, "support-career-changers.jpg", photo.teamPlanning.alt),
+    person("Entrepreneurs", photo.groupLaptop, "support-entrepreneurs.jpg", photo.groupLaptop.alt),
+    person("Professionals", photo.international, "support-professionals.jpg", photo.international.alt),
+    person("New Communities", photo.communityForum, "support-new-communities.jpg", photo.communityForum.alt),
+    person("Families", photo.communityPantry, "support-families.jpg", photo.communityPantry.alt),
+    person(
+      "People Facing Barriers to Opportunity",
+      photo.learningLaptop,
+      "support-barriers.jpg",
+      photo.learningLaptop.alt,
+    ),
+  ],
+  note: "Programme eligibility may vary depending on funding and individual programme criteria.",
+} as const;
+
+/* -------------------------------------------------------------------------
+   WORK WITH US
+   ------------------------------------------------------------------------- */
+
+export type PartnerIcon = "employers" | "training" | "community" | "public" | "funders" | "businesses";
+
+export const homeWorkWithUs = {
+  kicker: "Work With Us",
+  titleLead: "Creating Opportunity",
+  titleAccent: "Together",
+  // The brief's Public Sector Partnerships page.
+  description:
+    "Our community-based approach can help partners engage people who may be underrepresented in mainstream programmes.",
+  partners: [
+    {
+      title: "Employers",
+      line: "Connect with diverse talent.",
+      icon: "employers",
+      href: `${routes.partners}#employers`,
+    },
+    {
+      title: "Training Providers",
+      line: "Expand access to education.",
+      icon: "training",
+      href: `${routes.partners}#training-providers`,
+    },
+    {
+      title: "Community Organisations",
+      line: "Refer and support participants.",
+      icon: "community",
+      href: `${routes.partners}#community-organisations`,
+    },
+    {
+      title: "Public Sector",
+      line: "Develop effective community programmes.",
+      icon: "public",
+      href: `${routes.partners}#public-sector`,
+    },
+    {
+      title: "Funders",
+      line: "Invest in measurable social impact.",
+      icon: "funders",
+      href: `${routes.partners}#funders`,
+    },
+    {
+      title: "Businesses",
+      line: "Support skills and community development.",
+      icon: "businesses",
+      href: `${routes.partners}#corporate-partners`,
+    },
+  ] satisfies { title: string; line: string; icon: PartnerIcon; href: string }[],
+  /** The feature card: the brief's PARTNER WITH ONEVOICE block. */
+  card: {
+    kicker: "Partner With OneVoice",
+    title: "Together We Can Create More Opportunities",
+    description: "OneVoice welcomes strategic partners who share our commitment to:",
+    commitments: [
+      "Skills Development",
+      "Employment",
+      "Enterprise",
+      "Digital Inclusion",
+      "Education",
       "Wellbeing",
-      "Information & signposting",
+      "Community Development",
+      "Social Inclusion",
     ],
-    href: "/our-work#community",
-    imageCaption: "People taking part together in a community activity.",
+    cta: ctas.partner,
+    image: standIn(photo.teamPlanning, "work-with-us.jpg"),
   },
-];
+} as const;
 
-/* --- Your OneVoice Journey (source: "OUR JOURNEY") ------------------------- */
+/* -------------------------------------------------------------------------
+   FINAL CALL TO ACTION
+   ------------------------------------------------------------------------- */
 
-export const journeySteps: JourneyStep[] = [
-  { order: 1, label: "Connect", description: "Start with a conversation." },
-  { order: 2, label: "Discover", description: "Identify your goals and needs." },
-  { order: 3, label: "Develop", description: "Build skills and confidence." },
-  { order: 4, label: "Connect", description: "Access employers, education, enterprise and community opportunities." },
-  { order: 5, label: "Progress", description: "Move towards employment, education, enterprise or greater independence." },
-];
-
-/* --- Who we support (source: "WHO WE SUPPORT") ---------------------------- */
-
-export const audiences: string[] = [
-  "Women",
-  "Men",
-  "Young People",
-  "Jobseekers",
-  "Career Changers",
-  "Entrepreneurs",
-  "Professionals",
-  "New Communities",
-  "Families",
-  "People Facing Barriers to Opportunity",
-];
-
-export const audiencesCaveat =
-  "Programme eligibility may vary depending on funding and individual programme criteria.";
-
-/* -------------------------------------------------------------------------- */
-/*  "At a glance" bar — rendered by the About section                          */
-/*                                                                            */
-/*  NOT impact statistics. Every value is either a count of content published  */
-/*  on this site (so it can never drift from what a visitor can actually see)  */
-/*  or a fact stated in the source document. No participant numbers, outcomes  */
-/*  or delivery figures appear here — those belong in the Impact section, and  */
-/*  only once verified. Declared at this point in the file because it counts   */
-/*  `audiences` above.                                                        */
-/* -------------------------------------------------------------------------- */
-
-export interface AboutStat {
-  /** Lucide icon name, resolved by the rendering component. */
-  icon: string;
-  /** Counted up on scroll when numeric; `text` is shown verbatim when null. */
-  value: number | null;
-  text?: string;
-  label: string;
-}
-
-export const aboutStats: AboutStat[] = [
-  { icon: "layers", value: serviceAreas.length, label: "Areas of work" },
-  {
-    icon: "graduation-cap",
-    value: programmes.length,
-    label: "Programmes in development",
-  },
-  { icon: "users", value: audiences.length, label: "Audience groups welcomed" },
-  { icon: "map-pin", value: null, text: "London", label: "Where we work" },
-];
-
-export const aboutStatsCaveat =
-  "These describe the scope of our planned work, not results. Verified participation and outcome figures will be published once programmes begin.";
-
-/* --- Work with us (source: "WORK WITH US") -------------------------------- */
-
-export const partnerAudiences: PartnerAudience[] = [
-  { label: "Employers", description: "Connect with diverse talent." },
-  { label: "Training Providers", description: "Expand access to education." },
-  { label: "Community Organisations", description: "Refer and support participants." },
-  { label: "Public Sector", description: "Develop effective community programmes." },
-  { label: "Funders", description: "Invest in measurable social impact." },
-  { label: "Businesses", description: "Support skills and community development." },
-];
-
-/* --- Impact framework (source: "OUR IMPACT" — REACH→...→SUSTAIN) ----------- */
-/* Framework only. No figures: the source confirms no verified metrics. */
-
-export const impactFramework: ImpactStage[] = [
-  { order: 1, label: "Reach" },
-  { order: 2, label: "Engage" },
-  { order: 3, label: "Develop" },
-  { order: 4, label: "Progress" },
-  { order: 5, label: "Sustain" },
-];
-
-export const impactIntro =
-  "We are building the ways we will measure participation, progression and outcomes. As programmes begin, our work will be guided by a simple framework.";
-
-/** Areas OneVoice INTENDS to measure. Labels only — never presented as results. */
-export const intendedOutcomes: string[] = [
-  "People engaged",
-  "Programme participants",
-  "Skills developed",
-  "Employment outcomes",
-  "Digital skills gained",
-  "Mentoring relationships",
-  "Community participation",
-];
-
-/* -------------------------------------------------------------------------- */
-/*  Real Stories, Real Progress (brief section 10)                             */
-/*  THEMES ONLY — no participants, quotations, names or photographs are        */
-/*  invented. Genuine, consent-approved stories replace these later.           */
-/* -------------------------------------------------------------------------- */
-
-export interface StoryTheme {
-  from: string;
-  to: string;
-  icon: string;
-  description: string;
-}
-
-export const storyThemes: StoryTheme[] = [
-  {
-    from: "Unemployment", to: "Employment", icon: "briefcase",
-    description: "Building job readiness through CV preparation, interview practice, career guidance and connections with employers.",
-  },
-  {
-    from: "Digital exclusion", to: "Digital confidence", icon: "monitor-smartphone",
-    description: "Developing everyday digital skills to use technology, access online services and take the next step with confidence.",
-  },
-  {
-    from: "Isolation", to: "Community", icon: "users",
-    description: "Finding connection through community activities, volunteering, shared learning and supportive networks.",
-  },
-  {
-    from: "An idea", to: "A business", icon: "lightbulb",
-    description: "Exploring enterprise through business planning, practical skills, mentoring and opportunities to connect with others.",
-  },
-  {
-    from: "A career break", to: "A new career", icon: "compass",
-    description: "Preparing to return to work with a skills review, renewed digital confidence, CV support and interview preparation.",
-  },
-];
-
-export const storiesIntro =
-  "Everyone who comes to OneVoice starts somewhere different. Our work is to help people move from barriers towards confidence, skills, opportunity and independence. As participants choose to share their progress, their stories will appear here.";
-
-/* -------------------------------------------------------------------------- */
-/*  Community Events & Activities (brief section 11)                           */
-/*  Activity TYPES only. No dates, venues or schedules are invented.           */
-/* -------------------------------------------------------------------------- */
-
-export interface CommunityActivity {
-  /** Lucide icon name, resolved by the rendering component. */
-  icon: string;
-  title: string;
-  description: string;
-}
-
-export const communityActivities: CommunityActivity[] = [
-  { icon: "wrench", title: "Skills workshops", description: "Hands-on sessions to build practical, everyday capability." },
-  { icon: "users", title: "Community networking", description: "Meet neighbours, make connections and find your footing." },
-  { icon: "briefcase", title: "Employment events", description: "Guidance, introductions and routes towards work." },
-  { icon: "monitor-smartphone", title: "Digital skills sessions", description: "Confidence with the devices and services of daily life." },
-  { icon: "compass", title: "Leadership programmes", description: "Space for young people and women to develop and lead." },
-  { icon: "hand-heart", title: "Volunteering opportunities", description: "Share your time and skills to strengthen the community." },
-];
-
-export const communityIntro =
-  "OneVoice is a place to belong as well as to learn. Alongside our programmes, we bring people together through activities that build connection, confidence and community.";
-
-/* --- Final call to action (source: "FINAL CALL TO ACTION") ---------------- */
-
-export const finalCta = {
-  heading: "Your Voice Matters. Your Future Matters.",
-  body: "Whether you want to learn a new skill, find work, explore enterprise, improve your digital confidence or connect with your community, OneVoice is here to help you take the next step.",
-  tagline: "One Person. One Voice. One Opportunity at a Time.",
-  primaryCta: { label: "Get Support", href: "#contact" },
-  secondaryCta: { label: "Get Involved", href: "#partners" },
+export const homeFinalCta = {
+  titleLead: "Your Voice Matters.",
+  titleAccent: "Your Future Matters.",
+  description:
+    "Whether you want to learn a new skill, find work, start a business, improve your digital confidence, connect with other people or access support, OneVoice Skill Development Centre is here to help you take the next step.",
+  closing: brand.closing,
+  primaryCta: ctas.support,
+  secondaryCta: ctas.services,
+  image: photo.communityPantry,
 } as const;

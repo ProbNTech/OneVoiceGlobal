@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { assets } from "@/data/home";
+import { assets } from "@/data/legacy-home";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
