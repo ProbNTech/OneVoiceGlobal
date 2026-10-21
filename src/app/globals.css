@@ -1,26 +1,516 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   OneVoice Global Foundation — design tokens
+   --------------------------------------------------------------------------
+   PROVISIONAL. These values are a working design system, not the client's
+   approved brand identity. Every colour, font and measurement below is
+   defined once here so the whole site can be re-themed from this file when
+   the official OneVoice brand is signed off.
+   ========================================================================== */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --- Brand primitives ------------------------------------------------- */
+  --ov-blue: #115b96; /* Primary Blue  */
+  --ov-blue-hover: #0e4c7d; /* Darkened for hover/active states */
+  --ov-navy: #103d63; /* Deep Navy     */
+  --ov-navy-hover: #0c3151;
+  --ov-gold: #d4af37; /* Metallic Gold */
+  --ov-gold-hover: #bd9628;
+  --ov-gold-highlight: #f5df92;
+  --ov-gold-ink: #8e681b; /* Readable gold text on white and ivory */
+  --ov-teal: #12857d; /* Support teal — logomark / category tagging only */
+  --ov-ivory: #f7f5f0; /* Warm Ivory    */
+  --ov-ink: #172b3a; /* Primary Text  */
+  --ov-white: #ffffff;
+
+  /* Supporting neutrals, warm-tinted to sit with the ivory rather than
+     fighting it. --ov-slate is contrast-checked at 6.12:1 on white. */
+  --ov-slate: #54646f;
+  --ov-line: #e3e0da;
+  --ov-line-strong: #d3cfc6;
+
+  /* --- Semantic tokens (consumed by shadcn/ui and app components) -------- */
+  --background: var(--ov-white);
+  --foreground: var(--ov-ink);
+  --card: var(--ov-white);
+  --card-foreground: var(--ov-ink);
+  --popover: var(--ov-white);
+  --popover-foreground: var(--ov-ink);
+
+  --primary: var(--ov-blue);
+  --primary-foreground: var(--ov-white);
+  --secondary: var(--ov-ivory);
+  --secondary-foreground: var(--ov-navy);
+  --muted: var(--ov-ivory);
+  --muted-foreground: var(--ov-slate);
+
+  /* Gold surfaces carry ink text. Gold lettering uses a metallic highlight;
+     navy backgrounds use the brighter solid gold accent. */
+  --accent: var(--ov-gold);
+  --accent-foreground: var(--ov-ink);
+
+  --destructive: #a4231c;
+  --destructive-foreground: var(--ov-white);
+
+  --border: var(--ov-line);
+  --input: var(--ov-line-strong);
+  --ring: var(--ov-blue);
+
+  --chart-1: var(--ov-blue);
+  --chart-2: var(--ov-navy);
+  --chart-3: var(--ov-gold);
+  --chart-4: var(--ov-slate);
+  --chart-5: var(--ov-line-strong);
+
+  --sidebar: var(--ov-ivory);
+  --sidebar-foreground: var(--ov-ink);
+  --sidebar-primary: var(--ov-blue);
+  --sidebar-primary-foreground: var(--ov-white);
+  --sidebar-accent: var(--ov-white);
+  --sidebar-accent-foreground: var(--ov-navy);
+  --sidebar-border: var(--ov-line);
+  --sidebar-ring: var(--ov-blue);
+
+  /* --- Typography ------------------------------------------------------- */
+  /* Font family variables are injected by next/font in src/app/layout.tsx */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-heading: var(--font-manrope), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* --- Shape ------------------------------------------------------------ */
+  --radius: 1rem; /* 16px — cards, panels */
+
+  /* --- Elevation -------------------------------------------------------- */
+  /* Shadows are tinted with the ink colour, not black, so they stay warm. */
+  --shadow-soft: 0 1px 2px rgb(23 43 58 / 0.04),
+    0 2px 8px -4px rgb(23 43 58 / 0.08);
+  --shadow-card: 0 1px 2px rgb(23 43 58 / 0.04),
+    0 12px 28px -16px rgb(23 43 58 / 0.16);
+  --shadow-lift: 0 2px 4px rgb(23 43 58 / 0.05),
+    0 20px 40px -20px rgb(23 43 58 / 0.22);
+
+  /* --- Motion ----------------------------------------------------------- */
+  --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
 }
+
+/*
+ * Dark mode is NOT part of the approved design scope. The class-based `.dark`
+ * variant is left in place because shadcn/ui components reference these
+ * tokens, but it is inert: nothing toggles the `.dark` class, and no dark
+ * palette has been designed. Values below are placeholders only.
+ */
+.dark {
+  --background: #0f1b24;
+  --foreground: #f2f4f6;
+  --card: #15242f;
+  --card-foreground: #f2f4f6;
+  --popover: #15242f;
+  --popover-foreground: #f2f4f6;
+  --primary: #4f9fd8;
+  --primary-foreground: #0f1b24;
+  --secondary: #1c2f3c;
+  --secondary-foreground: #f2f4f6;
+  --muted: #1c2f3c;
+  --muted-foreground: #a3b1bc;
+  --accent: var(--ov-gold);
+  --accent-foreground: var(--ov-ink);
+  --destructive: #e4655c;
+  --destructive-foreground: #0f1b24;
+  --border: rgb(255 255 255 / 0.12);
+  --input: rgb(255 255 255 / 0.18);
+  --ring: #4f9fd8;
+}
+
+/* ==========================================================================
+   Tailwind theme bridge — exposes the tokens above as utility classes
+   ========================================================================== */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Named brand colours, for cases where a semantic token would obscure
+     intent (e.g. a navy footer that is not "secondary" anything). */
+  --color-brand-blue: var(--ov-blue);
+  --color-brand-blue-hover: var(--ov-blue-hover);
+  --color-brand-navy: var(--ov-navy);
+  --color-brand-navy-hover: var(--ov-navy-hover);
+  --color-brand-gold: var(--ov-gold);
+  --color-brand-gold-hover: var(--ov-gold-hover);
+  --color-brand-gold-ink: var(--ov-gold-ink);
+  --color-brand-teal: var(--ov-teal);
+  --color-brand-ivory: var(--ov-ivory);
+  --color-brand-ink: var(--ov-ink);
+  --color-brand-slate: var(--ov-slate);
+  --color-brand-line: var(--ov-line);
+  --color-brand-line-strong: var(--ov-line-strong);
+
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.25);
+  --radius-2xl: calc(var(--radius) * 1.5);
+  --radius-3xl: calc(var(--radius) * 2);
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+
+  --ease-entrance: var(--ease-entrance);
+  --ease-exit: var(--ease-exit);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ==========================================================================
+   Ambient motion
+   --------------------------------------------------------------------------
+   Two slow, looping keyframes used for the layered card compositions and the
+   soft brand blobs behind them. Both RESOLVE TO THEIR RESTING STATE at 100%,
+   so the global `prefers-reduced-motion` rule below — which collapses every
+   animation to 0.01ms and a single iteration — leaves elements exactly where
+   the static layout puts them, with no displacement.
+   ========================================================================== */
+
+@keyframes ov-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes ov-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Uncovers an element from its right edge leftwards. */
+@keyframes ov-unveil {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes ov-settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes ov-draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ov-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(16px, -20px) scale(1.06);
+  }
+}
+
+/* ==========================================================================
+   Base layer
+   ========================================================================== */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    /* 17px base. A significant share of the audience has limited English or
+       low digital confidence, so generous body text is an accessibility
+       requirement here, not a stylistic preference. Set on <body> rather than
+       <html> so rem-based utilities keep their expected 16px scale. */
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+    color: var(--ov-navy);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* A single, unmistakable focus indicator everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  /* Honour the OS-level reduced-motion preference globally, so no individual
+     component can forget to. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+
+@layer components {
+  /* Static metallic highlights keep the gold polished without looping motion. */
+  .gold-sheen {
+    background-color: var(--ov-gold);
+    background-image: linear-gradient(
+      115deg,
+      var(--ov-gold) 0%,
+      #e6c65b 30%,
+      var(--ov-gold-highlight) 48%,
+      #e6c65b 65%,
+      var(--ov-gold) 100%
+    );
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4);
+  }
+
+  .gold-sheen:hover {
+    background-image: linear-gradient(
+      115deg,
+      var(--ov-gold-hover),
+      #e6c65b 48%,
+      var(--ov-gold)
+    );
+  }
+
+  .gold-lettering {
+    color: var(--ov-gold);
+    background-image: linear-gradient(110deg, #c49a2e, var(--ov-gold) 40%, #e6c65b 60%, #c9a331);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* The standard reading container. Gutters step up with the viewport so
+     content never touches the edge at 320px. */
+  .container-page {
+    width: 100%;
+    max-width: 80rem; /* 1280px */
+    margin-inline: auto;
+    padding-inline: 1.25rem; /* 20px */
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem; /* 32px */
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-page {
+      padding-inline: 2.5rem; /* 40px */
+    }
+  }
+
+  /* A narrower measure for long-form prose (~68 characters). */
+  .container-prose {
+    width: 100%;
+    max-width: 44rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-prose {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Vertical rhythm between page sections. Two steps only — `section-y` for
+     standard bands and `section-y-tight` for subordinate ones. */
+  /* Compact homepage spacing at each breakpoint. */
+  .home-page {
+    --section-spacing: 1.5rem; /* 24px */
+    --section-eyebrow-size: 1rem; /* 16px */
+  }
+
+  .section-eyebrow {
+    font-size: var(--section-eyebrow-size, 0.875rem);
+  }
+
+  .section-y {
+    padding-block: var(--section-spacing, 4rem);
+  }
+
+  @media (min-width: 768px) {
+    .home-page {
+      --section-spacing: 2.5rem; /* 40px */
+      --section-eyebrow-size: 1.125rem; /* 18px */
+    }
+
+    .section-y {
+      padding-block: var(--section-spacing, 6rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .home-page {
+      --section-spacing: 3.5rem; /* 56px */
+    }
+
+    .section-y {
+      padding-block: var(--section-spacing, 8rem);
+    }
+  }
+
+  /* Gentle, continuous hover for floating cards and decorative blobs. The
+     offsets are deliberately small — the brief asks for subtle motion, not
+     attention-seeking movement. */
+  .animate-float {
+    animation: ov-float 6s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: ov-float 8s ease-in-out infinite;
+    animation-delay: -2.5s;
+  }
+
+  .animate-drift {
+    animation: ov-drift 20s ease-in-out infinite;
+  }
+
+  .animate-drift-slow {
+    animation: ov-drift 26s ease-in-out infinite;
+    animation-delay: -9s;
+  }
+
+  /* Hero entrance set. `backwards` fill shows the opening frame during the
+     delay; once each animation ends the element falls back to its ordinary,
+     visible styles — so if CSS animation never runs the hero is simply there,
+     fully legible, with nothing stuck at `opacity: 0`. The global
+     reduced-motion rule collapses all of them to their resting state. */
+  .animate-rise {
+    animation: ov-rise 0.75s var(--ease-entrance) backwards;
+  }
+
+  .animate-unveil {
+    animation: ov-unveil 1.1s var(--ease-entrance) backwards;
+  }
+
+  .animate-settle {
+    animation: ov-settle 1.3s var(--ease-entrance) backwards;
+  }
+
+  .animate-draw-x {
+    transform-origin: left center;
+    animation: ov-draw-x 0.5s var(--ease-entrance) backwards;
+  }
+
+  .section-y-tight {
+    padding-block: 3rem; /* 48px */
+  }
+
+  @media (min-width: 768px) {
+    .section-y-tight {
+      padding-block: 4rem; /* 64px */
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .section-y-tight {
+      padding-block: 5rem; /* 80px */
+    }
+  }
 }
