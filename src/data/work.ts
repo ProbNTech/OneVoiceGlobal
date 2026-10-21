@@ -13,7 +13,7 @@
  * No delivery, availability, timescale or outcome is claimed.
  */
 
-import { assets } from "@/data/home";
+import { assets } from "@/data/legacy-home";
 import { serviceAreas } from "@/data/services";
 
 /* -------------------------------------------------------------------------- */
