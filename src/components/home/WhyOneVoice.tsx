@@ -26,7 +26,7 @@ export function WhyOneVoice() {
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             {/* Matches the eyebrow in SectionHeading — see that component. */}
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-brand-gold">
+            <p className="section-eyebrow mb-4 font-bold uppercase tracking-[0.18em] text-brand-gold">
               Our approach
             </p>
             <h2

@@ -423,6 +423,11 @@
   /* Compact homepage spacing at each breakpoint. */
   .home-page {
     --section-spacing: 1.5rem; /* 24px */
+    --section-eyebrow-size: 1rem; /* 16px */
+  }
+
+  .section-eyebrow {
+    font-size: var(--section-eyebrow-size, 0.875rem);
   }
 
   .section-y {
@@ -432,6 +437,7 @@
   @media (min-width: 768px) {
     .home-page {
       --section-spacing: 2.5rem; /* 40px */
+      --section-eyebrow-size: 1.125rem; /* 18px */
     }
 
     .section-y {

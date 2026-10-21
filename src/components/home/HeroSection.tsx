@@ -81,7 +81,7 @@ export function HeroSection() {
         >
           <motion.p
             variants={item}
-            className="mb-6 text-sm font-bold uppercase tracking-[0.18em] text-brand-gold"
+            className="section-eyebrow mb-6 font-bold uppercase tracking-[0.18em] text-brand-gold"
           >
             {hero.label}
           </motion.p>
