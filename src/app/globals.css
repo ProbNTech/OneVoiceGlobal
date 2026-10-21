@@ -19,8 +19,10 @@
   --ov-blue-hover: #0e4c7d; /* Darkened for hover/active states */
   --ov-navy: #103d63; /* Deep Navy     */
   --ov-navy-hover: #0c3151;
-  --ov-gold: #e0a04b; /* Warm Gold     */
-  --ov-gold-hover: #c9873a;
+  --ov-gold: #d4af37; /* Metallic Gold */
+  --ov-gold-hover: #bd9628;
+  --ov-gold-highlight: #f5df92;
+  --ov-gold-ink: #8e681b; /* Readable gold text on white and ivory */
   --ov-teal: #12857d; /* Support teal — logomark / category tagging only */
   --ov-ivory: #f7f5f0; /* Warm Ivory    */
   --ov-ink: #172b3a; /* Primary Text  */
@@ -47,9 +49,8 @@
   --muted: var(--ov-ivory);
   --muted-foreground: var(--ov-slate);
 
-  /* Warm Gold is a SURFACE colour, never a text colour on white and never a
-     background for white text — both combinations measure 2.26:1 and fail
-     WCAG AA. Gold backgrounds always carry --ov-ink (6.44:1). */
+  /* Gold surfaces carry ink text. Light backgrounds use the deeper gold-ink
+     tone for lettering; navy backgrounds use the brighter metallic gold. */
   --accent: var(--ov-gold);
   --accent-foreground: var(--ov-ink);
 
@@ -179,6 +180,7 @@
   --color-brand-navy-hover: var(--ov-navy-hover);
   --color-brand-gold: var(--ov-gold);
   --color-brand-gold-hover: var(--ov-gold-hover);
+  --color-brand-gold-ink: var(--ov-gold-ink);
   --color-brand-teal: var(--ov-teal);
   --color-brand-ivory: var(--ov-ivory);
   --color-brand-ink: var(--ov-ink);
@@ -350,6 +352,37 @@
    ========================================================================== */
 
 @layer components {
+  /* Static metallic highlights keep the gold polished without looping motion. */
+  .gold-sheen {
+    background-color: var(--ov-gold);
+    background-image: linear-gradient(
+      115deg,
+      var(--ov-gold) 0%,
+      #e6c65b 30%,
+      var(--ov-gold-highlight) 48%,
+      #e6c65b 65%,
+      var(--ov-gold) 100%
+    );
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4);
+  }
+
+  .gold-sheen:hover {
+    background-image: linear-gradient(
+      115deg,
+      var(--ov-gold-hover),
+      #e6c65b 48%,
+      var(--ov-gold)
+    );
+  }
+
+  .gold-lettering {
+    color: var(--ov-gold);
+    background-image: linear-gradient(110deg, #c49a2e, var(--ov-gold) 40%, #e6c65b 60%, #c9a331);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   /* The standard reading container. Gutters step up with the viewport so
      content never touches the edge at 320px. */
   .container-page {
@@ -387,19 +420,32 @@
 
   /* Vertical rhythm between page sections. Two steps only — `section-y` for
      standard bands and `section-y-tight` for subordinate ones. */
+  /* Compact homepage spacing at each breakpoint. */
+  .home-page {
+    --section-spacing: 1.5rem; /* 24px */
+  }
+
   .section-y {
-    padding-block: 4rem; /* 64px */
+    padding-block: var(--section-spacing, 4rem);
   }
 
   @media (min-width: 768px) {
+    .home-page {
+      --section-spacing: 2.5rem; /* 40px */
+    }
+
     .section-y {
-      padding-block: 6rem; /* 96px */
+      padding-block: var(--section-spacing, 6rem);
     }
   }
 
   @media (min-width: 1280px) {
+    .home-page {
+      --section-spacing: 3.5rem; /* 56px */
+    }
+
     .section-y {
-      padding-block: 8rem; /* 128px */
+      padding-block: var(--section-spacing, 8rem);
     }
   }
 

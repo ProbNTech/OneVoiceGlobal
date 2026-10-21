@@ -77,11 +77,11 @@ export const aboutContent = {
   eyebrow: "One Organisation. Many Pathways.",
   heading: "Stronger Communities, Shared Opportunities, One World.",
   intro:
-    "OneVoice Global Foundation brings people, organisations and opportunities together to create stronger, more inclusive communities.",
+    "OneVoice Global Foundation connects people and organisations to build stronger, more inclusive communities.",
   lead: "Creating Opportunities. Strengthening Communities.",
-  body: "Through practical education, skills development, employment support, mentoring and community partnerships, we help individuals overcome barriers and move towards a more confident and independent future.",
+  body: "Through skills, employment support and mentoring, we help people overcome barriers and move forward with confidence.",
   mission:
-    "We listen first, understand what matters, and connect people to the right support — one conversation, one person, one opportunity at a time.",
+    "We listen, understand your needs and connect you with the right support.",
   cta: { label: "Learn About OneVoice", href: "#areas" },
   imageAlt:
     "A mentor and learner working side by side at a laptop during a community digital-skills session.",
@@ -146,6 +146,28 @@ export const whyOneVoice = {
   ],
 } as const;
 
+/* --- Support approach (source: "Our Approach", "Our Values", "What We Do") */
+export const supportAdvantage = {
+  eyebrow: "The OneVoice difference",
+  heading: "Support Built Around You",
+  description:
+    "Everyone starts somewhere different. Our approach begins with listening, understanding your goals and helping you find a practical way forward.",
+  points: [
+    "A conversation that starts with listening",
+    "Guidance shaped around your goals",
+    "Practical skills for life and work",
+    "English and digital confidence",
+    "Pathways into employment and enterprise",
+    "Mentoring and personal development",
+    "An inclusive, respectful approach",
+    "Connections with community and partners",
+    "Signposting to specialist support",
+    "Safety, privacy and wellbeing at the heart",
+  ],
+  badge: "One person. Many possibilities.",
+  badgeCaption: "Learn. Develop. Connect. Progress.",
+} as const;
+
 /* --- Eight core offerings (source: "OUR CORE PROGRAMMES") ------------------ */
 /* These are offer areas, not courses, so they carry no availability claim. */
 
@@ -192,7 +214,7 @@ export const programmeFeatures: ProgrammeFeature[] = [
       "Digital literacy",
       "Career guidance",
     ],
-    href: "#programmes",
+    href: "/our-work#skills-education",
     imageCaption: "An adult learner building digital confidence at a laptop.",
   },
   {
@@ -209,7 +231,7 @@ export const programmeFeatures: ProgrammeFeature[] = [
       "Mentoring",
       "Financial capability",
     ],
-    href: "#programmes",
+    href: "/our-work#skills-education",
     imageCaption: "A career-guidance conversation between two people.",
   },
   {
@@ -226,7 +248,7 @@ export const programmeFeatures: ProgrammeFeature[] = [
       "Wellbeing",
       "Information & signposting",
     ],
-    href: "#programmes",
+    href: "/our-work#community",
     imageCaption: "People taking part together in a community activity.",
   },
 ];
@@ -338,14 +360,31 @@ export const intendedOutcomes: string[] = [
 export interface StoryTheme {
   from: string;
   to: string;
+  icon: string;
+  description: string;
 }
 
 export const storyThemes: StoryTheme[] = [
-  { from: "Unemployment", to: "Employment" },
-  { from: "Digital exclusion", to: "Digital confidence" },
-  { from: "Isolation", to: "Community" },
-  { from: "An idea", to: "A business" },
-  { from: "A career break", to: "A new career" },
+  {
+    from: "Unemployment", to: "Employment", icon: "briefcase",
+    description: "Building job readiness through CV preparation, interview practice, career guidance and connections with employers.",
+  },
+  {
+    from: "Digital exclusion", to: "Digital confidence", icon: "monitor-smartphone",
+    description: "Developing everyday digital skills to use technology, access online services and take the next step with confidence.",
+  },
+  {
+    from: "Isolation", to: "Community", icon: "users",
+    description: "Finding connection through community activities, volunteering, shared learning and supportive networks.",
+  },
+  {
+    from: "An idea", to: "A business", icon: "lightbulb",
+    description: "Exploring enterprise through business planning, practical skills, mentoring and opportunities to connect with others.",
+  },
+  {
+    from: "A career break", to: "A new career", icon: "compass",
+    description: "Preparing to return to work with a skills review, renewed digital confidence, CV support and interview preparation.",
+  },
 ];
 
 export const storiesIntro =

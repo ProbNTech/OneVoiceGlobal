@@ -14,8 +14,7 @@ import { serviceAreas, serviceAreasCta } from "@/data/services";
  * already implied by reading order, so the whole badge is hidden from
  * assistive technology and the icon carries no label.
  *
- * The number is set in ink, not white: white on Warm Gold measures 2.26:1 and
- * fails WCAG AA, while ink on gold measures 6.44:1 (see globals.css).
+ * The number uses ink on gold so the small ordinal stays readable.
  */
 function AreaBadge({ order, Icon }: { order: number; Icon: LucideIcon }) {
   return (

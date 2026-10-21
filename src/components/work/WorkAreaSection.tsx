@@ -52,7 +52,7 @@ export function WorkAreaSection({ area, index }: WorkAreaSectionProps) {
             <Reveal>
               <p
                 aria-hidden="true"
-                className="font-heading text-sm font-bold tabular-nums tracking-[0.1em] text-brand-gold"
+                className="gold-lettering font-heading text-sm font-bold tabular-nums tracking-[0.1em]"
               >
                 {ordinal}
               </p>

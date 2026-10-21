@@ -49,7 +49,10 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-brand-gold">
+        <p className={cn(
+          "mb-4 text-sm font-bold uppercase tracking-[0.18em]",
+          dark ? "text-brand-gold" : "gold-lettering"
+        )}>
           {eyebrow}
         </p>
       )}

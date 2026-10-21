@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type CtaVariant =
-  | "primary" // warm gold — the main action (gold always carries ink text: 6.44:1)
+  | "primary" // metallic gold with high-contrast ink text
   | "secondary" // bordered — the subordinate action on a light background
   | "onDark" // solid white — main action on navy backgrounds
   | "onDarkOutline" // bordered white — subordinate action on navy / photo
@@ -24,11 +24,10 @@ const base =
 const buttonBase = "h-12 rounded-lg px-6 text-[0.9375rem]";
 
 const variants: Record<CtaVariant, string> = {
-  // Warm Gold is a surface colour only — it never carries white text (2.26:1).
-  // Paired with ink it measures 6.44:1 and passes WCAG AA.
+  // Metallic gold surfaces carry ink text for readable contrast.
   primary: cn(
     buttonBase,
-    "bg-brand-gold text-brand-ink hover:bg-brand-gold-hover"
+    "gold-sheen bg-brand-gold text-brand-ink hover:bg-brand-gold-hover"
   ),
   secondary: cn(
     buttonBase,

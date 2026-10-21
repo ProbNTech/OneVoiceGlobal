@@ -2,15 +2,26 @@ import { Section } from "@/components/shared/Section";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaLink } from "@/components/shared/CtaLink";
 import { Reveal } from "@/components/shared/Reveal";
-import { PlaceholderImage } from "@/components/shared/PlaceholderImage";
-import { resolveIcon } from "@/components/shared/icons";
+import Image from "next/image";
 import { assets, programmeFeatures } from "@/data/home";
 
-/** The approved photographs are spread across the three features; the third
- *  uses a clearly-marked placeholder until more photography is supplied. */
-const featureImages = [assets.learningPhoto, assets.secondaryPhoto, undefined];
-const featurePositions = ["center 35%", "center 30%", "center"];
-const tones = ["blue", "navy", "ivory"] as const;
+const featureImages = [
+  {
+    src: assets.learningPhoto,
+    alt: "People learning together around a laptop in a community setting.",
+    position: "center 35%",
+  },
+  {
+    src: assets.secondaryPhoto,
+    alt: "Learners developing their computer skills together at laptops.",
+    position: "center 30%",
+  },
+  {
+    src: assets.heroPhoto,
+    alt: "Volunteers distributing groceries to people in the community.",
+    position: "center",
+  },
+];
 
 /**
  * Our Support Programmes (brief section 04 / spec H-06).
@@ -22,65 +33,55 @@ const tones = ["blue", "navy", "ivory"] as const;
  */
 export function ProgrammesSection() {
   return (
-    <Section id="programmes">
+    <Section id="programmes" className="bg-brand-ivory">
       <div className="container-page">
         <SectionHeading
           eyebrow="What we do"
           title="Support That Opens Doors to Opportunity"
-          description="From learning new skills to accessing employment and community support, OneVoice helps people find practical pathways forward."
           align="center"
           className="mx-auto max-w-3xl"
         />
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="mt-10 grid gap-y-10 md:grid-cols-3 md:divide-x md:divide-white">
           {programmeFeatures.map((feature, i) => {
-            const Icon = resolveIcon(feature.icon);
+            const image = featureImages[i];
             return (
               <Reveal
                 as="article"
                 key={feature.id}
                 delay={i * 0.1}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)] transition-shadow duration-300 hover:shadow-[var(--shadow-card)]"
+                className="group flex flex-col items-center px-4 text-center sm:px-6 lg:px-8"
               >
-                <div className="relative">
-                  <PlaceholderImage
-                    src={featureImages[i]}
-                    alt={feature.imageCaption}
-                    caption={feature.imageCaption}
-                    aspect="landscape"
-                    position={featurePositions[i]}
-                    tone={tones[i]}
-                    rounded="rounded-none"
-                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    className="ring-0"
+                <div
+                  className="relative aspect-square w-full max-w-80 overflow-hidden bg-brand-navy/5"
+                  style={{ borderRadius: "0 42% 0 42%" }}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(min-width: 1024px) 320px, (min-width: 768px) 30vw, 85vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transform-none"
+                    style={{ objectPosition: image.position }}
                   />
-                  <span className="absolute left-4 top-4 inline-flex size-11 items-center justify-center rounded-xl bg-white text-brand-blue shadow-[var(--shadow-soft)]">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
                 </div>
 
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-heading text-xl font-bold text-brand-navy">
+                <div className="mt-7 flex flex-1 flex-col items-center">
+                  <h3 className="font-heading text-2xl font-extrabold text-brand-navy">
                     {feature.title}
                   </h3>
-                  <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted-foreground">
+                  <p className="mt-3 max-w-xs text-base leading-relaxed text-muted-foreground">
                     {feature.description}
                   </p>
 
-                  <ul className="mt-4 flex flex-wrap gap-1.5">
-                    {feature.topics.map((topic) => (
-                      <li
-                        key={topic}
-                        className="rounded-md bg-secondary px-2.5 py-1 text-[0.8125rem] font-medium text-secondary-foreground"
-                      >
-                        {topic}
-                      </li>
-                    ))}
-                  </ul>
-
                   <div className="mt-auto pt-6">
-                    <CtaLink href={feature.href} variant="text">
-                      Explore Programmes
+                    <CtaLink
+                      href={feature.href}
+                      variant="primary"
+                      className="shadow-card"
+                      aria-label={`Learn more about ${feature.title}`}
+                    >
+                      Learn More
                     </CtaLink>
                   </div>
                 </div>
@@ -89,13 +90,6 @@ export function ProgrammesSection() {
           })}
         </div>
 
-        <p className="mx-auto mt-10 max-w-3xl text-center text-sm text-muted-foreground">
-          These three areas are how we group our work on the homepage. Every
-          programme is currently{" "}
-          <span className="font-semibold text-brand-navy">planned</span> — the
-          full directory, with delivery details, will follow as programmes are
-          confirmed.
-        </p>
       </div>
     </Section>
   );

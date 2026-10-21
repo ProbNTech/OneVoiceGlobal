@@ -1,7 +1,8 @@
-import { ArrowRight } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Reveal } from "@/components/shared/Reveal";
+import { CtaLink } from "@/components/shared/CtaLink";
+import { resolveIcon } from "@/components/shared/icons";
 import { storiesIntro, storyThemes } from "@/data/home";
 
 /**
@@ -25,49 +26,55 @@ export function StoriesSection() {
           className="mx-auto max-w-3xl"
         />
 
-        <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {storyThemes.map((theme, i) => (
-            <Reveal
-              as="li"
-              key={`${theme.from}-${theme.to}`}
-              delay={i * 0.08}
-              className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-soft)] transition-shadow duration-300 hover:shadow-[var(--shadow-card)]"
-            >
-              <p className="text-[0.75rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
-                From
-              </p>
-              <p className="mt-1.5 font-heading text-lg font-semibold text-brand-slate">
-                {theme.from}
-              </p>
-              <ArrowRight
-                className="my-3.5 size-5 text-brand-gold"
-                aria-hidden="true"
-              />
-              <p className="text-[0.75rem] font-bold uppercase tracking-[0.16em] text-brand-blue">
-                To
-              </p>
-              <p className="mt-1.5 font-heading text-xl font-bold text-brand-navy">
-                {theme.to}
-              </p>
-            </Reveal>
-          ))}
+        <ul className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {storyThemes.map((theme, i) => {
+            const Icon = resolveIcon(theme.icon);
+            return (
+              <Reveal
+                as="li"
+                key={`${theme.from}-${theme.to}`}
+                delay={i * 0.08}
+                className="rounded-xl border border-border bg-card p-6 shadow-soft transition-shadow duration-300 hover:shadow-card"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span className="inline-flex size-10 items-center justify-center rounded-lg bg-brand-ivory text-brand-blue">
+                    <Icon className="size-5" strokeWidth={1.6} aria-hidden="true" />
+                  </span>
+                  <span aria-hidden="true" className="font-heading text-2xl font-bold tabular-nums text-brand-navy/25">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className="mt-4 font-heading text-lg font-bold leading-snug text-brand-navy">
+                  From {theme.from.toLowerCase()} to {theme.to.toLowerCase()}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {theme.description}
+                </p>
+              </Reveal>
+            );
+          })}
 
           {/* Honest placeholder for the future stories collection. */}
           <Reveal
             as="li"
             delay={storyThemes.length * 0.08}
-            className="flex flex-col justify-center rounded-2xl border border-dashed border-brand-line-strong bg-muted/50 p-6"
+            className="flex flex-col rounded-xl border border-border bg-brand-ivory p-6"
           >
-            <p className="font-heading text-lg font-bold text-brand-navy">
+            <h3 className="font-heading text-lg font-bold text-brand-navy">
               Your story could be next
-            </p>
+            </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               As participants choose to share their progress, their approved
               stories will appear here.
             </p>
-            <p className="mt-4 text-sm font-semibold text-brand-slate">
+            <p className="mt-3 text-xs font-medium text-muted-foreground">
               Success Stories — coming soon
             </p>
+            <div className="mt-auto pt-6">
+              <CtaLink href="/#contact" variant="text">
+                Start Your Journey
+              </CtaLink>
+            </div>
           </Reveal>
         </ul>
       </div>

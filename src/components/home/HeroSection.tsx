@@ -111,7 +111,7 @@ export function HeroSection() {
           >
             <Link
               href={hero.primaryCta.href}
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-brand-gold px-6 text-[0.9375rem] font-semibold text-brand-ink outline-none transition-colors hover:bg-brand-gold-hover focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+              className="gold-sheen group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-brand-gold px-6 text-[0.9375rem] font-semibold text-brand-ink outline-none transition-colors hover:bg-brand-gold-hover focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
             >
               {hero.primaryCta.label}
               <ArrowUpRight
@@ -144,7 +144,7 @@ export function HeroSection() {
       {/* Curved divider into the ivory band below */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 z-10 h-12 bg-brand-ivory sm:h-16 lg:h-20"
+        className="absolute inset-x-0 bottom-0 z-10 h-6 bg-brand-ivory sm:h-8 lg:h-10"
         style={{ borderRadius: "50% 50% 0 0 / 100% 100% 0 0" }}
       />
     </section>
