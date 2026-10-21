@@ -51,7 +51,7 @@ export function WorkFeatureRow({
     >
       <div className={mediaLeft ? "lg:order-2" : "lg:order-1"}>
         <Reveal delay={baseDelay}>
-          <p className="flex items-center gap-4 text-sm font-bold uppercase tracking-[0.18em] text-brand-navy">
+          <p className="gold-lettering flex items-center gap-4 text-sm font-bold uppercase tracking-[0.18em]">
             <span aria-hidden="true" className="h-px w-8 shrink-0 bg-brand-gold" />
             {feature.shortName}
           </p>

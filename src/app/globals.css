@@ -49,8 +49,8 @@
   --muted: var(--ov-ivory);
   --muted-foreground: var(--ov-slate);
 
-  /* Gold surfaces carry ink text. Light backgrounds use the deeper gold-ink
-     tone for lettering; navy backgrounds use the brighter metallic gold. */
+  /* Gold surfaces carry ink text. Gold lettering uses a metallic highlight;
+     navy backgrounds use the brighter solid gold accent. */
   --accent: var(--ov-gold);
   --accent-foreground: var(--ov-ink);
 

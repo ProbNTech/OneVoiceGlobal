@@ -44,7 +44,7 @@ export function OurWorkHero() {
       <div className="container-page relative z-10">
         <div className="flex flex-col justify-center py-14 sm:py-16 lg:min-h-[660px] lg:w-[45%] lg:py-24 lg:pr-14">
           <p
-            className="animate-rise text-base font-bold uppercase tracking-[0.18em] text-brand-navy"
+            className="gold-lettering animate-rise text-base font-bold uppercase tracking-[0.18em]"
             style={{ animationDelay: "0.3s" }}
           >
             {ourWorkHero.eyebrow}

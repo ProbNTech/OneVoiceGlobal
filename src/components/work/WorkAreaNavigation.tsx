@@ -85,8 +85,8 @@ export function WorkAreaNavigation() {
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "font-heading text-sm font-bold tabular-nums transition-colors duration-200",
-                      isActive ? "text-brand-gold" : "text-brand-gold/75"
+                      "gold-lettering font-heading text-sm font-bold tabular-nums transition-opacity duration-200",
+                      isActive ? "opacity-100" : "opacity-75"
                     )}
                   >
                     {String(i + 1).padStart(2, "0")}
