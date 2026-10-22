@@ -60,8 +60,25 @@ export function Journey() {
                   aria-hidden="true"
                   className="relative mx-auto grid h-20 w-20 place-items-center rounded-full bg-lagoon-600 text-white shadow-[0_18px_36px_-18px_rgb(14_122_118/0.8)] transition-[transform,background-color] duration-700 ease-out-soft group-hover:-translate-y-1.5 group-hover:bg-ink"
                 >
-                  {/* A soft ring that widens on hover. */}
-                  <span className="absolute inset-0 rounded-full ring-1 ring-lagoon-600/30 transition-transform duration-700 ease-out-soft group-hover:scale-125" />
+                  {/* An outer ring that draws itself round the circle as the step
+                      arrives (styles/site.css, .ring-draw) and widens on hover. */}
+                  <svg
+                    viewBox="0 0 100 100"
+                    className="absolute -inset-2.5 h-[calc(100%+1.25rem)] w-[calc(100%+1.25rem)] -rotate-90 text-lagoon-600/45 transition-transform duration-700 ease-out-soft group-hover:scale-110"
+                  >
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="48"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      pathLength={100}
+                      strokeDasharray="100"
+                      vectorEffect="non-scaling-stroke"
+                      className="ring-draw"
+                    />
+                  </svg>
                   <Icon className="h-7 w-7" strokeWidth={1.5} />
                 </span>
                 <p className="mt-6 text-[0.875rem] font-bold tabular-nums tracking-[0.22em] text-saffron-ink">

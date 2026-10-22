@@ -64,14 +64,16 @@ export function Programmes() {
           <Reveal variant="image" delay={100} className="lg:col-span-6">
             <div className="reveal-clip relative aspect-[4/3] overflow-hidden rounded-panel shadow-[0_50px_90px_-50px_rgb(10_37_64/0.6)]">
               <div className="reveal-media absolute inset-0">
-                <Image
-                  src={feature.src}
-                  alt={feature.alt}
-                  fill
-                  sizes="(min-width: 1360px) 760px, (min-width: 1024px) 56vw, 100vw"
-                  className="object-cover"
-                  style={{ objectPosition: feature.position }}
-                />
+                <div className="parallax absolute inset-x-0 -inset-y-[8%]">
+                  <Image
+                    src={feature.src}
+                    alt={feature.alt}
+                    fill
+                    sizes="(min-width: 1360px) 760px, (min-width: 1024px) 56vw, 100vw"
+                    className="object-cover"
+                    style={{ objectPosition: feature.position }}
+                  />
+                </div>
               </div>
             </div>
           </Reveal>
@@ -105,14 +107,16 @@ function ProgrammeCard({ programme }: { programme: HomeProgramme }) {
       </span>
 
       <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-sand shadow-[0_30px_60px_-40px_rgb(10_37_64/0.55)]">
-        <Image
-          src={programme.image.src}
-          alt={programme.image.alt}
-          fill
-          sizes="(min-width: 1920px) 440px, (min-width: 1024px) 23vw, (min-width: 640px) 50vw, 82vw"
-          className="object-cover transition-transform duration-[1.4s] ease-out-soft group-hover:scale-[1.08]"
-          style={{ objectPosition: programme.image.position }}
-        />
+        <div className="parallax absolute inset-x-0 -inset-y-[8%]">
+          <Image
+            src={programme.image.src}
+            alt={programme.image.alt}
+            fill
+            sizes="(min-width: 1920px) 440px, (min-width: 1024px) 23vw, (min-width: 640px) 50vw, 82vw"
+            className="object-cover transition-transform duration-[1.4s] ease-out-soft group-hover:scale-[1.08]"
+            style={{ objectPosition: programme.image.position }}
+          />
+        </div>
         <span className="absolute bottom-4 right-4 grid h-10 w-10 translate-y-2 place-items-center rounded-full bg-white text-ink opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           <ArrowUpRight className="h-4.5 w-4.5" />
         </span>

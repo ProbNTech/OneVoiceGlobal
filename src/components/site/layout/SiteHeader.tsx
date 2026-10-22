@@ -249,6 +249,8 @@ function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClose: () =
   return (
     <div
       id="site-menu"
+      // Scrolls on its own, outside the page's smooth scrolling.
+      data-lenis-prevent
       role="dialog"
       aria-modal="true"
       aria-label="Menu"

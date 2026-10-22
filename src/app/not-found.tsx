@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site/layout/SiteHeader";
 import { SiteFooter } from "@/components/site/layout/SiteFooter";
+import { SmoothScroll } from "@/components/site/layout/SmoothScroll";
 import { Cta, Kicker, Shell } from "@/components/site/ui/primitives";
 import { brand } from "@/data/site";
 
@@ -13,6 +14,7 @@ export const metadata: Metadata = { title: "Page not found" };
 export default function NotFound() {
   return (
     <div data-design="site" className="contents">
+      <SmoothScroll />
       <SiteHeader />
       <main id="main" className="relative isolate flex flex-1 items-center overflow-clip bg-cream pb-24 pt-40">
         <div
