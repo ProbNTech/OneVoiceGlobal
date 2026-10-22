@@ -34,7 +34,7 @@ export function VisionMission() {
           className="mt-5 max-w-5xl"
         />
 
-        <div className="mt-8 space-y-6 lg:mt-10">
+        <div className="mt-6 space-y-4 lg:mt-8">
           {aboutVisionPanels.map((panel, index) => {
             // The photograph changes sides; on phones it always leads.
             const photoRight = index % 2 === 1;
@@ -43,7 +43,7 @@ export function VisionMission() {
                 <div className="grid overflow-hidden rounded-panel bg-ocean-700 lg:grid-cols-12">
                   <div
                     className={cx(
-                      "relative min-h-[15rem] overflow-hidden bg-ocean-700 lg:col-span-4",
+                      "relative min-h-[13rem] overflow-hidden bg-ocean-700 lg:col-span-4",
                       photoRight && "lg:order-2",
                     )}
                   >
@@ -57,13 +57,15 @@ export function VisionMission() {
                     />
                   </div>
 
-                  <div className={cx("flex flex-col p-7 sm:p-9 lg:col-span-8 lg:p-11", photoRight && "lg:order-1")}>
-                    <p className="max-w-3xl text-lead text-white">{panel.statement}</p>
+                  <div className={cx("flex flex-col p-6 sm:p-8 lg:col-span-8 lg:p-9", photoRight && "lg:order-1")}>
+                    <p className="max-w-5xl text-[clamp(1.25rem,1.7vw,1.75rem)] leading-[1.45] text-white">
+                      {panel.statement}
+                    </p>
 
                     {panel.commitments ? (
-                      <ul className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                      <ul className="mt-5 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
                         {panel.commitments.map((item) => (
-                          <li key={item} className="flex items-center gap-3 text-[0.9375rem] text-white">
+                          <li key={item} className="flex items-center gap-3 text-[1.0625rem] text-white">
                             <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-navy-950">
                               <Check className="h-3.5 w-3.5" strokeWidth={2.6} />
                             </span>
@@ -73,13 +75,9 @@ export function VisionMission() {
                       </ul>
                     ) : null}
 
-                    {panel.note ? (
-                      <p className="mt-5 max-w-3xl text-[0.9375rem] leading-relaxed text-white/65">{panel.note}</p>
-                    ) : null}
-
                     {/* Pushed to the foot of the panel, as the reference sets it. */}
-                    <div className="mt-auto pt-8 text-right">
-                      <p className="text-[0.9375rem] font-bold text-white">{panel.label}</p>
+                    <div className="mt-auto pt-6 text-right">
+                      <p className="text-[1.0625rem] font-bold text-white">{panel.label}</p>
                       <p className="mt-0.5 text-[0.75rem] font-semibold text-saffron-300">
                         {aboutVisionMission.attribution}
                       </p>

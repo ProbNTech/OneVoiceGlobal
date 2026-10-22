@@ -51,7 +51,18 @@ const discTones: Record<ValueTone, string> = {
 };
 
 type Value = (typeof aboutValues.items)[number];
-type Cell = { kind: "value"; value: Value } | { kind: "photo"; image: HomeImage };
+type Cell = { kind: "value"; value: Value } | { kind: "photo"; image: HomeImage; rows: number; shape: string };
+
+/* Photographs alternate a plain corner with a leaf, so a grid this regular
+   does not read as a wall of identical boxes. */
+const photoShapes = ["rounded-card", "rounded-[1.25rem_4rem_1.25rem_1.25rem]"];
+
+/* The order the grid is filled in. Three columns and plain auto-placement do
+   the rest: a photograph standing two rows holds its column while the values
+   flow around it, so no cell is ever placed by hand and nothing breaks when a
+   card's text grows. "v" takes the next value, a number takes the next
+   photograph and says how many rows it stands. */
+const PLAN: ("v" | 1 | 2)[] = ["v", 2, "v", "v", "v", 2, "v", "v", "v", "v", 1, 1, 1];
 
 /**
  * Our Values, as a mosaic: the brief's eight values as cards in alternating
@@ -61,12 +72,18 @@ type Cell = { kind: "value"; value: Value } | { kind: "photo"; image: HomeImage 
  * to be placed by hand.
  */
 export function Values() {
-  const cells: Cell[] = [];
-  aboutValues.items.forEach((value, index) => {
-    cells.push({ kind: "value", value });
-    if (index === 0) cells.push({ kind: "photo", image: aboutValues.images[0] });
-    if (index === 3) cells.push({ kind: "photo", image: aboutValues.images[1] });
-  });
+  let nextValue = 0;
+  let nextImage = 0;
+  const cells: Cell[] = PLAN.map((slot) =>
+    slot === "v"
+      ? { kind: "value" as const, value: aboutValues.items[nextValue++]! }
+      : {
+          kind: "photo" as const,
+          image: aboutValues.images[nextImage]!,
+          rows: slot,
+          shape: photoShapes[nextImage++ % photoShapes.length]!,
+        },
+  );
 
   return (
     <section
@@ -87,16 +104,19 @@ export function Values() {
           </Reveal>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:mt-10 lg:auto-rows-fr lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:mt-10 lg:auto-rows-[minmax(11rem,1fr)] lg:grid-cols-3">
           {cells.map((cell, index) =>
             cell.kind === "photo" ? (
               <Reveal
                 key={cell.image.src}
                 variant="image"
                 delay={(index % 3) * 90}
-                className="group relative aspect-[4/3] sm:aspect-auto sm:min-h-[16rem] lg:row-span-2"
+                className={cx(
+                  "group relative aspect-[4/3] sm:aspect-auto sm:min-h-[14rem]",
+                  cell.rows === 2 && "lg:row-span-2",
+                )}
               >
-                <div className="reveal-clip absolute inset-0 overflow-hidden rounded-card bg-cream">
+                <div className={cx("reveal-clip absolute inset-0 overflow-hidden bg-cream", cell.shape)}>
                   <div className="reveal-media absolute inset-0">
                     <Image
                       src={cell.image.src}

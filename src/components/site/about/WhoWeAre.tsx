@@ -11,7 +11,7 @@ const icons: Record<OutcomeIcon, LucideIcon> = {
 };
 
 /**
- * Who We Are: a photograph on the left bracketed by two blocks in the logo's
+ * Who We Are: a photograph on the right bracketed by two blocks in the logo's
  * colours, the Foundation's subtitle on a card over its top corner and the
  * Centre's home on another over its foot; the statement beside it, with the
  * brief's
@@ -31,19 +31,19 @@ export function WhoWeAre() {
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
           {/* Photograph. The padding at the foot is the room the card hangs
               down into. */}
-          <div className="relative pb-10 lg:col-span-4">
+          <div className="relative pb-10 lg:col-span-4 lg:col-start-9">
             <Reveal variant="image" className="relative">
               {/* Two blocks in the logo's colours, offset behind the opposite
                   corners of the photograph so each reads as a bracket around
                   it. They take the corners the two cards leave free. */}
-              <Reveal variant="fade" delay={120} className="absolute -right-5 -top-5 -z-10">
+              <Reveal variant="fade" delay={120} className="absolute -left-5 -top-5 -z-10">
                 <div className="h-20 w-20 rounded-[1.75rem] bg-saffron-500 sm:h-24 sm:w-24 lg:h-28 lg:w-28" />
               </Reveal>
-              <Reveal variant="fade" delay={220} className="absolute -bottom-5 -left-5 -z-10">
+              <Reveal variant="fade" delay={220} className="absolute -bottom-5 -right-5 -z-10">
                 <div className="h-20 w-20 rounded-[1.75rem] bg-lagoon-600 sm:h-24 sm:w-24 lg:h-28 lg:w-28" />
               </Reveal>
 
-              <div className="reveal-clip relative aspect-[4/5] overflow-hidden rounded-[2rem_1.5rem_1.5rem_1.5rem] bg-sand shadow-[0_40px_80px_-45px_rgb(10_37_64/0.6)]">
+              <div className="reveal-clip relative aspect-[4/5] overflow-hidden rounded-[1.5rem_2rem_1.5rem_1.5rem] bg-sand shadow-[0_40px_80px_-45px_rgb(10_37_64/0.6)]">
                 <div className="reveal-media absolute inset-0">
                   <div className="parallax absolute inset-x-0 -inset-y-[8%]">
                     <Image
@@ -60,9 +60,9 @@ export function WhoWeAre() {
             </Reveal>
 
             <Reveal
-              variant="left"
+              variant="right"
               delay={420}
-              className="absolute -left-3 top-6 z-10 max-w-[15rem] sm:-left-5 sm:top-8"
+              className="absolute -right-3 top-6 z-10 max-w-[15rem] sm:-right-5 sm:top-8"
             >
               <div className="flex items-center gap-3 rounded-[1.25rem] bg-white p-4 shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
                 <Image src="/images/brand/mark.png" alt="" width={477} height={503} className="h-10 w-auto shrink-0" />
@@ -75,7 +75,7 @@ export function WhoWeAre() {
             <Reveal
               variant="up"
               delay={320}
-              className="absolute bottom-0 right-0 z-10 max-w-[15rem] sm:-right-5 sm:max-w-[19rem]"
+              className="absolute bottom-0 left-0 z-10 max-w-[15rem] sm:-left-5 sm:max-w-[19rem]"
             >
               <div className="flex items-center gap-4 rounded-[1.25rem] bg-white p-5 shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-ink text-white">
@@ -90,7 +90,7 @@ export function WhoWeAre() {
           </div>
 
           {/* Statement */}
-          <div className="lg:col-span-7 lg:col-start-6">
+          <div className="lg:col-span-7 lg:col-start-1 lg:row-start-1">
             <Reveal variant="fade">
               <Kicker>{aboutWhoWeAre.kicker}</Kicker>
             </Reveal>
@@ -101,11 +101,13 @@ export function WhoWeAre() {
               className="mt-5"
             />
             <Reveal delay={150}>
-              <p className="mt-6 max-w-3xl text-lead text-slate">{aboutWhoWeAre.lead}</p>
+              <p className="mt-6 max-w-4xl text-[clamp(1.1875rem,1.3vw,1.375rem)] leading-[1.6] text-slate">
+                {aboutWhoWeAre.lead}
+              </p>
             </Reveal>
             <Reveal delay={210}>
-              <p className="mt-5 max-w-3xl leading-relaxed text-slate">{aboutWhoWeAre.body}</p>
-              <p className="mt-7 max-w-3xl text-[0.9375rem] leading-relaxed text-muted">{barriers.lead}</p>
+              <p className="mt-5 max-w-4xl text-[1.0625rem] leading-relaxed text-slate">{aboutWhoWeAre.body}</p>
+              <p className="mt-7 max-w-4xl text-[1rem] leading-relaxed text-muted">{barriers.lead}</p>
             </Reveal>
 
             {/* Twelve barriers, so they are set plainly, three to a row. The
@@ -113,7 +115,7 @@ export function WhoWeAre() {
                 light of them. */}
             <ul
               aria-label="Barriers to opportunity"
-              className="mt-5 grid max-w-3xl gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3"
+              className="mt-5 grid max-w-4xl gap-x-8 gap-y-3.5 sm:grid-cols-2 lg:grid-cols-3"
             >
               {barriers.items.map((barrier, index) => (
                 <Reveal
@@ -121,7 +123,7 @@ export function WhoWeAre() {
                   key={barrier}
                   variant="up"
                   delay={240 + index * 45}
-                  className="flex items-baseline gap-3 text-[0.9375rem] leading-snug text-ink"
+                  className="flex items-baseline gap-3 text-[1rem] leading-snug text-ink"
                 >
                   <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-saffron-500" />
                   {barrier}
@@ -129,14 +131,14 @@ export function WhoWeAre() {
               ))}
             </ul>
 
-            <Reveal as="blockquote" delay={320} className="mt-9 max-w-2xl border-l-2 border-saffron-400 pl-6">
+            <Reveal as="blockquote" delay={320} className="mt-9 max-w-3xl border-l-2 border-saffron-400 pl-6">
               <span
                 aria-hidden="true"
                 className="block font-display text-[2.75rem] leading-[0.6] text-saffron-500 [font-variation-settings:'SOFT'_100]"
               >
                 {"“"}
               </span>
-              <p className="mt-4 font-display text-[1.25rem] leading-[1.5] text-ink [font-variation-settings:'SOFT'_100]">
+              <p className="mt-4 font-display text-[clamp(1.25rem,1.5vw,1.5rem)] leading-[1.45] text-ink [font-variation-settings:'SOFT'_100]">
                 {quote}
               </p>
             </Reveal>

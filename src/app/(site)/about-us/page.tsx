@@ -16,8 +16,10 @@ export const metadata: Metadata = {
 };
 
 /**
- * About Us, in the menu's order. Our Team is the one menu section still to
- * come: the brief gives it no content yet, so the strip leaves it out.
+ * About Us. The menu's sections run in its order; the OneVoice Journey, which
+ * the menu does not list, closes the page. Our Team is the one menu section
+ * still to come: the brief gives it no content yet, so the strip leaves it
+ * out.
  */
 export default function AboutPage() {
   return (
@@ -27,9 +29,9 @@ export default function AboutPage() {
       <WhoWeAre />
       <Approach />
       <VisionMission />
-      <Journey />
       <Values />
       <Commitments />
+      <Journey />
     </>
   );
 }

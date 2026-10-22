@@ -155,8 +155,6 @@ type VisionPanel = {
   statement: string;
   /** The Mission's closing clauses, which the brief sets off with semicolons. */
   commitments?: string[];
-  /** The Purpose's note on what OneVoice is not. */
-  note?: string;
   image: HomeImage;
 };
 
@@ -192,7 +190,6 @@ export const aboutVisionPanels = [
     label: "Our Purpose",
     statement:
       "To serve as a trusted bridge between communities and wider society, helping people be heard, access support, develop their potential and contribute positively to their local communities and the world.",
-    note: "OneVoice Global should be presented as a community partnership and empowerment platform, not as a political organisation, a replacement for established charities, or a body that automatically represents every community. Its role is to listen, connect, coordinate and help deliver solutions with local partners.",
     image: {
       src: "/images/home/women-learning-group.jpg",
       alt: "A group of young women with laptops listening to a facilitator",
@@ -279,7 +276,9 @@ export const aboutValues = {
     { name: "Integrity", line: "We act responsibly and transparently.", icon: "integrity", tone: "saffron" },
     { name: "Progress", line: "We focus on practical outcomes.", icon: "progress", tone: "navy" },
   ] satisfies { name: string; line: string; icon: ValueIcon; tone: ValueTone }[],
-  /** Two photographs woven into the grid, each standing two rows tall. */
+  /** Photographs woven through the grid. Values are abstractions; without
+      faces among them the section reads as a dashboard rather than as
+      anything to do with people. */
   images: [
     {
       src: "/images/Photo 1.png",
@@ -292,6 +291,24 @@ export const aboutValues = {
       alt: "Young adults working together on laptops around an office table",
       position: "50% 35%",
       pending: "about-values-2.jpg",
+    },
+    {
+      src: "/images/HomePageHeroSection2.png",
+      alt: "Volunteers handing a box of groceries to a woman at a community food distribution",
+      position: "40% 40%",
+      pending: "about-values-3.jpg",
+    },
+    {
+      src: "/images/OurWorkPageHeroSection1.jpg",
+      alt: "A group of young adults sharing laptops during a workshop",
+      position: "40% 45%",
+      pending: "about-values-4.jpg",
+    },
+    {
+      src: "/images/HomePageHeroSectionOrignal.png",
+      alt: "A smiling group gathered around a laptop at a table in a busy learning space",
+      position: "55% 45%",
+      pending: "about-values-5.jpg",
     },
   ] satisfies HomeImage[],
 } as const;
