@@ -30,7 +30,7 @@ This file is the playbook for every page on this site. Read it before designing 
 
 **Section design**
 - **Vary the sections.** Every section on a page takes a different design approach; repeating one card pattern reads as monotonous.
-- **No sticky or pinned scroll effects.** No sticky left columns, scrollytelling or pinned horizontal galleries: the user rejected all of them.
+- **No sticky or pinned scroll effects.** No sticky left columns, scrollytelling or pinned horizontal galleries: the user rejected all of them. The About page's OneVoice Journey was pinned briefly on 2026-10-22 and the user had it unpinned the same day; it now draws its path against the panel's own climb up the screen instead (`src/components/site/about/Journey.tsx`).
 - **Simple items stay simple.** An icon list is just an icon circle with text beside it, with no card, tile or background behind it. An image card is a photo with its title and line underneath, with no card background.
 - **No decorative hairlines.** None beside or under headings, and none between list rows.
 - **Shapes never crop text.** Organic shapes (arches, leaf corners) are welcome on photos, but keep the corners under any text small.
