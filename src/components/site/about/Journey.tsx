@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import { useCallback, useRef, useState, useSyncExternalStore } from "react";
+import { ChevronDown } from "lucide-react";
 import { useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
 import { cx } from "@/lib/cx";
 import { aboutJourney } from "@/data/about";
-import { Kicker, Shell, Title } from "../ui/primitives";
+import type { HomeImage } from "@/data/home";
+import { Cta, Kicker, Shell, Title } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
 
 /** Follows a media query, and reports false until the page is interactive. */
@@ -26,20 +28,20 @@ function useMedia(query: string) {
 }
 
 /**
- * The OneVoice Journey, split across one panel: London fills the right at
- * full strength, and a navy wedge with an amber edge carries the five steps
- * down the left. The steps light one after another, and the rail beside them
- * draws down to meet each one, as the panel rises into view. The page is
- * never held; the drawing is paced against the panel's own climb up the
- * screen, over roughly half a screen of ordinary scrolling.
+ * The OneVoice Journey drawn as a diagram down the left of the panel:
+ * Connect at the head, forking into Discover and Develop, each of which leads
+ * on to its own step. Three photographs stand beside it, and London sits
+ * behind the whole panel under a heavy wash.
  *
- * Each step carries its own length of rail, so consecutive lengths join and
- * the drawing needs no arithmetic about how tall a step happens to be.
+ * The nodes light one after another as the panel rises into view. The page is
+ * never held; the lighting is paced against the panel's own climb up the
+ * screen. The nodes carry no reveal of their own: the panel already decides
+ * when each is lit, and a second thing driving the same opacity is how the
+ * steps went blank before.
  *
- * Below large screens there is no room for a diagonal: the wedge gives way to
- * an even wash over the whole panel and the copy runs its full width. The
- * lighting is for large screens too — on phones, and under reduced motion,
- * every step is simply lit.
+ * Below large screens the diagram has no room, so the branches fold into one
+ * column and the joins are hidden; the nodes then stand in the brief's order,
+ * one to five, and every one of them is lit.
  */
 export function Journey() {
   const panel = useRef<HTMLElement>(null);
@@ -49,19 +51,45 @@ export function Journey() {
   const [lit, setLit] = useState(0);
   const steps = aboutJourney.steps;
 
-  // Measured from the panel's own climb: nothing is lit while it is still low
-  // on the screen, and the path is complete by the time it is a third of the
-  // way up. That is about half a screen of scrolling for the five steps.
   const { scrollYProgress } = useScroll({ target: panel, offset: ["start 0.9", "start 0.35"] });
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     const next = Math.max(0, Math.min(steps.length - 1, Math.floor(progress * (steps.length + 1))));
     setLit((current) => (current === next ? current : next));
   });
 
+  const node = (index: number) => {
+    const step = steps[index]!;
+    const isLit = !drawing || index <= lit;
+    return (
+      <div
+        className={cx(
+          "flex min-w-0 flex-col items-center text-center transition-opacity duration-700 ease-out-soft",
+          isLit ? "opacity-100" : "opacity-30",
+        )}
+      >
+        <span
+          aria-hidden="true"
+          className={cx(
+            "grid h-16 w-16 shrink-0 place-items-center rounded-full text-[1rem] font-bold tabular-nums transition-colors duration-700 ease-out-soft",
+            isLit
+              ? "bg-saffron-400 text-navy-950 shadow-[0_0_0_0.4375rem_rgb(233_176_79/0.15)]"
+              : "bg-white/[0.07] text-white/55 ring-1 ring-inset ring-white/20",
+          )}
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <h3 className="mt-5 font-display text-[clamp(1.5rem,1.9vw,2rem)] leading-tight text-white [font-variation-settings:'SOFT'_100]">
+          {step.name}
+        </h3>
+        <p className="mt-2.5 max-w-[16rem] text-[1.0625rem] leading-relaxed text-white/75">{step.line}</p>
+      </div>
+    );
+  };
+
   return (
     <section ref={panel} aria-labelledby="journey-title" className="relative isolate overflow-clip bg-cream py-band">
       <Shell>
-        <div className="relative isolate overflow-hidden rounded-panel bg-navy-950">
+        <div className="relative isolate overflow-hidden rounded-panel bg-navy-950 px-6 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
           {/* London, drifting as the page scrolls. */}
           <div aria-hidden="true" className="absolute inset-0 -z-30">
             <div className="parallax absolute inset-x-0 -inset-y-[8%]">
@@ -76,90 +104,128 @@ export function Journey() {
               />
             </div>
           </div>
-
-          {/* Small screens: the copy runs the full width, so the photograph is
-              held well back behind it. */}
-          <div aria-hidden="true" className="absolute inset-0 -z-20 bg-navy-950/92 lg:hidden" />
-
-          {/* Large screens: an amber edge, with the navy wedge laid over it a
-              shade narrower, which is what leaves the line showing. */}
+          {/* Deeper where the copy sits, lighter across the middle. */}
+          <div aria-hidden="true" className="absolute inset-0 -z-20 bg-navy-950/84" />
           <div
             aria-hidden="true"
-            className="absolute inset-0 -z-20 hidden bg-saffron-500 lg:block lg:[clip-path:polygon(0_0,60.25%_0,48.25%_100%,0_100%)]"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 -z-20 hidden bg-navy-950 lg:block lg:[clip-path:polygon(0_0,60%_0,48%_100%,0_100%)]"
+            className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgb(6_26_48/0.6)_0%,rgb(6_26_48/0.2)_45%,rgb(6_26_48/0.75)_100%)]"
           />
 
-          {/* Kept clear of the diagonal: the wedge is never narrower than 48%
-              of the panel, and the copy stops at 45%. */}
-          <div className="p-6 sm:p-10 lg:w-[45%] lg:p-14">
-            <Reveal variant="fade">
-              <Kicker tone="dark">{aboutJourney.kicker}</Kicker>
-            </Reveal>
-            <Title
-              id="journey-title"
-              lead={aboutJourney.titleLead}
-              accent={aboutJourney.titleAccent}
-              tone="dark"
-              accentTone="saffron"
-              size="statement"
-              className="mt-5"
-            />
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-7">
+              <div className="text-center">
+                <Reveal variant="fade" className="flex justify-center">
+                  <Kicker tone="dark">{aboutJourney.kicker}</Kicker>
+                </Reveal>
+                <Title
+                  id="journey-title"
+                  lead={aboutJourney.titleLead}
+                  accent={aboutJourney.titleAccent}
+                  tone="dark"
+                  accentTone="saffron"
+                  className="mt-5"
+                />
+              </div>
 
-            <ol className="mt-8 lg:mt-10">
-              {steps.map((step, index) => {
-                const isLit = !drawing || index <= lit;
-                return (
-                  // Connect is both the first step and the fourth.
-                  <Reveal
-                    as="li"
-                    key={`${step.name}-${index}`}
-                    variant="up"
-                    delay={index * 80}
-                    className="relative pl-9"
-                  >
-                    {/* This step's length of rail, and the colour that draws
-                        down it. */}
-                    <span aria-hidden="true" className="absolute left-[0.3125rem] top-0 h-full w-px bg-white/15" />
-                    <span
-                      aria-hidden="true"
-                      className={cx(
-                        "absolute left-[0.3125rem] top-0 h-full w-px origin-top bg-saffron-400 transition-transform duration-700 ease-out-soft",
-                        isLit ? "scale-y-100" : "scale-y-0",
-                      )}
-                    />
-                    {/* Outside the dimming, so an unlit marker stays a marker. */}
-                    <span
-                      aria-hidden="true"
-                      className={cx(
-                        "absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full transition-[background-color,box-shadow] duration-700 ease-out-soft",
-                        isLit ? "bg-saffron-400 shadow-[0_0_0_0.3125rem_rgb(233_176_79/0.18)]" : "bg-white/25",
-                      )}
-                    />
+              <div className="mt-10 grid gap-y-10 lg:mt-12 lg:gap-y-0">
+                {/* The head of the journey. */}
+                <div className="lg:flex lg:justify-center">{node(0)}</div>
 
-                    <div
-                      className={cx(
-                        "pb-7 transition-opacity duration-700 ease-out-soft",
-                        isLit ? "opacity-100" : "opacity-30",
-                      )}
-                    >
-                      <p className="text-[0.75rem] font-bold tabular-nums tracking-[0.22em] text-saffron-300">
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <h3 className="mt-1.5 font-display text-[1.375rem] leading-tight text-white [font-variation-settings:'SOFT'_100]">
-                        {step.name}
-                      </h3>
-                      <p className="mt-2 text-[0.9375rem] leading-relaxed text-white/75">{step.line}</p>
-                    </div>
-                  </Reveal>
-                );
-              })}
-            </ol>
+                {/* The fork: a stem, then an elbow out to each branch.
+                    Drawn as two bordered boxes meeting at the stem, so the
+                    turns are rounded rather than square corners. */}
+                <div aria-hidden="true" className="relative hidden h-20 lg:block">
+                  <span className="absolute left-1/2 top-0 h-8 w-px -translate-x-1/2 bg-white/30" />
+                  <span className="absolute left-1/4 top-8 h-12 w-1/4 rounded-tl-2xl border-l border-t border-white/30" />
+                  <span className="absolute right-1/4 top-8 h-12 w-1/4 rounded-tr-2xl border-r border-t border-white/30" />
+                </div>
+
+                <div className="grid gap-y-10 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-0">
+                  {node(1)}
+                  {node(2)}
+                </div>
+
+                {/* A drop from each branch to the step it leads to. */}
+                <div aria-hidden="true" className="hidden h-16 lg:grid lg:grid-cols-2 lg:gap-x-10">
+                  <Drop />
+                  <Drop />
+                </div>
+
+                <div className="grid gap-y-10 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-0">
+                  {node(3)}
+                  {node(4)}
+                </div>
+              </div>
+
+              <Reveal variant="up" delay={200} className="mt-12 flex justify-center">
+                <Cta href={aboutJourney.cta.href} variant="saffron">
+                  {aboutJourney.cta.label}
+                </Cta>
+              </Reveal>
+            </div>
+
+            {/* One wide photograph over two square ones. */}
+            <div className="grid gap-4 lg:col-span-5">
+              <Photo
+                image={aboutJourney.images[0]}
+                ratio="aspect-[4/3]"
+                shape="rounded-[2rem_1.25rem_1.25rem_1.25rem]"
+                wide
+              />
+              <div className="grid grid-cols-2 gap-4">
+                <Photo image={aboutJourney.images[1]} ratio="aspect-square" shape="rounded-[1.25rem]" />
+                <Photo
+                  image={aboutJourney.images[2]}
+                  ratio="aspect-square"
+                  shape="rounded-[1.25rem_1.25rem_1.25rem_2.5rem]"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </Shell>
     </section>
+  );
+}
+
+function Photo({
+  image,
+  ratio,
+  shape,
+  wide = false,
+}: {
+  image: HomeImage;
+  ratio: string;
+  shape: string;
+  wide?: boolean;
+}) {
+  return (
+    <Reveal variant="image" className={cx("group relative", ratio)}>
+      <div className={cx("reveal-clip absolute inset-0 overflow-hidden bg-navy-900 ring-1 ring-white/10", shape)}>
+        <div className="reveal-media absolute inset-0">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes={
+              wide
+                ? "(min-width: 1760px) 680px, (min-width: 1024px) 40vw, 100vw"
+                : "(min-width: 1760px) 330px, (min-width: 1024px) 20vw, 50vw"
+            }
+            className="object-cover transition-transform duration-[1.4s] ease-out-soft group-hover:scale-[1.07]"
+            style={{ objectPosition: image.position }}
+          />
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+function Drop() {
+  return (
+    <div className="relative">
+      <span className="absolute left-1/2 top-0 h-12 w-px -translate-x-1/2 bg-white/30" />
+      <ChevronDown className="absolute left-1/2 top-10 h-6 w-6 -translate-x-1/2 text-white/40" strokeWidth={1.6} />
+    </div>
   );
 }
