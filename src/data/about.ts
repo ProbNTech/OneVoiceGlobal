@@ -18,7 +18,7 @@
  * of staff.
  */
 
-import type { HomeImage } from "@/data/home";
+import type { HomeImage, JourneyIcon } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
 export const aboutHero = {
@@ -202,8 +202,7 @@ export const aboutVisionPanels = [
 /* -------------------------------------------------------------------------
    ONEVOICE JOURNEY
    The brief carries this on its OneVoice Journey page, and again, in the same
-   five steps, on the homepage. The home page sets them as a row of numbered
-   circles; here they are read down a rail instead.
+   five steps, on the homepage.
    ------------------------------------------------------------------------- */
 
 export const aboutJourney = {
@@ -211,7 +210,7 @@ export const aboutJourney = {
   /** The brief's own subtitle for the page. */
   titleLead: "One Person. One Goal.",
   titleAccent: "One Step at a Time.",
-  /** Fills the panel behind the path, under a heavy navy wash. Supplied by
+  /** Fills the panel behind the steps, under a heavy navy wash. Supplied by
       the user; the city the Centre works in, not a photograph in its own
       right. */
   backdrop: {
@@ -219,39 +218,29 @@ export const aboutJourney = {
     alt: "",
     position: "50% 55%",
   } satisfies HomeImage,
+  /** Sets the five steps up: what the journey is, and that it is walked at
+      the pace of the person walking it. */
+  lead: "Everyone who comes to OneVoice arrives at a different point, with different hopes and different pressures. The journey below is how we walk it with you — one conversation at a time, for as long as it takes.",
+  /** Closes the steps off, beneath them. */
+  note: "No two journeys look the same, and nobody walks it alone.",
   /** The brief's five steps, in the brief's order. Connect is step one and
       step four: the brief names both that way. */
   steps: [
-    { name: "Connect", line: "Start with a conversation." },
-    { name: "Discover", line: "Identify your goals and needs." },
-    { name: "Develop", line: "Build skills and confidence." },
-    { name: "Connect", line: "Access employers, education, enterprise and community opportunities." },
-    { name: "Progress", line: "Move towards employment, education, enterprise or greater independence." },
-  ],
+    { name: "Connect", line: "Start with a conversation.", icon: "message" },
+    { name: "Discover", line: "Identify your goals and needs.", icon: "compass" },
+    { name: "Develop", line: "Build skills and confidence.", icon: "sprout" },
+    {
+      name: "Connect",
+      line: "Access employers, education, enterprise and community opportunities.",
+      icon: "handshake",
+    },
+    {
+      name: "Progress",
+      line: "Move towards employment, education, enterprise or greater independence.",
+      icon: "trending",
+    },
+  ] satisfies { name: string; line: string; icon: JourneyIcon }[],
   cta: ctas.support,
-  /** Three photographs beside the diagram. The last of the brief's own
-      pictures are already spoken for on this page, so these stand in with
-      the first design's. */
-  images: [
-    {
-      src: "/images/OurWorkPageHeroSection3.png",
-      alt: "Colleagues standing around a table, reviewing printed documents together",
-      position: "50% 40%",
-      pending: "about-journey-1.jpg",
-    },
-    {
-      src: "/images/HomePageHeroSection1.png",
-      alt: "A smiling volunteer handing a box of food and clothing across a counter",
-      position: "45% 40%",
-      pending: "about-journey-2.jpg",
-    },
-    {
-      src: "/images/OurWorkHeroSection2.png",
-      alt: "A small team leaning over a table of plans and notes in a bright office",
-      position: "62% 40%",
-      pending: "about-journey-3.jpg",
-    },
-  ] satisfies HomeImage[],
 } as const;
 
 /* -------------------------------------------------------------------------
