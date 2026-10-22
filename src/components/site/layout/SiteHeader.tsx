@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, Plus, X } from "lucide-react";
 import { cx } from "@/lib/cx";
-import { brand, contact, ctas, navigation, type NavItem } from "@/data/site";
+import { brand, contact, ctas, navigation, routes, type NavItem } from "@/data/site";
 import { Cta } from "../ui/primitives";
 import { SocialIcon } from "../ui/SocialIcon";
 import { Logo } from "./Logo";
@@ -17,6 +17,9 @@ import { Logo } from "./Logo";
  * navigation below 1280px.
  */
 const PRIMARY = ["About Us", "Services", "Programmes", "Community", "Partners", "Get Involved"];
+/* Pages that open on a dark hero, where the bar sits in white until the page
+   moves: the home page's full-screen photograph, and the navy About Us band. */
+const DARK_HERO: string[] = [routes.home, routes.about];
 /* Shown in the bar only where the row has room for it (it is always in the full menu). */
 const ROOMY_ONLY = ["Get Involved"];
 const primaryItems = navigation.filter((item) => PRIMARY.includes(item.label));
@@ -28,9 +31,7 @@ export function SiteHeader() {
   // The menu remembers the path it was opened on, so navigating closes it.
   const [menuPath, setMenuPath] = useState<string | null>(null);
   const menuOpen = menuPath === pathname;
-  // The home page opens on a full-screen photograph: until the page moves,
-  // the bar sits on it in white.
-  const onPhoto = atTop && pathname === "/";
+  const onDark = atTop && DARK_HERO.includes(pathname);
   const lastY = useRef(0);
   const menuButton = useRef<HTMLButtonElement>(null);
 
@@ -71,19 +72,19 @@ export function SiteHeader() {
         )}
       >
         <div className="shell flex h-20 items-center gap-6">
-          <HeaderLogo light={onPhoto} compact={!atTop} />
+          <HeaderLogo light={onDark} compact={!atTop} />
 
           <nav aria-label="Main" className="ml-auto hidden xl:block">
             <ul className="flex items-center">
               {primaryItems.map((item) => (
-                <DesktopItem key={item.label} item={item} pathname={pathname} light={onPhoto} />
+                <DesktopItem key={item.label} item={item} pathname={pathname} light={onDark} />
               ))}
             </ul>
           </nav>
 
           <div className="ml-auto flex items-center gap-2.5 xl:ml-3">
             <span className="hidden sm:inline-flex">
-              <Cta href={ctas.support.href} size="sm" variant={onPhoto ? "saffron" : "ink"}>
+              <Cta href={ctas.support.href} size="sm" variant={onDark ? "saffron" : "ink"}>
                 {ctas.support.label}
               </Cta>
             </span>
