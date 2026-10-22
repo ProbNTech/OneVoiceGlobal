@@ -79,6 +79,7 @@
   --spacing-header: 5rem;
 
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.76, 0, 0.24, 1);
 
   --animate-kenburns: kenburns var(--slide-duration, 6.5s) linear both;
   --animate-marquee: marquee var(--marquee-duration, 60s) linear infinite;
@@ -154,6 +155,11 @@
     scroll-padding-top: var(--spacing-header);
   }
 
+  /* Lenis drives the smoothing itself; native smooth scrolling would fight it. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
   html:has([data-design="site"]) body {
     background-color: var(--color-cream);
   }
@@ -190,12 +196,15 @@
    adds `.is-in` once the element reaches the viewport. */
 
 @media (prefers-reduced-motion: no-preference) {
+  /* Blocks rise and come into focus out of a soft blur. */
   .js-reveal [data-reveal] {
     opacity: 0;
+    filter: blur(8px);
     transform: translate3d(0, 28px, 0);
     transition:
-      opacity 0.9s var(--ease-out-soft),
-      transform 1.1s var(--ease-out-soft);
+      opacity 1s var(--ease-out-soft),
+      filter 1.1s var(--ease-out-soft),
+      transform 1.25s var(--ease-out-soft);
     transition-delay: var(--reveal-delay, 0ms);
   }
 
@@ -208,53 +217,65 @@
   }
 
   .js-reveal [data-reveal="scale"] {
-    transform: scale(0.94);
+    filter: none;
+    transform: scale(0.95);
   }
 
   .js-reveal [data-reveal="fade"] {
     transform: none;
   }
 
-  /* Headline lines rise out of their own mask, one after another. */
+  /* Headline lines rise out of their own mask one after another, sharpening
+     as they settle. */
   .js-reveal [data-reveal="lines"] {
     opacity: 1;
+    filter: none;
     transform: none;
   }
 
   .js-reveal [data-reveal="lines"] .line-inner {
-    transform: translate3d(0, 110%, 0);
-    transition: transform 1.15s var(--ease-out-soft);
-    transition-delay: calc(var(--reveal-delay, 0ms) + var(--line, 0) * 110ms);
+    opacity: 0;
+    filter: blur(6px);
+    transform: translate3d(0, 105%, 0);
+    transition:
+      transform 1.3s var(--ease-out-soft),
+      opacity 1s var(--ease-out-soft),
+      filter 1.2s var(--ease-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0ms) + var(--line, 0) * 120ms);
   }
 
-  /* Photographs are uncovered from the foot up while settling out of a
-     slight zoom: `.reveal-clip` carries the clip, `.reveal-media` the scale.
-     The clip sits on a child, never on the observed element itself: Chrome
-     counts a fully clipped element as out of view, so it would never be
-     revealed. */
+  /* Photographs are uncovered from the foot up, like a curtain, while
+     settling out of a slight zoom: `.reveal-clip` carries the clip,
+     `.reveal-media` the scale. The clip sits on a child, never on the
+     observed element itself: Chrome counts a fully clipped element as out of
+     view, so it would never be revealed. */
   .js-reveal [data-reveal="image"] {
     opacity: 1;
+    filter: none;
     transform: none;
   }
 
   .js-reveal [data-reveal="image"] .reveal-clip {
     clip-path: inset(100% 0 0 0);
-    transition: clip-path 1.3s var(--ease-out-soft);
+    transition: clip-path 1.5s var(--ease-in-out-soft);
     transition-delay: var(--reveal-delay, 0ms);
   }
 
   .js-reveal [data-reveal="image"] .reveal-media {
-    transform: scale(1.16);
-    transition: transform 1.8s var(--ease-out-soft);
+    transform: scale(1.18);
+    transition: transform 2.2s var(--ease-out-soft);
     transition-delay: var(--reveal-delay, 0ms);
   }
 
   .js-reveal [data-reveal].is-in {
     opacity: 1;
+    filter: none;
     transform: none;
   }
 
   .js-reveal [data-reveal="lines"].is-in .line-inner {
+    opacity: 1;
+    filter: none;
     transform: none;
   }
 
@@ -264,6 +285,41 @@
 
   .js-reveal [data-reveal="image"].is-in .reveal-media {
     transform: none;
+  }
+
+  /* A ring that draws itself round an icon as its block arrives (the
+     journey steps). Drawn in full without motion or JavaScript. */
+  .js-reveal [data-reveal] .ring-draw {
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 1.8s var(--ease-in-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 250ms);
+  }
+
+  .js-reveal [data-reveal].is-in .ring-draw {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Photographs drift gently inside their frames as they pass through the
+   screen: scroll-driven, so it costs no JavaScript and runs on the
+   compositor. The element must overhang its frame (e.g. -inset-y-[8%]).
+   Browsers without view timelines, and reduced motion, keep it still. */
+@keyframes drift-y {
+  from {
+    translate: 0 -6%;
+  }
+  to {
+    translate: 0 6%;
+  }
+}
+
+@utility parallax {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: drift-y linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
   }
 }
 

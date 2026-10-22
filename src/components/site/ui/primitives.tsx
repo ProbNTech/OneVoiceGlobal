@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { cx } from "@/lib/cx";
+import { Magnetic } from "./Magnetic";
 import { Reveal } from "./Reveal";
 
 /* =========================================================================
@@ -159,8 +160,9 @@ export function Title({
 }
 
 /* =========================================================================
-   Cta: the pill button. A fill sweeps in from the left on hover and the
-   arrow slips forward inside its disc.
+   Cta: the pill button. A fill sweeps in from the left on hover, the arrow
+   slips forward inside its disc, and the whole pill leans a little towards
+   the pointer (<Magnetic>, which also carries `className`).
    ========================================================================= */
 
 const ctaVariants = {
@@ -189,22 +191,23 @@ export function Cta({
   className?: string;
 }) {
   return (
-    <Link
-      href={href}
-      className={cx(
-        "group/cta relative isolate inline-flex items-center gap-3 overflow-hidden rounded-full pl-6 pr-2 text-[0.9375rem] font-semibold whitespace-nowrap transition-colors duration-500",
-        "before:absolute before:inset-0 before:-z-10 before:origin-left before:scale-x-0 before:rounded-full before:transition-transform before:duration-500 before:ease-out-soft hover:before:scale-x-100",
-        size === "md" ? "h-13" : "h-12",
-        ctaVariants[variant],
-        className,
-      )}
-    >
-      <span>{children}</span>
-      <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-(--disc)">
-        <ArrowRight className="h-4 w-4 transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-[150%]" />
-        <ArrowRight className="absolute h-4 w-4 -translate-x-[150%] transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-0" />
-      </span>
-    </Link>
+    <Magnetic className={className}>
+      <Link
+        href={href}
+        className={cx(
+          "group/cta relative isolate inline-flex items-center gap-3 overflow-hidden rounded-full pl-6 pr-2 text-[0.9375rem] font-semibold whitespace-nowrap transition-colors duration-500",
+          "before:absolute before:inset-0 before:-z-10 before:origin-left before:scale-x-0 before:rounded-full before:transition-transform before:duration-500 before:ease-out-soft hover:before:scale-x-100",
+          size === "md" ? "h-13" : "h-12",
+          ctaVariants[variant],
+        )}
+      >
+        <span>{children}</span>
+        <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-(--disc)">
+          <ArrowRight className="h-4 w-4 transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-[150%]" />
+          <ArrowRight className="absolute h-4 w-4 -translate-x-[150%] transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-0" />
+        </span>
+      </Link>
+    </Magnetic>
   );
 }
 

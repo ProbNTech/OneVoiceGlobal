@@ -48,14 +48,16 @@ export function Intro() {
             <Reveal variant="image" className="w-[82%]">
               <div className="reveal-clip relative aspect-[4/5] overflow-hidden rounded-[2rem_9rem_2rem_2rem] bg-sand">
                 <div className="reveal-media absolute inset-0">
-                  <Image
-                    src={images.main.src}
-                    alt={images.main.alt}
-                    fill
-                    sizes="(min-width: 1024px) 40vw, 82vw"
-                    className="object-cover"
-                    style={{ objectPosition: images.main.position }}
-                  />
+                  <div className="parallax absolute inset-x-0 -inset-y-[8%]">
+                    <Image
+                      src={images.main.src}
+                      alt={images.main.alt}
+                      fill
+                      sizes="(min-width: 1024px) 40vw, 82vw"
+                      className="object-cover"
+                      style={{ objectPosition: images.main.position }}
+                    />
+                  </div>
                 </div>
               </div>
             </Reveal>

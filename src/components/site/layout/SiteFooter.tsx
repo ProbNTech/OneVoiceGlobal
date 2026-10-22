@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { brand, contact, copyrightYear, footerColumns, routes } from "@/data/site";
 import { Shell } from "../ui/primitives";
+import { Reveal } from "../ui/Reveal";
 import { SocialIcon } from "../ui/SocialIcon";
 import { Logo } from "./Logo";
 
@@ -21,32 +22,34 @@ export function SiteFooter() {
       <Shell className="pb-8 pt-12 md:pt-14">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.3fr] lg:gap-10">
           {/* Brand */}
-          <div>
+          <Reveal>
             <Logo tone="light" className="h-14" />
             <p className="mt-6 max-w-sm text-[0.9375rem] leading-relaxed">{brand.headline}</p>
             <p className="mt-3 max-w-sm text-[0.875rem] leading-relaxed text-white/45">{brand.initiative}</p>
-          </div>
+          </Reveal>
 
           {/* Link columns */}
-          {footerColumns.map((column) => (
-            <nav key={column.heading} aria-label={column.heading}>
-              <h3 className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300">
-                {column.heading}
-              </h3>
-              <ul className="mt-5 space-y-3">
-                {column.links.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="text-[0.9375rem] transition-colors hover:text-white">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          {footerColumns.map((column, index) => (
+            <Reveal key={column.heading} delay={(index + 1) * 90}>
+              <nav aria-label={column.heading}>
+                <h3 className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300">
+                  {column.heading}
+                </h3>
+                <ul className="mt-5 space-y-3">
+                  {column.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="text-[0.9375rem] transition-colors hover:text-white">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </Reveal>
           ))}
 
           {/* Get in Touch */}
-          <div>
+          <Reveal delay={(footerColumns.length + 1) * 90}>
             <h3 className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300">Get in Touch</h3>
             <p className="mt-5 text-[0.9375rem] text-white">{brand.centre}</p>
             {details.length ? (
@@ -94,7 +97,7 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
 
         <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-[0.8125rem] text-white/50 sm:flex-row sm:items-center">

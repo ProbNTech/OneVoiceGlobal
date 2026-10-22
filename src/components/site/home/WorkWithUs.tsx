@@ -79,14 +79,16 @@ export function WorkWithUs() {
             <Reveal variant="image" delay={150} className="lg:col-span-5">
               <div className="reveal-clip group relative isolate flex h-full min-h-[30rem] flex-col justify-end overflow-hidden rounded-[1.75rem] bg-navy-950 p-8 text-white sm:p-10 lg:p-12">
                 <div className="reveal-media absolute inset-0 -z-20">
-                  <Image
-                    src={card.image.src}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 40vw, 100vw"
-                    className="object-cover transition-transform duration-[2s] ease-out-soft group-hover:scale-105"
-                    style={{ objectPosition: card.image.position }}
-                  />
+                  <div className="parallax absolute inset-x-0 -inset-y-[8%]">
+                    <Image
+                      src={card.image.src}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 40vw, 100vw"
+                      className="object-cover transition-transform duration-[2s] ease-out-soft group-hover:scale-105"
+                      style={{ objectPosition: card.image.position }}
+                    />
+                  </div>
                 </div>
                 <div
                   aria-hidden="true"

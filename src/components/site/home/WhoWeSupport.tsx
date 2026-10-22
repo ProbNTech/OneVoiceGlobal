@@ -4,6 +4,7 @@ import { Info } from "lucide-react";
 import { cx } from "@/lib/cx";
 import { homeWhoWeSupport } from "@/data/home";
 import { Kicker, Shell, Title } from "../ui/primitives";
+import { GlideTrack } from "../ui/GlideTrack";
 import { Reveal } from "../ui/Reveal";
 
 type Group = (typeof homeWhoWeSupport.groups)[number];
@@ -16,7 +17,7 @@ const shapes = ["rounded-t-[999px] rounded-b-[1.75rem]", "rounded-[1.75rem_7rem_
 /**
  * OneVoice is for Everyone: the ten groups the brief names, as portrait
  * cards drifting past in two rows that run in opposite directions. Rows
- * pause under the pointer; with reduced motion they stand still and scroll
+ * glide to a stop under the pointer; with reduced motion they stand still and scroll
  * by hand instead.
  */
 export function WhoWeSupport() {
@@ -62,11 +63,8 @@ export function WhoWeSupport() {
 function Row({ groups, offset, reverse = false }: { groups: readonly Group[]; offset: number; reverse?: boolean }) {
   return (
     <div className="mask-fade-x overflow-hidden motion-reduce:overflow-x-auto">
-      <div
-        className={cx(
-          "flex w-max hover:[animation-play-state:paused]",
-          reverse ? "animate-marquee-reverse" : "animate-marquee",
-        )}
+      <GlideTrack
+        className={cx("flex w-max", reverse ? "animate-marquee-reverse" : "animate-marquee")}
         style={{ "--marquee-duration": "64s" } as CSSProperties}
       >
         {[0, 1].map((copy) => (
@@ -82,7 +80,7 @@ function Row({ groups, offset, reverse = false }: { groups: readonly Group[]; of
             ))}
           </ul>
         ))}
-      </div>
+      </GlideTrack>
     </div>
   );
 }
