@@ -228,6 +228,30 @@ export const aboutJourney = {
     { name: "Connect", line: "Access employers, education, enterprise and community opportunities." },
     { name: "Progress", line: "Move towards employment, education, enterprise or greater independence." },
   ],
+  cta: ctas.support,
+  /** Three photographs beside the diagram. The last of the brief's own
+      pictures are already spoken for on this page, so these stand in with
+      the first design's. */
+  images: [
+    {
+      src: "/images/OurWorkPageHeroSection3.png",
+      alt: "Colleagues standing around a table, reviewing printed documents together",
+      position: "50% 40%",
+      pending: "about-journey-1.jpg",
+    },
+    {
+      src: "/images/HomePageHeroSection1.png",
+      alt: "A smiling volunteer handing a box of food and clothing across a counter",
+      position: "45% 40%",
+      pending: "about-journey-2.jpg",
+    },
+    {
+      src: "/images/OurWorkHeroSection2.png",
+      alt: "A small team leaning over a table of plans and notes in a bright office",
+      position: "62% 40%",
+      pending: "about-journey-3.jpg",
+    },
+  ] satisfies HomeImage[],
 } as const;
 
 /* -------------------------------------------------------------------------
