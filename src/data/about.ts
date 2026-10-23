@@ -110,9 +110,10 @@ export const aboutWhoWeAre = {
     ],
   },
   quote: "Our role is to help people identify those barriers and find practical routes forward.",
-  /** The card over the photograph's top corner: the Foundation's own
-      subtitle, as the home page's introduction uses it. */
-  badge: brand.initiative,
+  /* The card over the photograph's top corner. It is the Foundation's own
+     subtitle shortened to fit the card, so `brand.initiative` keeps the
+     brief's full wording for the home page's introduction. */
+  badge: "Community Empowerment, Skills & Social Inclusion",
   /** The card over the photograph's foot. "Based in London" is the
       paragraph's own "London-based Skill Development Centre", as a label. */
   card: { title: "Based in London", line: brand.centre },

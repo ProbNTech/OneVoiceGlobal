@@ -52,7 +52,10 @@
   --color-mist: #eef3f6;
   --color-line: #e6dfd3;
   --color-slate: #46566a;
-  --color-muted: #5f6c7c;
+  /* Named `ink-muted`, not `muted`: globals.css maps `--color-muted` to the
+     legacy ivory surface, and its @theme is declared after this file is
+     imported, so a plain `text-muted` here came out near-white. */
+  --color-ink-muted: #5f6c7c;
 
   --font-display: var(--font-fraunces), "Fraunces", Georgia, serif;
   --font-body: var(--font-jakarta), "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
