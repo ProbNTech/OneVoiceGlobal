@@ -74,8 +74,8 @@ export function WhatWeDo() {
             <Reveal
               as="li"
               key={service.name}
-              variant="up"
-              delay={(index % 5) * 80}
+              variant="rise"
+              delay={index * 70}
               className="flex w-[70vw] max-w-xs shrink-0 snap-start sm:w-[44vw] lg:w-auto lg:max-w-none"
             >
               <ServiceCard service={service} number={index + 1} />
@@ -95,15 +95,15 @@ function ServiceCard({ service, number }: { service: Service; number: number }) 
       /* Ten cards lead to the same page until the services have pages of their
          own, so each link is named for its service rather than "learn more". */
       aria-label={`${service.name} — ${aboutWhatWeDo.cta.label}`}
-      className="group flex w-full flex-col overflow-hidden rounded-card bg-white ring-1 ring-ink/8 shadow-[0_20px_44px_-36px_rgb(10_37_64/0.55)] transition-[transform,box-shadow] duration-700 ease-out-soft hover:-translate-y-1.5 hover:shadow-[0_34px_60px_-40px_rgb(10_37_64/0.6)]"
+      className="group flex w-full flex-col overflow-hidden rounded-card bg-white ring-1 ring-ink/8 shadow-[0_24px_50px_-36px_rgb(10_37_64/0.6)] transition-transform duration-700 ease-out-soft hover:-translate-y-1.5"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-sand">
+      <div className="relative aspect-[16/9] overflow-hidden bg-sand">
         <Image
           src={service.image.src}
           alt={service.image.alt}
           fill
-          sizes="(min-width: 1280px) 20vw, 48vw"
-          className="object-cover transition-transform duration-[1.4s] ease-out-soft group-hover:scale-[1.07]"
+          sizes="(min-width: 1024px) 20vw, (min-width: 640px) 44vw, 70vw"
+          className="object-cover transition-transform duration-[1.4s] ease-out-soft group-hover:scale-[1.07] group-hover:will-change-transform"
           style={{ objectPosition: service.image.position }}
         />
         {/* The tab sits in the photograph's corner, as ELA sets it. */}

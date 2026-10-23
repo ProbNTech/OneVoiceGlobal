@@ -323,20 +323,17 @@ export const aboutWhatWeDo = {
   lead: "OneVoice Skill Development Centre provides an integrated programme of services.",
   cta: ctas.services,
   /* The brief's ten services, in the brief's order and numbered as it numbers
-     them. Every photograph is a stand-in waiting for its own generated image,
-     named in `pending`. There are only eight unused photographs on this page,
-     so two are used twice until the ten arrive: Mentoring repeats Employment
-     & Careers' and Community Development repeats Education & Skills
-     Development's. Each pair sits at opposite ends of the grid and takes a
-     different crop. */
+     them. Nine photographs were supplied under /images/about/What-we-do/,
+     numbered to match. The third was not, so English & Communication keeps a
+     stand-in and names the file it waits for in `pending`. The supplied files
+     are 16:9, which is the shape of the card's frame, so none is cropped and
+     none needs its crop steered. */
   items: [
     {
       name: "Education & Skills Development",
       image: {
-        src: "/images/OurWorkPageHeroSection1.jpg",
-        alt: "A group of young adults sharing laptops during a workshop",
-        position: "40% 45%",
-        pending: "about-service-education.jpg",
+        src: "/images/about/What-we-do/what-we-do-image-1.png",
+        alt: "A trainer at a whiteboard explaining a diagram to five people seated around a table with notebooks and laptops",
       },
       icon: "education",
       line: "Practical learning opportunities for personal, professional and digital development.",
@@ -344,10 +341,8 @@ export const aboutWhatWeDo = {
     {
       name: "Employment & Careers",
       image: {
-        src: "/images/OurWorkHeroSection1.png",
-        alt: "Young adults working together on laptops around an office table",
-        position: "50% 35%",
-        pending: "about-service-employment.jpg",
+        src: "/images/about/What-we-do/what-we-do-image-2.png",
+        alt: "An adviser showing a printed document to a man seated across a desk from her, a laptop open between them",
       },
       icon: "employment",
       line: "Helping people become job-ready, find employment and progress in their careers.",
@@ -358,7 +353,7 @@ export const aboutWhatWeDo = {
         src: "/images/Photo 1.png",
         alt: "A woman in a pink headscarf working on a laptop beside a smiling tutor at a shared desk",
         position: "45% 45%",
-        pending: "about-service-english.jpg",
+        pending: "what-we-do-image-3.png",
       },
       icon: "english",
       line: "Supporting people to develop confidence in English and workplace communication.",
@@ -366,10 +361,8 @@ export const aboutWhatWeDo = {
     {
       name: "Digital Inclusion",
       image: {
-        src: "/images/HomePageHeroSectionOrignal.png",
-        alt: "A smiling group gathered around a laptop at a table in a busy learning space",
-        position: "55% 45%",
-        pending: "about-service-digital.jpg",
+        src: "/images/about/What-we-do/What-we-do-image-4.png",
+        alt: "A woman pointing at a desktop screen while an older man beside her works the mouse, in a bright open learning space",
       },
       icon: "digital",
       line: "Building confidence with computers, technology and online services to develop the digital skills needed for everyday life, employment and business.",
@@ -377,10 +370,8 @@ export const aboutWhatWeDo = {
     {
       name: "Enterprise & Self-Employment",
       image: {
-        src: "/images/OurWorkHeroSection2.png",
-        alt: "A small team leaning over a table of plans and notes in a bright office",
-        position: "62% 40%",
-        pending: "about-service-enterprise.jpg",
+        src: "/images/about/What-we-do/What-we-Do-image-5.png",
+        alt: "Two women looking at a tablet together at a counter of small handmade products in a shop",
       },
       icon: "enterprise",
       line: "Supporting people to explore business ideas, freelancing and entrepreneurship.",
@@ -388,10 +379,8 @@ export const aboutWhatWeDo = {
     {
       name: "Information, Advice & Guidance",
       image: {
-        src: "/images/OurWorkPageHeroSection3.png",
-        alt: "Colleagues standing around a table, reviewing printed documents together",
-        position: "50% 40%",
-        pending: "about-service-guidance.jpg",
+        src: "/images/about/What-we-do/What-we-Do-image-6.png",
+        alt: "An adviser pointing to a printed leaflet on a low table while a woman seated beside her looks on",
       },
       icon: "guidance",
       line: "Helping people understand their options around learning, careers, employment and support.",
@@ -399,10 +388,8 @@ export const aboutWhatWeDo = {
     {
       name: "Health & Wellbeing",
       image: {
-        src: "/images/HomePageHeroSection2.png",
-        alt: "Volunteers handing a box of groceries to a woman at a community food distribution",
-        position: "40% 40%",
-        pending: "about-service-wellbeing.jpg",
+        src: "/images/about/What-we-do/What-We-Do-image-7.png",
+        alt: "Seven people sitting in a circle talking on a planted rooftop terrace at sunset, the London skyline behind them",
       },
       icon: "wellbeing",
       line: "Promoting positive mental health, resilience and social connection.",
@@ -410,10 +397,8 @@ export const aboutWhatWeDo = {
     {
       name: "Domestic Abuse Support",
       image: {
-        src: "/images/HomePageHeroSection1.png",
-        alt: "A smiling volunteer handing a box of food and clothing across a counter",
-        position: "45% 40%",
-        pending: "about-service-support.jpg",
+        src: "/images/about/What-we-do/What-we-do-image-8.png",
+        alt: "A woman taking notes while talking with another woman in armchairs, shelves of donated goods behind them",
       },
       icon: "support",
       line: "Providing safe, confidential and non-judgemental support and appropriate referrals.",
@@ -421,10 +406,8 @@ export const aboutWhatWeDo = {
     {
       name: "Mentoring",
       image: {
-        src: "/images/OurWorkHeroSection1.png",
-        alt: "Young adults working together on laptops around an office table",
-        position: "30% 45%",
-        pending: "about-service-mentoring.jpg",
+        src: "/images/about/What-we-do/What-we-do-image-9.png",
+        alt: "A speaker with a microphone addressing a seated audience in a conference hall",
       },
       icon: "mentoring",
       line: "Connecting people with mentors who can provide encouragement and practical guidance.",
@@ -432,10 +415,8 @@ export const aboutWhatWeDo = {
     {
       name: "Community Development",
       image: {
-        src: "/images/OurWorkPageHeroSection1.jpg",
-        alt: "A group of young adults sharing laptops during a workshop",
-        position: "65% 50%",
-        pending: "about-service-community.jpg",
+        src: "/images/about/What-we-do/What-we-do-image-10.png",
+        alt: "A large group of people of different ages and backgrounds sitting and talking together outdoors in a city park",
       },
       icon: "community",
       line: "Building stronger, more connected and inclusive communities.",

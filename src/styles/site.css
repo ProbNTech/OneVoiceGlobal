@@ -228,6 +228,18 @@
     transform: none;
   }
 
+  /* Like `up`, but with no blur. Re-blurring a grid of photographs every
+     frame is expensive enough to stutter, and the softness is not worth it
+     where the cards carry images of their own. */
+  .js-reveal [data-reveal="rise"] {
+    filter: none;
+    transform: translate3d(0, 30px, 0) scale(0.985);
+    transition:
+      opacity 0.7s var(--ease-out-soft),
+      transform 1.2s var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
   /* Headline lines rise out of their own mask one after another, sharpening
      as they settle. */
   .js-reveal [data-reveal="lines"] {
