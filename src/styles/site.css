@@ -298,6 +298,32 @@
   .js-reveal [data-reveal].is-in .ring-draw {
     stroke-dashoffset: 0;
   }
+
+  /* A rule that draws itself across a block as the block arrives: the line
+     treatment the reference sites set over their numbered cards. Drawn in
+     full without motion or JavaScript. */
+  .js-reveal [data-reveal] .line-draw {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.1s var(--ease-in-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 220ms);
+  }
+
+  .js-reveal [data-reveal].is-in .line-draw {
+    transform: none;
+  }
+
+  /* The same rule stood on end, for a marker running down a block's edge. */
+  .js-reveal [data-reveal] .line-draw-y {
+    transform: scaleY(0);
+    transform-origin: center top;
+    transition: transform 1.1s var(--ease-in-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 220ms);
+  }
+
+  .js-reveal [data-reveal].is-in .line-draw-y {
+    transform: none;
+  }
 }
 
 /* Photographs drift gently inside their frames as they pass through the

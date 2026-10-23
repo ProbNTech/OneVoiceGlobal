@@ -1,99 +1,45 @@
-import Image from "next/image";
-import {
-  BadgeCheck,
-  Handshake,
-  HeartHandshake,
-  Scale,
-  ShieldCheck,
-  Sparkles,
-  Target,
-  UsersRound,
-  type LucideIcon,
-} from "lucide-react";
+import type { CSSProperties } from "react";
 import { cx } from "@/lib/cx";
-import { aboutValues, type ValueIcon, type ValueTone } from "@/data/about";
-import type { HomeImage } from "@/data/home";
-import { Cta, Shell, Title } from "../ui/primitives";
+import { aboutValues } from "@/data/about";
+import { Cta, Kicker, Shell } from "../ui/primitives";
+import { GlideTrack } from "../ui/GlideTrack";
 import { Reveal } from "../ui/Reveal";
 
-const icons: Record<ValueIcon, LucideIcon> = {
-  empowerment: Sparkles,
-  inclusion: UsersRound,
-  respect: HeartHandshake,
-  equality: Scale,
-  safety: ShieldCheck,
-  collaboration: Handshake,
-  integrity: BadgeCheck,
-  progress: Target,
-};
-
-const cardTones: Record<ValueTone, string> = {
-  navy: "bg-navy-900 text-white/80",
-  deep: "bg-navy-950 text-white/80",
-  saffron: "bg-saffron-500 text-ink",
-  white: "bg-white text-slate ring-1 ring-ink/8",
-};
-
-const nameTones: Record<ValueTone, string> = {
-  navy: "text-white",
-  deep: "text-white",
-  saffron: "text-ink",
-  white: "text-ink",
-};
-
-/* The icon disc reverses the card: amber on the dark cards, navy on amber,
-   the logo blue on paper. */
-const discTones: Record<ValueTone, string> = {
-  navy: "bg-saffron-500 text-navy-950",
-  deep: "bg-saffron-500 text-navy-950",
-  saffron: "bg-navy-950 text-saffron-300",
-  white: "bg-ocean-600 text-white",
-};
-
-type Value = (typeof aboutValues.items)[number];
-type Cell = { kind: "value"; value: Value } | { kind: "photo"; image: HomeImage; rows: number; shape: string };
-
-/* Photographs alternate a plain corner with a leaf, so a grid this regular
-   does not read as a wall of identical boxes. */
-const photoShapes = ["rounded-card", "rounded-[1.25rem_4rem_1.25rem_1.25rem]"];
-
-/* The order the grid is filled in. Three columns and plain auto-placement do
-   the rest: a photograph standing two rows holds its column while the values
-   flow around it, so no cell is ever placed by hand and nothing breaks when a
-   card's text grows. "v" takes the next value, a number takes the next
-   photograph and says how many rows it stands. */
-const PLAN: ("v" | 1 | 2)[] = ["v", 2, "v", "v", "v", 2, "v", "v", "v", "v", 1, 1, 1];
+/* The accent on each card, cycling through the three colours of the logo's
+   figures so a row of cards carries the mark across it. */
+const ACCENTS = ["var(--color-ocean-600)", "var(--color-lagoon-600)", "var(--color-saffron-500)"];
 
 /**
- * Our Values, as a mosaic: the brief's eight values as cards in alternating
- * tones, with two photographs standing two rows tall among them. The
- * photographs follow the first and fourth values, which is what lands them in
- * opposite corners of the three-column grid without any of the cells needing
- * to be placed by hand.
+ * Our Values, built the way the reference sites build a set of short items:
+ * the values as zero-padded numbered cards, 01 to 08, closed off by a gliding
+ * ribbon of their names.
+ *
+ * Two pieces of motion, both of them the site's own. The ribbon runs on the
+ * marquee token and eases to a stop under the pointer (`GlideTrack`, as the
+ * home page's people rows do). Each card's rule draws itself across the top
+ * as the card arrives (`.line-draw`), which is the line treatment ELA sets
+ * over its blocks. Without JavaScript, and with reduced motion, the ribbon
+ * sits still and the rules are simply drawn.
  */
 export function Values() {
-  let nextValue = 0;
-  let nextImage = 0;
-  const cells: Cell[] = PLAN.map((slot) =>
-    slot === "v"
-      ? { kind: "value" as const, value: aboutValues.items[nextValue++]! }
-      : {
-          kind: "photo" as const,
-          image: aboutValues.images[nextImage]!,
-          rows: slot,
-          shape: photoShapes[nextImage++ % photoShapes.length]!,
-        },
-  );
-
   return (
     <section
       id={aboutValues.id}
       aria-labelledby="values-title"
-      className="relative isolate overflow-clip bg-sand py-band"
+      className="relative isolate overflow-clip bg-cream py-band"
     >
       <Shell>
-        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
-          <Title id="values-title" lead={aboutValues.titleLead} accent={aboutValues.titleAccent} inline />
+        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">
+          <div>
+            <Reveal variant="fade">
+              <Kicker as="h2" id="values-title">
+                {aboutValues.kicker}
+              </Kicker>
+            </Reveal>
+            <Reveal delay={100}>
+              <p className="mt-3 max-w-xl text-lead text-slate">{aboutValues.lead}</p>
+            </Reveal>
+          </div>
           <Reveal delay={200} className="flex flex-wrap gap-3">
             <Cta href={aboutValues.primaryCta.href} variant="saffron">
               {aboutValues.primaryCta.label}
@@ -103,72 +49,66 @@ export function Values() {
             </Cta>
           </Reveal>
         </div>
+        <ol className="mt-7 grid grid-cols-2 gap-3 sm:gap-4 lg:mt-9 lg:grid-cols-4 lg:gap-5">
+          {aboutValues.items.map((value, index) => (
+            <Reveal
+              as="li"
+              key={value.name}
+              variant="up"
+              delay={(index % 4) * 90}
+              style={{ "--accent": ACCENTS[index % ACCENTS.length] } as CSSProperties}
+              className="group relative flex flex-col overflow-hidden rounded-card bg-white p-4 ring-1 sm:p-6 ring-ink/6 shadow-[0_20px_44px_-36px_rgb(10_37_64/0.55)] transition-transform duration-700 ease-out-soft hover:-translate-y-1.5"
+            >
+              {/* The rule draws itself across the card's head. */}
+              <span aria-hidden="true" className="line-draw absolute inset-x-0 top-0 h-[3px] bg-(--accent)" />
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:mt-10 lg:auto-rows-[minmax(11rem,1fr)] lg:grid-cols-3">
-          {cells.map((cell, index) =>
-            cell.kind === "photo" ? (
-              <Reveal
-                key={cell.image.src}
-                variant="image"
-                delay={(index % 3) * 90}
+              <span
+                aria-hidden="true"
+                className="font-display text-[0.9375rem] font-light text-saffron-ink [font-variation-settings:'SOFT'_100]"
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3
                 className={cx(
-                  "group relative aspect-[4/3] sm:aspect-auto sm:min-h-[14rem]",
-                  cell.rows === 2 && "lg:row-span-2",
+                  "mt-4 font-display text-[1.375rem] leading-tight text-ink [font-variation-settings:'SOFT'_100]",
+                  "transition-colors duration-500 ease-out-soft group-hover:text-lagoon-600",
                 )}
               >
-                <div className={cx("reveal-clip absolute inset-0 overflow-hidden bg-cream", cell.shape)}>
-                  <div className="reveal-media absolute inset-0">
-                    <Image
-                      src={cell.image.src}
-                      alt={cell.image.alt}
-                      fill
-                      sizes="(min-width: 1760px) 580px, (min-width: 1024px) 32vw, (min-width: 640px) 48vw, 100vw"
-                      className="object-cover transition-transform duration-[1.4s] ease-out-soft group-hover:scale-[1.07]"
-                      style={{ objectPosition: cell.image.position }}
-                    />
-                  </div>
-                </div>
-              </Reveal>
-            ) : (
-              <ValueCard key={cell.value.name} value={cell.value} delay={(index % 3) * 90} />
-            ),
-          )}
-        </div>
+                {value.name}
+              </h3>
+              <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-slate">{value.line}</p>
+            </Reveal>
+          ))}
+        </ol>
       </Shell>
-    </section>
-  );
-}
 
-function ValueCard({ value, delay }: { value: Value; delay: number }) {
-  const Icon = icons[value.icon];
-  return (
-    <Reveal
-      as="article"
-      variant="up"
-      delay={delay}
-      className={cx(
-        "group flex flex-col rounded-card p-6 shadow-[0_18px_40px_-32px_rgb(10_37_64/0.55)] transition-transform duration-700 ease-out-soft hover:-translate-y-1 sm:p-7",
-        cardTones[value.tone],
-      )}
-    >
-      <div className="flex items-center gap-3">
-        <span
-          className={cx(
-            "grid h-10 w-10 shrink-0 place-items-center rounded-full transition-transform duration-700 ease-out-soft group-hover:scale-110",
-            discTones[value.tone],
-          )}
-        >
-          <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.7} />
-        </span>
-        <h3 className={cx("text-[1.0625rem] font-bold", nameTones[value.tone])}>{value.name}</h3>
-        <span
+      {/* The ribbon closes the band. It runs to the screen edge, so it sits
+          outside the page measure, and it repeats the names the cards carry
+          above, so it is decorative and hidden from screen readers. */}
+      <Reveal variant="fade" delay={120} className="mask-fade-x mt-7 overflow-hidden lg:mt-9">
+        <GlideTrack
           aria-hidden="true"
-          className="ml-auto self-start font-display text-[2.5rem] leading-[0.62] opacity-20 [font-variation-settings:'SOFT'_100]"
+          className="flex w-max animate-marquee motion-reduce:animate-none"
+          style={{ "--marquee-duration": "48s" } as CSSProperties}
         >
-          {"“"}
-        </span>
-      </div>
-      <p className="mt-auto pt-7 text-[0.9375rem] leading-relaxed">{value.line}</p>
-    </Reveal>
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0 items-center">
+              {aboutValues.items.map((value) => (
+                <span key={value.name} className="flex items-center">
+                  <span className="text-outline font-display text-[2.25rem] leading-none whitespace-nowrap text-ink/45 [font-variation-settings:'SOFT'_100] lg:text-[3rem]">
+                    {value.name}
+                  </span>
+                  <span className="mx-7 flex gap-1 lg:mx-9">
+                    <span className="h-1.5 w-1.5 rounded-full bg-ocean-600" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-lagoon-500" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-saffron-500" />
+                  </span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </GlideTrack>
+      </Reveal>
+    </section>
   );
 }

@@ -56,19 +56,18 @@ export const aboutHero = {
 
 /**
  * The strip under the hero. Its labels and links are the brief's About Us
- * sub-menu, but it runs in the order the page lays the sections out, which
- * puts Our Approach second. Sections the page does not carry are left out so
- * no link lands on an empty anchor; Our Team is missing because the brief
- * gives it no content yet.
+ * sub-menu, and it runs in the order the page lays the sections out. Sections
+ * the page does not carry are left out so no link lands on an empty anchor;
+ * Our Team is missing because the brief gives it no content yet.
  */
 const PAGE_SECTIONS = [
   "who-we-are",
-  "our-approach",
   "vision-and-mission",
   "our-values",
+  "our-approach",
   "safeguarding",
-  "policies",
-  "accessibility",
+  // "policies" and "accessibility" return here with the sections that will
+  // carry them.
 ];
 
 const aboutMenu = navigation.find((item) => item.label === "About Us")?.children ?? [];
@@ -247,83 +246,26 @@ export const aboutJourney = {
    OUR VALUES
    ------------------------------------------------------------------------- */
 
-export type ValueIcon =
-  "empowerment" | "inclusion" | "respect" | "equality" | "safety" | "collaboration" | "integrity" | "progress";
-
-/** How each card is painted: the logo navy, a deeper navy, amber, or paper. */
-export type ValueTone = "navy" | "deep" | "saffron" | "white";
-
 export const aboutValues = {
   id: "our-values",
-  /* The brief gives the Values block no title beyond its own heading, so the
-     heading is the title. It borrowed Respect's line, "Everyone deserves
-     dignity", for a while, but that is a card on this very grid and the two
-     read as a mistake side by side. */
-  titleLead: "Our",
-  titleAccent: "Values",
+  /* The brief heads this block "Our Values" and gives it no title beyond
+     that, so the heading is the kicker. */
+  kicker: "Our Values",
+  /** The brief's headline for the Foundation, held in `brand`. */
+  lead: brand.headline,
   primaryCta: ctas.support,
   secondaryCta: ctas.partner,
   /** The brief's eight values, in the brief's order. */
   items: [
-    {
-      name: "Empowerment",
-      line: "We help people develop the confidence to make informed choices.",
-      icon: "empowerment",
-      tone: "navy",
-    },
-    {
-      name: "Inclusion",
-      line: "We welcome people from diverse backgrounds and circumstances.",
-      icon: "inclusion",
-      tone: "saffron",
-    },
-    { name: "Respect", line: "Everyone deserves dignity.", icon: "respect", tone: "white" },
-    { name: "Equality", line: "We work to reduce barriers to opportunity.", icon: "equality", tone: "deep" },
-    { name: "Safety", line: "Safeguarding and wellbeing are fundamental.", icon: "safety", tone: "navy" },
-    {
-      name: "Collaboration",
-      line: "We achieve more by working together.",
-      icon: "collaboration",
-      tone: "white",
-    },
-    { name: "Integrity", line: "We act responsibly and transparently.", icon: "integrity", tone: "saffron" },
-    { name: "Progress", line: "We focus on practical outcomes.", icon: "progress", tone: "navy" },
-  ] satisfies { name: string; line: string; icon: ValueIcon; tone: ValueTone }[],
-  /** Photographs woven through the grid. Values are abstractions; without
-      faces among them the section reads as a dashboard rather than as
-      anything to do with people. */
-  images: [
-    {
-      src: "/images/Photo 1.png",
-      alt: "A woman in a pink headscarf working on a laptop beside a smiling tutor at a shared desk",
-      position: "40% 50%",
-      pending: "about-values-1.jpg",
-    },
-    {
-      src: "/images/OurWorkHeroSection1.png",
-      alt: "Young adults working together on laptops around an office table",
-      position: "50% 35%",
-      pending: "about-values-2.jpg",
-    },
-    {
-      src: "/images/HomePageHeroSection2.png",
-      alt: "Volunteers handing a box of groceries to a woman at a community food distribution",
-      position: "40% 40%",
-      pending: "about-values-3.jpg",
-    },
-    {
-      src: "/images/OurWorkPageHeroSection1.jpg",
-      alt: "A group of young adults sharing laptops during a workshop",
-      position: "40% 45%",
-      pending: "about-values-4.jpg",
-    },
-    {
-      src: "/images/HomePageHeroSectionOrignal.png",
-      alt: "A smiling group gathered around a laptop at a table in a busy learning space",
-      position: "55% 45%",
-      pending: "about-values-5.jpg",
-    },
-  ] satisfies HomeImage[],
+    { name: "Empowerment", line: "We help people develop the confidence to make informed choices." },
+    { name: "Inclusion", line: "We welcome people from diverse backgrounds and circumstances." },
+    { name: "Respect", line: "Everyone deserves dignity." },
+    { name: "Equality", line: "We work to reduce barriers to opportunity." },
+    { name: "Safety", line: "Safeguarding and wellbeing are fundamental." },
+    { name: "Collaboration", line: "We achieve more by working together." },
+    { name: "Integrity", line: "We act responsibly and transparently." },
+    { name: "Progress", line: "We focus on practical outcomes." },
+  ] satisfies { name: string; line: string }[],
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -351,67 +293,186 @@ export const aboutApproach = {
 } as const;
 
 /* -------------------------------------------------------------------------
-   SAFEGUARDING, POLICIES AND ACCESSIBILITY
-   Three of the brief's blocks, set side by side. "Policies" has no block of
-   its own in the brief; Confidentiality & Privacy is the nearest, so the
-   menu's Policies link lands there.
+   WHAT WE DO
+   The Centre's ten services, from the brief's "What We Do" block. These are
+   not the brief's Services sub-menu, which groups the same work into five
+   headings; both are the brief's own and are left as the brief writes them.
    ------------------------------------------------------------------------- */
 
-export const aboutCommitmentsIntro = {
-  /* The brief gives these three blocks no shared title, so the section
-     borrows a line it uses elsewhere, the subtitle of its Domestic Abuse
-     Support page: "Everyone Deserves to Feel Safe and Respected." */
-  titleLead: "Everyone Deserves to Feel",
-  titleAccent: "Safe and Respected",
+export type ServiceIcon =
+  | "education"
+  | "employment"
+  | "english"
+  | "digital"
+  | "enterprise"
+  | "guidance"
+  | "wellbeing"
+  | "support"
+  | "mentoring"
+  | "community";
+
+export const aboutWhatWeDo = {
+  id: "what-we-do",
+  kicker: brand.centre,
+  /** The brief's own heading for the block, split two-tone. */
+  titleLead: "What We",
+  titleAccent: "Do",
+  /* The brief's opening line. It introduces a numbered list and so ends on a
+     colon; set as a sentence here because the list follows on its own. */
+  lead: "OneVoice Skill Development Centre provides an integrated programme of services.",
+  cta: ctas.services,
+  /* The brief's ten services, in the brief's order and numbered as it numbers
+     them. Every photograph is a stand-in waiting for its own generated image,
+     named in `pending`. There are only eight unused photographs on this page,
+     so two are used twice until the ten arrive: Mentoring repeats Employment
+     & Careers' and Community Development repeats Education & Skills
+     Development's. Each pair sits at opposite ends of the grid and takes a
+     different crop. */
+  items: [
+    {
+      name: "Education & Skills Development",
+      image: {
+        src: "/images/OurWorkPageHeroSection1.jpg",
+        alt: "A group of young adults sharing laptops during a workshop",
+        position: "40% 45%",
+        pending: "about-service-education.jpg",
+      },
+      icon: "education",
+      line: "Practical learning opportunities for personal, professional and digital development.",
+    },
+    {
+      name: "Employment & Careers",
+      image: {
+        src: "/images/OurWorkHeroSection1.png",
+        alt: "Young adults working together on laptops around an office table",
+        position: "50% 35%",
+        pending: "about-service-employment.jpg",
+      },
+      icon: "employment",
+      line: "Helping people become job-ready, find employment and progress in their careers.",
+    },
+    {
+      name: "English & Communication",
+      image: {
+        src: "/images/Photo 1.png",
+        alt: "A woman in a pink headscarf working on a laptop beside a smiling tutor at a shared desk",
+        position: "45% 45%",
+        pending: "about-service-english.jpg",
+      },
+      icon: "english",
+      line: "Supporting people to develop confidence in English and workplace communication.",
+    },
+    {
+      name: "Digital Inclusion",
+      image: {
+        src: "/images/HomePageHeroSectionOrignal.png",
+        alt: "A smiling group gathered around a laptop at a table in a busy learning space",
+        position: "55% 45%",
+        pending: "about-service-digital.jpg",
+      },
+      icon: "digital",
+      line: "Building confidence with computers, technology and online services to develop the digital skills needed for everyday life, employment and business.",
+    },
+    {
+      name: "Enterprise & Self-Employment",
+      image: {
+        src: "/images/OurWorkHeroSection2.png",
+        alt: "A small team leaning over a table of plans and notes in a bright office",
+        position: "62% 40%",
+        pending: "about-service-enterprise.jpg",
+      },
+      icon: "enterprise",
+      line: "Supporting people to explore business ideas, freelancing and entrepreneurship.",
+    },
+    {
+      name: "Information, Advice & Guidance",
+      image: {
+        src: "/images/OurWorkPageHeroSection3.png",
+        alt: "Colleagues standing around a table, reviewing printed documents together",
+        position: "50% 40%",
+        pending: "about-service-guidance.jpg",
+      },
+      icon: "guidance",
+      line: "Helping people understand their options around learning, careers, employment and support.",
+    },
+    {
+      name: "Health & Wellbeing",
+      image: {
+        src: "/images/HomePageHeroSection2.png",
+        alt: "Volunteers handing a box of groceries to a woman at a community food distribution",
+        position: "40% 40%",
+        pending: "about-service-wellbeing.jpg",
+      },
+      icon: "wellbeing",
+      line: "Promoting positive mental health, resilience and social connection.",
+    },
+    {
+      name: "Domestic Abuse Support",
+      image: {
+        src: "/images/HomePageHeroSection1.png",
+        alt: "A smiling volunteer handing a box of food and clothing across a counter",
+        position: "45% 40%",
+        pending: "about-service-support.jpg",
+      },
+      icon: "support",
+      line: "Providing safe, confidential and non-judgemental support and appropriate referrals.",
+    },
+    {
+      name: "Mentoring",
+      image: {
+        src: "/images/OurWorkHeroSection1.png",
+        alt: "Young adults working together on laptops around an office table",
+        position: "30% 45%",
+        pending: "about-service-mentoring.jpg",
+      },
+      icon: "mentoring",
+      line: "Connecting people with mentors who can provide encouragement and practical guidance.",
+    },
+    {
+      name: "Community Development",
+      image: {
+        src: "/images/OurWorkPageHeroSection1.jpg",
+        alt: "A group of young adults sharing laptops during a workshop",
+        position: "65% 50%",
+        pending: "about-service-community.jpg",
+      },
+      icon: "community",
+      line: "Building stronger, more connected and inclusive communities.",
+    },
+  ] satisfies { name: string; line: string; icon: ServiceIcon; image: HomeImage }[],
 } as const;
 
-export type CommitmentIcon = "safeguarding" | "privacy" | "accessibility";
+/* -------------------------------------------------------------------------
+   SAFEGUARDING
+   ------------------------------------------------------------------------- */
 
-export const aboutCommitments = [
-  {
-    id: "safeguarding",
-    icon: "safeguarding",
-    kicker: "Safeguarding",
-    title: "Keeping People Safe",
-    paragraphs: [
-      "Safeguarding is central to our work. OneVoice will maintain appropriate safeguarding policies, procedures, training and referral arrangements. Staff, volunteers, mentors and partners involved in delivery will be expected to understand their responsibilities.",
-      "Where safeguarding concerns arise, appropriate action will be taken in accordance with relevant procedures and legal requirements.",
-    ],
+export type SafeguardIcon = "policies" | "procedures" | "training" | "referral" | "law";
+
+export const aboutSafeguarding = {
+  id: "safeguarding",
+  kicker: "Safeguarding",
+  /** The brief's own title for the block, split two-tone. */
+  titleLead: "Keeping People",
+  titleAccent: "Safe",
+  /** The brief's first two paragraphs, word for word. */
+  paragraphs: [
+    "Safeguarding is central to our work. OneVoice will maintain appropriate safeguarding policies, procedures, training and referral arrangements.",
+    "Staff, volunteers, mentors and partners involved in delivery will be expected to understand their responsibilities.",
+  ],
+  /* The four things the first paragraph names, drawn out of its own sentence
+     and numbered. The panel's label is the brief's own clause, so the list
+     still reads as the sentence it came from and claims nothing more. */
+  arrangementsLabel: "OneVoice will maintain",
+  arrangements: [
+    { name: "Policies", icon: "policies" },
+    { name: "Procedures", icon: "procedures" },
+    { name: "Training", icon: "training" },
+    { name: "Referral Arrangements", icon: "referral" },
+  ] satisfies { name: string; icon: SafeguardIcon }[],
+  /** The brief's closing sentence, set apart as a notice. */
+  notice: {
+    icon: "law" as SafeguardIcon,
+    text: "Where safeguarding concerns arise, appropriate action will be taken in accordance with relevant procedures and legal requirements.",
   },
-  {
-    id: "policies",
-    icon: "privacy",
-    kicker: "Policies",
-    title: "Confidentiality & Privacy",
-    paragraphs: [
-      "We respect the privacy of people using our services. Personal information will be handled responsibly in accordance with applicable data protection requirements and our privacy policy.",
-      "There may be circumstances where information must be shared to protect someone from serious harm or where required by law.",
-    ],
-  },
-  {
-    id: "accessibility",
-    icon: "accessibility",
-    kicker: "Accessibility",
-    title: "Accessibility & Inclusion",
-    paragraphs: ["We aim to make our services accessible to people with different:"],
-    /** The brief's seven, listed rather than run on. */
-    items: [
-      "Languages",
-      "Abilities",
-      "Educational backgrounds",
-      "Digital skills",
-      "Cultural backgrounds",
-      "Employment experiences",
-      "Family circumstances",
-    ],
-    note: "Reasonable adjustments should be considered wherever practical.",
-  },
-] satisfies {
-  id: string;
-  icon: CommitmentIcon;
-  kicker: string;
-  title: string;
-  paragraphs: string[];
-  items?: string[];
-  note?: string;
-}[];
+  cta: ctas.support,
+} as const;

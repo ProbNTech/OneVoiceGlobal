@@ -64,13 +64,19 @@ export function Kicker({
   children,
   tone = "light",
   className,
+  /** A section with no heading of its own can name itself by its kicker. */
+  as: Tag = "p",
+  id,
 }: {
   children: ReactNode;
   tone?: "light" | "dark";
   className?: string;
+  as?: "p" | "h2" | "h3";
+  id?: string;
 }) {
   return (
-    <p
+    <Tag
+      id={id}
       className={cx(
         "inline-flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-[0.22em]",
         tone === "light" ? "text-saffron-ink" : "text-saffron-300",
@@ -83,7 +89,7 @@ export function Kicker({
         <span className="h-1.5 w-1.5 rounded-full bg-saffron-500" />
       </span>
       {children}
-    </p>
+    </Tag>
   );
 }
 
