@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type CSSProperties, type ElementType, type ReactNode } from "react";
 
-type RevealVariant = "up" | "left" | "right" | "scale" | "fade" | "lines" | "image";
+type RevealVariant = "up" | "rise" | "left" | "right" | "scale" | "fade" | "lines" | "image";
 
 type RevealProps = {
   children: ReactNode;

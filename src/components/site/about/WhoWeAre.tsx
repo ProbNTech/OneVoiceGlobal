@@ -19,7 +19,7 @@ const icons: Record<OutcomeIcon, LucideIcon> = {
  * three tiles.
  */
 export function WhoWeAre() {
-  const { barriers, card, image, outcomes, quote } = aboutWhoWeAre;
+  const { badge, barriers, card, image, outcomes, quote } = aboutWhoWeAre;
 
   return (
     <section
@@ -62,11 +62,11 @@ export function WhoWeAre() {
             <Reveal
               variant="right"
               delay={420}
-              className="absolute -right-3 top-6 z-10 max-w-[15rem] sm:-right-5 sm:top-8"
+              className="absolute -right-3 top-6 z-10 max-w-[15.5rem] sm:-right-5 sm:top-8"
             >
               <div className="flex items-center gap-3 rounded-[1.25rem] bg-white p-4 shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
                 <Image src="/images/brand/mark.png" alt="" width={477} height={503} className="h-10 w-auto shrink-0" />
-                <p className="text-[0.8125rem] font-semibold leading-snug text-ink">{aboutWhoWeAre.badge}</p>
+                <p className="text-[0.8125rem] font-semibold leading-snug text-ink">{badge}</p>
               </div>
             </Reveal>
 
@@ -83,7 +83,7 @@ export function WhoWeAre() {
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[0.9375rem] font-bold text-ink">{card.title}</span>
-                  <span className="mt-0.5 block text-[0.8125rem] leading-snug text-muted">{card.line}</span>
+                  <span className="mt-0.5 block text-[0.8125rem] leading-snug text-ink-muted">{card.line}</span>
                 </span>
               </div>
             </Reveal>
@@ -107,7 +107,7 @@ export function WhoWeAre() {
             </Reveal>
             <Reveal delay={210}>
               <p className="mt-5 max-w-4xl text-[1.0625rem] leading-relaxed text-slate">{aboutWhoWeAre.body}</p>
-              <p className="mt-7 max-w-4xl text-[1rem] leading-relaxed text-muted">{barriers.lead}</p>
+              <p className="mt-7 max-w-4xl text-[1rem] leading-relaxed text-ink-muted">{barriers.lead}</p>
             </Reveal>
 
             {/* Twelve barriers, so they are set plainly, three to a row. The

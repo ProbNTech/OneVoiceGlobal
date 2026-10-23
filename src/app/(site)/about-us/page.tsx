@@ -3,10 +3,11 @@ import { Hero } from "@/components/site/about/Hero";
 import { SectionNav } from "@/components/site/about/SectionNav";
 import { WhoWeAre } from "@/components/site/about/WhoWeAre";
 import { VisionMission } from "@/components/site/about/VisionMission";
-import { Journey } from "@/components/site/about/Journey";
 import { Values } from "@/components/site/about/Values";
+import { Journey } from "@/components/site/about/Journey";
+import { WhatWeDo } from "@/components/site/about/WhatWeDo";
 import { Approach } from "@/components/site/about/Approach";
-import { Commitments } from "@/components/site/about/Commitments";
+import { Safeguarding } from "@/components/site/about/Safeguarding";
 import { aboutHero } from "@/data/about";
 
 export const metadata: Metadata = {
@@ -27,10 +28,11 @@ export default function AboutPage() {
       <Hero />
       <SectionNav />
       <WhoWeAre />
-      <Approach />
       <VisionMission />
       <Values />
-      <Commitments />
+      <Approach />
+      <WhatWeDo />
+      <Safeguarding />
       <Journey />
     </>
   );

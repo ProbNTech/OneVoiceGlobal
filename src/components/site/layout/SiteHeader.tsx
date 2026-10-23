@@ -410,7 +410,7 @@ function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClose: () =
         <div className="mt-12 flex flex-col gap-8 border-t border-line pt-8 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex items-center gap-4">
             <Image src="/images/brand/mark.png" alt="" width={477} height={503} className="h-12 w-auto" />
-            <p className="max-w-xs text-[0.875rem] leading-relaxed text-muted">{brand.tagline}</p>
+            <p className="max-w-xs text-[0.875rem] leading-relaxed text-ink-muted">{brand.tagline}</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             {social.map((item) => (

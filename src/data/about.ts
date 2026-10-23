@@ -18,7 +18,7 @@
  * of staff.
  */
 
-import type { HomeImage } from "@/data/home";
+import type { HomeImage, JourneyIcon } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
 export const aboutHero = {
@@ -56,19 +56,18 @@ export const aboutHero = {
 
 /**
  * The strip under the hero. Its labels and links are the brief's About Us
- * sub-menu, but it runs in the order the page lays the sections out, which
- * puts Our Approach second. Sections the page does not carry are left out so
- * no link lands on an empty anchor; Our Team is missing because the brief
- * gives it no content yet.
+ * sub-menu, and it runs in the order the page lays the sections out. Sections
+ * the page does not carry are left out so no link lands on an empty anchor;
+ * Our Team is missing because the brief gives it no content yet.
  */
 const PAGE_SECTIONS = [
   "who-we-are",
-  "our-approach",
   "vision-and-mission",
   "our-values",
+  "our-approach",
   "safeguarding",
-  "policies",
-  "accessibility",
+  // "policies" and "accessibility" return here with the sections that will
+  // carry them.
 ];
 
 const aboutMenu = navigation.find((item) => item.label === "About Us")?.children ?? [];
@@ -111,9 +110,10 @@ export const aboutWhoWeAre = {
     ],
   },
   quote: "Our role is to help people identify those barriers and find practical routes forward.",
-  /** The card over the photograph's top corner: the Foundation's own
-      subtitle, as the home page's introduction uses it. */
-  badge: brand.initiative,
+  /* The card over the photograph's top corner. It is the Foundation's own
+     subtitle shortened to fit the card, so `brand.initiative` keeps the
+     brief's full wording for the home page's introduction. */
+  badge: "Community Empowerment, Skills & Social Inclusion",
   /** The card over the photograph's foot. "Based in London" is the
       paragraph's own "London-based Skill Development Centre", as a label. */
   card: { title: "Based in London", line: brand.centre },
@@ -202,8 +202,7 @@ export const aboutVisionPanels = [
 /* -------------------------------------------------------------------------
    ONEVOICE JOURNEY
    The brief carries this on its OneVoice Journey page, and again, in the same
-   five steps, on the homepage. The home page sets them as a row of numbered
-   circles; here they are read down a rail instead.
+   five steps, on the homepage.
    ------------------------------------------------------------------------- */
 
 export const aboutJourney = {
@@ -211,7 +210,7 @@ export const aboutJourney = {
   /** The brief's own subtitle for the page. */
   titleLead: "One Person. One Goal.",
   titleAccent: "One Step at a Time.",
-  /** Fills the panel behind the path, under a heavy navy wash. Supplied by
+  /** Fills the panel behind the steps, under a heavy navy wash. Supplied by
       the user; the city the Centre works in, not a photograph in its own
       right. */
   backdrop: {
@@ -219,122 +218,55 @@ export const aboutJourney = {
     alt: "",
     position: "50% 55%",
   } satisfies HomeImage,
+  /** Sets the five steps up: what the journey is, and that it is walked at
+      the pace of the person walking it. */
+  lead: "Everyone who comes to OneVoice arrives at a different point, with different hopes and different pressures. The journey below is how we walk it with you — one conversation at a time, for as long as it takes.",
+  /** Closes the steps off, beneath them. */
+  note: "No two journeys look the same, and nobody walks it alone.",
   /** The brief's five steps, in the brief's order. Connect is step one and
       step four: the brief names both that way. */
   steps: [
-    { name: "Connect", line: "Start with a conversation." },
-    { name: "Discover", line: "Identify your goals and needs." },
-    { name: "Develop", line: "Build skills and confidence." },
-    { name: "Connect", line: "Access employers, education, enterprise and community opportunities." },
-    { name: "Progress", line: "Move towards employment, education, enterprise or greater independence." },
-  ],
+    { name: "Connect", line: "Start with a conversation.", icon: "message" },
+    { name: "Discover", line: "Identify your goals and needs.", icon: "compass" },
+    { name: "Develop", line: "Build skills and confidence.", icon: "sprout" },
+    {
+      name: "Connect",
+      line: "Access employers, education, enterprise and community opportunities.",
+      icon: "handshake",
+    },
+    {
+      name: "Progress",
+      line: "Move towards employment, education, enterprise or greater independence.",
+      icon: "trending",
+    },
+  ] satisfies { name: string; line: string; icon: JourneyIcon }[],
   cta: ctas.support,
-  /** Three photographs beside the diagram. The last of the brief's own
-      pictures are already spoken for on this page, so these stand in with
-      the first design's. */
-  images: [
-    {
-      src: "/images/OurWorkPageHeroSection3.png",
-      alt: "Colleagues standing around a table, reviewing printed documents together",
-      position: "50% 40%",
-      pending: "about-journey-1.jpg",
-    },
-    {
-      src: "/images/HomePageHeroSection1.png",
-      alt: "A smiling volunteer handing a box of food and clothing across a counter",
-      position: "45% 40%",
-      pending: "about-journey-2.jpg",
-    },
-    {
-      src: "/images/OurWorkHeroSection2.png",
-      alt: "A small team leaning over a table of plans and notes in a bright office",
-      position: "62% 40%",
-      pending: "about-journey-3.jpg",
-    },
-  ] satisfies HomeImage[],
 } as const;
 
 /* -------------------------------------------------------------------------
    OUR VALUES
    ------------------------------------------------------------------------- */
 
-export type ValueIcon =
-  "empowerment" | "inclusion" | "respect" | "equality" | "safety" | "collaboration" | "integrity" | "progress";
-
-/** How each card is painted: the logo navy, a deeper navy, amber, or paper. */
-export type ValueTone = "navy" | "deep" | "saffron" | "white";
-
 export const aboutValues = {
   id: "our-values",
-  /* The brief gives the Values block no title beyond its own heading, so the
-     heading is the title. It borrowed Respect's line, "Everyone deserves
-     dignity", for a while, but that is a card on this very grid and the two
-     read as a mistake side by side. */
-  titleLead: "Our",
-  titleAccent: "Values",
+  /* The brief heads this block "Our Values" and gives it no title beyond
+     that, so the heading is the kicker. */
+  kicker: "Our Values",
+  /** The brief's headline for the Foundation, held in `brand`. */
+  lead: brand.headline,
   primaryCta: ctas.support,
   secondaryCta: ctas.partner,
   /** The brief's eight values, in the brief's order. */
   items: [
-    {
-      name: "Empowerment",
-      line: "We help people develop the confidence to make informed choices.",
-      icon: "empowerment",
-      tone: "navy",
-    },
-    {
-      name: "Inclusion",
-      line: "We welcome people from diverse backgrounds and circumstances.",
-      icon: "inclusion",
-      tone: "saffron",
-    },
-    { name: "Respect", line: "Everyone deserves dignity.", icon: "respect", tone: "white" },
-    { name: "Equality", line: "We work to reduce barriers to opportunity.", icon: "equality", tone: "deep" },
-    { name: "Safety", line: "Safeguarding and wellbeing are fundamental.", icon: "safety", tone: "navy" },
-    {
-      name: "Collaboration",
-      line: "We achieve more by working together.",
-      icon: "collaboration",
-      tone: "white",
-    },
-    { name: "Integrity", line: "We act responsibly and transparently.", icon: "integrity", tone: "saffron" },
-    { name: "Progress", line: "We focus on practical outcomes.", icon: "progress", tone: "navy" },
-  ] satisfies { name: string; line: string; icon: ValueIcon; tone: ValueTone }[],
-  /** Photographs woven through the grid. Values are abstractions; without
-      faces among them the section reads as a dashboard rather than as
-      anything to do with people. */
-  images: [
-    {
-      src: "/images/Photo 1.png",
-      alt: "A woman in a pink headscarf working on a laptop beside a smiling tutor at a shared desk",
-      position: "40% 50%",
-      pending: "about-values-1.jpg",
-    },
-    {
-      src: "/images/OurWorkHeroSection1.png",
-      alt: "Young adults working together on laptops around an office table",
-      position: "50% 35%",
-      pending: "about-values-2.jpg",
-    },
-    {
-      src: "/images/HomePageHeroSection2.png",
-      alt: "Volunteers handing a box of groceries to a woman at a community food distribution",
-      position: "40% 40%",
-      pending: "about-values-3.jpg",
-    },
-    {
-      src: "/images/OurWorkPageHeroSection1.jpg",
-      alt: "A group of young adults sharing laptops during a workshop",
-      position: "40% 45%",
-      pending: "about-values-4.jpg",
-    },
-    {
-      src: "/images/HomePageHeroSectionOrignal.png",
-      alt: "A smiling group gathered around a laptop at a table in a busy learning space",
-      position: "55% 45%",
-      pending: "about-values-5.jpg",
-    },
-  ] satisfies HomeImage[],
+    { name: "Empowerment", line: "We help people develop the confidence to make informed choices." },
+    { name: "Inclusion", line: "We welcome people from diverse backgrounds and circumstances." },
+    { name: "Respect", line: "Everyone deserves dignity." },
+    { name: "Equality", line: "We work to reduce barriers to opportunity." },
+    { name: "Safety", line: "Safeguarding and wellbeing are fundamental." },
+    { name: "Collaboration", line: "We achieve more by working together." },
+    { name: "Integrity", line: "We act responsibly and transparently." },
+    { name: "Progress", line: "We focus on practical outcomes." },
+  ] satisfies { name: string; line: string }[],
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -362,67 +294,167 @@ export const aboutApproach = {
 } as const;
 
 /* -------------------------------------------------------------------------
-   SAFEGUARDING, POLICIES AND ACCESSIBILITY
-   Three of the brief's blocks, set side by side. "Policies" has no block of
-   its own in the brief; Confidentiality & Privacy is the nearest, so the
-   menu's Policies link lands there.
+   WHAT WE DO
+   The Centre's ten services, from the brief's "What We Do" block. These are
+   not the brief's Services sub-menu, which groups the same work into five
+   headings; both are the brief's own and are left as the brief writes them.
    ------------------------------------------------------------------------- */
 
-export const aboutCommitmentsIntro = {
-  /* The brief gives these three blocks no shared title, so the section
-     borrows a line it uses elsewhere, the subtitle of its Domestic Abuse
-     Support page: "Everyone Deserves to Feel Safe and Respected." */
-  titleLead: "Everyone Deserves to Feel",
-  titleAccent: "Safe and Respected",
+export type ServiceIcon =
+  | "education"
+  | "employment"
+  | "english"
+  | "digital"
+  | "enterprise"
+  | "guidance"
+  | "wellbeing"
+  | "support"
+  | "mentoring"
+  | "community";
+
+export const aboutWhatWeDo = {
+  id: "what-we-do",
+  kicker: brand.centre,
+  /** The brief's own heading for the block, split two-tone. */
+  titleLead: "What We",
+  titleAccent: "Do",
+  /* The brief's opening line. It introduces a numbered list and so ends on a
+     colon; set as a sentence here because the list follows on its own. */
+  lead: "OneVoice Skill Development Centre provides an integrated programme of services.",
+  cta: ctas.services,
+  /* The brief's ten services, in the brief's order and numbered as it numbers
+     them. Nine photographs were supplied under /images/about/What-we-do/,
+     numbered to match. The third was not, so English & Communication keeps a
+     stand-in and names the file it waits for in `pending`. The supplied files
+     are 16:9, which is the shape of the card's frame, so none is cropped and
+     none needs its crop steered. */
+  items: [
+    {
+      name: "Education & Skills Development",
+      image: {
+        src: "/images/about/What-we-do/what-we-do-image-1.png",
+        alt: "A trainer at a whiteboard explaining a diagram to five people seated around a table with notebooks and laptops",
+      },
+      icon: "education",
+      line: "Practical learning opportunities for personal, professional and digital development.",
+    },
+    {
+      name: "Employment & Careers",
+      image: {
+        src: "/images/about/What-we-do/what-we-do-image-2.png",
+        alt: "An adviser showing a printed document to a man seated across a desk from her, a laptop open between them",
+      },
+      icon: "employment",
+      line: "Helping people become job-ready, find employment and progress in their careers.",
+    },
+    {
+      name: "English & Communication",
+      image: {
+        src: "/images/Photo 1.png",
+        alt: "A woman in a pink headscarf working on a laptop beside a smiling tutor at a shared desk",
+        position: "45% 45%",
+        pending: "what-we-do-image-3.png",
+      },
+      icon: "english",
+      line: "Supporting people to develop confidence in English and workplace communication.",
+    },
+    {
+      name: "Digital Inclusion",
+      image: {
+        src: "/images/about/What-we-do/What-we-do-image-4.png",
+        alt: "A woman pointing at a desktop screen while an older man beside her works the mouse, in a bright open learning space",
+      },
+      icon: "digital",
+      line: "Building confidence with computers, technology and online services to develop the digital skills needed for everyday life, employment and business.",
+    },
+    {
+      name: "Enterprise & Self-Employment",
+      image: {
+        src: "/images/about/What-we-do/What-we-Do-image-5.png",
+        alt: "Two women looking at a tablet together at a counter of small handmade products in a shop",
+      },
+      icon: "enterprise",
+      line: "Supporting people to explore business ideas, freelancing and entrepreneurship.",
+    },
+    {
+      name: "Information, Advice & Guidance",
+      image: {
+        src: "/images/about/What-we-do/What-we-Do-image-6.png",
+        alt: "An adviser pointing to a printed leaflet on a low table while a woman seated beside her looks on",
+      },
+      icon: "guidance",
+      line: "Helping people understand their options around learning, careers, employment and support.",
+    },
+    {
+      name: "Health & Wellbeing",
+      image: {
+        src: "/images/about/What-we-do/What-We-Do-image-7.png",
+        alt: "Seven people sitting in a circle talking on a planted rooftop terrace at sunset, the London skyline behind them",
+      },
+      icon: "wellbeing",
+      line: "Promoting positive mental health, resilience and social connection.",
+    },
+    {
+      name: "Domestic Abuse Support",
+      image: {
+        src: "/images/about/What-we-do/What-we-do-image-8.png",
+        alt: "A woman taking notes while talking with another woman in armchairs, shelves of donated goods behind them",
+      },
+      icon: "support",
+      line: "Providing safe, confidential and non-judgemental support and appropriate referrals.",
+    },
+    {
+      name: "Mentoring",
+      image: {
+        src: "/images/about/What-we-do/What-we-do-image-9.png",
+        alt: "A speaker with a microphone addressing a seated audience in a conference hall",
+      },
+      icon: "mentoring",
+      line: "Connecting people with mentors who can provide encouragement and practical guidance.",
+    },
+    {
+      name: "Community Development",
+      image: {
+        src: "/images/about/What-we-do/What-we-do-image-10.png",
+        alt: "A large group of people of different ages and backgrounds sitting and talking together outdoors in a city park",
+      },
+      icon: "community",
+      line: "Building stronger, more connected and inclusive communities.",
+    },
+  ] satisfies { name: string; line: string; icon: ServiceIcon; image: HomeImage }[],
 } as const;
 
-export type CommitmentIcon = "safeguarding" | "privacy" | "accessibility";
+/* -------------------------------------------------------------------------
+   SAFEGUARDING
+   ------------------------------------------------------------------------- */
 
-export const aboutCommitments = [
-  {
-    id: "safeguarding",
-    icon: "safeguarding",
-    kicker: "Safeguarding",
-    title: "Keeping People Safe",
-    paragraphs: [
-      "Safeguarding is central to our work. OneVoice will maintain appropriate safeguarding policies, procedures, training and referral arrangements. Staff, volunteers, mentors and partners involved in delivery will be expected to understand their responsibilities.",
-      "Where safeguarding concerns arise, appropriate action will be taken in accordance with relevant procedures and legal requirements.",
-    ],
+export type SafeguardIcon = "policies" | "procedures" | "training" | "referral" | "law";
+
+export const aboutSafeguarding = {
+  id: "safeguarding",
+  kicker: "Safeguarding",
+  /** The brief's own title for the block, split two-tone. */
+  titleLead: "Keeping People",
+  titleAccent: "Safe",
+  /** The brief's first two paragraphs, word for word. */
+  paragraphs: [
+    "Safeguarding is central to our work. OneVoice will maintain appropriate safeguarding policies, procedures, training and referral arrangements.",
+    "Staff, volunteers, mentors and partners involved in delivery will be expected to understand their responsibilities.",
+  ],
+  /* The four things the first paragraph names, drawn out of its own sentence
+     and numbered. The panel's label is the brief's own clause, so the list
+     still reads as the sentence it came from and claims nothing more. */
+  arrangementsLabel: "OneVoice will maintain",
+  arrangements: [
+    { name: "Policies", icon: "policies" },
+    { name: "Procedures", icon: "procedures" },
+    { name: "Training", icon: "training" },
+    { name: "Referral Arrangements", icon: "referral" },
+  ] satisfies { name: string; icon: SafeguardIcon }[],
+  /** The brief's closing sentence, set apart as a notice. */
+  notice: {
+    icon: "law" as SafeguardIcon,
+    text: "Where safeguarding concerns arise, appropriate action will be taken in accordance with relevant procedures and legal requirements.",
   },
-  {
-    id: "policies",
-    icon: "privacy",
-    kicker: "Policies",
-    title: "Confidentiality & Privacy",
-    paragraphs: [
-      "We respect the privacy of people using our services. Personal information will be handled responsibly in accordance with applicable data protection requirements and our privacy policy.",
-      "There may be circumstances where information must be shared to protect someone from serious harm or where required by law.",
-    ],
-  },
-  {
-    id: "accessibility",
-    icon: "accessibility",
-    kicker: "Accessibility",
-    title: "Accessibility & Inclusion",
-    paragraphs: ["We aim to make our services accessible to people with different:"],
-    /** The brief's seven, listed rather than run on. */
-    items: [
-      "Languages",
-      "Abilities",
-      "Educational backgrounds",
-      "Digital skills",
-      "Cultural backgrounds",
-      "Employment experiences",
-      "Family circumstances",
-    ],
-    note: "Reasonable adjustments should be considered wherever practical.",
-  },
-] satisfies {
-  id: string;
-  icon: CommitmentIcon;
-  kicker: string;
-  title: string;
-  paragraphs: string[];
-  items?: string[];
-  note?: string;
-}[];
+  cta: ctas.support,
+} as const;

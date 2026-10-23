@@ -59,7 +59,7 @@ This file is the playbook for every page on this site. Read it before designing 
   - `ink`/`navy-900` (#0a2540) is the text and anchor colour; `navy-950` is for dark bands.
   - `ocean-600` (#0b5394) is the logo blue; `lagoon-600` (#0e7a76) is the logo teal; `saffron-500` (#de9c2e) is the logo amber.
   - Use `saffron-ink` for amber text on light backgrounds (it passes contrast), and the light tints `ocean-300`, `lagoon-300` and `saffron-300/400` for accents on dark backgrounds.
-  - Neutrals: `cream` (the page paper), `sand`, `mist`, `slate` (body text), `muted`, `line`.
+  - Neutrals: `cream` (the page paper), `sand`, `mist`, `slate` (body text), `ink-muted`, `line`. The quiet text colour is `ink-muted`, not `muted`: `--color-muted` belongs to the legacy shadcn scale in `globals.css`, whose `@theme` is declared after `site.css` is imported, so `text-muted` comes out near-white.
 - **Type:**
   - **Display face:** Fraunces (`font-display`). Always add `[font-variation-settings:'SOFT'_100]` and use normal weight. The accent half of a title is italic, light, and coloured: lagoon on light backgrounds, saffron-400 on dark.
   - **Body face:** Plus Jakarta Sans (`font-body`, the default inside the site).
