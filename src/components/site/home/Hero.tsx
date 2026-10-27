@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRef, useState, type CSSProperties } from "react";
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { cx } from "@/lib/cx";
-import { brand } from "@/data/site";
+import { brand, logo } from "@/data/site";
 import { homeHero } from "@/data/home";
 import { Cta, Kicker, Shell } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
@@ -218,7 +218,13 @@ function TaglineBadge() {
           </textPath>
         </text>
       </svg>
-      <Image src="/images/brand/mark.png" alt="" width={477} height={503} className="h-8 w-auto sm:h-11 lg:h-14" />
+      <Image
+        src={logo.mark.src}
+        alt=""
+        width={logo.mark.width}
+        height={logo.mark.height}
+        className="h-8 w-auto sm:h-11 lg:h-14"
+      />
       <span className="sr-only">{brand.tagline}</span>
     </div>
   );

@@ -1,22 +1,20 @@
 import Link from "next/link";
-import { aboutSections } from "@/data/about";
-import { Shell } from "../ui/primitives";
+import type { NavLink } from "@/data/site";
+import { Shell } from "./primitives";
 
 /**
- * The strip under the hero: the page's own sections, as the brief's About Us
- * sub-menu lists them. It scrolls sideways where the row runs out of room
- * rather than wrapping, and it is not sticky.
+ * The strip under an inner page's hero: the page's own sections, as the
+ * brief's sub-menu for that page lists them. It scrolls sideways where the
+ * row runs out of room rather than wrapping, and it is not sticky.
  */
-export function SectionNav() {
+export function SectionNav({ label, links }: { label: string; links: NavLink[] }) {
   return (
     <div className="border-b border-line bg-white">
       <Shell>
         <div className="scrollbar-none -mx-(--gutter) flex items-center gap-8 overflow-x-auto px-(--gutter) py-5">
-          <p className="shrink-0 font-display text-[1.25rem] text-ink [font-variation-settings:'SOFT'_100]">
-            {aboutSections.label}
-          </p>
+          <p className="shrink-0 font-display text-[1.25rem] text-ink [font-variation-settings:'SOFT'_100]">{label}</p>
           <ul className="flex shrink-0 items-center gap-7 lg:ml-auto">
-            {aboutSections.links.map((link) => (
+            {links.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}

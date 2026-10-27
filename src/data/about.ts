@@ -25,10 +25,9 @@ export const aboutHero = {
   kicker: brand.name,
   /** The brief's tagline, one phrase to a line. */
   title: ["Stronger Communities.", "Shared Opportunities.", "One World."],
-  description:
-    "OneVoice Global Foundation connects communities, organisations and institutions to create practical pathways into skills, opportunity, participation and progress.",
+  description: `${brand.name} connects communities, organisations and institutions to create practical pathways into skills, opportunity, participation and progress.`,
   /** "Our Work" is the brief's Services section: what the Foundation delivers. */
-  primaryCta: { label: "Explore Our Work", href: routes.services },
+  primaryCta: { label: "Explore Our Work", href: routes.ourWork },
   secondaryCta: { label: "Get Involved", href: routes.getInvolved },
   /** The pill over the collage: the brief's motto. */
   badge: `${brand.motto.join(". ")}.`,
@@ -89,7 +88,7 @@ export const aboutWhoWeAre = {
   kicker: "Who We Are",
   titleLead: "Everyone Has",
   titleAccent: "Potential.",
-  lead: "OneVoice Global Foundation is a community empowerment and partnership platform dedicated to helping people access opportunities, develop their potential and participate more fully in society.",
+  lead: `${brand.name} is a community empowerment and partnership platform dedicated to helping people access opportunities, develop their potential and participate more fully in society.`,
   body: "Through our London-based Skill Development Centre, we support people from ethnic minority, disadvantaged and underserved communities to build skills, gain confidence, improve digital capability, access employment, explore enterprise, strengthen wellbeing and connect with their communities.",
   /** The brief's own line and its twelve barriers, in the brief's order. */
   barriers: {

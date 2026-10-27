@@ -31,14 +31,14 @@ const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], displa
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "OneVoice Global Foundation | Empowering People. Building Skills. Creating Opportunities.",
-    template: "%s | OneVoice Global Foundation",
+    default: `${siteConfig.name} | Empowering People. Building Skills. Creating Opportunities.`,
+    template: `%s | ${siteConfig.name}`,
   },
   description:
     "OneVoice Skill Development Centre supports people from ethnic minority, disadvantaged and underserved communities across London to develop skills, build confidence, access employment and connect with their communities.",
   applicationName: siteConfig.name,
   openGraph: {
-    title: "OneVoice Global Foundation",
+    title: siteConfig.name,
     description: "Stronger Communities, Shared Opportunities, One World.",
     siteName: siteConfig.name,
     locale: "en_GB",

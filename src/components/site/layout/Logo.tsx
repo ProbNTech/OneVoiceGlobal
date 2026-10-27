@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cx } from "@/lib/cx";
-import { brand } from "@/data/site";
+import { brand, logo } from "@/data/site";
 
 /**
- * The OneVoice Global Foundation logo. `light` is the reversed version for
- * dark bands: the wordmark and the navy figure turn white, the blue, teal
- * and amber figures keep their colour.
+ * The OneVoice Community Foundation logo. `light` is the reversed version
+ * for dark bands: the navy wordmark turns white, the figures and the teal
+ * "Community Foundation" line keep their colour.
  */
 export function Logo({
   tone = "colour",
@@ -17,14 +17,15 @@ export function Logo({
   className?: string;
   eager?: boolean;
 }) {
+  const file = tone === "colour" ? logo.colour : logo.light;
   return (
     <Link href="/" aria-label={`${brand.name}, home`} className={cx("inline-flex shrink-0", className)}>
       <Image
-        src={tone === "colour" ? "/images/brand/logo.png" : "/images/brand/logo-white.png"}
+        src={file.src}
         alt=""
-        width={2018}
-        height={604}
-        sizes="200px"
+        width={file.width}
+        height={file.height}
+        sizes="260px"
         preload={eager}
         className="h-full w-auto"
       />

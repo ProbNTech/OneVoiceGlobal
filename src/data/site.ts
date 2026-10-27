@@ -2,11 +2,13 @@
  * Site-wide content for the redesigned pages (`src/app/(site)/`): brand
  * lines, the brief's main menu, footer and contact.
  *
- * The menu is the brief's own (HOME to CONTACT, with its sub-menus) and every
- * label is written as the brief writes it. The pages behind it are not built
- * yet: each top-level item points at the route it will live on, and each
- * sub-item at a section anchor on that page. Until a page exists the link
- * lands on the site's not-found page.
+ * The menu is the brief's V.2 menu (24 October 2026: HOME to CONTACT, with
+ * its sub-menus), and every label is written as the brief writes it, except
+ * Programmes (see below). V.2 renames SERVICES to OUR WORK and adds SEMINARS &
+ * WORKSHOPS and EVENTS 2027. Each top-level item points at the route its
+ * page lives on, and each sub-item at a section anchor on that page. Until a
+ * page exists the link lands on the site's not-found page; Our Work still
+ * opens the first design's page at /our-work until it is redesigned.
  *
  * Contact details: the brief's CONTACT US block gives the labels (Address,
  * Telephone, Email, Website) with no values, and names four social platforms
@@ -18,7 +20,10 @@ export type NavLink = { label: string; href: string };
 export type NavItem = NavLink & { children?: NavLink[] };
 
 export const brand = {
-  name: "OneVoice Global Foundation",
+  /* The brief says "OneVoice Global Foundation"; on 27 October 2026 the
+     client renamed the organisation, with a new logo. Every page takes the
+     name from here, including lines the brief writes with the old one. */
+  name: "OneVoice Community Foundation",
   centre: "OneVoice Skill Development Centre",
   tagline: "Stronger Communities, Shared Opportunities, One World",
   initiative: "Community Empowerment, Skills and Social Inclusion Initiative",
@@ -27,11 +32,26 @@ export const brand = {
   closing: "One Person. One Voice. One Opportunity at a Time.",
 } as const;
 
+/**
+ * The logo files, made from the client's OneVoice Community Foundation logo
+ * (27 October 2026): the colour version and the reversed one for dark bands
+ * leave off the logo's tagline line, which is too small to read at header
+ * size, and the mark is its figures alone. The client's file is 547 pixels
+ * wide; swap in larger versions here when the original arrives.
+ */
+export const logo = {
+  colour: { src: "/images/brand/community-logo.png", width: 469, height: 103 },
+  light: { src: "/images/brand/community-logo-white.png", width: 469, height: 103 },
+  mark: { src: "/images/brand/community-mark.png", width: 106, height: 103 },
+} as const;
+
 export const routes = {
   home: "/",
   about: "/about-us",
-  services: "/services",
+  ourWork: "/our-work",
   programmes: "/programmes",
+  seminars: "/seminars-and-workshops",
+  events: "/events",
   community: "/community",
   partners: "/partners",
   impact: "/impact",
@@ -70,53 +90,65 @@ export const navigation: NavItem[] = [
     ]),
   },
   {
-    label: "Services",
-    href: routes.services,
-    children: sub(routes.services, [
-      "Community Support",
-      "Skills & Education",
-      "Advocacy & Leadership",
-      "Youth & Women",
+    label: "Our Work",
+    href: routes.ourWork,
+    children: sub(routes.ourWork, [
+      "Education, Skills and Digital Inclusion",
+      "Livelihoods, Employment and Entrepreneurship",
+      "Mental Wellbeing and Family Support",
+      "Community Inclusion and Advocacy",
+      "Youth, Women and Family Empowerment",
+      "Community Partnerships and Diaspora Engagement",
       "International Network",
     ]),
   },
   {
     label: "Programmes",
     href: routes.programmes,
+    // The brief's menu names nineteen programmes, but its copy comes in
+    // twenty-three blocks under other names, and some of the nineteen have
+    // no copy at all. As agreed on 27 October 2026, the page is built from
+    // the blocks, grouped into these seven themes (see src/data/programmes-page.ts).
     children: sub(routes.programmes, [
-      // The brief's first entry ends on a stray "&"; written here without it.
-      "Education & Everyday English (ESOL)",
-      "IT/Digital Literacy & Skills Development",
-      "Careers Information, Advice & Guidance",
-      "Pre-employment & Pre-Settlement Skills",
-      "Employability & Employment Events",
-      "Women's & Men's Development",
-      "Return to Work",
+      "Education & English",
+      "Digital OneVoice",
+      "Employment & Careers",
       "Enterprise & Mentoring",
-      "Financial Capability",
-      "Youth Development",
-      "Women's Wellbeing & Resilience",
-      "Domestic Abuse & Family Support",
+      "Women, Men & Youth",
+      "Wellbeing & Family",
+      "Safety & Advice",
+    ]),
+  },
+  {
+    label: "Seminars & Workshops",
+    href: routes.seminars,
+    children: sub(routes.seminars, [
+      "Priority Workshops for 2027",
       "Mental Health & Wellbeing",
-      "Feminist Leadership & Volunteering",
-      "Matrimonial Relations & Preventing Divorce",
-      "New Arrival & Settlement Support",
-      "Drugs Awareness",
-      "Community Support",
-      "Information & Signposting",
+      "Rights & Empowerment",
+      "Healthy Relationships",
+    ]),
+  },
+  {
+    label: "Events 2027",
+    href: routes.events,
+    children: sub(routes.events, [
+      "Community Iftar & Official Launch",
+      "International Women's Day",
+      "Eid Bazaar",
+      "Pakistan Independence Day & Community Celebration",
+      "East London Community Marathon Walks",
+      // The brief writes "Yearbook 2027-100"; the dash is spaced so it does not read as a range.
+      "Yearbook 2027 – 100 Inspiring Personalities",
+      "OneVoice Achievement Awards 2027",
     ]),
   },
   {
     label: "Community",
     href: routes.community,
-    children: sub(routes.community, [
-      "Outreach",
-      "Community Hub & Networks",
-      "Events",
-      "Volunteering",
-      "Community Voice",
-      "Achievement Awards",
-    ]),
+    // The brief's V.2 (24 October 2026) menu. It moves Events and the
+    // Achievement Awards out of Community and onto its new Events 2027 page.
+    children: sub(routes.community, ["Outreach", "Community Hub & Networks", "Volunteering", "Community Voice"]),
   },
   {
     label: "Partners",
@@ -150,9 +182,20 @@ export const navigation: NavItem[] = [
   { label: "Contact", href: routes.contact },
 ];
 
+/**
+ * The kinds of enquiry the Contact page's form takes (its labels and lines
+ * are in src/data/contact.ts). A call to act that ends at the form opens it
+ * with its own kind already chosen, through `enquiryHref`.
+ */
+export type EnquiryTopic = "support" | "interest" | "refer" | "volunteer" | "partner" | "sponsor" | "donate";
+
+/** The Contact page, scrolled to its form, with one kind of enquiry chosen. */
+export const enquiryHref = (topic: EnquiryTopic) => `${routes.contact}?enquiry=${topic}#contact-us`;
+
 export const ctas = {
-  support: { label: "Get Support", href: routes.contact },
-  services: { label: "Explore Our Services", href: routes.services },
+  support: { label: "Get Support", href: enquiryHref("support") },
+  // The homepage hero's label in the brief; it leads to Our Work.
+  services: { label: "Explore Our Services", href: routes.ourWork },
   partner: { label: "Become a Partner", href: `${routes.getInvolved}#become-a-partner` },
   donate: { label: "Donate", href: `${routes.getInvolved}#donate` },
 } satisfies Record<string, NavLink>;
@@ -179,12 +222,20 @@ const byLabel = (label: string) => navigation.find((item) => item.label === labe
 export const footerColumns: { heading: string; links: NavLink[] }[] = [
   {
     heading: "Explore",
-    links: ["About Us", "Services", "Programmes", "Community", "Partners", "Impact", "News & Resources"].map(
-      (label) => {
-        const { href } = byLabel(label);
-        return { label, href };
-      },
-    ),
+    links: [
+      "About Us",
+      "Our Work",
+      "Programmes",
+      "Seminars & Workshops",
+      "Events 2027",
+      "Community",
+      "Partners",
+      "Impact",
+      "News & Resources",
+    ].map((label) => {
+      const { href } = byLabel(label);
+      return { label, href };
+    }),
   },
   { heading: "Get Involved", links: byLabel("Get Involved").children ?? [] },
   {
