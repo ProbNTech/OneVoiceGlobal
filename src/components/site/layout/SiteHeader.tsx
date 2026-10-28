@@ -6,22 +6,26 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, Plus, X } from "lucide-react";
 import { cx } from "@/lib/cx";
-import { brand, contact, ctas, navigation, routes, type NavItem } from "@/data/site";
+import { brand, contact, ctas, logo, navigation, type NavItem, routes } from "@/data/site";
 import { Cta } from "../ui/primitives";
 import { SocialIcon } from "../ui/SocialIcon";
 import { Logo } from "./Logo";
 
 /**
- * Five or six of the brief's ten menu sections fit on one desktop row; all ten, with
- * every sub-page, live in the full menu behind "Menu", which is also the only
- * navigation below 1280px.
+ * Five or six of the brief's twelve menu sections fit on one desktop row; all
+ * twelve, with every sub-page, live in the full menu behind "Menu", which is
+ * also the only navigation below 1280px. The row follows the navigation the
+ * brief's V.2 asks for in its website standards (About Us, Our Programmes,
+ * Events & Activities, Get Involved), with Our Work, its new name for
+ * Services; Contact is the Get Support button beside it.
  */
-const PRIMARY = ["About Us", "Services", "Programmes", "Community", "Partners", "Get Involved"];
+const PRIMARY = ["About Us", "Our Work", "Programmes", "Events 2027", "Community", "Get Involved"];
 /* Pages that open on a dark hero, where the bar sits in white until the page
-   moves: the home page's full-screen photograph, and the navy About Us band. */
-const DARK_HERO: string[] = [routes.home, routes.about];
+   moves: the home page's full-screen photograph, and the navy About Us and
+   Partners bands. */
+const DARK_HERO: string[] = [routes.home, routes.about, routes.partners];
 /* Shown in the bar only where the row has room for it (it is always in the full menu). */
-const ROOMY_ONLY = ["Get Involved"];
+const ROOMY_ONLY = ["Community"];
 const primaryItems = navigation.filter((item) => PRIMARY.includes(item.label));
 
 export function SiteHeader() {
@@ -131,20 +135,20 @@ function HeaderLogo({ light, compact }: { light: boolean; compact: boolean }) {
       className={cx("relative inline-flex shrink-0 transition-[height] duration-500", compact ? "h-10" : "h-12")}
     >
       <Image
-        src="/images/brand/logo.png"
+        src={logo.colour.src}
         alt=""
-        width={2018}
-        height={604}
-        sizes="200px"
+        width={logo.colour.width}
+        height={logo.colour.height}
+        sizes="240px"
         preload
         className={cx("h-full w-auto transition-opacity duration-500", light ? "opacity-0" : "opacity-100")}
       />
       <Image
-        src="/images/brand/logo-white.png"
+        src={logo.light.src}
         alt=""
-        width={2018}
-        height={604}
-        sizes="200px"
+        width={logo.light.width}
+        height={logo.light.height}
+        sizes="240px"
         preload
         className={cx(
           "absolute inset-0 h-full w-auto transition-opacity duration-500",
@@ -157,17 +161,18 @@ function HeaderLogo({ light, compact }: { light: boolean; compact: boolean }) {
 
 /* -------------------------------------------------------------------------
    Desktop item. The dropdown opens on hover and on :focus-within, so
-   keyboard users tab straight into it. Programmes, with nineteen entries,
-   gets a two-column panel.
+   keyboard users tab straight into it. A section with more than ten
+   entries gets a two-column panel, and one with long names a wider one.
    ------------------------------------------------------------------------- */
 
 function DesktopItem({ item, pathname, light }: { item: NavItem; pathname: string; light: boolean }) {
   const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
   const children = item.children ?? [];
   const wide = children.length > 10;
+  const roomy = children.some((child) => child.label.length > 30);
 
   return (
-    <li className={cx("group/item relative", ROOMY_ONLY.includes(item.label) && "hidden min-[1400px]:block")}>
+    <li className={cx("group/item relative", ROOMY_ONLY.includes(item.label) && "hidden 2xl:block")}>
       <Link
         href={item.href}
         aria-current={active ? "page" : undefined}
@@ -195,7 +200,7 @@ function DesktopItem({ item, pathname, light }: { item: NavItem; pathname: strin
             "invisible absolute left-1/2 top-full z-10 -translate-x-1/2 translate-y-2 pt-3 opacity-0 transition-all duration-300 ease-out-soft",
             "group-hover/item:visible group-hover/item:translate-y-0 group-hover/item:opacity-100",
             "group-focus-within/item:visible group-focus-within/item:translate-y-0 group-focus-within/item:opacity-100",
-            wide ? "w-[42rem]" : "w-72",
+            wide ? "w-[42rem]" : roomy ? "w-[26rem]" : "w-72",
           )}
         >
           <div className="rounded-[1.5rem] bg-white p-3 shadow-[0_30px_60px_-30px_rgb(10_37_64/0.45)] ring-1 ring-ink/6">
@@ -325,7 +330,6 @@ function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClose: () =
                 className={cx(
                   "transition-all duration-700",
                   open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
-                  item.label === "Programmes" && "row-span-2",
                 )}
                 style={{ transitionDelay: open ? `${220 + index * 60}ms` : "0ms" }}
               >
@@ -409,7 +413,13 @@ function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClose: () =
 
         <div className="mt-12 flex flex-col gap-8 border-t border-line pt-8 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex items-center gap-4">
-            <Image src="/images/brand/mark.png" alt="" width={477} height={503} className="h-12 w-auto" />
+            <Image
+              src={logo.mark.src}
+              alt=""
+              width={logo.mark.width}
+              height={logo.mark.height}
+              className="h-12 w-auto"
+            />
             <p className="max-w-xs text-[0.875rem] leading-relaxed text-ink-muted">{brand.tagline}</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">

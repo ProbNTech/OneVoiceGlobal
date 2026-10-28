@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { CSSProperties, ReactNode } from "react";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { cx } from "@/lib/cx";
 import { Magnetic } from "./Magnetic";
@@ -145,21 +145,22 @@ export function Title({
       )}
     >
       {lines.map((line, index) => (
-        <span
-          key={line}
-          className={cx(
-            "overflow-hidden pb-[0.08em] -mb-[0.08em]",
-            inline ? "inline-block align-bottom" : "block",
-            inline && index === 1 && "ml-[0.25em]",
-          )}
-        >
+        <Fragment key={line}>
+          {/* A real space between the halves rather than a margin on the
+              accent: a space vanishes where the line wraps, a margin would
+              indent the second line. */}
+          {inline && index === 1 ? " " : null}
           <span
-            className={cx("line-inner block", index === 1 && cx("italic font-light", accentTones[accentTone]))}
-            style={{ "--line": index } as CSSProperties}
+            className={cx("overflow-hidden pb-[0.08em] -mb-[0.08em]", inline ? "inline-block align-bottom" : "block")}
           >
-            {line}
+            <span
+              className={cx("line-inner block", index === 1 && cx("italic font-light", accentTones[accentTone]))}
+              style={{ "--line": index } as CSSProperties}
+            >
+              {line}
+            </span>
           </span>
-        </span>
+        </Fragment>
       ))}
     </Reveal>
   );
@@ -183,6 +184,24 @@ const ctaVariants = {
 
 export type CtaVariant = keyof typeof ctaVariants;
 
+const ctaClass = (variant: CtaVariant, size: "sm" | "md") =>
+  cx(
+    "group/cta relative isolate inline-flex items-center gap-3 overflow-hidden rounded-full pl-6 pr-2 text-[0.9375rem] font-semibold whitespace-nowrap transition-colors duration-500",
+    "before:absolute before:inset-0 before:-z-10 before:origin-left before:scale-x-0 before:rounded-full before:transition-transform before:duration-500 before:ease-out-soft hover:before:scale-x-100",
+    size === "md" ? "h-13" : "h-12",
+    ctaVariants[variant],
+  );
+
+/** The arrow in its disc, which slips out as a second one slides in on hover. */
+function CtaArrow() {
+  return (
+    <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-(--disc)">
+      <ArrowRight className="h-4 w-4 transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-[150%]" />
+      <ArrowRight className="absolute h-4 w-4 -translate-x-[150%] transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-0" />
+    </span>
+  );
+}
+
 export function Cta({
   href,
   children,
@@ -198,21 +217,38 @@ export function Cta({
 }) {
   return (
     <Magnetic className={className}>
-      <Link
-        href={href}
-        className={cx(
-          "group/cta relative isolate inline-flex items-center gap-3 overflow-hidden rounded-full pl-6 pr-2 text-[0.9375rem] font-semibold whitespace-nowrap transition-colors duration-500",
-          "before:absolute before:inset-0 before:-z-10 before:origin-left before:scale-x-0 before:rounded-full before:transition-transform before:duration-500 before:ease-out-soft hover:before:scale-x-100",
-          size === "md" ? "h-13" : "h-12",
-          ctaVariants[variant],
-        )}
+      <Link href={href} className={ctaClass(variant, size)}>
+        <span>{children}</span>
+        <CtaArrow />
+      </Link>
+    </Magnetic>
+  );
+}
+
+/** The same pill as a form's submit button. */
+export function CtaButton({
+  children,
+  variant = "ink",
+  size = "md",
+  className,
+  disabled,
+}: {
+  children: ReactNode;
+  variant?: CtaVariant;
+  size?: "sm" | "md";
+  className?: string;
+  disabled?: boolean;
+}) {
+  return (
+    <Magnetic className={className}>
+      <button
+        type="submit"
+        disabled={disabled}
+        className={cx(ctaClass(variant, size), "cursor-pointer disabled:cursor-wait disabled:opacity-70")}
       >
         <span>{children}</span>
-        <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-(--disc)">
-          <ArrowRight className="h-4 w-4 transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-[150%]" />
-          <ArrowRight className="absolute h-4 w-4 -translate-x-[150%] transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-0" />
-        </span>
-      </Link>
+        <CtaArrow />
+      </button>
     </Magnetic>
   );
 }

@@ -15,6 +15,7 @@ export function SiteFooter() {
     { label: "Address", value: contact.address },
     { label: "Telephone", value: contact.telephone, href: `tel:${contact.telephone.replace(/\s+/g, "")}` },
     { label: "Email", value: contact.email, href: `mailto:${contact.email}` },
+    { label: "Website", value: contact.website, href: contact.website },
   ].filter((item) => item.value);
 
   return (

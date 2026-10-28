@@ -15,6 +15,7 @@ import {
 import { homeIntro, type ConnectIcon } from "@/data/home";
 import { Kicker, Shell } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
+import { logo } from "@/data/site";
 
 const icons: Record<ConnectIcon, LucideIcon> = {
   residents: House,
@@ -85,7 +86,13 @@ export function Intro() {
               className="absolute left-4 top-8 max-w-[15rem] sm:left-8 lg:-left-6 lg:top-12"
             >
               <div className="flex items-center gap-3 rounded-[1.25rem] bg-white p-4 shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
-                <Image src="/images/brand/mark.png" alt="" width={477} height={503} className="h-10 w-auto shrink-0" />
+                <Image
+                  src={logo.mark.src}
+                  alt=""
+                  width={logo.mark.width}
+                  height={logo.mark.height}
+                  className="h-10 w-auto shrink-0"
+                />
                 <p className="text-[0.8125rem] font-semibold leading-snug text-ink">{homeIntro.badge}</p>
               </div>
             </Reveal>

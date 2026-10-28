@@ -3,6 +3,7 @@ import { DoorOpen, MapPin, Sprout, UsersRound, type LucideIcon } from "lucide-re
 import { aboutWhoWeAre, type OutcomeIcon } from "@/data/about";
 import { Kicker, Shell, Title } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
+import { logo } from "@/data/site";
 
 const icons: Record<OutcomeIcon, LucideIcon> = {
   connect: UsersRound,
@@ -65,7 +66,13 @@ export function WhoWeAre() {
               className="absolute -right-3 top-6 z-10 max-w-[15.5rem] sm:-right-5 sm:top-8"
             >
               <div className="flex items-center gap-3 rounded-[1.25rem] bg-white p-4 shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
-                <Image src="/images/brand/mark.png" alt="" width={477} height={503} className="h-10 w-auto shrink-0" />
+                <Image
+                  src={logo.mark.src}
+                  alt=""
+                  width={logo.mark.width}
+                  height={logo.mark.height}
+                  className="h-10 w-auto shrink-0"
+                />
                 <p className="text-[0.8125rem] font-semibold leading-snug text-ink">{badge}</p>
               </div>
             </Reveal>

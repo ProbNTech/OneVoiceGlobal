@@ -92,6 +92,7 @@
   --animate-spin-slow: turn 28s linear infinite;
   --animate-pulse-dot: pulse-dot 2.4s var(--ease-out-soft) infinite;
   --animate-slide-progress: slide-progress var(--slide-duration, 6.5s) linear both;
+  --animate-typing: typing 1.4s var(--ease-in-out-soft) infinite;
 
   @keyframes turn {
     to {
@@ -143,6 +144,20 @@
     }
     to {
       transform: scaleX(1);
+    }
+  }
+
+  /* The three dots of a reply being written (the Contact hero). */
+  @keyframes typing {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.45;
+    }
+    30% {
+      transform: translateY(-40%);
+      opacity: 1;
     }
   }
 }
@@ -338,6 +353,73 @@
 
   .js-reveal [data-reveal].is-in .line-draw-y {
     transform: none;
+  }
+
+  /* A statement whose phrases light up one after another as it arrives
+     (the Partners page's areas of collaboration). The block itself stays
+     put; each `.phrase` carries its place in the order as `--i`. */
+  .js-reveal [data-reveal="phrases"] {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  .js-reveal [data-reveal="phrases"] .phrase {
+    opacity: 0.14;
+    transition: opacity 0.9s var(--ease-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0ms) + var(--i, 0) * 150ms);
+  }
+
+  .js-reveal [data-reveal="phrases"].is-in .phrase {
+    opacity: 1;
+  }
+}
+
+/* A panel that eases up into place each time it is shown (the Programmes
+   page's tabs): the animation replays whenever `hidden` comes off. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* -- Photo stack (Get Involved: Support Our Work) -----------------------------
+   One photograph of the stack shows at a time, the one marked `.is-active`.
+   The incoming photograph is uncovered from the foot up over the one it
+   replaces, which hides only once it has been covered, so the frame is
+   never empty. Reduced motion swaps them at once. */
+.photo-stack > * {
+  z-index: 0;
+  clip-path: inset(100% 0 0 0);
+}
+
+.photo-stack > .is-active {
+  z-index: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .photo-stack > * {
+    transition: clip-path 0s linear 0.9s;
+  }
+
+  .photo-stack > .is-active {
+    transition: clip-path 0.9s var(--ease-in-out-soft);
+  }
+
+  .photo-stack > * img {
+    scale: 1.12;
+    transition: scale 0s linear 0.9s;
+  }
+
+  .photo-stack > .is-active img {
+    scale: 1;
+    transition: scale 1.6s var(--ease-out-soft);
   }
 }
 

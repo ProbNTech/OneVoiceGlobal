@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/site/about/Hero";
-import { SectionNav } from "@/components/site/about/SectionNav";
+import { SectionNav } from "@/components/site/ui/SectionNav";
 import { WhoWeAre } from "@/components/site/about/WhoWeAre";
 import { VisionMission } from "@/components/site/about/VisionMission";
 import { Values } from "@/components/site/about/Values";
@@ -8,7 +8,7 @@ import { Journey } from "@/components/site/about/Journey";
 import { WhatWeDo } from "@/components/site/about/WhatWeDo";
 import { Approach } from "@/components/site/about/Approach";
 import { Safeguarding } from "@/components/site/about/Safeguarding";
-import { aboutHero } from "@/data/about";
+import { aboutHero, aboutSections } from "@/data/about";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -26,7 +26,7 @@ export default function AboutPage() {
   return (
     <>
       <Hero />
-      <SectionNav />
+      <SectionNav label={aboutSections.label} links={aboutSections.links} />
       <WhoWeAre />
       <VisionMission />
       <Values />

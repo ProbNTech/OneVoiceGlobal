@@ -1,12 +1,12 @@
 @AGENTS.md
 
-# OneVoice Global Foundation website: how we design and build it
+# OneVoice Community Foundation website: how we design and build it
 
 This file is the playbook for every page on this site. Read it before designing or coding anything, and follow it unless the person you are working with tells you otherwise. The home page is built and its design is approved. It is the reference for everything that follows, so open `src/app/(site)/page.tsx` and the files under `src/components/site/` and reuse them before inventing anything new.
 
 ## 1. What we are building
 
-- **Client:** OneVoice Global Foundation, a London community empowerment, skills and social-inclusion charity. Its delivery arm is "OneVoice Skill Development Centre".
+- **Client:** OneVoice Community Foundation (the source documents call it "OneVoice Global Foundation"; the client renamed it on 27 October 2026), a London community empowerment, skills and social-inclusion charity. Its delivery arm is "OneVoice Skill Development Centre".
 - **Feel:** clean, soft and elegant, a little premium, media-rich (lots of real-looking photographs), with smooth, premium motion. It should be calmer and sleeker than our full-premium event sites (ASBS, CWEF) but built the same way.
 - **Style references:** elaflooring.co.uk (its section patterns are the user's favourites), asianresource.org.uk, reachvolunteering.org.uk. **Motion references:** innovatorpathway.co.uk, asianresource.org.uk.
 - The intern's first design (everything under `src/components/{layout,shared,work}`, `src/data/{navigation,services,work,programmes,legacy-home}.ts` and the `(legacy)` route group) was rejected. Never copy its look or reuse its components for new pages.
@@ -18,7 +18,7 @@ This file is the playbook for every page on this site. Read it before designing 
 - When a section needs a title the document does not give, borrow a line the document uses elsewhere, and note its source in a comment in the data file (see `src/data/home.ts`).
 - **Never invent** statistics, testimonials, partner names or logos, contact details, social links, dates or venues. The document's contact block is blank. `src/data/site.ts → contact` stays empty until the client supplies values, and empty values are simply not rendered. The four social platforms show as icons without links until URLs arrive.
 - Keep card copy short: a card shows the document's title and one line. Don't pile on bullet lists, chips or sub-headings unless the user asks.
-- British English. Write the names exactly as the document does: "OneVoice Global Foundation", "OneVoice Skill Development Centre".
+- British English. Write the names exactly: "OneVoice Community Foundation" (never the documents' old "OneVoice Global Foundation"; take it from `brand.name` in `src/data/site.ts`), "OneVoice Skill Development Centre". The logo files are `logo` in the same file.
 
 ## 3. Design rules from the user's reviews (follow these)
 

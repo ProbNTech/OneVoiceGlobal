@@ -2,12 +2,17 @@
  * Copy and media for the home page (`src/app/(site)/page.tsx`).
  *
  * Every line of copy comes from the brief's homepage block (HOMEPAGE HERO to
- * FINAL CALL TO ACTION), in the brief's order. Where a section needed a title
- * the brief does not give, it borrows one of the brief's own lines from the
- * matching page (noted beside it).
+ * FINAL CALL TO ACTION), in the brief's order; HOMEPAGE HERO to FINAL CALL TO
+ * ACTION are the same word for word in Draft01 and V.2. V.2 then closes the
+ * block with the Foundation's own lines in place of Draft01's Vision, Mission
+ * and five areas of work; they are the Foundation section, set before the
+ * closing banner. Where a section needed a title the brief does not give, it
+ * borrows one of the brief's own lines from the matching page (noted beside
+ * it).
  *
- * IMAGES. The six photographs under /images/home/ come from the brief; the
- * rest are the existing photographs in /images/. A slot marked `pending` is
+ * IMAGES. The six photographs under /images/home/ and the four under
+ * /images/community/ come from the brief (Draft01 and V.2); the rest are the
+ * existing photographs in /images/. A slot marked `pending` is
  * waiting for a generated image (file name, pixel size and prompt are in
  * `_source/home-media-brief.md`); until it arrives `src` is the closest
  * existing photograph as a stand-in, and swapping it is a one-line change to
@@ -137,7 +142,7 @@ export const homeIntro = {
   kicker: brand.name,
   /** The statement, split so its key phrase can be set in italic. */
   statement: {
-    before: "OneVoice Global Foundation is a ",
+    before: `${brand.name} is a `,
     accent: "community empowerment and partnership platform",
     after:
       " to connect residents, community organisations, local authorities, education providers, charities and employers.",
@@ -227,21 +232,21 @@ export const homeProgrammes = {
       title: "Skills Development",
       line: "Develop practical skills for life and work.",
       icon: "skills",
-      href: `${routes.programmes}#it-digital-literacy-and-skills-development`,
+      href: `${routes.programmes}#education-and-english`,
       image: photo.digitalClass,
     },
     {
       title: "Employability",
       line: "Become job ready and access employment opportunities.",
       icon: "employability",
-      href: `${routes.programmes}#employability-and-employment-events`,
+      href: `${routes.programmes}#employment-and-careers`,
       image: standIn(photo.teamDocuments, "programme-employability.jpg"),
     },
     {
       title: "Digital OneVoice",
       line: "Build confidence in the digital world.",
       icon: "digital",
-      href: `${routes.programmes}#it-digital-literacy-and-skills-development`,
+      href: `${routes.programmes}#digital-onevoice`,
       image: standIn(photo.laptopsWorkshop, "programme-digital.jpg"),
     },
     {
@@ -255,28 +260,28 @@ export const homeProgrammes = {
       title: "English & Communication",
       line: "Develop English and communication skills.",
       icon: "english",
-      href: `${routes.programmes}#education-and-everyday-english-esol`,
+      href: `${routes.programmes}#english-and-communication`,
       image: standIn(photo.womenGroup, "programme-english.jpg"),
     },
     {
       title: "Mentoring",
       line: "Get guidance and support from experienced people.",
       icon: "mentoring",
-      href: `${routes.programmes}#enterprise-and-mentoring`,
+      href: `${routes.programmes}#mentoring`,
       image: standIn(photo.learningLaptop, "programme-mentoring.jpg"),
     },
     {
       title: "Wellbeing",
       line: "Build resilience, confidence and social connection.",
       icon: "wellbeing",
-      href: `${routes.programmes}#mental-health-and-wellbeing`,
+      href: `${routes.programmes}#wellbeing-and-family`,
       image: standIn(photo.communityMeeting, "programme-wellbeing.jpg"),
     },
     {
       title: "Community",
       line: "Connect, participate and build relationships.",
       icon: "community",
-      href: `${routes.programmes}#community-support`,
+      href: routes.community,
       image: photo.communityForum,
     },
   ] satisfies HomeProgramme[],
@@ -415,6 +420,85 @@ export const homeWorkWithUs = {
     cta: ctas.partner,
     image: standIn(photo.teamPlanning, "work-with-us.jpg"),
   },
+} as const;
+
+/* -------------------------------------------------------------------------
+   THE FOUNDATION (V.2)
+   The lines V.2 closes its homepage block with: a headline with its line
+   and two calls to act, two short statements, and the brief's outline of the
+   website's main pages, each with the line it gives that page (its entry for
+   Home itself is left out here, on the home page).
+   ------------------------------------------------------------------------- */
+
+const v2Photo = {
+  gathering: {
+    src: "/images/community/community-gathering.jpg",
+    alt: "Residents of different ages sharing a table and talking together at a busy community gathering in a hall",
+    position: "50% 50%",
+  },
+  workshop: {
+    src: "/images/community/community-workshop.jpg",
+    alt: "A facilitator at a whiteboard leading a workshop for adults seated at tables in a bright, modern community space",
+    position: "50% 50%",
+  },
+  professionals: {
+    src: "/images/community/professionals-collaborating.jpg",
+    alt: "Professionals gathered round a table of laptops and printed charts, talking and smiling together",
+    position: "55% 45%",
+  },
+  volunteers: {
+    src: "/images/community/outreach-volunteers.jpg",
+    alt: "Volunteers in high-visibility vests chatting with residents outside beside a rail of donated clothes",
+    position: "55% 45%",
+  },
+} satisfies Record<string, HomeImage>;
+
+export const homeFoundation = {
+  kicker: brand.name,
+  titleLead: "Stronger Communities. Greater Opportunity.",
+  titleAccent: "Lasting Change.",
+  lead: "Connecting communities with the skills, support and partnerships they need to thrive.",
+  primaryCta: { label: "Explore Our Work", href: routes.ourWork },
+  secondaryCta: { label: "Partner With Us", href: ctas.partner.href },
+  /** Each statement split where its accent half begins. */
+  statements: [
+    {
+      lead: "Every Community Has Potential.",
+      accent: "Every Voice Matters.",
+      line: "We bring people and organisations together to improve access to learning, wellbeing, employment and community participation.",
+    },
+    {
+      lead: "From Shared Challenges",
+      accent: "to Shared Solutions",
+      line: "Discover how partnerships, community-led programmes and practical support can help create more inclusive opportunities.",
+    },
+  ],
+  pages: [
+    {
+      title: "About Us",
+      line: "Our story, vision, mission, values, approach and governance.",
+      href: routes.about,
+      image: v2Photo.gathering,
+    },
+    {
+      title: "Our Work",
+      line: "Education, skills, livelihoods, wellbeing, inclusion and community development.",
+      href: routes.ourWork,
+      image: v2Photo.workshop,
+    },
+    {
+      title: "Our Partnerships",
+      line: "Corporates, public bodies, charities, trusts, foundations and diaspora networks.",
+      href: routes.partners,
+      image: v2Photo.professionals,
+    },
+    {
+      title: "Support Us & Get Involved",
+      line: "Donate, volunteer, become a partner, fund a programme or join the network.",
+      href: routes.getInvolved,
+      image: v2Photo.volunteers,
+    },
+  ] satisfies { title: string; line: string; href: string; image: HomeImage }[],
 } as const;
 
 /* -------------------------------------------------------------------------
