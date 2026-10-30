@@ -16,9 +16,9 @@
 export const orange = {
   angle: "135deg",
   /** The main gradient: buttons, icon discs, dots, bars, and lettering on dark bands. */
-  bright: ["#ffb347", "#ff8c1a", "#ff6a00"],
+  bright: ["#ffa033", "#fa7a0a", "#eb5a00"],
   /** The orange button's hover fill, a touch deeper so its white text stays clear. */
-  hover: ["#ffa133", "#ff7d0f", "#f25e00"],
+  hover: ["#fa9020", "#ef6c00", "#db5000"],
   /** Paler: glows, and lettering on mid-tone grounds such as the closing banner's blue. */
   light: ["#ffd29a", "#ffb95e", "#ff9a33"],
   /** The softest tint: pale panels and the glows behind the page heroes. */

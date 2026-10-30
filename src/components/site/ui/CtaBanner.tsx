@@ -22,8 +22,8 @@ const SHADE: "orange" | "blue" | "none" = "orange";
  * the full width of the banner, so it stays a few lines tall; the photograph
  * fills the banner behind it and drifts a little slower than the page.
  *
- * The shade over the photograph is set by `SHADE` above: on trial, a light
- * wash of the brand orange gradient, with white lettering (the accent in
+ * The shade over the photograph is set by `SHADE` above: on trial, the
+ * brand orange gradient at 90%, the photograph just showing through, with white lettering (the accent in
  * white italic) on a soft shadow, and a navy button. Two dotted rings, after the circle of dots round the logo's emblem, turn
  * slowly at the sides on wider screens (and hold still under reduced
  * motion), and the main button carries a soft orange glow.
@@ -70,9 +70,9 @@ export function CtaBanner({
             <motion.div aria-hidden="true" style={{ y }} className="absolute inset-x-0 -inset-y-[14%] -z-20">
               <Photo image={image} decorative sizes="(min-width: 1920px) 1760px, 100vw" quality={80} />
             </motion.div>
-            {/* Only a light wash of the orange gradient, so the banner sits quietly with the rest of the page;
-                a soft shadow under the lettering keeps it readable on the photograph. */}
-            {onOrange ? <div aria-hidden="true" className="absolute inset-0 -z-10 bg-orange opacity-35" /> : null}
+            {/* The orange gradient at 90%, so the photograph only shows through as a hint; a soft shadow
+                under the lettering keeps it crisp. */}
+            {onOrange ? <div aria-hidden="true" className="absolute inset-0 -z-10 bg-orange opacity-90" /> : null}
             {SHADE === "blue" ? (
               <>
                 <div
