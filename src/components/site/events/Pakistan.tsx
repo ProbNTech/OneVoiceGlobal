@@ -21,7 +21,7 @@ const frames = [
  * description. Then the theme's three parts, Heritage, Identity and Shared
  * Futures, each named in the display face under a photograph of its own;
  * the three stand side by side in organic frames, the middle one higher.
- * The proposed highlights close the section, each led by an amber dot.
+ * The proposed highlights close the section, each led by an orange dot.
  */
 export function Pakistan() {
   const { theme, highlights } = eventsPakistan;

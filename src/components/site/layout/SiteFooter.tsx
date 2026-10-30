@@ -25,7 +25,7 @@ export function SiteFooter() {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.3fr] lg:gap-10">
           {/* Brand */}
           <Reveal>
-            <Logo tone="light" className="h-14" />
+            <Logo tone="light" className="h-[9.125rem]" />
             <p className="mt-6 max-w-sm text-[0.9375rem] leading-relaxed">{brand.headline}</p>
             <p className="mt-3 max-w-sm text-[0.875rem] leading-relaxed text-white/45">{brand.initiative}</p>
           </Reveal>
@@ -82,7 +82,7 @@ export function SiteFooter() {
                     <a
                       href={item.href}
                       aria-label={item.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-white/8 text-white ring-1 ring-white/10 transition-colors hover:bg-saffron-500 hover:text-ink"
+                      className="grid h-10 w-10 place-items-center rounded-full bg-white/8 text-white ring-1 ring-white/10 transition-colors hover:bg-saffron-500 hover:text-white"
                     >
                       <SocialIcon platform={item.platform} className="h-4 w-4" />
                     </a>

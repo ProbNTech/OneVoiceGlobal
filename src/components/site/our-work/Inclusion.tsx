@@ -67,7 +67,7 @@ export function Inclusion() {
                 const Icon = icons[item.icon];
                 return (
                   <Reveal as="li" key={item.text} delay={(index % 2) * 80} className="group flex items-start gap-4">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/8 text-saffron-300 ring-1 ring-white/12 transition-colors duration-500 group-hover:bg-saffron-500 group-hover:text-navy-950">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/8 text-saffron-300 ring-1 ring-white/12 transition-colors duration-500 group-hover:bg-saffron-500 group-hover:text-white">
                       <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                     </span>
                     <span className="pt-1 text-[0.9375rem] leading-relaxed text-white/80">{item.text}</span>

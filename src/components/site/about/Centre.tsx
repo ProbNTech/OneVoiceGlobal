@@ -75,7 +75,7 @@ export function Centre() {
               ))}
             </ul>
             <p className="mt-6 flex items-start gap-4 text-[1.0625rem] font-semibold leading-relaxed text-ink">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-saffron-500 text-navy-950">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
                 <Route aria-hidden="true" className="h-5 w-5" strokeWidth={1.7} />
               </span>
               <span className="pt-2">{aboutCentre.role}</span>

@@ -103,7 +103,7 @@ export function Hero() {
 
       <motion.div
         style={{ y: copyY, opacity: copyOpacity }}
-        className="flex flex-1 items-center pb-44 pt-32 sm:pb-40 lg:pt-36"
+        className="flex flex-1 items-center pb-44 pt-36 sm:pb-40 lg:pt-44"
       >
         <Shell>
           <div className="max-w-3xl">

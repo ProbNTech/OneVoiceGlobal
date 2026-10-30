@@ -19,7 +19,8 @@
  * a OneVoice participant, volunteer or member of staff.
  */
 
-import { brand, ctas, routes } from "@/data/site";
+import { aboutTeam } from "@/data/about";
+import { brand, ctas, navigation, routes } from "@/data/site";
 
 export type HomeImage = {
   src: string;
@@ -543,6 +544,29 @@ export const homeFoundation = {
       image: doorPhoto.support,
     },
   ] satisfies { title: string; line: string; href: string; image: HomeImage }[],
+} as const;
+
+/* -------------------------------------------------------------------------
+   OUR TEAM
+   The client asked for the team on the home page as well as on About Us.
+   The people, roles and portraits are read from the About page's block so
+   the two never drift apart. These are the members' own photographs and
+   there is only one of each, so they are the one deliberate exception to
+   the one-image-per-slot rule. The link is the About Us sub-menu's own
+   entry for the section.
+   ------------------------------------------------------------------------- */
+
+export const homeTeam = {
+  kicker: aboutTeam.kicker,
+  titleLead: aboutTeam.titleLead,
+  titleAccent: aboutTeam.titleAccent,
+  members: aboutTeam.members,
+  link: {
+    label: "About Us",
+    href:
+      navigation.find((item) => item.label === "About Us")?.children?.find((link) => link.label === "Our Team")?.href ??
+      routes.about,
+  },
 } as const;
 
 /* -------------------------------------------------------------------------

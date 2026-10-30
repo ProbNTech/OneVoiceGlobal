@@ -37,15 +37,21 @@
   --color-lagoon-600: #0e7a76; /* logo teal */
   --color-lagoon-700: #0b5f5c;
 
-  --color-saffron-50: #fcf6ea;
-  --color-saffron-100: #f8ead0;
-  --color-saffron-300: #f0c97f;
-  --color-saffron-400: #e9b04f;
-  --color-saffron-500: #de9c2e; /* logo amber */
-  --color-saffron-600: #c2821c;
-  /* Amber at text weight. The logo amber is about 2.3:1 on cream, so labels
-     on light bands use this darker cut, which clears 4.5:1. */
-  --color-saffron-ink: #8a5b0c;
+  /* A bright, vivid orange, one solid colour with no gradient (the user's
+     choice on 30 October 2026, a step brighter than britononetech.com's
+     button hover). Anything set on it (button text, icons, numbers) is
+     white. The scale keeps its first name, saffron, from the interim logo's
+     amber, so every class that uses it follows without a rename. */
+  --color-saffron-50: #fff5eb;
+  --color-saffron-100: #ffe5cc;
+  --color-saffron-300: #ffb264;
+  --color-saffron-400: #ff9f3f;
+  --color-saffron-500: #ff8c1a;
+  --color-saffron-600: #ec7600;
+  /* Orange at text weight, for labels on light bands only. The bright
+     orange is about 2.2:1 on cream, so these use a darker cut of the same
+     hue, which clears 4.5:1 on cream, white and sand. */
+  --color-saffron-ink: #ad5200;
 
   --color-cream: #faf7f1;
   --color-sand: #f3ede3;

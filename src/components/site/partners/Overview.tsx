@@ -25,9 +25,9 @@ const icons: Record<CollaborationIcon, LucideIcon> = {
   referrals: Waypoints,
 };
 
-/* The disc before each area, cycling through the logo's colours; the amber
-   one takes a dark icon, as white on amber would be too faint. */
-const DISCS = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-saffron-500 text-ink"];
+/* The disc before each area, cycling through the logo's colours, each
+   with a white icon. */
+const DISCS = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-saffron-500 text-white"];
 
 /* Every other area is set in the italic accent of the site's titles, in
    turn in each of the logo's colours. */

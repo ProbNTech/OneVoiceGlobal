@@ -12,7 +12,7 @@ import { EventMeta } from "./EventMeta";
  * criteria and governance on a card over its foot. Beside it the event's
  * theme as the title, its date, the brief's two sentences, its proposed
  * highlights, and its ten potential categories, two to a row, each led by a
- * small amber award mark with nothing behind it.
+ * small orange award mark with nothing behind it.
  */
 export function Awards() {
   const { image, highlights, categories } = eventsAwards;

@@ -11,7 +11,7 @@ import { Reveal } from "../ui/Reveal";
  * brief's line on what the stories will be on a card over its foot. Beside
  * it the heading, the brief's line that stories can show the difference
  * support makes, and its six example journeys, each set as a turn in one
- * line: where it starts, in muted italic, an amber arrow, and where it
+ * line: where it starts, in muted italic, an orange arrow, and where it
  * leads, in the display face. On hover the arrow moves on and the
  * destination takes the logo's teal. The journeys are the brief's own
  * examples, not stories of real participants, and the page presents them

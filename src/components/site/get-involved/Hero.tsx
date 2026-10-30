@@ -36,7 +36,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="get-involved-hero-title"
-      className="relative isolate overflow-clip bg-cream pb-band pt-28 lg:pt-32"
+      className="relative isolate overflow-clip bg-cream pb-band pt-32 lg:pt-40"
     >
       {/* Soft light in the logo's colours behind the collage. */}
       <div

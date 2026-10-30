@@ -104,7 +104,7 @@ export function Wellbeing() {
                         aria-hidden="true"
                         className={cx(
                           "grid h-9 w-9 shrink-0 place-items-center rounded-full transition-[rotate,background-color] duration-500 ease-out-soft",
-                          isOpen ? "rotate-45 bg-saffron-500 text-ink" : "rotate-0 bg-white text-ink",
+                          isOpen ? "rotate-45 bg-saffron-500 text-white" : "rotate-0 bg-white text-ink",
                         )}
                       >
                         <Plus className="h-4 w-4" strokeWidth={2} />

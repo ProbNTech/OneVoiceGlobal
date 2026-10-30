@@ -7,7 +7,7 @@ import { Reveal } from "../ui/Reveal";
 /**
  * The "10 Signs" of Healthy Relationships, Healthy Relationships' third
  * programme area in full, on cream. The ten signs stand five to a row, each
- * a number in a ring whose amber arc runs a tenth further round than the
+ * a number in a ring whose orange arc runs a tenth further round than the
  * last, so the tenth closes the circle; the arcs draw themselves as the
  * signs arrive (`.arc-draw` in site.css). Each sign's name is set in the
  * display face with the brief's line beneath, with nothing behind them. The
@@ -92,7 +92,7 @@ export function TenSigns() {
 
         <div className="mt-10 grid grid-cols-1 gap-6 lg:mt-12 lg:grid-cols-2 lg:gap-14">
           <Reveal className="flex items-start gap-4">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-saffron-500 text-ink">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
               <TriangleAlert aria-hidden="true" className="h-5 w-5" strokeWidth={1.7} />
             </span>
             <p className="max-w-2xl text-[1rem] leading-relaxed text-ink">{seminarsSigns.warning}</p>

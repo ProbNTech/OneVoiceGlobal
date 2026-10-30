@@ -21,7 +21,7 @@ const ACCENTS = ["text-ink", "text-lagoon-600", "text-ink", "text-ocean-600", "t
 /**
  * Our Impact Framework, centred on cream: the brief's five words, Reach,
  * Engage, Develop, Progress and Sustain, set as one rising line in the
- * display face, each a size larger than the last and joined by an amber
+ * display face, each a size larger than the last and joined by an orange
  * arrow, so the framework reads as growth. They light up one after another
  * as the line arrives (`[data-reveal="phrases"]` in site.css). On phones
  * the words stand one under another, still growing, with the arrows

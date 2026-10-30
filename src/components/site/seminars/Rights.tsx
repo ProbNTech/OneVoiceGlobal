@@ -37,7 +37,7 @@ const ACCENTS = ["var(--color-ocean-300)", "var(--color-lagoon-300)", "var(--col
  * register the brief's design notes ask for. On the left a photograph cut
  * with a leaf corner, with the programme's commitment on a card across its
  * foot, and beneath it why the programme matters and the barriers it names.
- * On the right the programme's headline, its second line in amber and its
+ * On the right the programme's headline, its second line in orange and its
  * aim, then its six programme areas and two additional topics as a plain
  * icon list, two to a row: an icon circle, the area's title and the brief's
  * line, with nothing behind them.

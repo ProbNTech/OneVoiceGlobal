@@ -2,6 +2,9 @@
 
 import { contactEnquiry } from "@/data/contact";
 import type { EnquiryTopic } from "@/data/site";
+import { FORMS } from "@/lib/forms";
+import { sendNotification } from "@/lib/notify";
+import { saveSubmission } from "@/lib/sheets";
 
 export type EnquiryField = "topic" | "name" | "email" | "message";
 
@@ -15,7 +18,7 @@ export type Enquiry = {
 };
 
 export type EnquiryState = {
-  status: "idle" | "invalid" | "sent" | "unavailable" | "failed";
+  status: "idle" | "invalid" | "sent" | "failed";
   errors?: Partial<Record<EnquiryField, string>>;
   /** What was entered, so the form can show it again after a try that did not go through. */
   values?: Partial<Record<keyof Enquiry, string>>;
@@ -63,13 +66,28 @@ export async function sendEnquiry(_previous: EnquiryState, formData: FormData): 
 }
 
 /**
- * Where an enquiry goes. The brief leaves the Centre's email address blank,
- * and the client has not yet said how enquiries should reach them (an inbox,
- * a CRM or a form service), so for now nothing is sent and the form says so
- * plainly. Connect the chosen service here: return "sent" once it has
- * accepted the enquiry, and "failed" if it has not.
+ * Where an enquiry goes, as on the Commonwealth Entrepreneurs Forum site: a
+ * row in the "Contact Enquiries" tab of the Google Sheet (lib/sheets.ts), then
+ * an email to the team at LEADS_NOTIFY_EMAIL (lib/notify.ts). The kind of
+ * enquiry is recorded by its label ("Volunteer"), as the visitor saw it.
  */
-async function deliverEnquiry(enquiry: Enquiry): Promise<"sent" | "unavailable" | "failed"> {
-  void enquiry;
-  return "unavailable";
+async function deliverEnquiry(enquiry: Enquiry): Promise<"sent" | "failed"> {
+  const def = FORMS.enquiry;
+  const topic = contactEnquiry.form.topics.find((item) => item.id === enquiry.topic)?.label ?? enquiry.topic;
+  const values: Record<string, string> = { ...enquiry, topic };
+
+  try {
+    await saveSubmission(def, values);
+  } catch (error) {
+    console.error("[forms] failed to save the enquiry", error);
+    return "failed";
+  }
+
+  // The enquiry is already saved, so a mail hiccup only gets logged.
+  try {
+    await sendNotification(def, values);
+  } catch (error) {
+    console.error("[forms] notification email failed (the enquiry was saved)", error);
+  }
+  return "sent";
 }

@@ -103,6 +103,9 @@ const accentTones = {
   lagoon: "text-lagoon-600",
   ocean: "text-ocean-600",
   saffron: "text-saffron-400",
+  /* A paler orange for mid-tone grounds such as the closing banner's blue,
+     where the logo orange itself would sit too close in brightness. */
+  "saffron-light": "text-saffron-300",
   white: "text-white/60",
 } as const;
 
@@ -174,7 +177,9 @@ export function Title({
 
 const ctaVariants = {
   ink: "bg-ink text-white before:bg-ocean-600 [--disc:rgb(255_255_255/0.14)]",
-  saffron: "bg-saffron-500 text-ink before:bg-saffron-300 [--disc:rgb(10_37_64/0.1)]",
+  /* Orange carries white text; the hover fill is a deeper cut of the same
+     orange, so the white stays as clear as it was. */
+  saffron: "bg-saffron-500 text-white before:bg-saffron-600 [--disc:rgb(255_255_255/0.22)]",
   white: "bg-white text-ink before:bg-saffron-100 [--disc:rgb(10_37_64/0.07)]",
   outline:
     "bg-transparent text-ink ring-1 ring-inset ring-ink/20 before:bg-ink hover:text-white [--disc:rgb(10_37_64/0.07)]",

@@ -13,7 +13,7 @@ import { EventMeta } from "./EventMeta";
  * to edge and drifts as the page scrolls, shaded only on the left where the
  * title, date, venue and the brief's description sit. Its proposed
  * highlights are set on a white card over the right of the picture, each
- * beside an amber tick.
+ * beside an orange tick.
  */
 export function Iftar() {
   const { image, venue } = eventsIftar;
@@ -77,7 +77,7 @@ export function Iftar() {
               <ul aria-labelledby="iftar-highlights" className="mt-6 grid gap-x-6 gap-y-3.5 sm:grid-cols-2">
                 {eventsIftar.highlights.map((highlight) => (
                   <li key={highlight} className="flex items-start gap-3 text-[1rem] font-medium leading-snug text-ink">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-navy-950">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
                       <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.6} />
                     </span>
                     {highlight}

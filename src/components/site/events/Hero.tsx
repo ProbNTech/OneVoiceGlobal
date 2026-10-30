@@ -36,7 +36,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="events-hero-title"
-      className="relative isolate overflow-clip bg-cream pb-band pt-28 lg:pt-32"
+      className="relative isolate overflow-clip bg-cream pb-band pt-32 lg:pt-40"
     >
       {/* Soft light in the logo's colours behind the collage. */}
       <div
@@ -135,7 +135,7 @@ export function Hero() {
                 href={card.event.href}
                 className="group flex items-center gap-4 rounded-card bg-white p-4 shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)] sm:p-5"
               >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-saffron-500 text-ink">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
                   <CalendarDays aria-hidden="true" className="h-5 w-5" strokeWidth={1.7} />
                 </span>
                 <span className="min-w-0 flex-1">

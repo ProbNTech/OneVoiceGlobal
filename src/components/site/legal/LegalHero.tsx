@@ -18,7 +18,7 @@ export function LegalHero({ title, description }: { title: string; description: 
   return (
     <section
       aria-labelledby="legal-title"
-      className="relative isolate overflow-clip bg-navy-950 pb-10 pt-28 text-white sm:pb-12 lg:pt-36"
+      className="relative isolate overflow-clip bg-navy-950 pb-10 pt-32 text-white sm:pb-12 lg:pt-44"
     >
       <div
         aria-hidden="true"

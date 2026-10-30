@@ -8,7 +8,7 @@ import { Reveal } from "../ui/Reveal";
  * Start Your OneVoice Journey: the brief's For Individuals, For Young People
  * and For Men blocks as three cards side by side. The outer two are white,
  * each with its list; the middle one is a photograph of young people at work
- * carrying the brief's words to them, with its four-word motto in amber.
+ * carrying the brief's words to them, with its four-word motto in orange.
  */
 export function Journey() {
   const { individuals, men, youngPeople } = getInvolvedJourney;

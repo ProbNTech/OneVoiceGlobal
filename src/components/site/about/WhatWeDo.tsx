@@ -97,7 +97,7 @@ export function WhatWeDo() {
               <span
                 className={cx(
                   "absolute left-3 top-3 grid h-10 w-10 place-items-center rounded-full bg-white text-[0.8125rem] font-bold tabular-nums text-ink shadow-[0_8px_20px_-10px_rgb(10_37_64/0.6)]",
-                  "transition-colors duration-500 group-hover:bg-saffron-500",
+                  "transition-colors duration-500 group-hover:bg-saffron-500 group-hover:text-white",
                 )}
               >
                 {String(index + 1).padStart(2, "0")}

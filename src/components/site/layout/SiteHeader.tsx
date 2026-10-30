@@ -125,35 +125,38 @@ export function SiteHeader() {
   );
 }
 
-/* Both versions of the logo are stacked and cross-faded, so the switch
-   between the photograph and the cream bar never waits on a download. */
+/* The client's logo as supplied, which is navy on a transparent ground.
+   After the CWEF header: at the top of every page the logo is large and
+   hangs below the bar into the hero ("the logo breaks the rule"), and once
+   the page scrolls it shrinks into the bar. Over the dark home hero a white
+   plate fades in behind it (the file's own transparent margin is the
+   plate's padding); on the cream bar the plate fades away. Every hero leaves
+   room at its top for the hanging logo. */
 function HeaderLogo({ light, compact }: { light: boolean; compact: boolean }) {
   return (
     <Link
       href="/"
       aria-label={`${brand.name}, home`}
-      className={cx("relative inline-flex shrink-0 transition-[height] duration-500", compact ? "h-10" : "h-12")}
+      className={cx(
+        "relative inline-flex shrink-0 self-start transition-[height,margin] duration-500 ease-out-soft",
+        compact ? "mt-2 h-16" : "mt-3 h-[5.5rem] lg:h-32",
+      )}
     >
+      <span
+        aria-hidden="true"
+        className={cx(
+          "absolute inset-0 rounded-2xl bg-white shadow-[0_18px_40px_-20px_rgb(0_0_0/0.6)] transition-opacity duration-500",
+          light ? "opacity-100" : "opacity-0",
+        )}
+      />
       <Image
         src={logo.colour.src}
         alt=""
         width={logo.colour.width}
         height={logo.colour.height}
-        sizes="240px"
+        sizes="(min-width: 1024px) 172px, 120px"
         preload
-        className={cx("h-full w-auto transition-opacity duration-500", light ? "opacity-0" : "opacity-100")}
-      />
-      <Image
-        src={logo.light.src}
-        alt=""
-        width={logo.light.width}
-        height={logo.light.height}
-        sizes="240px"
-        preload
-        className={cx(
-          "absolute inset-0 h-full w-auto transition-opacity duration-500",
-          light ? "opacity-100" : "opacity-0",
-        )}
+        className="relative h-full w-auto"
       />
     </Link>
   );
@@ -273,7 +276,7 @@ function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClose: () =
       )}
     >
       <div className="shell flex h-20 items-center">
-        <Logo className="h-12" />
+        <Logo className="h-16" />
         <button
           ref={closeButton}
           type="button"

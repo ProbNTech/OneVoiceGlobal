@@ -162,9 +162,6 @@ export const contactEnquiry = {
     },
     status: {
       sent: "Thank you. Your enquiry has been sent.",
-      /* Shown until the client confirms where enquiries should go (see
-         deliverEnquiry in src/app/(site)/contact/actions.ts). */
-      unavailable: "Online enquiries are not connected yet, so this message has not been sent.",
       failed: "Your enquiry could not be sent. Please try again.",
     },
   },

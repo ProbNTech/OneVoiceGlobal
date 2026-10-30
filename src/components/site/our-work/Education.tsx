@@ -84,7 +84,7 @@ export function Education() {
               className="absolute bottom-0 left-4 right-4 z-10 sm:left-auto sm:right-6 sm:max-w-[22rem] lg:-left-10 lg:right-auto"
             >
               <p className="flex items-start gap-3.5 rounded-card bg-white p-5 text-[0.9375rem] font-medium leading-relaxed text-ink shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-saffron-500 text-navy-950">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
                   <Sparkles aria-hidden="true" className="h-5 w-5" strokeWidth={1.7} />
                 </span>
                 {ourWorkEducation.closing}

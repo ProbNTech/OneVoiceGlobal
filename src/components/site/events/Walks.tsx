@@ -27,9 +27,9 @@ const icons: Record<WalkIcon, LucideIcon> = {
   sponsorship: HandHeart,
 };
 
-/* The disc before each highlight, cycling through the logo's colours; the
-   amber one takes a dark icon, as white on amber would be too faint. */
-const DISCS = ["bg-lagoon-600 text-white", "bg-ocean-600 text-white", "bg-saffron-500 text-ink"];
+/* The disc before each highlight, cycling through the logo's colours, each
+   with a white icon. */
+const DISCS = ["bg-lagoon-600 text-white", "bg-ocean-600 text-white", "bg-saffron-500 text-white"];
 
 /* Every other highlight is set in the italic accent of the site's titles. */
 const ACCENTS = ["text-lagoon-600", "text-ocean-600", "text-saffron-ink"];

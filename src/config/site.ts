@@ -1,5 +1,5 @@
 /**
- * OneVoice Community Foundation — single source of site-wide configuration.
+ * OneVoice Global Foundation — single source of site-wide configuration.
  *
  * IMPORTANT — nothing invented. The client's source document leaves the
  * contact block blank ("Address:", "Telephone:", "Email:" with no values) and
@@ -45,14 +45,14 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "OneVoice Community Foundation",
+  name: "OneVoice Global Foundation",
   deliveryName: "OneVoice Skill Development Centre",
   tagline: "Stronger Communities, Shared Opportunities, One World.",
   headline: "Empowering People. Building Skills. Creating Opportunities.",
   supportingMessage: "Learn. Develop. Connect. Progress.",
   differentiator: "One Organisation. Many Pathways.",
   description:
-    "OneVoice Community Foundation connects communities across London with education, skills, employment, enterprise and opportunities for participation.",
+    "OneVoice Global Foundation connects communities across London with education, skills, employment, enterprise and opportunities for participation.",
   // Provisional. Replace with the approved production domain before launch.
   url: "https://www.onevoice.example",
 

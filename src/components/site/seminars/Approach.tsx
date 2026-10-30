@@ -14,7 +14,7 @@ const icons: Record<PrincipleIcon, LucideIcon> = {
 };
 
 /* The icon circles take the logo's three colours in turn. */
-const circles = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-saffron-500 text-ink"];
+const circles = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-saffron-500 text-white"];
 
 /**
  * Our Approach: the overview's subtitle as the heading across the band, then

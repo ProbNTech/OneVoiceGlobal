@@ -5,6 +5,7 @@ import { VisionMission } from "@/components/site/about/VisionMission";
 import { Values } from "@/components/site/about/Values";
 import { Approach } from "@/components/site/about/Approach";
 import { TheoryOfChange } from "@/components/site/about/TheoryOfChange";
+import { Team } from "@/components/site/about/Team";
 import { Centre } from "@/components/site/about/Centre";
 import { Trust } from "@/components/site/about/Trust";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
@@ -20,10 +21,9 @@ export const metadata: Metadata = {
 /**
  * About Us. The Foundation's own V.2 block in the order of the About Us
  * sub-menu (Who We Are, Vision & Mission, Our Values, Our Approach, with its
- * Theory of Change), then the Skill Development Centre, its delivery arm,
+ * Theory of Change, and Our Team), then the Skill Development Centre, its delivery arm,
  * with What We Do, and the brief's Safeguarding, Policies and Accessibility
- * as tabs. It closes on the brief's subtitle for Our Work. Our Team, the one
- * menu entry left out, waits for content from the client. Copy and images
+ * as tabs. It closes on the brief's subtitle for Our Work. Copy and images
  * live in src/data/about.ts.
  */
 export default function AboutPage() {
@@ -36,6 +36,7 @@ export default function AboutPage() {
       <Values />
       <Approach />
       <TheoryOfChange />
+      <Team />
       <Centre />
       <Trust />
       <CtaBanner

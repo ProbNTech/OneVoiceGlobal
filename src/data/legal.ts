@@ -20,9 +20,9 @@ import { brand, contact, routes, type NavLink } from "./site";
  * the website sets no cookies of its own.
  *
  * Nothing here names an address, telephone number, registration number or
- * date the client has not given. Contact details come from `contact` in
- * site.ts and appear once they are filled in; until then each document
- * points to the Contact page. The pages carry no effective date until the
+ * date that has not been supplied. Contact details come from `contact` in
+ * site.ts, and each document lists the ones on file beside a link to the
+ * Contact page. The pages carry no effective date until the
  * client sets one. These are drafts for the client to approve, ideally with
  * their own adviser, before the site goes live.
  */

@@ -7,11 +7,12 @@
  * and Purpose. The Skill Development Centre, the Foundation's delivery arm,
  * follows with the brief's "About OneVoice" and "What We Do" blocks, and the
  * page closes on the brief's Safeguarding, Confidentiality & Privacy and
- * Accessibility & Inclusion lines. Lines the brief writes with the old name
- * ("OneVoice Global") take `brand.name` or "OneVoice".
+ * Accessibility & Inclusion lines. Lines that name the Foundation take
+ * `brand.name` or "OneVoice".
  *
  * The strip under the hero is the brief's About Us sub-menu, read from the
- * navigation. Our Team is left out: the brief gives it no content yet.
+ * navigation. Our Team's names and roles were supplied by the client on
+ * 30 October 2026 (the brief lists the heading only).
  * Policies holds the brief's Governance and Accountability block with
  * Confidentiality & Privacy.
  *
@@ -142,6 +143,7 @@ const PAGE_SECTIONS = [
   "vision-and-mission",
   "our-values",
   "our-approach",
+  "our-team",
   "safeguarding",
   "policies",
   "accessibility",
@@ -358,6 +360,49 @@ export const aboutTheory = {
   ],
   closing:
     "Our long-term ambition is to contribute to more capable individuals, better-connected communities and a more inclusive society.",
+} as const;
+
+/* -------------------------------------------------------------------------
+   OUR TEAM
+   Names and roles supplied by the client on 30 October 2026; the brief
+   gives this sub-menu entry no copy, so the section carries no claims
+   beyond them. The portraits are each person's own photograph, cut to 4:5:
+   Dr Rabia Ishrat's and Shahid Nadeem Sandhu's from the profiles the client
+   linked, and Mahi Zaal's the Instagram photo the user chose (sent as a
+   screenshot, cropped clear of the app's controls). Originals are in
+   `_source/generated/team/`.
+   ------------------------------------------------------------------------- */
+
+/** A team member's own photograph, saved under /images/about/team/. */
+const portrait = (file: string, alt: string): HomeImage => ({
+  src: `/images/about/team/${file}.jpg`,
+  alt,
+  position: "50% 30%",
+});
+
+export const aboutTeam = {
+  id: "our-team",
+  kicker: "Our Team",
+  /* The sub-menu's own label, split as a two-tone title. */
+  titleLead: "Our",
+  titleAccent: "Team",
+  members: [
+    {
+      name: "Dr Rabia Ishrat",
+      role: "Chief Executive Officer",
+      image: portrait("team-rabia-ishrat", "Dr Rabia Ishrat, Chief Executive Officer"),
+    },
+    {
+      name: "Shahid Nadeem Sandhu",
+      role: "Vice President",
+      image: portrait("team-shahid-nadeem-sandhu", "Shahid Nadeem Sandhu, Vice President"),
+    },
+    {
+      name: "Mahi Zaal",
+      role: "Director, Marketing & PR",
+      image: portrait("team-mahi-zaal-dubai", "Mahi Zaal, Director, Marketing & PR"),
+    },
+  ],
 } as const;
 
 /* -------------------------------------------------------------------------
