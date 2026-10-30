@@ -29,14 +29,14 @@ export function LegalHero({ title, description }: { title: string; description: 
         <nav aria-label="Breadcrumb">
           <ol className="flex items-center gap-2 text-[0.6875rem] font-semibold uppercase tracking-[0.18em]">
             <li>
-              <Link href={routes.home} className="text-white/75 transition-colors hover:text-saffron-300">
+              <Link href={routes.home} className="text-white/75 transition-colors hover:text-orange">
                 Home
               </Link>
             </li>
             <li aria-hidden="true">
-              <ChevronRight className="h-3 w-3 text-saffron-400" />
+              <ChevronRight className="h-3 w-3 icon-orange" />
             </li>
-            <li aria-current="page" className="text-saffron-300">
+            <li aria-current="page" className="text-orange">
               {title}
             </li>
           </ol>

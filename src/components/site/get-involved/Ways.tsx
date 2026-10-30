@@ -134,7 +134,7 @@ export function Ways() {
                       className={cx(
                         "mt-1 hidden h-11 w-11 place-items-center sm:grid rounded-full transition-colors duration-500",
                         isActive
-                          ? "bg-saffron-500 text-white"
+                          ? "bg-orange text-white"
                           : "bg-white text-ink shadow-[0_10px_24px_-14px_rgb(10_37_64/0.5)]",
                       )}
                     >

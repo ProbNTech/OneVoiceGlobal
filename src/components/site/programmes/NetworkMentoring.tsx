@@ -8,7 +8,7 @@ import { Reveal } from "../ui/Reveal";
 import { RunList } from "../ui/RunList";
 
 /* Each word of the network's heading takes one of the logo's colours. */
-const triadColours = ["text-ocean-600", "text-lagoon-600", "text-saffron-ink"];
+const triadColours = ["text-ocean-600", "text-lagoon-600", "text-orange-ink"];
 
 /**
  * The OneVoice Business Network and Mentoring, side by side, closing the
@@ -74,7 +74,7 @@ export function NetworkMentoring() {
 
             <Reveal delay={160} className="mt-7 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
               <div>
-                <p id="network-who" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+                <p id="network-who" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
                   {network.whoLabel}
                 </p>
                 <RunList
@@ -86,7 +86,7 @@ export function NetworkMentoring() {
               <div>
                 <p
                   id="network-activities"
-                  className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                  className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
                 >
                   {network.activitiesLabel}
                 </p>
@@ -125,7 +125,7 @@ export function NetworkMentoring() {
                 className="relative z-10 -mt-12 ml-4 mr-10 sm:absolute sm:-bottom-8 sm:right-6 sm:m-0 sm:max-w-[22rem]"
               >
                 <figure className="rounded-card bg-navy-950 p-6 text-white shadow-[0_30px_60px_-30px_rgb(6_26_48/0.7)]">
-                  <Quote aria-hidden="true" className="h-6 w-6 text-saffron-400" strokeWidth={1.6} />
+                  <Quote aria-hidden="true" className="h-6 w-6 icon-orange" strokeWidth={1.6} />
                   <blockquote className="mt-3 font-display text-[1.25rem] leading-snug [font-variation-settings:'SOFT'_100]">
                     {mentoring.quote}
                   </blockquote>
@@ -144,7 +144,7 @@ export function NetworkMentoring() {
               <RunList
                 items={mentoring.items}
                 labelledBy="mentoring-list"
-                dot="bg-saffron-500"
+                dot="bg-orange"
                 className="mt-2 text-[1rem] leading-[1.9] text-ink"
               />
               <p className="mt-4 text-[0.875rem] leading-relaxed text-ink-muted">{mentoring.note}</p>

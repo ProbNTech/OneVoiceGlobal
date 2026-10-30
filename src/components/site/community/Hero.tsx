@@ -46,7 +46,7 @@ export function Hero() {
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-40 right-1/4 -z-10 h-[26rem] w-[26rem] rounded-full bg-saffron-100/80 blur-[110px]"
+        className="absolute -bottom-40 right-1/4 -z-10 h-[26rem] w-[26rem] rounded-full bg-orange-soft opacity-80 blur-[110px]"
       />
 
       <Shell>

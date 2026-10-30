@@ -45,12 +45,12 @@ export function Safety() {
             <div className="relative isolate flex flex-col gap-4 overflow-hidden rounded-panel bg-navy-950 p-7 text-white shadow-[0_40px_80px_-50px_rgb(6_26_48/0.8)] sm:flex-row sm:items-center sm:gap-8 sm:p-9">
               <div
                 aria-hidden="true"
-                className="absolute -left-16 -top-24 -z-10 h-64 w-64 rounded-full bg-saffron-500/20 blur-[80px]"
+                className="absolute -left-16 -top-24 -z-10 h-64 w-64 rounded-full bg-orange opacity-20 blur-[80px]"
               />
               {/* The number is said in the sentence beside it. */}
               <p
                 aria-hidden="true"
-                className="shrink-0 font-display text-[5rem] leading-[0.9] tracking-[-0.03em] text-saffron-400 [font-variation-settings:'SOFT'_100] sm:text-[6.5rem]"
+                className="shrink-0 font-display text-[5rem] leading-[0.9] tracking-[-0.03em] text-orange [font-variation-settings:'SOFT'_100] sm:text-[6.5rem]"
               >
                 {emergency.number}
               </p>
@@ -77,11 +77,7 @@ export function Safety() {
                   </p>
                 ))}
                 {"list" in block && block.list ? (
-                  <RunList
-                    items={block.list}
-                    dot="bg-saffron-500"
-                    className="mt-2 text-[1rem] leading-[1.9] text-ink"
-                  />
+                  <RunList items={block.list} dot="bg-orange" className="mt-2 text-[1rem] leading-[1.9] text-ink" />
                 ) : null}
                 {"closing" in block && block.closing ? (
                   <p className="mt-3 text-[0.875rem] leading-relaxed text-ink-muted">{block.closing}</p>

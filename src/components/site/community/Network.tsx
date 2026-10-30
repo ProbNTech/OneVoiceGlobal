@@ -37,7 +37,7 @@ export function Network() {
           <Reveal delay={150} className="lg:col-span-6 lg:pb-2">
             <p className="text-lead text-slate">{communityNetwork.lead}</p>
             <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-              <span className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-ink">
+              <span className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange-ink">
                 {objective.label}
               </span>
               <ol className="flex flex-wrap items-center gap-x-3 gap-y-1">
@@ -47,7 +47,7 @@ export function Network() {
                       {step}
                     </span>
                     {index < objective.steps.length - 1 ? (
-                      <ArrowRight aria-hidden="true" className="h-4 w-4 text-saffron-500" strokeWidth={2} />
+                      <ArrowRight aria-hidden="true" className="h-4 w-4 icon-orange" strokeWidth={2} />
                     ) : null}
                   </li>
                 ))}
@@ -74,7 +74,7 @@ export function Network() {
                   <div className="absolute inset-x-4 bottom-4 sm:inset-x-6 sm:bottom-6">
                     <span
                       aria-hidden="true"
-                      className="font-display text-[0.875rem] tabular-nums text-saffron-300 [font-variation-settings:'SOFT'_100]"
+                      className="font-display text-[0.875rem] tabular-nums text-orange [font-variation-settings:'SOFT'_100]"
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>

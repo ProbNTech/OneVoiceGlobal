@@ -60,7 +60,7 @@ export function Enterprise() {
                 <p className="mt-6 max-w-xl text-lead text-slate">{programmesEnterprise.lead}</p>
                 <p
                   id="enterprise-who"
-                  className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                  className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
                 >
                   {programmesEnterprise.whoLabel}
                 </p>
@@ -113,14 +113,14 @@ export function Enterprise() {
 
                 <h3
                   id="enterprise-support"
-                  className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300"
+                  className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange"
                 >
                   {programmesEnterprise.supportLabel}
                 </h3>
                 <RunList
                   items={programmesEnterprise.support}
                   labelledBy="enterprise-support"
-                  dot="bg-saffron-400"
+                  dot="bg-orange"
                   className="mt-4 text-[1rem] leading-[1.95] text-white"
                 />
                 <Cta href={cta.href} variant="saffron" className="mt-8 self-start">

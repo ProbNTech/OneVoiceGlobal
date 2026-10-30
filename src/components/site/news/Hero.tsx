@@ -29,7 +29,7 @@ export function Hero() {
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-48 right-1/4 -z-10 h-[26rem] w-[26rem] rounded-full bg-saffron-100/80 blur-[110px]"
+        className="absolute -bottom-48 right-1/4 -z-10 h-[26rem] w-[26rem] rounded-full bg-orange-soft opacity-80 blur-[110px]"
       />
 
       <Shell>
@@ -83,7 +83,7 @@ export function Hero() {
                   <Newspaper aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                 </span>
                 <div>
-                  <p className="text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-saffron-ink">
+                  <p className="text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-orange-ink">
                     {card.label}
                   </p>
                   <p className="mt-1 font-display text-[1.125rem] leading-snug text-ink [font-variation-settings:'SOFT'_100]">

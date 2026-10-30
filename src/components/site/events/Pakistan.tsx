@@ -80,7 +80,7 @@ export function Pakistan() {
                 <figcaption
                   className={cx(
                     "mt-4 text-center font-display text-[1.125rem] leading-tight [font-variation-settings:'SOFT'_100] sm:mt-5 sm:text-[1.625rem] lg:text-[2rem]",
-                    index % 2 === 0 ? "text-white" : "font-light italic text-saffron-300",
+                    index % 2 === 0 ? "text-white" : "font-light italic text-orange",
                   )}
                 >
                   {part.word}
@@ -91,7 +91,7 @@ export function Pakistan() {
         </ul>
 
         <Reveal delay={150} className="mx-auto mt-10 max-w-5xl text-center lg:mt-12">
-          <h3 id="pakistan-highlights" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-300">
+          <h3 id="pakistan-highlights" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange">
             {eventsPakistan.highlightsLabel}
           </h3>
           <ul
@@ -100,7 +100,7 @@ export function Pakistan() {
           >
             {highlights.map((highlight) => (
               <li key={highlight} className="inline-flex items-start gap-2.5 text-left">
-                <span aria-hidden="true" className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-saffron-400" />
+                <span aria-hidden="true" className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" />
                 {highlight}
               </li>
             ))}

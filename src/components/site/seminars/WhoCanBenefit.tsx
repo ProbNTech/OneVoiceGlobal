@@ -7,7 +7,7 @@ import { Cta, Kicker, Shell, Title } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
 
 /* Each programme's list is dotted in its own colour from the logo. */
-const dots = ["bg-lagoon-500", "bg-ocean-600", "bg-saffron-500"];
+const dots = ["bg-lagoon-500", "bg-ocean-600", "bg-orange"];
 
 /**
  * Who Can Benefit? The overview's heading, its lead, its note on how

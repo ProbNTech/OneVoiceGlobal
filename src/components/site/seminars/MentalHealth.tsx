@@ -80,7 +80,7 @@ export function MentalHealth() {
           <Reveal variant="fade">
             <h3
               id="mental-health-areas"
-              className="text-[0.8125rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+              className="text-[0.8125rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
             >
               {seminarsMentalHealth.areasLabel}
             </h3>

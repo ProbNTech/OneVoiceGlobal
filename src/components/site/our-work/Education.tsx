@@ -37,7 +37,7 @@ export function Education() {
               <p className="mt-6 max-w-2xl text-lead text-slate">{ourWorkEducation.lead}</p>
               <p
                 id="education-list"
-                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {ourWorkEducation.listLabel}
               </p>
@@ -84,7 +84,7 @@ export function Education() {
               className="absolute bottom-0 left-4 right-4 z-10 sm:left-auto sm:right-6 sm:max-w-[22rem] lg:-left-10 lg:right-auto"
             >
               <p className="flex items-start gap-3.5 rounded-card bg-white p-5 text-[0.9375rem] font-medium leading-relaxed text-ink shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-orange text-white">
                   <Sparkles aria-hidden="true" className="h-5 w-5" strokeWidth={1.7} />
                 </span>
                 {ourWorkEducation.closing}

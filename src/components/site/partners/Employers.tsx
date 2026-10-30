@@ -33,7 +33,7 @@ export function Employers() {
             />
             <Reveal delay={150}>
               <p className="mt-6 max-w-xl text-lead text-slate">{partnersEmployers.lead}</p>
-              <p className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-ink">
+              <p className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange-ink">
                 {partnersEmployers.listLabel}
               </p>
             </Reveal>
@@ -46,7 +46,7 @@ export function Employers() {
                   delay={200 + index * 45}
                   className="flex items-center gap-3 text-[1rem] font-medium text-ink"
                 >
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-orange text-white">
                     <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.6} />
                   </span>
                   {item}
@@ -90,11 +90,11 @@ export function Employers() {
                 aria-hidden="true"
                 className="absolute -right-24 -top-24 -z-10 h-64 w-64 rounded-full bg-ocean-600/30 blur-[90px]"
               />
-              <Quote aria-hidden="true" className="h-9 w-9 text-saffron-400" strokeWidth={1.4} />
+              <Quote aria-hidden="true" className="h-9 w-9 icon-orange" strokeWidth={1.4} />
               <blockquote className="mt-6 font-display text-[clamp(1.375rem,1.8vw,1.75rem)] leading-[1.35] text-white [font-variation-settings:'SOFT'_100]">
                 {promise.text}
               </blockquote>
-              <figcaption className="mt-6 text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-300">
+              <figcaption className="mt-6 text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange">
                 {promise.label}
               </figcaption>
             </figure>

@@ -12,7 +12,7 @@ function Prose({ text }: { text: string }) {
       <a
         key={index}
         href={`mailto:${part}`}
-        className="font-medium text-ink underline decoration-saffron-500 underline-offset-4 transition-colors hover:text-ocean-600"
+        className="font-medium text-ink underline-orange transition-colors hover:text-ocean-600"
       >
         {part}
       </a>
@@ -42,7 +42,7 @@ export function LegalContent({ sections }: { sections: LegalSection[] }) {
           {sections.map((section, index) => (
             <section key={section.id} id={section.id} className="mt-11 scroll-mt-28 first:mt-0">
               <h2 className="flex items-baseline gap-3 font-display text-[1.375rem] font-normal leading-tight text-ink [font-variation-settings:'SOFT'_100] sm:text-[1.5rem]">
-                <span className="font-body text-[0.875rem] font-bold tabular-nums tracking-wide text-saffron-ink">
+                <span className="font-body text-[0.875rem] font-bold tabular-nums tracking-wide text-orange-ink">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span>{section.title}</span>

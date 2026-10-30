@@ -122,7 +122,7 @@ export function Employment() {
                 <p className="mt-4 max-w-2xl text-[1.0625rem] leading-relaxed text-slate">{tab.lead}</p>
                 {/* Careers guidance names its list in its lead already. */}
                 {"listLabel" in tab ? (
-                  <p className="mt-6 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+                  <p className="mt-6 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
                     {tab.listLabel}
                   </p>
                 ) : null}
@@ -140,14 +140,14 @@ export function Employment() {
                   <div className="mt-7">
                     <p
                       id={`employment-extra-${index}`}
-                      className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                      className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
                     >
                       {tab.extra.label}
                     </p>
                     <RunList
                       items={tab.extra.items}
                       labelledBy={`employment-extra-${index}`}
-                      dot="bg-saffron-500"
+                      dot="bg-orange"
                       className="mt-2 text-[0.9375rem] leading-[1.9] text-ink"
                     />
                   </div>

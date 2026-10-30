@@ -95,8 +95,8 @@ export function WorkWithUs() {
                   className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(6_26_48/0.35)_0%,rgb(6_26_48/0.72)_40%,rgb(6_26_48/0.92)_100%)]"
                 />
 
-                <Handshake className="h-9 w-9 text-saffron-300" strokeWidth={1.3} />
-                <p className="mt-6 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300">
+                <Handshake className="h-9 w-9 icon-orange" strokeWidth={1.3} />
+                <p className="mt-6 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange">
                   {card.kicker}
                 </p>
                 <h3 className="mt-3 max-w-md font-display text-[2.125rem] leading-[1.1] text-white [font-variation-settings:'SOFT'_100] sm:text-[2.5rem]">
@@ -106,7 +106,7 @@ export function WorkWithUs() {
                 <ul className="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                   {card.commitments.map((item) => (
                     <li key={item} className="flex items-center gap-3 text-[0.9375rem] text-white">
-                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-orange text-white">
                         <Check className="h-3.5 w-3.5" strokeWidth={2.6} />
                       </span>
                       {item}

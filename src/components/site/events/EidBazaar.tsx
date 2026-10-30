@@ -49,7 +49,7 @@ export function EidBazaar() {
             </Reveal>
 
             <Reveal variant="fade" delay={150}>
-              <h3 id="eid-focus" className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+              <h3 id="eid-focus" className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
                 {eventsEid.focusLabel}
               </h3>
             </Reveal>
@@ -86,14 +86,14 @@ export function EidBazaar() {
             <Reveal delay={150}>
               <h3
                 id="eid-highlights"
-                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {eventsEid.highlightsLabel}
               </h3>
               <ul aria-labelledby="eid-highlights" className="mt-4 grid max-w-3xl gap-x-8 gap-y-2.5 sm:grid-cols-2">
                 {highlights.map((highlight) => (
                   <li key={highlight} className="flex items-start gap-3 text-[0.9375rem] leading-snug text-ink">
-                    <span aria-hidden="true" className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-saffron-500" />
+                    <span aria-hidden="true" className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" />
                     {highlight}
                   </li>
                 ))}

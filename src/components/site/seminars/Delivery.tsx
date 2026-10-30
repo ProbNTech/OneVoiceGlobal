@@ -27,10 +27,10 @@ const icons: Record<DeliveryIcon, LucideIcon> = {
 
 /* The disc before each way, cycling through the logo's colours, each
    with a white icon. */
-const DISCS = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-saffron-500 text-white"];
+const DISCS = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-orange text-white"];
 
 /* Every other way is set in the italic accent of the site's titles. */
-const ACCENTS = ["text-lagoon-600", "text-ocean-600", "text-saffron-ink"];
+const ACCENTS = ["text-lagoon-600", "text-ocean-600", "text-orange-ink"];
 
 /**
  * How We Plan to Deliver the Programme: the six ways the overview names, run
@@ -137,7 +137,7 @@ export function Delivery() {
                   delay={100 + index * 60}
                   className="flex items-start gap-3 text-[0.9375rem] leading-snug text-ink"
                 >
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-orange text-white">
                     <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.6} />
                   </span>
                   {item}
@@ -152,7 +152,7 @@ export function Delivery() {
 
           <Reveal delay={150} className="lg:col-span-5 lg:self-center">
             <div className="flex items-center gap-5">
-              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
+              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-orange text-white">
                 <Phone aria-hidden="true" className="h-7 w-7" strokeWidth={1.5} />
               </span>
               <p className="font-display text-[4.5rem] leading-none tabular-nums text-ink [font-variation-settings:'SOFT'_100]">

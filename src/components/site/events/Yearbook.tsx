@@ -24,7 +24,7 @@ export function Yearbook() {
     >
       <div
         aria-hidden="true"
-        className="absolute -left-32 top-1/4 -z-10 h-[30rem] w-[30rem] rounded-full bg-saffron-50 blur-[110px]"
+        className="absolute -left-32 top-1/4 -z-10 h-[30rem] w-[30rem] rounded-full bg-orange-soft blur-[110px]"
       />
 
       <Shell>
@@ -59,14 +59,14 @@ export function Yearbook() {
 
               <p
                 id="yearbook-profiles"
-                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {eventsYearbook.profilesLabel}
               </p>
               <RunList
                 items={eventsYearbook.profiles}
                 labelledBy="yearbook-profiles"
-                dot="bg-saffron-500"
+                dot="bg-orange"
                 className="mt-3 max-w-3xl font-display text-[1.375rem] leading-[1.6] text-ink [font-variation-settings:'SOFT'_100] sm:text-[1.625rem]"
               />
               <p className="mt-3 text-[1rem] italic leading-relaxed text-slate">{eventsYearbook.focus}</p>

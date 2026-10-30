@@ -57,14 +57,14 @@ export function ReturnToWork() {
             <RunList
               items={programmesReturn.reasons}
               labelledBy="return-reasons"
-              dot="bg-saffron-500"
+              dot="bg-orange"
               className="mx-auto mt-3 max-w-3xl text-[1.0625rem] leading-[1.9] text-ink"
             />
           </Reveal>
         </div>
 
         <Reveal variant="fade" delay={80} className="mt-10 flex justify-center lg:mt-12">
-          <p id="return-pathway" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+          <p id="return-pathway" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
             {programmesReturn.pathwayLabel}
           </p>
         </Reveal>
@@ -105,7 +105,7 @@ export function ReturnToWork() {
                   </svg>
                   <Icon className="h-7 w-7" strokeWidth={1.5} />
                 </span>
-                <p className="mt-6 text-[0.875rem] font-bold tabular-nums tracking-[0.22em] text-saffron-ink">
+                <p className="mt-6 text-[0.875rem] font-bold tabular-nums tracking-[0.22em] text-orange-ink">
                   {String(index + 1).padStart(2, "0")}
                 </p>
                 <h3 className="mx-auto mt-2.5 max-w-[10rem] text-[0.875rem] font-bold uppercase leading-snug tracking-[0.14em] text-ink">

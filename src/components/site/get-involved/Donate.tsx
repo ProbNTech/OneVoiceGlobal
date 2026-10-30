@@ -67,7 +67,7 @@ export function Donate() {
                     delay={200 + index * 60}
                     className="group flex items-center gap-4"
                   >
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-saffron-ink shadow-[0_10px_24px_-14px_rgb(10_37_64/0.45)] transition-colors duration-500 group-hover:bg-saffron-500 group-hover:text-white">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white icon-orange-ink shadow-[0_10px_24px_-14px_rgb(10_37_64/0.45)] transition-colors duration-500 group-hover:bg-orange group-hover:text-white">
                       <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                     </span>
                     <span className="text-[1rem] font-semibold leading-snug text-ink">{item.label}</span>
@@ -78,12 +78,12 @@ export function Donate() {
           </div>
 
           <Reveal variant="up" delay={150} className="lg:col-span-5">
-            <div className="relative isolate overflow-hidden rounded-panel bg-saffron-500 p-4 text-white shadow-[0_40px_80px_-50px_rgb(138_91_12/0.9)] sm:p-5">
+            <div className="relative isolate overflow-hidden rounded-panel bg-orange p-4 text-white shadow-[0_40px_80px_-50px_color-mix(in_srgb,var(--orange-ink-3)_90%,transparent)] sm:p-5">
               <div
                 aria-hidden="true"
-                className="absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-saffron-300/70 blur-[80px]"
+                className="absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-orange-light opacity-70 blur-[80px]"
               />
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] bg-saffron-400">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] bg-orange">
                 <div className="parallax absolute inset-x-0 -inset-y-[8%]">
                   <Image
                     src={image.src}

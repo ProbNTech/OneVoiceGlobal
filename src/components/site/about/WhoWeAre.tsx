@@ -88,7 +88,7 @@ export function WhoWeAre() {
               className="absolute bottom-0 left-4 right-4 z-10 sm:right-auto sm:max-w-[26rem] lg:-left-8"
             >
               <figure className="rounded-card bg-white p-5 shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)] sm:p-6">
-                <Quote aria-hidden="true" className="h-6 w-6 text-saffron-500" strokeWidth={1.6} />
+                <Quote aria-hidden="true" className="h-6 w-6 icon-orange" strokeWidth={1.6} />
                 <blockquote className="mt-3 font-display text-[1.0625rem] leading-snug text-ink [font-variation-settings:'SOFT'_100] sm:text-[1.1875rem]">
                   {aboutWhoWeAre.quote}
                 </blockquote>
@@ -99,7 +99,7 @@ export function WhoWeAre() {
 
         <div className="mt-12 lg:mt-14">
           <Reveal variant="fade">
-            <h3 className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">{serve.label}</h3>
+            <h3 className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">{serve.label}</h3>
             <p id="serve-lead" className="mt-3 max-w-3xl text-[1.0625rem] leading-relaxed text-slate">
               {serve.lead}
             </p>

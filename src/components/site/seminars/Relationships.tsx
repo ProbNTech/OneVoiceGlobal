@@ -51,7 +51,7 @@ export function Relationships() {
             <Reveal variant="fade" delay={150}>
               <h3
                 id="relationships-areas"
-                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {seminarsRelationships.areasLabel}
               </h3>
@@ -94,7 +94,7 @@ export function Relationships() {
                 {seminarsRelationships.respect}
               </p>
               <p className="mt-5 flex max-w-2xl items-start gap-3.5 text-[0.875rem] leading-relaxed text-ink-muted">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white text-saffron-ink">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white icon-orange-ink">
                   <Info aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
                 </span>
                 <span>

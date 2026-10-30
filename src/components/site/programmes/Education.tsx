@@ -55,7 +55,7 @@ export function Education() {
               <p className="mt-6 max-w-xl text-lead text-slate">{programmesEducation.lead}</p>
               <p
                 id="training-areas"
-                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {programmesEducation.listLabel}
               </p>
@@ -92,7 +92,7 @@ export function Education() {
               className="relative z-10 -mt-14 ml-4 max-w-sm sm:absolute sm:-bottom-6 sm:left-6 sm:mt-0 sm:ml-0"
             >
               <p className="flex items-start gap-3 rounded-card bg-white p-5 text-[0.9375rem] leading-relaxed text-ink shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-orange text-white">
                   <GraduationCap aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                 </span>
                 {programmesEducation.note}

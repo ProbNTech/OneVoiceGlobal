@@ -104,7 +104,7 @@ export function Wellbeing() {
                         aria-hidden="true"
                         className={cx(
                           "grid h-9 w-9 shrink-0 place-items-center rounded-full transition-[rotate,background-color] duration-500 ease-out-soft",
-                          isOpen ? "rotate-45 bg-saffron-500 text-white" : "rotate-0 bg-white text-ink",
+                          isOpen ? "rotate-45 bg-orange text-white" : "rotate-0 bg-white text-ink",
                         )}
                       >
                         <Plus className="h-4 w-4" strokeWidth={2} />
@@ -126,7 +126,7 @@ export function Wellbeing() {
                     <div className="overflow-hidden">
                       <div className="pb-4 pl-16 pt-2 sm:pl-[4.25rem]">
                         {item.title ? (
-                          <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+                          <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
                             {item.title}
                           </p>
                         ) : null}

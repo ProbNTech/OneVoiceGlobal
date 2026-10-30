@@ -14,7 +14,7 @@ const icons: Record<PrincipleIcon, LucideIcon> = {
 };
 
 /* The icon circles take the logo's three colours in turn. */
-const circles = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-saffron-500 text-white"];
+const circles = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-orange text-white"];
 
 /**
  * Our Approach: the overview's subtitle as the heading across the band, then
@@ -66,7 +66,7 @@ export function Approach() {
               className="absolute inset-x-4 bottom-0 mx-auto max-w-sm sm:inset-x-8 lg:left-8 lg:right-auto lg:max-w-[24rem]"
             >
               <div className="rounded-card bg-white p-6 shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
-                <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+                <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
                   {commitment.label}
                 </p>
                 <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-ink">{commitment.text}</p>

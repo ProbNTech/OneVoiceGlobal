@@ -36,7 +36,7 @@ export function Journey() {
         <div className="mt-8 grid gap-4 lg:mt-10 lg:grid-cols-3 lg:gap-5">
           <Reveal variant="up">
             <div className="flex h-full flex-col rounded-panel bg-white p-7 shadow-[0_30px_60px_-45px_rgb(10_37_64/0.55)] sm:p-9">
-              <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-ink">
+              <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange-ink">
                 {individuals.label}
               </p>
               <h3 className="mt-3 font-display text-[1.75rem] leading-tight text-ink [font-variation-settings:'SOFT'_100]">
@@ -73,14 +73,12 @@ export function Journey() {
                 aria-hidden="true"
                 className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(6_26_48/0.1)_0%,rgb(6_26_48/0.55)_40%,rgb(6_26_48/0.94)_100%)]"
               />
-              <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-300">
-                {youngPeople.label}
-              </p>
+              <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange">{youngPeople.label}</p>
               <h3 className="mt-3 font-display text-[2rem] leading-tight text-white [font-variation-settings:'SOFT'_100]">
                 {youngPeople.title}
               </h3>
               <p className="mt-4 text-[1rem] leading-relaxed text-white/85">{youngPeople.text}</p>
-              <p className="mt-5 font-display text-[1.375rem] font-light italic text-saffron-300 [font-variation-settings:'SOFT'_100]">
+              <p className="mt-5 font-display text-[1.375rem] font-light italic text-orange [font-variation-settings:'SOFT'_100]">
                 {youngPeople.motto}
               </p>
             </div>
@@ -88,7 +86,7 @@ export function Journey() {
 
           <Reveal variant="up" delay={240}>
             <div className="flex h-full flex-col rounded-panel bg-white p-7 shadow-[0_30px_60px_-45px_rgb(10_37_64/0.55)] sm:p-9">
-              <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-ink">{men.label}</p>
+              <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange-ink">{men.label}</p>
               <h3 className="mt-3 font-display text-[1.75rem] leading-tight text-ink [font-variation-settings:'SOFT'_100]">
                 {men.title}
               </h3>

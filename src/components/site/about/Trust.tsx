@@ -147,7 +147,7 @@ export function Trust() {
                       {"list" in block && block.list ? (
                         <RunList
                           items={block.list}
-                          dot="bg-saffron-500"
+                          dot="bg-orange"
                           className="mt-3 max-w-2xl text-[1.0625rem] leading-[1.9] text-ink"
                         />
                       ) : null}

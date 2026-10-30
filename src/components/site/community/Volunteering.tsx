@@ -108,8 +108,8 @@ export function Volunteering() {
                   className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(6_26_48/0.2)_0%,rgb(6_26_48/0.65)_42%,rgb(6_26_48/0.93)_100%)]"
                 />
 
-                <HandHeart aria-hidden="true" className="h-9 w-9 text-saffron-300" strokeWidth={1.3} />
-                <p className="mt-6 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300">
+                <HandHeart aria-hidden="true" className="h-9 w-9 icon-orange" strokeWidth={1.3} />
+                <p className="mt-6 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange">
                   {card.kicker}
                 </p>
                 <h3 className="mt-3 max-w-md font-display text-[2.125rem] leading-[1.1] text-white [font-variation-settings:'SOFT'_100] sm:text-[2.5rem]">
@@ -117,11 +117,7 @@ export function Volunteering() {
                 </h3>
                 <p className="mt-5 max-w-md text-[1.0625rem] leading-relaxed text-white/85">{card.line}</p>
                 <p className="mt-6 flex max-w-md gap-3 text-[0.9375rem] leading-relaxed text-white/70">
-                  <ShieldCheck
-                    aria-hidden="true"
-                    className="mt-0.5 h-5 w-5 shrink-0 text-saffron-300"
-                    strokeWidth={1.6}
-                  />
+                  <ShieldCheck aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 icon-orange" strokeWidth={1.6} />
                   {card.note}
                 </p>
                 <Cta href={card.cta.href} variant="saffron" className="mt-8 self-start">

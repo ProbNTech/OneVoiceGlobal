@@ -50,7 +50,7 @@ export function WomensDay() {
             <Reveal variant="scale" delay={320} className="absolute bottom-0 right-4 z-10 sm:right-8 lg:-right-6">
               <p className="grid h-32 w-32 place-items-center rounded-full bg-white text-center shadow-[0_24px_50px_-24px_rgb(10_37_64/0.5)] sm:h-36 sm:w-36">
                 <span>
-                  <span className="block text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-saffron-ink">
+                  <span className="block text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-orange-ink">
                     {date.secondary}
                   </span>
                   <span className="mt-1 block font-display text-[2.75rem] leading-none text-ink [font-variation-settings:'SOFT'_100]">
@@ -80,7 +80,7 @@ export function WomensDay() {
             <Reveal variant="fade" delay={150}>
               <h3
                 id="womens-day-highlights"
-                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {eventsWomensDay.highlightsLabel}
               </h3>

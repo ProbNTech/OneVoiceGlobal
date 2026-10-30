@@ -71,7 +71,7 @@ export function TenSigns() {
                       strokeLinecap="round"
                       pathLength={100}
                       strokeDasharray={`${arc} 100`}
-                      className="arc-draw text-saffron-500"
+                      className="arc-draw stroke-orange"
                       style={{ "--arc": arc } as CSSProperties}
                     />
                   </svg>
@@ -92,7 +92,7 @@ export function TenSigns() {
 
         <div className="mt-10 grid grid-cols-1 gap-6 lg:mt-12 lg:grid-cols-2 lg:gap-14">
           <Reveal className="flex items-start gap-4">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-orange text-white">
               <TriangleAlert aria-hidden="true" className="h-5 w-5" strokeWidth={1.7} />
             </span>
             <p className="max-w-2xl text-[1rem] leading-relaxed text-ink">{seminarsSigns.warning}</p>

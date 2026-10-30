@@ -29,8 +29,8 @@ export function PartnerSponsor() {
                 aria-hidden="true"
                 className="absolute -right-24 -top-28 -z-10 h-80 w-80 rounded-full bg-ocean-600/30 blur-[110px]"
               />
-              <Handshake aria-hidden="true" className="h-9 w-9 text-saffron-300" strokeWidth={1.3} />
-              <p className="mt-6 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300">
+              <Handshake aria-hidden="true" className="h-9 w-9 icon-orange" strokeWidth={1.3} />
+              <p className="mt-6 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange">
                 {partner.kicker}
               </p>
               <h2
@@ -43,7 +43,7 @@ export function PartnerSponsor() {
               <ul className="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                 {partner.commitments.map((item) => (
                   <li key={item} className="flex items-center gap-3 text-[0.9375rem] text-white">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-orange text-white">
                       <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.6} />
                     </span>
                     {item}
@@ -80,7 +80,7 @@ export function PartnerSponsor() {
                 </div>
               </div>
               <div className="flex flex-1 flex-col p-7 sm:p-10 lg:px-12 lg:pb-12">
-                <p className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-ink">
+                <p className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange-ink">
                   {sponsor.kicker}
                 </p>
                 <h2

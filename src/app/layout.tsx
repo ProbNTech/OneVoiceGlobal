@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import { siteConfig } from "@/config/site";
+import { orangeCssVariables } from "@/styles/brand-colours";
 import "./globals.css";
 
 /**
@@ -64,6 +65,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       // The reveal script adds a class before React loads.
       suppressHydrationWarning
       className={`${fraunces.variable} ${jakarta.variable} ${inter.variable} ${manrope.variable} h-full antialiased`}
+      // The brand orange, from its one home in styles/brand-colours.ts, for styles/site.css to build on.
+      style={orangeCssVariables()}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: revealScript }} />

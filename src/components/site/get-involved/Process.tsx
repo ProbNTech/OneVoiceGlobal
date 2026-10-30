@@ -71,7 +71,7 @@ export function Process() {
                   </svg>
                   <Icon className="h-7 w-7" strokeWidth={1.5} />
                 </span>
-                <p className="mt-6 text-[0.875rem] font-bold tabular-nums tracking-[0.22em] text-saffron-ink">
+                <p className="mt-6 text-[0.875rem] font-bold tabular-nums tracking-[0.22em] text-orange-ink">
                   {String(index + 1).padStart(2, "0")}
                 </p>
                 <h3 className="mx-auto mt-2.5 max-w-[11rem] text-[0.875rem] font-bold uppercase leading-snug tracking-[0.14em] text-ink">

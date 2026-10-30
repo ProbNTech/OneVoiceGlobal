@@ -34,7 +34,7 @@ export function SiteFooter() {
           {footerColumns.map((column, index) => (
             <Reveal key={column.heading} delay={(index + 1) * 90}>
               <nav aria-label={column.heading}>
-                <h3 className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300">
+                <h3 className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange">
                   {column.heading}
                 </h3>
                 <ul className="mt-5 space-y-3">
@@ -52,7 +52,7 @@ export function SiteFooter() {
 
           {/* Get in Touch */}
           <Reveal delay={(footerColumns.length + 1) * 90}>
-            <h3 className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300">Get in Touch</h3>
+            <h3 className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange">Get in Touch</h3>
             <p className="mt-5 text-[0.9375rem] text-white">{brand.centre}</p>
             {details.length ? (
               <ul className="mt-4 space-y-3 text-[0.9375rem]">
@@ -82,7 +82,7 @@ export function SiteFooter() {
                     <a
                       href={item.href}
                       aria-label={item.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-white/8 text-white ring-1 ring-white/10 transition-colors hover:bg-saffron-500 hover:text-white"
+                      className="grid h-10 w-10 place-items-center rounded-full bg-white/8 text-white ring-1 ring-white/10 transition-colors hover:bg-orange hover:text-white"
                     >
                       <SocialIcon platform={item.platform} className="h-4 w-4" />
                     </a>

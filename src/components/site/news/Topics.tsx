@@ -72,7 +72,7 @@ export function Topics() {
             return (
               <Reveal as="li" key={topic.label} delay={index * 60}>
                 <Link href={topic.href} className="group flex items-center gap-4">
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/8 text-saffron-300 ring-1 ring-white/10 transition-colors duration-500 group-hover:bg-saffron-500 group-hover:text-white">
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/8 icon-orange ring-1 ring-white/10 transition-colors duration-500 group-hover:bg-orange group-hover:text-white">
                     <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                   </span>
                   <span className="text-[1rem] font-semibold leading-snug text-white">{topic.label}</span>

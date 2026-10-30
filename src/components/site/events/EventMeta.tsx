@@ -29,7 +29,7 @@ export function EventMeta({
             aria-hidden="true"
             className={cx(
               "mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0",
-              tone === "light" ? "text-lagoon-600" : "text-saffron-300",
+              tone === "light" ? "text-lagoon-600" : "icon-orange",
             )}
             strokeWidth={1.8}
           />

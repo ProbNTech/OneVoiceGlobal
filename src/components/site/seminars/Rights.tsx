@@ -90,7 +90,7 @@ export function Rights() {
             </div>
 
             <Reveal className="mt-10">
-              <h3 className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-300">{why.label}</h3>
+              <h3 className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange">{why.label}</h3>
               <p className="mt-3 max-w-xl text-[1.0625rem] leading-relaxed text-white">{why.text}</p>
               <p id="rights-barriers" className="mt-5 text-[0.9375rem] text-white/70">
                 {why.barriersLabel}
@@ -98,7 +98,7 @@ export function Rights() {
               <ul aria-labelledby="rights-barriers" className="mt-3 space-y-2.5">
                 {why.barriers.map((barrier) => (
                   <li key={barrier} className="flex items-start gap-3 text-[0.9375rem] leading-snug text-white">
-                    <span aria-hidden="true" className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-saffron-400" />
+                    <span aria-hidden="true" className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" />
                     {barrier}
                   </li>
                 ))}
@@ -118,7 +118,7 @@ export function Rights() {
               className="mt-5"
             />
             <Reveal delay={150}>
-              <p className="mt-6 font-display text-[1.5rem] font-light italic leading-snug text-saffron-300 [font-variation-settings:'SOFT'_100]">
+              <p className="mt-6 font-display text-[1.5rem] font-light italic leading-snug text-orange [font-variation-settings:'SOFT'_100]">
                 {seminarsRights.tagline}
               </p>
               <p className="mt-4 max-w-2xl text-lead text-white/80">{seminarsRights.lead}</p>
@@ -131,7 +131,7 @@ export function Rights() {
             </ul>
 
             <Reveal variant="fade" className="mt-9">
-              <h3 id="rights-topics" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-300">
+              <h3 id="rights-topics" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange">
                 {topics.label}
               </h3>
             </Reveal>

@@ -58,7 +58,7 @@ export function Youth() {
             className="relative z-10 mx-4 -mt-16 sm:mx-10 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mx-0 lg:mt-0"
           >
             <div className="rounded-panel bg-white p-6 shadow-[0_40px_80px_-40px_rgb(10_37_64/0.5)] sm:p-8">
-              <p id="youth-list" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+              <p id="youth-list" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
                 {ourWorkYouth.listLabel}
               </p>
               <ul aria-labelledby="youth-list" className="mt-4 space-y-3">
