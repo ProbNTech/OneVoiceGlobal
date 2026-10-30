@@ -88,7 +88,7 @@ export function SiteHeader() {
 
           <div className="ml-auto flex items-center gap-2.5 xl:ml-3">
             <span className="hidden sm:inline-flex">
-              <Cta href={ctas.support.href} size="sm" variant={onDark ? "saffron" : "ink"}>
+              <Cta href={ctas.support.href} size="sm" variant="saffron">
                 {ctas.support.label}
               </Cta>
             </span>
