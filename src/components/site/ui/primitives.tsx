@@ -69,7 +69,8 @@ export function Kicker({
   id,
 }: {
   children: ReactNode;
-  tone?: "light" | "dark";
+  /** `white` is for orange grounds, where orange lettering would vanish. */
+  tone?: "light" | "dark" | "white";
   className?: string;
   as?: "p" | "h2" | "h3";
   id?: string;
@@ -79,7 +80,7 @@ export function Kicker({
       id={id}
       className={cx(
         "inline-flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-[0.22em]",
-        tone === "light" ? "text-orange-ink" : "text-orange",
+        { light: "text-orange-ink", dark: "text-orange", white: "text-white" }[tone],
         className,
       )}
     >
@@ -107,6 +108,10 @@ const accentTones = {
      where the logo orange itself would sit too close in brightness. */
   "saffron-light": "text-orange-light",
   white: "text-white/60",
+  /* For orange grounds, where an orange accent would vanish. */
+  navy: "text-navy-950",
+  /* Full white, for lettering set straight on a photograph. */
+  "white-solid": "text-white",
 } as const;
 
 const orangeTones = new Set<keyof typeof accentTones>(["saffron", "saffron-light"]);
