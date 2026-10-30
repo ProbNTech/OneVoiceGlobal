@@ -23,10 +23,11 @@ const SHADE: "orange" | "blue" | "none" = "orange";
  * fills the banner behind it and drifts a little slower than the page.
  *
  * The shade over the photograph is set by `SHADE` above: on trial, the
- * brand orange gradient at 90%, the photograph just showing through, with white lettering (the accent in
- * white italic) on a soft shadow, and a navy button. Two dotted rings, after the circle of dots round the logo's emblem, turn
- * slowly at the sides on wider screens (and hold still under reduced
- * motion), and the main button carries a soft orange glow.
+ * brand orange gradient at 90%, the photograph just showing through, with
+ * white lettering (the accent in white italic) on a soft shadow and a navy
+ * button. Two dotted rings, after the circle of dots round the logo's
+ * emblem, turn slowly at the sides on wider screens (and hold still under
+ * reduced motion).
  */
 export function CtaBanner({
   id,
