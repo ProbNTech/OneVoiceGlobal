@@ -102,7 +102,7 @@ function ProgrammeCard({ programme }: { programme: HomeProgramme }) {
   return (
     <Link href={programme.href} className="group relative block">
       {/* The icon tab sits over the photograph's top edge. */}
-      <span className="absolute -top-5 left-5 z-10 grid h-12 w-12 place-items-center rounded-xl bg-saffron-500 text-white shadow-[0_12px_24px_-12px_rgb(10_37_64/0.6)] transition-transform duration-700 ease-out-soft group-hover:-translate-y-1 group-hover:rotate-[-6deg]">
+      <span className="absolute -top-5 left-5 z-10 grid h-12 w-12 place-items-center rounded-xl bg-orange text-white shadow-[0_12px_24px_-12px_rgb(10_37_64/0.6)] transition-transform duration-700 ease-out-soft group-hover:-translate-y-1 group-hover:rotate-[-6deg]">
         <Icon className="h-5.5 w-5.5" strokeWidth={1.7} />
       </span>
 

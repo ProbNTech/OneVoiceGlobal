@@ -39,7 +39,7 @@ const icons: Record<SignpostIcon, LucideIcon> = {
 };
 
 /* The signs take the logo's three colours in turn, as soft tints. */
-const tones = ["bg-lagoon-50 text-lagoon-700", "bg-navy-50 text-ocean-700", "bg-saffron-50 text-saffron-ink"];
+const tones = ["bg-lagoon-50 text-lagoon-700", "bg-navy-50 text-ocean-700", "bg-orange-soft icon-orange-ink"];
 
 /**
  * Information & Signposting: the brief's INFORMATION, ADVICE & SIGNPOSTING

@@ -38,7 +38,7 @@ export function Centre() {
             />
             <Reveal delay={120}>
               <p className="mt-6 text-lead text-slate">{aboutCentre.lead}</p>
-              <p className="mt-6 text-[0.8125rem] font-bold uppercase tracking-[0.18em] text-saffron-ink">
+              <p className="mt-6 text-[0.8125rem] font-bold uppercase tracking-[0.18em] text-orange-ink">
                 {aboutCentre.motto}
               </p>
             </Reveal>
@@ -67,7 +67,7 @@ export function Centre() {
                     {index < barriers.length - 1 ? (
                       <span
                         aria-hidden="true"
-                        className="ml-[0.45em] mr-[0.2em] inline-block h-[0.22em] w-[0.22em] rounded-full bg-saffron-500 align-middle"
+                        className="ml-[0.45em] mr-[0.2em] inline-block h-[0.22em] w-[0.22em] rounded-full bg-orange align-middle"
                       />
                     ) : null}
                   </li>{" "}
@@ -75,7 +75,7 @@ export function Centre() {
               ))}
             </ul>
             <p className="mt-6 flex items-start gap-4 text-[1.0625rem] font-semibold leading-relaxed text-ink">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-orange text-white">
                 <Route aria-hidden="true" className="h-5 w-5" strokeWidth={1.7} />
               </span>
               <span className="pt-2">{aboutCentre.role}</span>

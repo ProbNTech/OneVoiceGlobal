@@ -10,7 +10,7 @@ import { Reveal } from "../ui/Reveal";
 import { logo } from "@/data/site";
 
 /* The three dots of the logo, as a reply being written. */
-const typingDots = ["bg-ocean-600", "bg-lagoon-500", "bg-saffron-500"];
+const typingDots = ["bg-ocean-600", "bg-lagoon-500", "bg-orange"];
 
 /**
  * Contact hero, on cream like the other inner pages: the brief's "Start
@@ -46,7 +46,7 @@ export function Hero() {
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-56 right-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-saffron-100/80 blur-[110px]"
+        className="absolute -bottom-56 right-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-orange-soft opacity-80 blur-[110px]"
       />
 
       <Shell>

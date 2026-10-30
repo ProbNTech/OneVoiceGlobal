@@ -7,7 +7,7 @@ import { Reveal } from "../ui/Reveal";
 
 /* Each programme's list is dotted in its own colour from the logo, as on
    the Seminars & Workshops page. */
-const DOTS = ["bg-lagoon-500", "bg-ocean-600", "bg-saffron-500"];
+const DOTS = ["bg-lagoon-500", "bg-ocean-600", "bg-orange"];
 
 /**
  * Measuring Our Impact: the potential indicators the three Seminars &

@@ -86,7 +86,7 @@ export function Reports() {
               className="absolute bottom-0 left-0 z-10 max-w-[18rem] sm:-left-5 sm:max-w-[20rem]"
             >
               <p className="flex items-center gap-4 rounded-card bg-white p-5 text-[0.9375rem] font-semibold leading-snug text-ink shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)]">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-orange text-white">
                   <FileClock aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                 </span>
                 {impactReports.status}

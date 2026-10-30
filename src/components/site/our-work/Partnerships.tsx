@@ -75,7 +75,7 @@ export function Partnerships() {
             <Reveal variant="fade">
               <p
                 id="partnerships-list"
-                className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink sm:text-center"
+                className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink sm:text-center"
               >
                 {ourWorkPartnerships.listLabel}
               </p>

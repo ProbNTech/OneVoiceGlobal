@@ -122,7 +122,7 @@ export function WorkWithUs() {
             <Reveal delay={150}>
               <p
                 id="seminars-opportunities"
-                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {seminarsWorkWithUs.opportunitiesLabel}
               </p>
@@ -132,7 +132,7 @@ export function WorkWithUs() {
                     key={item}
                     className="flex items-start gap-3 font-display text-[1.125rem] leading-snug text-ink [font-variation-settings:'SOFT'_100]"
                   >
-                    <span aria-hidden="true" className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rounded-full bg-saffron-500" />
+                    <span aria-hidden="true" className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" />
                     {item}
                   </li>
                 ))}

@@ -54,7 +54,7 @@ export function Hero() {
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-56 right-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-saffron-100/80 blur-[110px]"
+        className="absolute -bottom-56 right-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-orange-soft opacity-80 blur-[110px]"
       />
 
       <Shell>
@@ -176,7 +176,7 @@ export function Hero() {
                         )}
                       >
                         {text}
-                        {index < card.words.length - 1 ? <span className="text-saffron-500"> +</span> : null}
+                        {index < card.words.length - 1 ? <span className="text-orange"> +</span> : null}
                       </span>
                     ))}
                   </p>

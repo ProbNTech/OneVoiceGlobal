@@ -70,7 +70,7 @@ function Panel({ line, index, total }: { line: Line; index: number; total: numbe
 
       {/* Open: the whole line. */}
       <div className="panel-body absolute inset-x-0 bottom-0 p-6 sm:p-7 lg:p-9">
-        <span className="font-display text-[1rem] tabular-nums text-saffron-300 [font-variation-settings:'SOFT'_100]">
+        <span className="font-display text-[1rem] tabular-nums text-orange [font-variation-settings:'SOFT'_100]">
           {count}
         </span>
         <p className="mt-3 max-w-md font-display text-[1.625rem] leading-[1.2] text-white [font-variation-settings:'SOFT'_100] lg:text-[2rem]">
@@ -88,7 +88,7 @@ function Highlight({ text, phrase }: { text: string; phrase: string }) {
   return (
     <>
       {text.slice(0, at)}
-      <em className="font-light text-saffron-300">{phrase}</em>
+      <em className="font-light text-orange">{phrase}</em>
       {text.slice(at + phrase.length)}
     </>
   );
@@ -113,7 +113,7 @@ function Conclusion() {
               {/* The sum's plus signs travel with the part they join, so a
                   wrapped line never ends on a dangling "+". */}
               {index > 0 ? (
-                <span aria-hidden="true" className="font-display text-[1.25rem] leading-none text-saffron-500">
+                <span aria-hidden="true" className="font-display text-[1.25rem] leading-none text-orange">
                   +
                 </span>
               ) : null}

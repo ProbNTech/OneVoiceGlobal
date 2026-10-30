@@ -95,7 +95,7 @@ export function PublicSector() {
                 })}
               </ul>
 
-              <p className="mt-9 max-w-2xl font-display text-[clamp(1.25rem,1.6vw,1.5rem)] font-light italic leading-snug text-saffron-300 [font-variation-settings:'SOFT'_100]">
+              <p className="mt-9 max-w-2xl font-display text-[clamp(1.25rem,1.6vw,1.5rem)] font-light italic leading-snug text-orange [font-variation-settings:'SOFT'_100]">
                 {partnersPublic.closing}
               </p>
             </div>

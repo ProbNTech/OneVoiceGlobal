@@ -122,7 +122,7 @@ function Circle() {
         {/* Three points on the circle, a third of a turn apart. */}
         <span className="absolute left-1/2 top-[0.5%] h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ocean-600" />
         <span className="absolute left-[15.3%] top-[86%] h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-lagoon-500" />
-        <span className="absolute left-[84.7%] top-[86%] h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-saffron-500" />
+        <span className="absolute left-[84.7%] top-[86%] h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange" />
       </div>
 
       {/* The ring draws itself round the photograph as it arrives (.ring-draw). */}

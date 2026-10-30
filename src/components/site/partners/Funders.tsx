@@ -105,8 +105,8 @@ export function Funders() {
                   className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(6_26_48/0.25)_0%,rgb(6_26_48/0.7)_40%,rgb(6_26_48/0.94)_100%)]"
                 />
 
-                <Sprout aria-hidden="true" className="h-9 w-9 text-saffron-300" strokeWidth={1.3} />
-                <p className="mt-6 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-saffron-300">
+                <Sprout aria-hidden="true" className="h-9 w-9 icon-orange" strokeWidth={1.3} />
+                <p className="mt-6 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange">
                   {card.kicker}
                 </p>
                 <h3 className="mt-3 font-display text-[2rem] leading-[1.1] text-white [font-variation-settings:'SOFT'_100] sm:text-[2.25rem]">
@@ -115,7 +115,7 @@ export function Funders() {
                 <ul className="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                   {card.supports.map((item) => (
                     <li key={item} className="flex items-center gap-3 text-[0.9375rem] text-white">
-                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-orange text-white">
                         <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.6} />
                       </span>
                       {item}
@@ -134,7 +134,7 @@ export function Funders() {
             words carry their own full stops, so they alternate upright and
             italic rather than taking separators. */}
         <Reveal className="mt-8 text-center lg:mt-10">
-          <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-ink">{card.lead}</p>
+          <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange-ink">{card.lead}</p>
           <p className="mx-auto mt-4 max-w-6xl font-display text-[clamp(1.625rem,3vw,2.75rem)] leading-[1.25] tracking-[-0.015em] [font-variation-settings:'SOFT'_100]">
             {card.outcomes.map((word, index) => (
               <span key={word}>

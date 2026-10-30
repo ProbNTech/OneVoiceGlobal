@@ -50,29 +50,26 @@ export function Safety() {
               />
               <Reveal delay={120}>
                 <p className="mt-6 max-w-xl text-lead text-white/75">{abuse.lead}</p>
-                <p
-                  id="abuse-forms"
-                  className="mt-6 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-300"
-                >
+                <p id="abuse-forms" className="mt-6 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange">
                   {abuse.formsLabel}
                 </p>
                 <RunList
                   items={abuse.forms}
                   labelledBy="abuse-forms"
-                  dot="bg-saffron-400"
+                  dot="bg-orange"
                   className="mt-2.5 max-w-xl text-[1.0625rem] leading-[1.9] text-white"
                 />
               </Reveal>
             </div>
 
             <Reveal delay={180} className="lg:col-span-6 lg:self-center">
-              <h3 id="abuse-support" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-300">
+              <h3 id="abuse-support" className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange">
                 {abuse.supportLabel}
               </h3>
               <ul aria-labelledby="abuse-support" className="mt-5 grid grid-cols-1 gap-x-6 gap-y-3.5 sm:grid-cols-2">
                 {abuse.support.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-[0.9375rem] leading-snug text-white">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-orange text-white">
                       <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.6} />
                     </span>
                     {item}
@@ -96,13 +93,13 @@ export function Safety() {
                     <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.5} />
                     <span
                       aria-hidden="true"
-                      className="absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-saffron-500 text-[0.6875rem] font-bold tabular-nums text-white"
+                      className="absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-orange text-[0.6875rem] font-bold tabular-nums text-white"
                     >
                       {index + 1}
                     </span>
                   </span>
                   <div>
-                    <h3 className="text-[0.8125rem] font-bold uppercase tracking-[0.16em] text-saffron-ink">
+                    <h3 className="text-[0.8125rem] font-bold uppercase tracking-[0.16em] text-orange-ink">
                       {item.name}
                     </h3>
                     <p className="mt-2 font-display text-[1.625rem] leading-snug text-ink [font-variation-settings:'SOFT'_100] lg:text-[1.875rem]">
@@ -114,7 +111,7 @@ export function Safety() {
                   <p className="max-w-3xl text-[1rem] leading-relaxed text-slate">{item.lead}</p>
                   <RunList
                     items={item.items}
-                    dot={["bg-ocean-600", "bg-lagoon-500", "bg-saffron-500"][index % 3]}
+                    dot={["bg-ocean-600", "bg-lagoon-500", "bg-orange"][index % 3]}
                     className="mt-2.5 max-w-3xl text-[1.0625rem] leading-[1.9] text-ink"
                   />
                   <p className="mt-3 max-w-3xl text-[0.875rem] leading-relaxed text-ink-muted">{item.closing}</p>

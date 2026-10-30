@@ -90,7 +90,7 @@ export function CtaBanner({
                 <Cta
                   href={primaryCta.href}
                   variant="saffron"
-                  className="rounded-full shadow-[0_18px_40px_-14px_rgb(255_140_26/0.8)]"
+                  className="rounded-full shadow-[0_18px_40px_-14px_color-mix(in_srgb,var(--orange-bright-2)_80%,transparent)]"
                 >
                   {primaryCta.label}
                 </Cta>
@@ -114,7 +114,7 @@ function DotRing({ className }: { className: string }) {
     <svg aria-hidden="true" viewBox="0 0 200 200" className={cx("absolute -z-10 opacity-50", className)}>
       {Array.from({ length: count }, (_, index) => {
         const angle = (index / count) * Math.PI * 2;
-        const accent = index % 12 === 5 ? "fill-saffron-400" : index % 12 === 11 ? "fill-lagoon-300" : "fill-white/75";
+        const accent = index % 12 === 5 ? "fill-orange" : index % 12 === 11 ? "fill-lagoon-300" : "fill-white/75";
         return (
           <circle
             key={index}

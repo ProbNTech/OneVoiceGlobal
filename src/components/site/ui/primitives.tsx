@@ -79,14 +79,14 @@ export function Kicker({
       id={id}
       className={cx(
         "inline-flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-[0.22em]",
-        tone === "light" ? "text-saffron-ink" : "text-saffron-300",
+        tone === "light" ? "text-orange-ink" : "text-orange",
         className,
       )}
     >
       <span aria-hidden="true" className="flex gap-1">
         <span className="h-1.5 w-1.5 rounded-full bg-ocean-600" />
         <span className="h-1.5 w-1.5 rounded-full bg-lagoon-500" />
-        <span className="h-1.5 w-1.5 rounded-full bg-saffron-500" />
+        <span className="h-1.5 w-1.5 rounded-full bg-orange" />
       </span>
       {children}
     </Tag>
@@ -102,12 +102,14 @@ export function Kicker({
 const accentTones = {
   lagoon: "text-lagoon-600",
   ocean: "text-ocean-600",
-  saffron: "text-saffron-400",
+  saffron: "text-orange",
   /* A paler orange for mid-tone grounds such as the closing banner's blue,
      where the logo orange itself would sit too close in brightness. */
-  "saffron-light": "text-saffron-300",
+  "saffron-light": "text-orange-light",
   white: "text-white/60",
 } as const;
+
+const orangeTones = new Set<keyof typeof accentTones>(["saffron", "saffron-light"]);
 
 export function Title({
   lead,
@@ -157,7 +159,17 @@ export function Title({
             className={cx("overflow-hidden pb-[0.08em] -mb-[0.08em]", inline ? "inline-block align-bottom" : "block")}
           >
             <span
-              className={cx("line-inner block", index === 1 && cx("italic font-light", accentTones[accentTone]))}
+              className={cx(
+                "line-inner",
+                index === 1 && cx("italic font-light", accentTones[accentTone]),
+                /* An orange accent is a gradient painted through the letters, so
+                   its line hugs the words (or the gradient would stretch across
+                   the whole column) and gets a little room for the italic's
+                   overhang and descenders, which the paint would otherwise miss. */
+                index === 1 && orangeTones.has(accentTone)
+                  ? "inline-block pb-[0.08em] pe-[0.1em] align-top -mb-[0.08em]"
+                  : "block",
+              )}
               style={{ "--line": index } as CSSProperties}
             >
               {line}
@@ -179,8 +191,8 @@ const ctaVariants = {
   ink: "bg-ink text-white before:bg-ocean-600 [--disc:rgb(255_255_255/0.14)]",
   /* Orange carries white text; the hover fill is a deeper cut of the same
      orange, so the white stays as clear as it was. */
-  saffron: "bg-saffron-500 text-white before:bg-saffron-600 [--disc:rgb(255_255_255/0.22)]",
-  white: "bg-white text-ink before:bg-saffron-100 [--disc:rgb(10_37_64/0.07)]",
+  saffron: "bg-orange text-white before:bg-orange-hover [--disc:rgb(255_255_255/0.22)]",
+  white: "bg-white text-ink before:bg-orange-soft [--disc:rgb(10_37_64/0.07)]",
   outline:
     "bg-transparent text-ink ring-1 ring-inset ring-ink/20 before:bg-ink hover:text-white [--disc:rgb(10_37_64/0.07)]",
   "outline-light":

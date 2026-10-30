@@ -5,7 +5,7 @@ import { Reveal } from "../ui/Reveal";
 const accentTones = {
   lagoon: "text-lagoon-600",
   ocean: "text-ocean-600",
-  saffron: "text-saffron-400",
+  saffron: "text-orange",
 } as const;
 
 /**

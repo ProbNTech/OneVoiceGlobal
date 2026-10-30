@@ -46,7 +46,7 @@ export function Calendar() {
               <Link href={event.href} className="group flex items-center gap-5 sm:gap-7">
                 {/* The date, as the brief writes it. */}
                 <span className="w-24 shrink-0 sm:w-28">
-                  <span className="block text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-saffron-ink">
+                  <span className="block text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-orange-ink">
                     {event.date.secondary}
                   </span>
                   <span
@@ -83,7 +83,7 @@ export function Calendar() {
 
         <Reveal className="mt-10 lg:mt-12">
           <p className="flex max-w-3xl items-start gap-3.5 text-[0.9375rem] leading-relaxed text-ink-muted">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white text-saffron-ink">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white icon-orange-ink">
               <Info aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
             </span>
             {eventsCalendar.note}

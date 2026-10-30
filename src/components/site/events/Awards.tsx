@@ -65,7 +65,7 @@ export function Awards() {
 
               <h3
                 id="awards-highlights"
-                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {eventsAwards.highlightsLabel}
               </h3>
@@ -82,7 +82,7 @@ export function Awards() {
             <Reveal variant="fade" delay={150}>
               <h3
                 id="awards-categories"
-                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {eventsAwards.categoriesLabel}
               </h3>
@@ -97,7 +97,7 @@ export function Awards() {
                 >
                   <Award
                     aria-hidden="true"
-                    className="h-5 w-5 shrink-0 text-saffron-500 transition-transform duration-500 ease-out-soft group-hover:-rotate-12 group-hover:scale-110"
+                    className="h-5 w-5 shrink-0 icon-orange transition-transform duration-500 ease-out-soft group-hover:-rotate-12 group-hover:scale-110"
                     strokeWidth={1.6}
                   />
                   {category}

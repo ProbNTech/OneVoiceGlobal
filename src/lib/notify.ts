@@ -15,17 +15,19 @@
 
 import nodemailer from "nodemailer";
 import type { FormDef } from "./forms";
+import { orange } from "../styles/brand-colours.ts";
 
 // `brand.name` in data/site.ts, written out so the test script can load this file.
 const SITE = "OneVoice Global Foundation";
 
-// The brand colours of styles/site.css: navy-900, navy-950, ocean-600, saffron-500 and the neutrals.
+// The brand colours of styles/site.css: navy-900, navy-950, ocean-600 and the neutrals; the orange comes from styles/brand-colours.ts.
 const NAVY = "#0a2540";
 const NAVY_DEEP = "#061a30";
 const LINK = "#0b5394";
-const SAFFRON = "#ff8c1a";
-const SAFFRON_INK = "#ad5200";
-const SAFFRON_TINT = "#ffe5cc";
+// Email apps cannot draw gradients, so the email takes solid stops from the site's orange palette.
+const SAFFRON = orange.bright[1];
+const SAFFRON_INK = orange.ink[1];
+const SAFFRON_TINT = orange.soft[1];
 const TEXT = "#0a2540";
 const MUTED = "#5f6c7c";
 const RULE = "#e6dfd3";

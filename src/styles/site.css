@@ -37,21 +37,22 @@
   --color-lagoon-600: #0e7a76; /* logo teal */
   --color-lagoon-700: #0b5f5c;
 
-  /* A bright, vivid orange, one solid colour with no gradient (the user's
-     choice on 30 October 2026, a step brighter than britononetech.com's
-     button hover). Anything set on it (button text, icons, numbers) is
-     white. The scale keeps its first name, saffron, from the interim logo's
-     amber, so every class that uses it follows without a rename. */
-  --color-saffron-50: #fff5eb;
-  --color-saffron-100: #ffe5cc;
-  --color-saffron-300: #ffb264;
-  --color-saffron-400: #ff9f3f;
-  --color-saffron-500: #ff8c1a;
-  --color-saffron-600: #ec7600;
-  /* Orange at text weight, for labels on light bands only. The bright
-     orange is about 2.2:1 on cream, so these use a darker cut of the same
-     hue, which clears 4.5:1 on cream, white and sand. */
-  --color-saffron-ink: #ad5200;
+  /* The orange's solid stops, read from the one palette in
+     styles/brand-colours.ts (published as --orange-* variables by the root
+     layout). On the page orange is always a gradient (the user's rule,
+     30 October 2026): see the orange utilities at the foot of this file. These solid values are only the fallback under each
+     gradient and the colour of places a gradient cannot reach (focus rings,
+     text selection, the notification email). The scale keeps its first
+     name, saffron, from the interim logo's amber. */
+  --color-saffron-50: var(--orange-soft-1);
+  --color-saffron-100: var(--orange-soft-2);
+  --color-saffron-300: var(--orange-light-2);
+  --color-saffron-400: var(--orange-light-3);
+  --color-saffron-500: var(--orange-bright-2);
+  --color-saffron-600: var(--orange-hover-3);
+  /* Orange at text weight, the fallback under the deep gradient that small
+     labels on light bands use. */
+  --color-saffron-ink: var(--orange-ink-2);
 
   --color-cream: #faf7f1;
   --color-sand: #f3ede3;
@@ -587,4 +588,141 @@
 @utility text-outline {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1px currentColor;
+}
+
+/* -------------------------------------------------------------------------
+   Orange is always a gradient (the user's rule, 30 October 2026), after
+   britononetech.com's brand gradient but brighter. Each utility keeps a
+   solid colour underneath as the fallback. The colours themselves live in
+   styles/brand-colours.ts.
+
+   - bg-orange: fills (buttons, icon discs, tabs, dots, bars). Anything set
+     on it is white. bg-orange-hover is the button's hover fill, a touch
+     deeper so the white stays clear; bg-orange-light and bg-orange-soft
+     are the paler tints for glows and soft panels.
+   - text-orange: lettering, painted through the glyphs. text-orange-light
+     is for mid-tone grounds such as the closing banner's blue, and
+     text-orange-ink, a deeper gradient, for small labels on light bands,
+     where the bright one would be too faint to read.
+   - icon-orange (-ink): line icons. Lucide strokes with currentColor, so
+     the stroke is pointed at an SVG gradient instead (OrangeGradients, in
+     the site layout, drawn in each icon's own 24-unit space).
+   - stroke-orange / fill-orange: other SVG shapes, the gradient laid across
+     each shape's own box.
+   - underline-orange: a link underline drawn as a gradient line.
+   ------------------------------------------------------------------------- */
+
+:root {
+  /* Built from the palette in styles/brand-colours.ts, which the root layout
+     publishes as --orange-* variables on this same element. Change the
+     colours there, not here. */
+  --gradient-orange: linear-gradient(
+    var(--orange-angle),
+    var(--orange-bright-1) 0%,
+    var(--orange-bright-2) 50%,
+    var(--orange-bright-3) 100%
+  );
+  --gradient-orange-hover: linear-gradient(
+    var(--orange-angle),
+    var(--orange-hover-1) 0%,
+    var(--orange-hover-2) 50%,
+    var(--orange-hover-3) 100%
+  );
+  --gradient-orange-light: linear-gradient(
+    var(--orange-angle),
+    var(--orange-light-1) 0%,
+    var(--orange-light-2) 50%,
+    var(--orange-light-3) 100%
+  );
+  --gradient-orange-soft: linear-gradient(var(--orange-angle), var(--orange-soft-1) 0%, var(--orange-soft-2) 100%);
+  --gradient-orange-ink: linear-gradient(
+    var(--orange-angle),
+    var(--orange-ink-1) 0%,
+    var(--orange-ink-2) 50%,
+    var(--orange-ink-3) 100%
+  );
+}
+
+@utility bg-orange {
+  background-color: var(--color-saffron-500);
+  background-image: var(--gradient-orange);
+}
+
+@utility bg-orange-hover {
+  background-color: var(--color-saffron-600);
+  background-image: var(--gradient-orange-hover);
+}
+
+@utility bg-orange-light {
+  background-color: var(--color-saffron-300);
+  background-image: var(--gradient-orange-light);
+}
+
+@utility bg-orange-soft {
+  background-color: var(--color-saffron-100);
+  background-image: var(--gradient-orange-soft);
+}
+
+/* -webkit-text-fill-color rather than a transparent colour, so currentColor
+   (and any icon inside) still resolves to orange. */
+@utility text-orange {
+  color: var(--color-saffron-500);
+  background-image: var(--gradient-orange);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-orange-light {
+  color: var(--color-saffron-300);
+  background-image: var(--gradient-orange-light);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-orange-ink {
+  color: var(--color-saffron-ink);
+  background-image: var(--gradient-orange-ink);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility icon-orange {
+  color: var(--color-saffron-500);
+
+  &:where(svg),
+  & svg {
+    stroke: url(#orange-gradient);
+  }
+}
+
+@utility icon-orange-ink {
+  color: var(--color-saffron-ink);
+
+  &:where(svg),
+  & svg {
+    stroke: url(#orange-gradient-ink);
+  }
+}
+
+@utility stroke-orange {
+  color: var(--color-saffron-500);
+  stroke: url(#orange-gradient-box);
+}
+
+@utility fill-orange {
+  fill: url(#orange-gradient-box);
+}
+
+@utility underline-orange {
+  text-decoration: none;
+  background-image: var(--gradient-orange);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1.5px;
+  padding-bottom: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }

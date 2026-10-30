@@ -11,7 +11,7 @@ import { Reveal } from "../ui/Reveal";
 
 /* The three key words of the headline take light tints of the logo's three
    figure colours, in the order they sit around the mark. */
-const accentColours = ["text-ocean-300", "text-lagoon-300", "text-saffron-400"];
+const accentColours = ["text-ocean-300", "text-lagoon-300", "text-orange"];
 
 const SLIDE_MS = 2500;
 /* The cross-fade overlaps the next slide's time, so it stays short. */
@@ -181,7 +181,7 @@ export function Hero() {
                             key={`${index}`}
                             onAnimationEnd={next}
                             className={cx(
-                              "block h-full origin-left rounded-full bg-saffron-400 animate-slide-progress",
+                              "block h-full origin-left rounded-full bg-orange animate-slide-progress",
                               paused && "[animation-play-state:paused]",
                             )}
                             style={{ "--slide-duration": `${SLIDE_MS}ms` } as CSSProperties}

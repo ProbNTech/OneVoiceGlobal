@@ -55,10 +55,7 @@ export function Inclusion() {
               className="mt-5"
             />
             <Reveal delay={120}>
-              <p
-                id="inclusion-list"
-                className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-300"
-              >
+              <p id="inclusion-list" className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange">
                 {ourWorkInclusion.listLabel}
               </p>
             </Reveal>
@@ -67,7 +64,7 @@ export function Inclusion() {
                 const Icon = icons[item.icon];
                 return (
                   <Reveal as="li" key={item.text} delay={(index % 2) * 80} className="group flex items-start gap-4">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/8 text-saffron-300 ring-1 ring-white/12 transition-colors duration-500 group-hover:bg-saffron-500 group-hover:text-white">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/8 icon-orange ring-1 ring-white/12 transition-colors duration-500 group-hover:bg-orange group-hover:text-white">
                       <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                     </span>
                     <span className="pt-1 text-[0.9375rem] leading-relaxed text-white/80">{item.text}</span>
@@ -76,7 +73,7 @@ export function Inclusion() {
               })}
             </ul>
             <Reveal delay={200}>
-              <p className="mt-8 max-w-2xl font-display text-[1.1875rem] font-light italic leading-snug text-saffron-300 [font-variation-settings:'SOFT'_100] sm:text-[1.375rem]">
+              <p className="mt-8 max-w-2xl font-display text-[1.1875rem] font-light italic leading-snug text-orange [font-variation-settings:'SOFT'_100] sm:text-[1.375rem]">
                 {ourWorkInclusion.closing}
               </p>
             </Reveal>

@@ -64,13 +64,13 @@ export function Integration() {
 
           <Reveal variant="right" delay={200} className="lg:col-span-5 lg:col-start-8">
             <div className="rounded-panel bg-white p-7 text-slate shadow-[0_40px_80px_-40px_rgb(0_0_0/0.6)] sm:p-9">
-              <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-ink">
+              <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange-ink">
                 {communityIntegration.listLabel}
               </p>
               <ul className="mt-6 grid gap-x-6 gap-y-3.5 sm:grid-cols-2">
                 {communityIntegration.activities.map((activity) => (
                   <li key={activity} className="flex items-center gap-3 text-[1rem] font-medium text-ink">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-orange text-white">
                       <Check className="h-3.5 w-3.5" strokeWidth={2.6} />
                     </span>
                     {activity}

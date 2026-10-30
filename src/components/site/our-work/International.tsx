@@ -37,7 +37,7 @@ export function International() {
               <p className="mt-5 max-w-2xl text-lead text-slate">{ourWorkInternational.lead}</p>
               <p
                 id="international-list"
-                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {ourWorkInternational.listLabel}
               </p>

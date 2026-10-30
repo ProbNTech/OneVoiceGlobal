@@ -91,7 +91,7 @@ export function Stories() {
                   </span>
                   <ArrowRight
                     aria-hidden="true"
-                    className="h-5 w-5 shrink-0 translate-y-0.5 self-center text-saffron-500 transition-transform duration-500 ease-out-soft group-hover:translate-x-1.5"
+                    className="h-5 w-5 shrink-0 translate-y-0.5 self-center icon-orange transition-transform duration-500 ease-out-soft group-hover:translate-x-1.5"
                     strokeWidth={1.8}
                   />
                   <span className="font-display text-[1.5rem] leading-snug text-ink transition-colors duration-500 [font-variation-settings:'SOFT'_100] group-hover:text-lagoon-600 sm:text-[1.875rem]">

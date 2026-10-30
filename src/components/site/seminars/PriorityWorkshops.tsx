@@ -117,7 +117,7 @@ export function PriorityWorkshops() {
                       <span
                         className={cx(
                           "w-10 shrink-0 pt-1 font-display text-[1.625rem] font-light italic leading-none tabular-nums transition-colors duration-500 [font-variation-settings:'SOFT'_100] sm:w-12 sm:text-[2rem]",
-                          isOpen ? "text-saffron-500" : "text-saffron-ink",
+                          isOpen ? "text-orange" : "text-orange-ink",
                         )}
                       >
                         {count}
@@ -139,7 +139,7 @@ export function PriorityWorkshops() {
                         aria-hidden="true"
                         className={cx(
                           "mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full transition-[rotate,background-color] duration-500 ease-out-soft",
-                          isOpen ? "rotate-45 bg-saffron-500 text-white" : "rotate-0 bg-white text-ink",
+                          isOpen ? "rotate-45 bg-orange text-white" : "rotate-0 bg-white text-ink",
                         )}
                       >
                         <Plus className="h-4 w-4" strokeWidth={2} />
@@ -184,7 +184,7 @@ export function PriorityWorkshops() {
 
                         <p
                           id={`workshop-topics-${index}`}
-                          className="mt-5 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                          className="mt-5 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
                         >
                           {labels.topics}
                         </p>
@@ -202,13 +202,13 @@ export function PriorityWorkshops() {
 
                         <div className="mt-5 grid gap-5 sm:grid-cols-2 sm:gap-8">
                           <div>
-                            <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+                            <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
                               {labels.who}
                             </p>
                             <p className="mt-2 text-[0.9375rem] leading-relaxed text-slate">{workshop.who}</p>
                           </div>
                           <div>
-                            <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+                            <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
                               {labels.objective}
                             </p>
                             <p className="mt-2 font-display text-[1.125rem] leading-snug text-ink [font-variation-settings:'SOFT'_100]">

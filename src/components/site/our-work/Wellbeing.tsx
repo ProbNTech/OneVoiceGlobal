@@ -64,7 +64,7 @@ export function Wellbeing() {
             <Reveal delay={120}>
               <p
                 id="wellbeing-list"
-                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
               >
                 {ourWorkWellbeing.listLabel}
               </p>

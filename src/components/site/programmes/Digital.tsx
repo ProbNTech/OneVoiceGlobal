@@ -91,7 +91,7 @@ export function Digital() {
                       <span
                         className={cx(
                           "mx-6 h-2 w-2 rounded-full lg:mx-8",
-                          ["bg-ocean-300", "bg-lagoon-300", "bg-saffron-400"][index % 3],
+                          ["bg-ocean-300", "bg-lagoon-300", "bg-orange"][index % 3],
                         )}
                       />
                     </span>
@@ -120,9 +120,7 @@ export function Digital() {
               </div>
               <div className="absolute inset-0 bg-linear-to-t from-navy-950/90 via-navy-950/35 to-transparent" />
               <div className="absolute inset-x-6 bottom-6 sm:inset-x-8 sm:bottom-8 lg:left-16">
-                <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-300">
-                  {confidence.label}
-                </p>
+                <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange">{confidence.label}</p>
                 <p className="mt-2.5 max-w-md font-display text-[1.375rem] leading-snug text-white [font-variation-settings:'SOFT'_100] sm:text-[1.625rem]">
                   {confidence.text}
                 </p>
@@ -134,31 +132,31 @@ export function Digital() {
             {programmesDigital.tracks.map((track, index) => (
               <Reveal key={track.name} delay={index * 120}>
                 <div className="flex items-center gap-4">
-                  <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-navy-900 ring-2 ring-saffron-400/70 ring-offset-4 ring-offset-navy-950">
-                    <Image
-                      src={track.image.src}
-                      alt={track.image.alt}
-                      fill
-                      sizes="64px"
-                      className="object-cover"
-                      style={{ objectPosition: track.image.position }}
-                    />
+                  {/* The ring is the orange gradient showing round a navy gap, since
+                      a CSS ring can only take one colour. */}
+                  <span className="shrink-0 rounded-full bg-orange p-[2px]">
+                    <span className="block rounded-full bg-navy-950 p-1">
+                      <span className="relative block h-16 w-16 overflow-hidden rounded-full bg-navy-900">
+                        <Image
+                          src={track.image.src}
+                          alt={track.image.alt}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                          style={{ objectPosition: track.image.position }}
+                        />
+                      </span>
+                    </span>
                   </span>
                   <div>
-                    <h3 className="text-[0.8125rem] font-bold uppercase tracking-[0.16em] text-saffron-300">
-                      {track.name}
-                    </h3>
+                    <h3 className="text-[0.8125rem] font-bold uppercase tracking-[0.16em] text-orange">{track.name}</h3>
                     <p className="mt-1 font-display text-[1.375rem] leading-snug text-white [font-variation-settings:'SOFT'_100]">
                       {track.title}
                     </p>
                   </div>
                 </div>
                 <p className="mt-5 text-[0.9375rem] leading-relaxed text-white/70">{track.lead}</p>
-                <RunList
-                  items={track.items}
-                  dot="bg-saffron-400"
-                  className="mt-3 text-[1rem] leading-[1.95] text-white"
-                />
+                <RunList items={track.items} dot="bg-orange" className="mt-3 text-[1rem] leading-[1.95] text-white" />
               </Reveal>
             ))}
           </div>

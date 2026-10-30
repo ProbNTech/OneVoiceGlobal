@@ -41,7 +41,7 @@ export function Hero() {
       {/* Soft light in the logo's colours behind the collage. */}
       <div
         aria-hidden="true"
-        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-saffron-100/80 blur-[120px]"
+        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-orange-soft opacity-80 blur-[120px]"
       />
       <div
         aria-hidden="true"
@@ -135,7 +135,7 @@ export function Hero() {
                 href={card.event.href}
                 className="group flex items-center gap-4 rounded-card bg-white p-4 shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)] sm:p-5"
               >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-orange text-white">
                   <CalendarDays aria-hidden="true" className="h-5 w-5" strokeWidth={1.7} />
                 </span>
                 <span className="min-w-0 flex-1">

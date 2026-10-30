@@ -7,7 +7,7 @@ import { Reveal } from "../ui/Reveal";
 import { RunList } from "../ui/RunList";
 
 /* Each verb of the women's statement takes one of the logo's colours in turn. */
-const verbColours = ["text-lagoon-600", "text-ocean-600", "text-saffron-ink"];
+const verbColours = ["text-lagoon-600", "text-ocean-600", "text-orange-ink"];
 
 /* The three groups' photographs, each cut in its own organic shape. */
 const shapes = [
@@ -99,7 +99,7 @@ export function People() {
                     style={{ objectPosition: group.image.position }}
                   />
                 </div>
-                <h3 className="mt-6 text-[0.8125rem] font-bold uppercase tracking-[0.16em] text-saffron-ink">
+                <h3 className="mt-6 text-[0.8125rem] font-bold uppercase tracking-[0.16em] text-orange-ink">
                   {group.name}
                 </h3>
                 <p className="mt-2 font-display text-[1.5rem] leading-snug text-ink [font-variation-settings:'SOFT'_100]">
@@ -111,7 +111,7 @@ export function People() {
                 </p>
                 <RunList
                   items={group.items}
-                  dot={["bg-lagoon-500", "bg-ocean-600", "bg-saffron-500"][index % 3]}
+                  dot={["bg-lagoon-500", "bg-ocean-600", "bg-orange"][index % 3]}
                   className="mt-2.5 text-[1rem] leading-[1.9] text-ink"
                 />
                 {group.closing ? (

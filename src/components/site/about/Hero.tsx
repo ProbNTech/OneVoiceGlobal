@@ -51,7 +51,7 @@ export function Hero() {
       {/* Soft light in the logo's colours behind the mosaic. */}
       <div
         aria-hidden="true"
-        className="absolute -right-24 -top-48 -z-10 h-[38rem] w-[38rem] rounded-full bg-saffron-100/80 blur-[120px]"
+        className="absolute -right-24 -top-48 -z-10 h-[38rem] w-[38rem] rounded-full bg-orange-soft opacity-80 blur-[120px]"
       />
       <div
         aria-hidden="true"

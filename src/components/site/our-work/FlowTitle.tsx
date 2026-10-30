@@ -31,7 +31,7 @@ export function FlowTitle({
         className,
       )}
     >
-      {lead} <em className={cx("font-light", tone === "light" ? "text-lagoon-600" : "text-saffron-400")}>{accent}</em>
+      {lead} <em className={cx("font-light", tone === "light" ? "text-lagoon-600" : "text-orange")}>{accent}</em>
     </Reveal>
   );
 }

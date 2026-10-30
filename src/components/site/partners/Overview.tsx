@@ -27,11 +27,11 @@ const icons: Record<CollaborationIcon, LucideIcon> = {
 
 /* The disc before each area, cycling through the logo's colours, each
    with a white icon. */
-const DISCS = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-saffron-500 text-white"];
+const DISCS = ["bg-ocean-600 text-white", "bg-lagoon-600 text-white", "bg-orange text-white"];
 
 /* Every other area is set in the italic accent of the site's titles, in
    turn in each of the logo's colours. */
-const ACCENTS = ["text-lagoon-600", "text-ocean-600", "text-saffron-ink"];
+const ACCENTS = ["text-lagoon-600", "text-ocean-600", "text-orange-ink"];
 
 /**
  * Our Partnerships: the Foundation's own introduction to its partnerships,
@@ -72,7 +72,7 @@ export function Overview() {
           <Reveal variant="fade">
             <p
               id="collaboration-label"
-              className="text-[0.8125rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+              className="text-[0.8125rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
             >
               {partnersOverview.listLabel}
             </p>

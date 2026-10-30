@@ -47,7 +47,7 @@ export function Approach() {
                 <p className="mt-6 max-w-2xl text-lead text-slate">{aboutApproach.lead}</p>
                 <p
                   id="principles-label"
-                  className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink"
+                  className="mt-8 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink"
                 >
                   {aboutApproach.principlesLabel}
                 </p>
@@ -100,7 +100,7 @@ export function Approach() {
                   className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(6_26_48/0.25)_0%,rgb(6_26_48/0.7)_45%,rgb(6_26_48/0.92)_100%)]"
                 />
 
-                <Handshake aria-hidden="true" className="h-9 w-9 text-saffron-300" strokeWidth={1.3} />
+                <Handshake aria-hidden="true" className="h-9 w-9 icon-orange" strokeWidth={1.3} />
                 <p className="mt-6 max-w-md font-display text-[2rem] leading-[1.12] text-white [font-variation-settings:'SOFT'_100] sm:text-[2.375rem]">
                   {card.lines[0]}
                 </p>

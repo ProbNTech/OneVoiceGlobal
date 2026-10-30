@@ -8,7 +8,7 @@ import { Reveal } from "../ui/Reveal";
 const accents = {
   lagoon: "text-lagoon-600",
   ocean: "text-ocean-600",
-  saffron: "text-saffron-ink",
+  saffron: "text-orange-ink",
 } as const;
 
 /**
@@ -81,7 +81,7 @@ export function VisionMission() {
           </Reveal>
 
           <Reveal delay={120} className="lg:col-span-7">
-            <h3 className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-ink">
+            <h3 className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange-ink">
               {aboutVisionMission.missionLabel}
             </h3>
             <p className="mt-4 font-display text-[1.625rem] leading-snug text-ink [font-variation-settings:'SOFT'_100] sm:text-[2rem]">

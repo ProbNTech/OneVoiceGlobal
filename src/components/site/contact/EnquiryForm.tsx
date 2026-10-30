@@ -73,7 +73,7 @@ export function EnquiryForm({ initialTopic = "support" }: { initialTopic?: Enqui
     <form ref={formRef} action={formAction} noValidate className="relative">
       <div className="p-6 sm:p-9 lg:p-10">
         <fieldset aria-describedby={errors.topic ? "enquiry-topic-error" : undefined} className="group/topics">
-          <legend className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+          <legend className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
             {form.topicsLabel}
           </legend>
           <div className="mt-4 flex flex-wrap gap-2">
@@ -182,11 +182,8 @@ export function EnquiryForm({ initialTopic = "support" }: { initialTopic?: Enqui
         </p>
       </div>
 
-      <p className="flex items-center gap-3.5 rounded-b-panel bg-saffron-50 px-6 py-4 text-[0.9375rem] leading-snug text-ink sm:px-9 lg:px-10">
-        <span
-          aria-hidden="true"
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-saffron-500 text-white"
-        >
+      <p className="flex items-center gap-3.5 rounded-b-panel bg-orange-soft px-6 py-4 text-[0.9375rem] leading-snug text-ink sm:px-9 lg:px-10">
+        <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-orange text-white">
           <Phone className="h-4 w-4" strokeWidth={2} />
         </span>
         {form.emergency}

@@ -99,7 +99,7 @@ export function SiteHeader() {
               aria-expanded={menuOpen}
               aria-controls="site-menu"
               aria-label="Open the full menu"
-              className="group/menu inline-flex h-12 cursor-pointer items-center gap-3 rounded-full bg-white pl-4 pr-3.5 text-[0.9375rem] font-semibold text-ink shadow-[0_1px_2px_rgb(10_37_64/0.06),0_8px_24px_-12px_rgb(10_37_64/0.25)] ring-1 ring-ink/8 transition-colors hover:bg-saffron-50"
+              className="group/menu inline-flex h-12 cursor-pointer items-center gap-3 rounded-full bg-white pl-4 pr-3.5 text-[0.9375rem] font-semibold text-ink shadow-[0_1px_2px_rgb(10_37_64/0.06),0_8px_24px_-12px_rgb(10_37_64/0.25)] ring-1 ring-ink/8 transition-colors hover:bg-orange-soft"
             >
               <span>Menu</span>
               <span aria-hidden="true" className="flex w-5 flex-col items-end gap-1.25">
@@ -191,7 +191,7 @@ function DesktopItem({ item, pathname, light }: { item: NavItem; pathname: strin
         <span
           aria-hidden="true"
           className={cx(
-            "absolute inset-x-3.5 bottom-2 h-px origin-center bg-saffron-500 transition-transform duration-500",
+            "absolute inset-x-3.5 bottom-2 h-px origin-center bg-orange transition-transform duration-500",
             active ? "scale-x-100" : "scale-x-0 group-hover/item:scale-x-100",
           )}
         />
@@ -215,7 +215,7 @@ function DesktopItem({ item, pathname, light }: { item: NavItem; pathname: strin
                     className="group/sub flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 text-[0.875rem] font-medium text-slate transition-colors hover:bg-cream hover:text-ink"
                   >
                     <span>{child.label}</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 shrink-0 -translate-x-1 text-saffron-600 opacity-0 transition-all duration-300 group-hover/sub:translate-x-0 group-hover/sub:opacity-100" />
+                    <ArrowUpRight className="h-3.5 w-3.5 shrink-0 -translate-x-1 icon-orange opacity-0 transition-all duration-300 group-hover/sub:translate-x-0 group-hover/sub:opacity-100" />
                   </Link>
                 </li>
               ))}
@@ -373,10 +373,7 @@ function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClose: () =
                     >
                       {item.label}
                       <Plus
-                        className={cx(
-                          "h-5 w-5 text-saffron-600 transition-transform duration-500",
-                          isOpen && "rotate-45",
-                        )}
+                        className={cx("h-5 w-5 icon-orange transition-transform duration-500", isOpen && "rotate-45")}
                       />
                     </button>
                     <div

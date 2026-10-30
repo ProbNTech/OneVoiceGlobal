@@ -98,7 +98,7 @@ export function CommunityOrgs() {
             </Reveal>
             <Reveal delay={150}>
               <p className="mt-6 max-w-2xl text-lead text-slate">{partnersCommunity.lead}</p>
-              <p className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.22em] text-saffron-ink">
+              <p className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.22em] text-orange-ink">
                 {partnersCommunity.listLabel}
               </p>
             </Reveal>

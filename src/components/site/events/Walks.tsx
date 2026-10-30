@@ -29,10 +29,10 @@ const icons: Record<WalkIcon, LucideIcon> = {
 
 /* The disc before each highlight, cycling through the logo's colours, each
    with a white icon. */
-const DISCS = ["bg-lagoon-600 text-white", "bg-ocean-600 text-white", "bg-saffron-500 text-white"];
+const DISCS = ["bg-lagoon-600 text-white", "bg-ocean-600 text-white", "bg-orange text-white"];
 
 /* Every other highlight is set in the italic accent of the site's titles. */
-const ACCENTS = ["text-lagoon-600", "text-ocean-600", "text-saffron-ink"];
+const ACCENTS = ["text-lagoon-600", "text-ocean-600", "text-orange-ink"];
 
 /**
  * 5. OneVoice East London Community Marathon Walks, on cream: the event's
@@ -79,7 +79,7 @@ export function Walks() {
 
         <div className="mt-8 lg:mt-10">
           <Reveal variant="fade">
-            <p id="walks-highlights" className="text-[0.8125rem] font-bold uppercase tracking-[0.2em] text-saffron-ink">
+            <p id="walks-highlights" className="text-[0.8125rem] font-bold uppercase tracking-[0.2em] text-orange-ink">
               {eventsWalks.highlightsLabel}
             </p>
           </Reveal>

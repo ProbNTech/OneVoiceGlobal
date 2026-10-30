@@ -35,7 +35,7 @@ export function Latest() {
             />
             <Reveal delay={150}>
               <p className="mt-8 flex items-center gap-4 font-display text-statement text-ink [font-variation-settings:'SOFT'_100]">
-                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-saffron-500 text-white">
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-orange text-white">
                   <Newspaper aria-hidden="true" className="h-6 w-6" strokeWidth={1.6} />
                 </span>
                 {newsLatest.status}

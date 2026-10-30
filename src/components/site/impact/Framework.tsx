@@ -70,7 +70,7 @@ export function Framework() {
                 {index < steps.length - 1 ? (
                   <ArrowRight
                     aria-hidden="true"
-                    className="mb-[0.6em] h-6 w-6 shrink-0 rotate-90 text-saffron-500 lg:mb-[0.9em] lg:h-7 lg:w-7 lg:rotate-0"
+                    className="mb-[0.6em] h-6 w-6 shrink-0 rotate-90 icon-orange lg:mb-[0.9em] lg:h-7 lg:w-7 lg:rotate-0"
                     strokeWidth={1.6}
                   />
                 ) : null}
