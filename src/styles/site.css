@@ -329,6 +329,19 @@
     stroke-dashoffset: 0;
   }
 
+  /* An arc that draws itself to its own length (`--arc`, out of 100) as its
+     block arrives: the Seminars page's ten signs, each a tenth further round
+     than the last. Drawn in full without motion or JavaScript. */
+  .js-reveal [data-reveal] .arc-draw {
+    stroke-dashoffset: var(--arc);
+    transition: stroke-dashoffset 1.6s var(--ease-in-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 250ms);
+  }
+
+  .js-reveal [data-reveal].is-in .arc-draw {
+    stroke-dashoffset: 0;
+  }
+
   /* A rule that draws itself across a block as the block arrives: the line
      treatment the reference sites set over their numbered cards. Drawn in
      full without motion or JavaScript. */
@@ -372,6 +385,28 @@
 
   .js-reveal [data-reveal="phrases"].is-in .phrase {
     opacity: 1;
+  }
+
+  /* A bar that grows into place as its block arrives (the About page's
+     Theory of Change): across from its start on phones, where the bars lie
+     flat, and up from its foot on large screens, where they stand. Drawn in
+     full without motion or JavaScript. */
+  .js-reveal [data-reveal] .rise-draw {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.3s var(--ease-in-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 200ms);
+  }
+
+  @media (min-width: 64rem) {
+    .js-reveal [data-reveal] .rise-draw {
+      transform: scaleY(0);
+      transform-origin: center bottom;
+    }
+  }
+
+  .js-reveal [data-reveal].is-in .rise-draw {
+    transform: none;
   }
 }
 

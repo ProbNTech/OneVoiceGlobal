@@ -17,87 +17,76 @@
  * open the Contact page's form, with their own kind of enquiry chosen,
  * until it arrives.
  *
- * IMAGES. A slot marked `pending` is waiting for a generated image (file
- * name, pixel size and prompt are in `_source/get-involved-media-brief.md`);
- * until it arrives `src` is the closest existing photograph, and swapping it
- * is a one-line change to `src`. Alt text describes only what the frame
- * shows: none of these people is presented as a OneVoice participant,
- * volunteer or member of staff.
+ * IMAGES. Each photograph was generated for its slot (prompts in
+ * `_source/get-involved-media-brief.md`) and cut to the slot's exact size;
+ * the originals are kept in `_source/generated/`. No photograph here is used
+ * anywhere else on the site. Alt text describes only what the frame shows:
+ * none of these people is presented as a OneVoice participant, volunteer or
+ * member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, enquiryHref, navigation, routes } from "@/data/site";
 
-const photo = {
-  communityPantry: {
-    src: "/images/HomePageHeroSection2.png",
-    alt: "Volunteers handing a box of groceries to a woman at a community food distribution",
-    position: "60% 40%",
-  },
-  learningLaptop: {
-    src: "/images/Photo 1.png",
-    alt: "A woman in a pink headscarf working on a laptop beside a smiling tutor at a shared desk",
-    position: "40% 50%",
-  },
-  screenHelp: {
-    src: "/images/about/What-we-do/What-we-do-image-4.png",
-    alt: "A woman pointing at a desktop screen while an older man beside her works the mouse, in a bright open learning space",
-    position: "50% 50%",
-  },
-  adviserLeaflet: {
-    src: "/images/about/What-we-do/What-we-Do-image-6.png",
-    alt: "An adviser pointing to a printed leaflet on a low table while a woman seated beside her looks on",
-    position: "50% 50%",
-  },
-  youngLaptops: {
-    src: "/images/OurWorkHeroSection1.png",
-    alt: "Young adults working together on laptops around an office table",
-    position: "50% 35%",
-  },
-  outreachVolunteers: {
-    src: "/images/community/outreach-volunteers.jpg",
-    alt: "Volunteers in high-visibility vests chatting with residents outside beside a rail of donated clothes",
-    position: "55% 45%",
-  },
-  foodSupport: {
-    src: "/images/HomePageHeroSection1.png",
-    alt: "A smiling volunteer handing a box of food and clothing across a counter",
-    position: "45% 40%",
-  },
-  trainer: {
-    src: "/images/about/What-we-do/what-we-do-image-1.png",
-    alt: "A trainer at a whiteboard explaining a diagram to five people seated around a table with notebooks and laptops",
-    position: "50% 50%",
-  },
-  rooftopCircle: {
-    src: "/images/about/What-we-do/What-We-Do-image-7.png",
-    alt: "Seven people sitting in a circle talking on a planted rooftop terrace at sunset, the London skyline behind them",
-    position: "50% 60%",
-  },
-  professionals: {
-    src: "/images/community/professionals-collaborating.jpg",
-    alt: "Professionals gathered round a table of laptops and printed charts, talking and smiling together",
-    position: "55% 45%",
-  },
-  workshop: {
-    src: "/images/community/community-workshop.jpg",
-    alt: "A facilitator at a whiteboard leading a workshop for adults seated at tables in a bright, modern community space",
-    position: "50% 50%",
-  },
-  conference: {
-    src: "/images/about/What-we-do/What-we-do-image-9.png",
-    alt: "A speaker with a microphone addressing a seated audience in a conference hall",
-    position: "50% 50%",
-  },
-  gathering: {
-    src: "/images/community/community-gathering.jpg",
-    alt: "Residents of different ages sharing a table and talking together at a busy community gathering in a hall",
-    position: "50% 50%",
-  },
-} satisfies Record<string, HomeImage>;
+/** A photograph generated for its slot, saved under /images/get-involved/ by the slot's file name. */
+const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
+  src: `/images/get-involved/${file}.jpg`,
+  alt,
+  position,
+});
 
-/** A stand-in for a slot still waiting for its own photograph. */
-const standIn = (image: HomeImage, pending: string): HomeImage => ({ ...image, pending });
+const photo = {
+  hero: shot(
+    "get-involved-hero",
+    "A young woman in a teal jumper handing a box of groceries to an older woman in a patterned headscarf, a volunteer carrying boxes behind",
+  ),
+  heroInset: shot("get-involved-hero-inset", "A teenage girl and an older man laughing as they repot herbs together"),
+  partner: shot(
+    "support-partner",
+    "A man and a woman smiling as they sign papers at a table while two colleagues behind them clap",
+  ),
+  volunteer: shot(
+    "support-volunteer",
+    "A woman with a notepad and a young woman in a teal hijab going through receipts with a calculator at a table",
+  ),
+  programme: shot(
+    "support-programme",
+    "A tutor helping a woman in a navy hijab guide fabric through a sewing machine, other learners sewing behind them",
+  ),
+  network: shot(
+    "support-network",
+    "A young man and an older woman in a navy blazer laughing across a small table, other pairs talking behind them",
+  ),
+  reach: shot(
+    "support-reach",
+    "A young man filming an older woman in a teal headscarf on a phone on a small tripod as she talks in a garden",
+  ),
+  refer: shot(
+    "refer-someone",
+    "A woman shaking hands with a woman in a navy hijab at a reception desk, the woman's young son beside her",
+  ),
+  youngPeople: shot(
+    "young-people",
+    "Young people laughing as they paint a colourful mural of leaves and shapes on a garden wall",
+    "50% 10%",
+  ),
+  homework: shot(
+    "volunteer",
+    "A young woman reading a picture book with two young children who point at the page, smiling",
+  ),
+  donate: shot(
+    "donate",
+    "A woman and a man lifting a laptop out of a cardboard box beside a stack of laptops and books",
+  ),
+  sponsor: shot(
+    "sponsor",
+    "Adult learners at laptops along rows of tables, one woman raising her hand as a trainer walks between the desks",
+  ),
+  cta: shot(
+    "get-involved-cta",
+    "People of all ages sitting in a wide circle of chairs with cups of tea, laughing as a young woman standing introduces herself",
+  ),
+} satisfies Record<string, HomeImage>;
 
 /** The anchors the menu builds for this page's sections. */
 const anchors = navigation.find((item) => item.label === "Get Involved")?.children ?? [];
@@ -120,8 +109,8 @@ export const getInvolvedHero = {
   secondaryCta: { label: "Donate", href: anchorFor("Donate") },
   card: "Together, we can help build communities where people feel heard, supported and equipped to shape their own futures.",
   images: {
-    main: standIn(photo.communityPantry, "get-involved-hero.jpg"),
-    inset: standIn(photo.learningLaptop, "get-involved-hero-inset.jpg"),
+    main: photo.hero,
+    inset: photo.heroInset,
   },
 } as const;
 
@@ -153,31 +142,31 @@ export const getInvolvedWays = {
       title: "Become a partner",
       line: "Collaborate with us to develop and deliver community programmes.",
       link: { label: "Become a Partner", href: anchorFor("Become a Partner") },
-      image: standIn(photo.professionals, "support-partner.jpg"),
+      image: photo.partner,
     },
     {
       title: "Volunteer your expertise",
       line: "Share your professional knowledge, mentoring skills or local experience.",
       link: { label: "Volunteer", href: anchorFor("Volunteer") },
-      image: standIn(photo.screenHelp, "support-volunteer.jpg"),
+      image: photo.volunteer,
     },
     {
       title: "Support a programme",
       line: "Explore opportunities to fund or sponsor initiatives that address identified community needs.",
       link: { label: "Sponsor a Programme", href: anchorFor("Sponsor a Programme") },
-      image: standIn(photo.workshop, "support-programme.jpg"),
+      image: photo.programme,
     },
     {
       title: "Join our network",
       line: "Connect with community organisations, professionals, businesses and supporters working towards shared goals.",
       link: { label: "Community & Business Network", href: `${routes.community}#community-networks` },
-      image: standIn(photo.conference, "support-network.jpg"),
+      image: photo.network,
     },
     {
       title: "Help us reach more people",
       line: "Share our work and help connect individuals and organisations with relevant opportunities.",
       link: { label: "Refer Someone", href: anchorFor("Refer Someone") },
-      image: standIn(photo.gathering, "support-reach.jpg"),
+      image: photo.reach,
     },
   ] satisfies { title: string; line: string; link: { label: string; href: string }; image: HomeImage }[],
 } as const;
@@ -219,7 +208,7 @@ export const getInvolvedRefer = {
     { label: "Self-referral", icon: "self" },
   ] satisfies { label: string; icon: ReferrerIcon }[],
   note: "Eligibility may vary according to individual programmes and funding requirements.",
-  image: standIn(photo.adviserLeaflet, "refer-someone.jpg"),
+  image: photo.refer,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -277,7 +266,7 @@ export const getInvolvedJourney = {
     title: "Your Future Starts Here",
     text: "Whether you are looking for your first job, considering further education, exploring an apprenticeship or thinking about starting a business, OneVoice can help you understand your options.",
     motto: "Learn. Explore. Develop. Progress.",
-    image: standIn(photo.youngLaptops, "young-people.jpg"),
+    image: photo.youngPeople,
   },
   men: {
     label: "For Men",
@@ -338,7 +327,7 @@ export const getInvolvedVolunteer = {
   /* The brief's call to action label for volunteering ("Register Your
      Interest"), from its website guidance. */
   cta: { label: "Register Your Interest", href: enquiryHref("volunteer") },
-  image: standIn(photo.outreachVolunteers, "volunteer.jpg"),
+  image: photo.homework,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -367,7 +356,7 @@ export const getInvolvedDonate = {
   closing: "Every contribution can help create another opportunity.",
   /* [Donate Now] opens the Contact form until the client supplies a donation link. */
   cta: { label: "Donate Now", href: enquiryHref("donate") },
-  image: standIn(photo.foodSupport, "donate.jpg"),
+  image: photo.donate,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -414,7 +403,7 @@ export const getInvolvedSponsor = {
     "Youth Development",
   ],
   cta: { label: "Sponsor a Programme", href: enquiryHref("sponsor") },
-  image: standIn(photo.trainer, "sponsor.jpg"),
+  image: photo.sponsor,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -431,5 +420,5 @@ export const getInvolvedCta = {
     "Whether you want to learn a new skill, find work, start a business, improve your digital confidence, connect with other people or access support, OneVoice Skill Development Centre is here to help you take the next step.",
   primaryCta: ctas.support,
   secondaryCta: { label: "Refer Someone", href: anchorFor("Refer Someone") },
-  image: standIn(photo.rooftopCircle, "get-involved-cta.jpg"),
+  image: photo.cta,
 } as const;

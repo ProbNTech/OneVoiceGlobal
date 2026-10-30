@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import type { HomeImage } from "@/data/home";
 import type { NavLink } from "@/data/site";
+import { Photo } from "./Photo";
 import { Cta, Kicker, Shell, Title } from "./primitives";
 import { Reveal } from "./Reveal";
 
@@ -49,15 +49,7 @@ export function CtaBanner({
             className="relative isolate overflow-hidden rounded-panel bg-navy-950 px-6 py-12 text-center text-white shadow-[0_50px_90px_-50px_rgb(6_26_48/0.75)] sm:px-12 lg:py-16"
           >
             <motion.div aria-hidden="true" style={{ y }} className="absolute inset-x-0 -inset-y-[14%] -z-20">
-              <Image
-                src={image.src}
-                alt=""
-                fill
-                sizes="(min-width: 1920px) 1760px, 100vw"
-                quality={80}
-                className="object-cover"
-                style={{ objectPosition: image.position }}
-              />
+              <Photo image={image} decorative sizes="(min-width: 1920px) 1760px, 100vw" quality={80} />
             </motion.div>
             <div aria-hidden="true" className="absolute inset-0 -z-10 bg-navy-950/72" />
 

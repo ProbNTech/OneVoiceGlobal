@@ -10,14 +10,13 @@
  * borrows one of the brief's own lines from the matching page (noted beside
  * it).
  *
- * IMAGES. The six photographs under /images/home/ and the four under
- * /images/community/ come from the brief (Draft01 and V.2); the rest are the
- * existing photographs in /images/. A slot marked `pending` is
- * waiting for a generated image (file name, pixel size and prompt are in
- * `_source/home-media-brief.md`); until it arrives `src` is the closest
- * existing photograph as a stand-in, and swapping it is a one-line change to
- * `src`. Alt text describes only what the frame shows: none of these people
- * is presented as a OneVoice participant, volunteer or member of staff.
+ * IMAGES. Every photograph on the page was generated for its slot to the
+ * media brief (28 October 2026) and saved under /images/home/ by the slot's
+ * file name, cut to the slot's exact size; the originals and the prompts
+ * are kept in `_source/generated/`. No photograph here is used anywhere
+ * else on the site. Alt text
+ * describes only what the frame shows: none of these people is presented as
+ * a OneVoice participant, volunteer or member of staff.
  */
 
 import { brand, ctas, routes } from "@/data/site";
@@ -27,89 +26,159 @@ export type HomeImage = {
   alt: string;
   /** CSS object-position, for steering the crop. */
   position?: string;
+  /** A different crop for phones, where a wide photograph shows as a tall slice (the hero only). */
+  positionMobile?: string;
   /** The generated file this slot is waiting for, under /images/home/. */
   pending?: string;
 };
 
-const photo = {
-  learningLaptop: {
-    src: "/images/Photo 1.png",
-    alt: "A woman in a pink headscarf working on a laptop beside a smiling tutor at a shared desk",
-    position: "40% 50%",
-  },
-  teamPlanning: {
-    src: "/images/OurWorkHeroSection2.png",
-    alt: "A small team leaning over a table of plans and notes in a bright office",
-    position: "62% 40%",
-  },
-  groupLaptop: {
-    src: "/images/HomePageHeroSectionOrignal.png",
-    alt: "A smiling group gathered around a laptop at a table in a busy learning space",
-    position: "55% 45%",
-  },
-  teamDocuments: {
-    src: "/images/OurWorkPageHeroSection3.png",
-    alt: "Colleagues standing around a table, reviewing printed documents together",
-    position: "50% 40%",
-  },
-  youngLaptops: {
-    src: "/images/OurWorkHeroSection1.png",
-    alt: "Young adults working together on laptops around an office table",
-    position: "50% 35%",
-  },
-  laptopsWorkshop: {
-    src: "/images/OurWorkPageHeroSection1.jpg",
-    alt: "A group of young adults sharing laptops during a workshop",
-    position: "40% 50%",
-  },
-  foodSupport: {
-    src: "/images/HomePageHeroSection1.png",
-    alt: "A smiling volunteer handing a box of food and clothing across a counter",
-    position: "45% 40%",
-  },
-  communityPantry: {
-    src: "/images/HomePageHeroSection2.png",
-    alt: "Volunteers handing a box of groceries to a woman at a community food distribution",
-    position: "40% 40%",
-  },
-  communityForum: {
-    src: "/images/home/community-forum.jpg",
-    alt: "People of different ages and backgrounds talking together around tables at a community meeting",
-    position: "50% 40%",
-  },
-  communityMeeting: {
-    src: "/images/home/community-meeting.jpg",
-    alt: "A woman speaking while others listen around tables in a library meeting room",
-    position: "45% 45%",
-  },
-  digitalClass: {
-    src: "/images/home/digital-skills-class.jpg",
-    alt: "A tutor helping two women at computers in a learning room",
-    position: "40% 50%",
-  },
-  consultation: {
-    src: "/images/home/community-consultation.jpg",
-    alt: "Community members seated along a long table during a consultation session",
-    position: "50% 55%",
-  },
-  womenGroup: {
-    src: "/images/home/women-learning-group.jpg",
-    alt: "A group of young women with laptops listening to a facilitator",
-    position: "50% 45%",
-  },
-  international: {
-    src: "/images/home/international-meeting.jpg",
-    alt: "Delegates from different countries around a meeting table with a presentation screen",
-    position: "50% 50%",
-  },
-} satisfies Record<string, HomeImage>;
-
-/** A stand-in for a slot still waiting for its own photograph. */
-const standIn = (image: HomeImage, pending: string, alt?: string): HomeImage => ({
-  ...image,
-  alt: alt ?? image.alt,
-  pending,
+/** A photograph generated for its slot, saved under /images/home/ by the slot's file name. */
+const shot = (file: string, alt: string, position = "50% 50%", positionMobile?: string): HomeImage => ({
+  src: `/images/home/${file}.jpg`,
+  alt,
+  position,
+  ...(positionMobile ? { positionMobile } : {}),
 });
+
+const photo = {
+  /* Hero slides. Wide screens show the photograph's own left edge, which
+     keeps the people clear of the headline; phones steer their tall slice
+     onto the people instead. */
+  heroLearn: shot(
+    "hero-learn",
+    "A tutor in a navy cardigan pointing at a laptop as an older man beside her smiles, other learners at the next table in a bright learning centre",
+    "0% 45%",
+    "62% 45%",
+  ),
+  heroDevelop: shot(
+    "hero-develop",
+    "A young woman presenting her plan at a flip chart while a mentor and two other learners listen and smile around an oak table",
+    "0% 30%",
+    "60% 30%",
+  ),
+  heroConnect: shot(
+    "hero-connect",
+    "A young man in a navy jumper laughing with a woman in a teal blouse at a busy networking afternoon, leaflets on a table beside them",
+    "0% 30%",
+    "72% 30%",
+  ),
+  heroProgress: shot(
+    "hero-progress",
+    "A young woman in a navy blazer shaking hands with an employer in a bright reception, a woman in a teal cardigan smiling beside her",
+    "0% 40%",
+    "56% 40%",
+  ),
+  /* Introduction collage. */
+  introCommunity: shot(
+    "intro-community",
+    "Residents of different ages sitting in a circle in a bright hall, listening as an older man speaks, a facilitator taking notes on a clipboard",
+  ),
+  introPartnership: shot(
+    "intro-partnership",
+    "Four people from different organisations talking together over printed papers at a wooden table, one pointing at a page",
+  ),
+  /* Why OneVoice: one for each line. */
+  whyJob: shot(
+    "why-job",
+    "A man holding a printed CV as an adviser beside him points to a list of job openings on the table",
+  ),
+  whyDigital: shot(
+    "why-digital",
+    "An older woman in a floral kameez using a laptop as a young volunteer beside her points at the screen, both smiling",
+  ),
+  whyEnglish: shot(
+    "why-english",
+    "A woman in a teal hijab speaking with her hands as an older tutor listens and smiles, picture cards on the table",
+  ),
+  whyConfidence: shot(
+    "why-confidence",
+    "A woman standing to speak to a small seated group that smiles back at her, a facilitator beside her",
+  ),
+  whyListen: shot(
+    "why-listen",
+    "A young man talking while a support worker in a teal jumper listens closely, mugs of tea on a low table",
+  ),
+  whyEnterprise: shot(
+    "why-enterprise",
+    "A young woman showing a handmade candle to a business mentor at a table of samples and paper sketches",
+  ),
+  whySpecialist: shot(
+    "why-specialist",
+    "An adviser on the phone taking notes as an older man beside her holds a folder of letters and looks on",
+  ),
+  /* Our Core Programmes. */
+  programmesFeature: shot(
+    "programmes-feature",
+    "Small groups of adults working at tables with laptops and notebooks in a bright learning centre, a tutor kneeling beside one group",
+  ),
+  programmeSkills: shot(
+    "programme-skills",
+    "A tutor in a teal jumper explaining a household budget to adults with calculators and notebooks around a table",
+  ),
+  programmeEmployability: shot(
+    "programme-employability",
+    "A young man in a shirt and tie answering questions across a table from two interviewers at a mock interview",
+  ),
+  programmeDigital: shot(
+    "programme-digital",
+    "A tutor leaning in to help a young man and an older woman at desktop computers in a digital skills class",
+  ),
+  programmeEnterprise: shot(
+    "programme-enterprise",
+    "A young woman presenting her business idea to others around a table of sticky notes, sketches and laptops",
+  ),
+  programmeEnglish: shot(
+    "programme-english",
+    "Adults practising English in pairs around a table of picture cards as a tutor listens in",
+  ),
+  programmeMentoring: shot(
+    "programme-mentoring",
+    "A woman listening as a young man explains his goals over coffee at a round table",
+  ),
+  programmeWellbeing: shot(
+    "programme-wellbeing",
+    "Women of different ages sitting in a circle with cups of tea, talking and laughing in a bright room",
+  ),
+  programmeCommunity: shot(
+    "programme-community",
+    "Neighbours of all ages sharing food and laughing at a long table as a volunteer pours tea",
+  ),
+  /* Who We Support: one series. */
+  supportWomen: shot("support-women", "Two women, one in a hijab, laughing together over a notebook at a table"),
+  supportMen: shot("support-men", "A man thinking at a laptop as a tutor leans in and points at the screen"),
+  supportYoungPeople: shot(
+    "support-young-people",
+    "Three teenagers smiling around a laptop, one pointing at the screen",
+  ),
+  supportJobseekers: shot(
+    "support-jobseekers",
+    "A young woman holding a printed CV and practising her answers with an adviser",
+  ),
+  supportCareerChangers: shot(
+    "support-career-changers",
+    "A man in glasses learning workplace software at a laptop with a younger tutor beside him",
+  ),
+  supportEntrepreneurs: shot("support-entrepreneurs", "A young woman smiling as she packs an order into a box"),
+  supportProfessionals: shot(
+    "support-professionals",
+    "A woman in a blazer leading a small workshop beside a flip chart",
+  ),
+  supportNewCommunities: shot(
+    "support-new-communities",
+    "A volunteer handing an information pack to a family with a young child at a help desk",
+  ),
+  supportFamilies: shot(
+    "support-families",
+    "A mother and father doing a craft activity with their two children at a table",
+  ),
+  supportBarriers: shot(
+    "support-barriers",
+    "A woman in a wheelchair working at a laptop at a desk as a support worker beside her smiles",
+  ),
+  /* Work With Us and the closing banner. */
+  workWithUs: shot("work-with-us", "Two people shaking hands across a table while colleagues smile behind them"),
+  finalCta: shot("final-cta", "A busy, bright community centre with people of all ages talking in small groups"),
+} satisfies Record<string, HomeImage>;
 
 /* -------------------------------------------------------------------------
    HOMEPAGE HERO
@@ -125,13 +194,10 @@ export const homeHero = {
   secondaryCta: ctas.services,
   /** One slide per word of the brief's motto, Learn. Develop. Connect. Progress. */
   slides: [
-    { word: "Learn", image: photo.learningLaptop },
-    { word: "Develop", image: photo.teamPlanning },
-    { word: "Connect", image: photo.groupLaptop },
-    {
-      word: "Progress",
-      image: standIn(photo.teamDocuments, "hero-progress.jpg"),
-    },
+    { word: "Learn", image: photo.heroLearn },
+    { word: "Develop", image: photo.heroDevelop },
+    { word: "Connect", image: photo.heroConnect },
+    { word: "Progress", image: photo.heroProgress },
   ],
 } as const;
 
@@ -161,8 +227,8 @@ export const homeIntro = {
   /** The card over the collage: the brief's subtitle for the Foundation. */
   badge: brand.initiative,
   images: {
-    main: standIn(photo.communityForum, "intro-community.jpg"),
-    inset: standIn(photo.international, "intro-partnership.jpg"),
+    main: photo.introCommunity,
+    inset: photo.introPartnership,
   },
 } as const;
 
@@ -179,21 +245,21 @@ export const homeWhy = {
     {
       text: "Someone may come to us looking for a job.",
       key: "looking for a job",
-      image: standIn(photo.teamDocuments, "why-job.jpg"),
+      image: photo.whyJob,
     },
-    { text: "They may actually need digital skills.", key: "digital skills", image: photo.laptopsWorkshop },
-    { text: "They may need English.", key: "English", image: photo.womenGroup },
+    { text: "They may actually need digital skills.", key: "digital skills", image: photo.whyDigital },
+    { text: "They may need English.", key: "English", image: photo.whyEnglish },
     {
       text: "They may need confidence.",
       key: "confidence",
-      image: standIn(photo.foodSupport, "why-confidence.jpg"),
+      image: photo.whyConfidence,
     },
-    { text: "They may need someone to listen.", key: "someone to listen", image: photo.communityMeeting },
-    { text: "They may need enterprise support.", key: "enterprise support", image: photo.youngLaptops },
+    { text: "They may need someone to listen.", key: "someone to listen", image: photo.whyListen },
+    { text: "They may need enterprise support.", key: "enterprise support", image: photo.whyEnterprise },
     {
       text: "They may need access to a specialist service.",
       key: "a specialist service",
-      image: photo.consultation,
+      image: photo.whySpecialist,
     },
   ],
   conclusion: "That's why our approach is holistic.",
@@ -226,63 +292,63 @@ export const homeProgrammes = {
     "Where formal accreditation is required, OneVoice can work with appropriately accredited training and education partners.",
   ],
   cta: { label: "View All Programmes", href: routes.programmes },
-  feature: standIn(photo.groupLaptop, "programmes-feature.jpg"),
+  feature: photo.programmesFeature,
   items: [
     {
       title: "Skills Development",
       line: "Develop practical skills for life and work.",
       icon: "skills",
       href: `${routes.programmes}#education-and-english`,
-      image: photo.digitalClass,
+      image: photo.programmeSkills,
     },
     {
       title: "Employability",
       line: "Become job ready and access employment opportunities.",
       icon: "employability",
       href: `${routes.programmes}#employment-and-careers`,
-      image: standIn(photo.teamDocuments, "programme-employability.jpg"),
+      image: photo.programmeEmployability,
     },
     {
       title: "Digital OneVoice",
       line: "Build confidence in the digital world.",
       icon: "digital",
       href: `${routes.programmes}#digital-onevoice`,
-      image: standIn(photo.laptopsWorkshop, "programme-digital.jpg"),
+      image: photo.programmeDigital,
     },
     {
       title: "OneVoice Enterprise",
       line: "Turn ideas into opportunities.",
       icon: "enterprise",
       href: `${routes.programmes}#enterprise-and-mentoring`,
-      image: standIn(photo.youngLaptops, "programme-enterprise.jpg"),
+      image: photo.programmeEnterprise,
     },
     {
       title: "English & Communication",
       line: "Develop English and communication skills.",
       icon: "english",
       href: `${routes.programmes}#english-and-communication`,
-      image: standIn(photo.womenGroup, "programme-english.jpg"),
+      image: photo.programmeEnglish,
     },
     {
       title: "Mentoring",
       line: "Get guidance and support from experienced people.",
       icon: "mentoring",
       href: `${routes.programmes}#mentoring`,
-      image: standIn(photo.learningLaptop, "programme-mentoring.jpg"),
+      image: photo.programmeMentoring,
     },
     {
       title: "Wellbeing",
       line: "Build resilience, confidence and social connection.",
       icon: "wellbeing",
       href: `${routes.programmes}#wellbeing-and-family`,
-      image: standIn(photo.communityMeeting, "programme-wellbeing.jpg"),
+      image: photo.programmeWellbeing,
     },
     {
       title: "Community",
       line: "Connect, participate and build relationships.",
       icon: "community",
       href: routes.community,
-      image: photo.communityForum,
+      image: photo.programmeCommunity,
     },
   ] satisfies HomeProgramme[],
 } as const;
@@ -321,32 +387,22 @@ export type JourneyIcon = (typeof homeJourney.steps)[number]["icon"];
    WHO WE SUPPORT
    ------------------------------------------------------------------------- */
 
-const person = (label: string, image: HomeImage, file: string, alt: string) => ({
-  label,
-  image: standIn(image, file, alt),
-});
-
 export const homeWhoWeSupport = {
   kicker: "Who We Support",
   titleLead: "OneVoice is for",
   titleAccent: "Everyone",
   lead: "Our programmes can support:",
   groups: [
-    person("Women", photo.womenGroup, "support-women.jpg", photo.womenGroup.alt),
-    person("Men", photo.youngLaptops, "support-men.jpg", photo.youngLaptops.alt),
-    person("Young People", photo.laptopsWorkshop, "support-young-people.jpg", photo.laptopsWorkshop.alt),
-    person("Jobseekers", photo.teamDocuments, "support-jobseekers.jpg", photo.teamDocuments.alt),
-    person("Career Changers", photo.teamPlanning, "support-career-changers.jpg", photo.teamPlanning.alt),
-    person("Entrepreneurs", photo.groupLaptop, "support-entrepreneurs.jpg", photo.groupLaptop.alt),
-    person("Professionals", photo.international, "support-professionals.jpg", photo.international.alt),
-    person("New Communities", photo.communityForum, "support-new-communities.jpg", photo.communityForum.alt),
-    person("Families", photo.communityPantry, "support-families.jpg", photo.communityPantry.alt),
-    person(
-      "People Facing Barriers to Opportunity",
-      photo.learningLaptop,
-      "support-barriers.jpg",
-      photo.learningLaptop.alt,
-    ),
+    { label: "Women", image: photo.supportWomen },
+    { label: "Men", image: photo.supportMen },
+    { label: "Young People", image: photo.supportYoungPeople },
+    { label: "Jobseekers", image: photo.supportJobseekers },
+    { label: "Career Changers", image: photo.supportCareerChangers },
+    { label: "Entrepreneurs", image: photo.supportEntrepreneurs },
+    { label: "Professionals", image: photo.supportProfessionals },
+    { label: "New Communities", image: photo.supportNewCommunities },
+    { label: "Families", image: photo.supportFamilies },
+    { label: "People Facing Barriers to Opportunity", image: photo.supportBarriers },
   ],
   note: "Programme eligibility may vary depending on funding and individual programme criteria.",
 } as const;
@@ -418,7 +474,7 @@ export const homeWorkWithUs = {
       "Social Inclusion",
     ],
     cta: ctas.partner,
-    image: standIn(photo.teamPlanning, "work-with-us.jpg"),
+    image: photo.workWithUs,
   },
 } as const;
 
@@ -430,27 +486,15 @@ export const homeWorkWithUs = {
    Home itself is left out here, on the home page).
    ------------------------------------------------------------------------- */
 
-const v2Photo = {
-  gathering: {
-    src: "/images/community/community-gathering.jpg",
-    alt: "Residents of different ages sharing a table and talking together at a busy community gathering in a hall",
-    position: "50% 50%",
-  },
-  workshop: {
-    src: "/images/community/community-workshop.jpg",
-    alt: "A facilitator at a whiteboard leading a workshop for adults seated at tables in a bright, modern community space",
-    position: "50% 50%",
-  },
-  professionals: {
-    src: "/images/community/professionals-collaborating.jpg",
-    alt: "Professionals gathered round a table of laptops and printed charts, talking and smiling together",
-    position: "55% 45%",
-  },
-  volunteers: {
-    src: "/images/community/outreach-volunteers.jpg",
-    alt: "Volunteers in high-visibility vests chatting with residents outside beside a rail of donated clothes",
-    position: "55% 45%",
-  },
+/* The four doorway photographs, shown as small circles; each its own. */
+const doorPhoto = {
+  about: shot(
+    "door-about",
+    "Two smiling women of different generations greeting each other warmly in a bright entrance",
+  ),
+  work: shot("door-work", "A tutor and a learner smiling over a notebook during a lesson"),
+  partnerships: shot("door-partnerships", "Two people from different organisations shaking hands across a table"),
+  support: shot("door-support", "A smiling volunteer in a teal tabard carrying a box of donated books"),
 } satisfies Record<string, HomeImage>;
 
 export const homeFoundation = {
@@ -478,25 +522,25 @@ export const homeFoundation = {
       title: "About Us",
       line: "Our story, vision, mission, values, approach and governance.",
       href: routes.about,
-      image: v2Photo.gathering,
+      image: doorPhoto.about,
     },
     {
       title: "Our Work",
       line: "Education, skills, livelihoods, wellbeing, inclusion and community development.",
       href: routes.ourWork,
-      image: v2Photo.workshop,
+      image: doorPhoto.work,
     },
     {
       title: "Our Partnerships",
       line: "Corporates, public bodies, charities, trusts, foundations and diaspora networks.",
       href: routes.partners,
-      image: v2Photo.professionals,
+      image: doorPhoto.partnerships,
     },
     {
       title: "Support Us & Get Involved",
       line: "Donate, volunteer, become a partner, fund a programme or join the network.",
       href: routes.getInvolved,
-      image: v2Photo.volunteers,
+      image: doorPhoto.support,
     },
   ] satisfies { title: string; line: string; href: string; image: HomeImage }[],
 } as const;
@@ -513,5 +557,5 @@ export const homeFinalCta = {
   closing: brand.closing,
   primaryCta: ctas.support,
   secondaryCta: ctas.services,
-  image: photo.communityPantry,
+  image: photo.finalCta,
 } as const;

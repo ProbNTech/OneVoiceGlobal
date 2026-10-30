@@ -20,10 +20,10 @@
  * Lists are kept whole: the page sets the longest of them as running text
  * rather than as bullet lists, so they stay compact.
  *
- * IMAGES. A slot marked `pending` is waiting for a generated image (file
- * name, pixel size and prompt are in `_source/programmes-media-brief.md`);
- * until it arrives `src` is the closest existing photograph, and swapping it
- * is a one-line change to `src`. Alt text describes only what the frame
+ * IMAGES. Each photograph was generated for its slot (prompts in
+ * `_source/programmes-media-brief.md`) and cut to the slot's exact size; the
+ * originals and prompts are kept in `_source/generated/`. No photograph here
+ * is used anywhere else on the site. Alt text describes only what the frame
  * shows: none of these people is presented as a OneVoice participant or
  * member of staff.
  */
@@ -31,101 +31,87 @@
 import type { HomeImage } from "@/data/home";
 import { brand, enquiryHref, navigation, routes } from "@/data/site";
 
-const photo = {
-  digitalClass: {
-    src: "/images/home/digital-skills-class.jpg",
-    alt: "A tutor helping two women at computers in a learning room",
-    position: "45% 45%",
-  },
-  peerCircle: {
-    src: "/images/community/peer-support-circle.jpg",
-    alt: "Adults of different ages sitting in a circle and talking warmly at a peer support group",
-    position: "50% 50%",
-  },
-  womenGroup: {
-    src: "/images/home/women-learning-group.jpg",
-    alt: "A group of young women with laptops listening to a facilitator",
-    position: "50% 45%",
-  },
-  screenHelp: {
-    src: "/images/about/What-we-do/What-we-do-image-4.png",
-    alt: "A woman pointing at a desktop screen while an older man beside her works the mouse, in a bright open learning space",
-    position: "50% 50%",
-  },
-  youngLaptops: {
-    src: "/images/OurWorkHeroSection1.png",
-    alt: "Young adults working together on laptops around an office table",
-    position: "50% 40%",
-  },
-  shopTablet: {
-    src: "/images/about/What-we-do/What-we-Do-image-5.png",
-    alt: "Two women looking at a tablet together at a counter of small handmade products in a shop",
-    position: "50% 45%",
-  },
-  adviserDesk: {
-    src: "/images/about/What-we-do/what-we-do-image-2.png",
-    alt: "An adviser showing a printed document to a man seated across a desk from her, a laptop open between them",
-    position: "45% 50%",
-  },
-  adviserLeaflet: {
-    src: "/images/about/What-we-do/What-we-Do-image-6.png",
-    alt: "An adviser pointing to a printed leaflet on a low table while a woman seated beside her looks on",
-    position: "50% 50%",
-  },
-  teamDocuments: {
-    src: "/images/OurWorkPageHeroSection3.png",
-    alt: "Colleagues standing around a table, reviewing printed documents together",
-    position: "50% 45%",
-  },
-  teamPlans: {
-    src: "/images/OurWorkHeroSection2.png",
-    alt: "A small team leaning over a table of plans and notes in a bright office",
-    position: "50% 50%",
-  },
-  conference: {
-    src: "/images/about/What-we-do/What-we-do-image-9.png",
-    alt: "A speaker with a microphone addressing a seated audience in a conference hall",
-    position: "50% 50%",
-  },
-  tutorLaptop: {
-    src: "/images/Photo 1.png",
-    alt: "A woman in a pink headscarf working on a laptop beside a smiling tutor at a shared desk",
-    position: "40% 50%",
-  },
-  groupLaptop: {
-    src: "/images/HomePageHeroSectionOrignal.png",
-    alt: "A smiling group gathered around a laptop at a table in a busy learning space",
-    position: "50% 45%",
-  },
-  trainer: {
-    src: "/images/about/What-we-do/what-we-do-image-1.png",
-    alt: "A trainer at a whiteboard explaining a diagram to five people seated around a table with notebooks and laptops",
-    position: "50% 50%",
-  },
-  workshop: {
-    src: "/images/community/community-workshop.jpg",
-    alt: "A facilitator at a whiteboard leading a workshop for adults seated at tables in a bright, modern community space",
-    position: "50% 50%",
-  },
-  womenConversation: {
-    src: "/images/community/women-conversation.jpg",
-    alt: "A group of women, several in headscarves, laughing and talking together in a warm sitting room",
-    position: "50% 45%",
-  },
-  rooftopCircle: {
-    src: "/images/about/What-we-do/What-We-Do-image-7.png",
-    alt: "Seven people sitting in a circle talking on a planted rooftop terrace at sunset, the London skyline behind them",
-    position: "50% 60%",
-  },
-  parkGathering: {
-    src: "/images/about/What-we-do/What-we-do-image-10.png",
-    alt: "A large group of people of different ages and backgrounds sitting and talking together outdoors in a city park",
-    position: "50% 45%",
-  },
-} satisfies Record<string, HomeImage>;
+/** A photograph generated for its slot, saved under /images/programmes/ by the slot's file name. */
+const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
+  src: `/images/programmes/${file}.jpg`,
+  alt,
+  position,
+});
 
-/** A stand-in for a slot still waiting for its own photograph. */
-const standIn = (image: HomeImage, pending: string): HomeImage => ({ ...image, pending });
+const photo = {
+  hero: shot(
+    "programmes-hero",
+    "A woman in a teal head wrap holding a notebook and talking to a smiling man and two seated women at a table",
+  ),
+  heroSide: shot(
+    "programmes-hero-side",
+    "A young woman, an older man and a woman in a navy hijab laughing together over their folders, holding cups of tea",
+  ),
+  education: shot(
+    "programmes-education",
+    "A young man behind a reception counter greeting an older man while a woman with a notepad and two seated learners look on",
+  ),
+  digital: shot(
+    "programmes-digital",
+    "A young man pointing to a tablet as three older adults at a round table smile at their own tablets",
+  ),
+  digitalWork: shot(
+    "programmes-digital-work",
+    "A smiling man in a headset talking during an online meeting at a laptop",
+  ),
+  digitalBusiness: shot(
+    "programmes-digital-business",
+    "A baker in a navy apron photographing loaves of fresh bread with his phone",
+  ),
+  employability: shot(
+    "programmes-employability",
+    "A woman in a navy hijab leaning in to help an older man at a laptop, with other adults working at laptops along the table",
+  ),
+  careersGuidance: shot(
+    "programmes-careers-guidance",
+    "A young woman pointing to a printed chart of options while an older man beside her looks on at a round table",
+  ),
+  careerDevelopment: shot(
+    "programmes-career-development",
+    "A woman in a navy blazer listening closely as a man talks with his hands across a café table, other pairs talking behind them",
+  ),
+  enterprise: shot(
+    "programmes-enterprise",
+    "A young man and a young woman at a tall workbench with plain product boxes and a laptop, the woman explaining with her hands",
+  ),
+  businessNetwork: shot(
+    "programmes-business-network",
+    "Stallholders showing handmade soaps, plants, bread and jewellery to visitors along a row of tables in a sunlit hall",
+  ),
+  mentoring: shot(
+    "programmes-mentoring",
+    "A young woman sketching boxes and arrows on a whiteboard while an older woman beside her watches and smiles",
+  ),
+  women: shot(
+    "programmes-women",
+    "A woman in a teal hijab smiling beside a poster on the wall as the seated women around her smile and one claps",
+  ),
+  youngPeople: shot(
+    "programmes-young-people",
+    "A young woman pointing out an open-plan office to three teenagers walking beside her",
+  ),
+  youngMen: shot(
+    "programmes-young-men",
+    "Young men sitting in a circle of chairs, one talking with his hands while an older man and the others listen",
+  ),
+  mensDevelopment: shot(
+    "programmes-mens-development",
+    "A man in a teal shirt pointing to papers on a table as three men of different ages work with notebooks and calculators",
+  ),
+  wellbeing: shot(
+    "programmes-wellbeing",
+    "A father and two young children making a fruit salad at a kitchen counter with a smiling woman in a teal apron",
+  ),
+  cta: shot(
+    "programmes-cta",
+    "People of all ages chatting over cups of tea at tables and on sofas in a bright, busy community lounge",
+  ),
+} satisfies Record<string, HomeImage>;
 
 /** The anchors the menu builds for this page's themes. */
 const anchors = navigation.find((item) => item.label === "Programmes")?.children ?? [];
@@ -152,8 +138,8 @@ export const programmesHero = {
     words: ["Education", "Skills", "Employment", "Digital", "Enterprise", "Mentoring", "Wellbeing", "Community"],
   },
   images: {
-    main: standIn(photo.digitalClass, "programmes-hero.jpg"),
-    side: standIn(photo.peerCircle, "programmes-hero-side.jpg"),
+    main: photo.hero,
+    side: photo.heroSide,
   },
 } as const;
 
@@ -195,7 +181,7 @@ export const programmesEducation = {
   ],
   /** On the card over the photograph. */
   note: "Where formal accreditation is required, OneVoice can work with appropriately accredited training and education partners.",
-  image: standIn(photo.womenGroup, "programmes-education.jpg"),
+  image: photo.education,
   english: {
     id: "english-and-communication",
     kicker: "English & Communication",
@@ -288,7 +274,7 @@ export const programmesDigital = {
         "Workplace communication",
         "Digital job applications",
       ],
-      image: standIn(photo.youngLaptops, "programmes-digital-work.jpg"),
+      image: photo.digitalWork,
     },
     {
       name: "Digital for Business",
@@ -306,10 +292,10 @@ export const programmesDigital = {
         "AI productivity tools",
         "Digital branding",
       ],
-      image: standIn(photo.shopTablet, "programmes-digital-business.jpg"),
+      image: photo.digitalBusiness,
     },
   ],
-  image: standIn(photo.screenHelp, "programmes-digital.jpg"),
+  image: photo.digital,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -367,7 +353,7 @@ export const programmesEmployment = {
         "Career progression",
         "Return-to-work support",
       ],
-      image: standIn(photo.adviserDesk, "programmes-employability.jpg"),
+      image: photo.employability,
     },
     {
       name: "Careers Information, Advice & Guidance",
@@ -399,7 +385,7 @@ export const programmesEmployment = {
           "Community outreach",
         ],
       },
-      image: standIn(photo.adviserLeaflet, "programmes-careers-guidance.jpg"),
+      image: photo.careersGuidance,
     },
     {
       name: "Career Development",
@@ -422,7 +408,7 @@ export const programmesEmployment = {
         "Negotiation",
         "Career transitions",
       ],
-      image: standIn(photo.teamDocuments, "programmes-career-development.jpg"),
+      image: photo.careerDevelopment,
     },
   ] satisfies CareerTab[],
 } as const;
@@ -502,7 +488,7 @@ export const programmesEnterprise = {
     "Funding signposting",
     "Business introductions",
   ],
-  image: standIn(photo.teamPlans, "programmes-enterprise.jpg"),
+  image: photo.enterprise,
   network: {
     kicker: "OneVoice Business Network",
     /** The block's three-word heading. */
@@ -529,7 +515,7 @@ export const programmesEnterprise = {
       "Professional introductions",
       "Collaboration opportunities",
     ],
-    image: standIn(photo.conference, "programmes-business-network.jpg"),
+    image: photo.businessNetwork,
   },
   mentoring: {
     id: "mentoring",
@@ -549,7 +535,7 @@ export const programmesEnterprise = {
       "Return to work",
     ],
     note: "Mentoring will operate within appropriate safeguarding, confidentiality and professional boundaries.",
-    image: standIn(photo.tutorLaptop, "programmes-mentoring.jpg"),
+    image: photo.mentoring,
   },
 } as const;
 
@@ -573,7 +559,7 @@ export const programmesPeople = {
       ["Connect", "them with opportunities."],
       ["Support", "their progress."],
     ],
-    image: standIn(photo.womenConversation, "programmes-women.jpg"),
+    image: photo.women,
   },
   groups: [
     {
@@ -597,7 +583,7 @@ export const programmesPeople = {
         "Work experience",
       ],
       closing: "Our aim is to help young people understand their options and develop the confidence to pursue them.",
-      image: standIn(photo.groupLaptop, "programmes-young-people.jpg"),
+      image: photo.youngPeople,
     },
     {
       name: "Young Men's Development",
@@ -617,7 +603,7 @@ export const programmesPeople = {
       ],
       closing:
         "The focus is on practical skills, positive role models and constructive pathways into education, employment and enterprise.",
-      image: standIn(photo.trainer, "programmes-young-men.jpg"),
+      image: photo.youngMen,
     },
     {
       name: "Men's Development",
@@ -636,7 +622,7 @@ export const programmesPeople = {
         "Community participation",
       ],
       closing: "",
-      image: standIn(photo.workshop, "programmes-mens-development.jpg"),
+      image: photo.mensDevelopment,
     },
   ],
 } as const;
@@ -739,7 +725,7 @@ export const programmesWellbeing = {
       notes: [],
     },
   ] satisfies { name: string; title: string; icon: WellbeingIcon; lead: string; list: string[]; notes: string[] }[],
-  image: standIn(photo.rooftopCircle, "programmes-wellbeing.jpg"),
+  image: photo.wellbeing,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -867,5 +853,5 @@ export const programmesCta = {
     "We welcome referrals and partnerships with women's organisations, schools, colleges and universities, local authorities, faith and community groups, employers, employment, housing and community organisations, charities, health and wellbeing organisations, family members and friends, as well as self-referrals.",
   primaryCta: { label: "Refer Someone", href: `${routes.getInvolved}#refer-someone` },
   secondaryCta: { label: "Register Your Interest", href: enquiryHref("interest") },
-  image: standIn(photo.parkGathering, "programmes-cta.jpg"),
+  image: photo.cta,
 } as const;

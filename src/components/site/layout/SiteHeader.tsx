@@ -21,9 +21,9 @@ import { Logo } from "./Logo";
  */
 const PRIMARY = ["About Us", "Our Work", "Programmes", "Events 2027", "Community", "Get Involved"];
 /* Pages that open on a dark hero, where the bar sits in white until the page
-   moves: the home page's full-screen photograph, and the navy About Us and
-   Partners bands. */
-const DARK_HERO: string[] = [routes.home, routes.about, routes.partners];
+   moves: the home page's full-screen photograph and the legal pages' navy
+   masthead. Every other inner page opens on a light cream hero. */
+const DARK_HERO: string[] = [routes.home, routes.privacy, routes.terms, routes.cookies];
 /* Shown in the bar only where the row has room for it (it is always in the full menu). */
 const ROOMY_ONLY = ["Community"];
 const primaryItems = navigation.filter((item) => PRIMARY.includes(item.label));
@@ -316,7 +316,8 @@ function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClose: () =
               )}
               style={{ transitionDelay: open ? "360ms" : "0ms" }}
             >
-              <Image src="/images/home/women-learning-group.jpg" alt="" fill sizes="20vw" className="object-cover" />
+              {/* The menu's own photograph, used nowhere else on the site. */}
+              <Image src="/images/home/menu-feature.jpg" alt="" fill sizes="20vw" className="object-cover" />
               <div className="absolute inset-0 bg-linear-to-t from-navy-950/75 via-navy-950/10 to-transparent" />
               <p className="absolute inset-x-6 bottom-6 font-display text-[1.375rem] leading-snug text-white [font-variation-settings:'SOFT'_100]">
                 {brand.motto.join(". ")}.

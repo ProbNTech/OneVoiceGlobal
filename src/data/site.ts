@@ -7,8 +7,7 @@
  * Programmes (see below). V.2 renames SERVICES to OUR WORK and adds SEMINARS &
  * WORKSHOPS and EVENTS 2027. Each top-level item points at the route its
  * page lives on, and each sub-item at a section anchor on that page. Until a
- * page exists the link lands on the site's not-found page; Our Work still
- * opens the first design's page at /our-work until it is redesigned.
+ * page exists the link lands on the site's not-found page.
  *
  * Contact details: the brief's CONTACT US block gives the labels (Address,
  * Telephone, Email, Website) with no values, and names four social platforms
@@ -58,6 +57,9 @@ export const routes = {
   news: "/news-resources",
   getInvolved: "/get-involved",
   contact: "/contact",
+  privacy: "/privacy-policy",
+  terms: "/terms-and-conditions",
+  cookies: "/cookie-policy",
 } as const;
 
 /** Turns a menu label into the anchor id it will have on its page. */

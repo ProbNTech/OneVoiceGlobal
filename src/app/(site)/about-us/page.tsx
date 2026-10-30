@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/site/about/Hero";
-import { SectionNav } from "@/components/site/ui/SectionNav";
 import { WhoWeAre } from "@/components/site/about/WhoWeAre";
 import { VisionMission } from "@/components/site/about/VisionMission";
 import { Values } from "@/components/site/about/Values";
-import { Journey } from "@/components/site/about/Journey";
-import { WhatWeDo } from "@/components/site/about/WhatWeDo";
 import { Approach } from "@/components/site/about/Approach";
-import { Safeguarding } from "@/components/site/about/Safeguarding";
-import { aboutHero, aboutSections } from "@/data/about";
+import { TheoryOfChange } from "@/components/site/about/TheoryOfChange";
+import { Centre } from "@/components/site/about/Centre";
+import { Trust } from "@/components/site/about/Trust";
+import { CtaBanner } from "@/components/site/ui/CtaBanner";
+import { SectionNav } from "@/components/site/ui/SectionNav";
+import { aboutCta, aboutHero, aboutSections } from "@/data/about";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -17,10 +18,13 @@ export const metadata: Metadata = {
 };
 
 /**
- * About Us. The menu's sections run in its order; the OneVoice Journey, which
- * the menu does not list, closes the page. Our Team is the one menu section
- * still to come: the brief gives it no content yet, so the strip leaves it
- * out.
+ * About Us. The Foundation's own V.2 block in the order of the About Us
+ * sub-menu (Who We Are, Vision & Mission, Our Values, Our Approach, with its
+ * Theory of Change), then the Skill Development Centre, its delivery arm,
+ * with What We Do, and the brief's Safeguarding, Policies and Accessibility
+ * as tabs. It closes on the brief's subtitle for Our Work. Our Team, the one
+ * menu entry left out, waits for content from the client. Copy and images
+ * live in src/data/about.ts.
  */
 export default function AboutPage() {
   return (
@@ -31,9 +35,19 @@ export default function AboutPage() {
       <VisionMission />
       <Values />
       <Approach />
-      <WhatWeDo />
-      <Safeguarding />
-      <Journey />
+      <TheoryOfChange />
+      <Centre />
+      <Trust />
+      <CtaBanner
+        id="about-cta-title"
+        kicker={aboutCta.kicker}
+        titleLead={aboutCta.titleLead}
+        titleAccent={aboutCta.titleAccent}
+        description={aboutCta.description}
+        primaryCta={aboutCta.primaryCta}
+        secondaryCta={aboutCta.secondaryCta}
+        image={aboutCta.image}
+      />
     </>
   );
 }

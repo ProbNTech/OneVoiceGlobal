@@ -13,109 +13,98 @@
  * pairs the Hub with the Network ("Community Hub & Networks"), so the Network
  * follows the Hub here rather than Volunteering as it does in the block.
  *
- * IMAGES. The eight photographs under /images/community/ come from the V.2
- * document. A slot marked `pending` is waiting for a generated image (file
- * name, pixel size and prompt are in `_source/community-media-brief.md`):
- * until it arrives `src` is the closest existing photograph, and swapping it
- * is a one-line change to `src`. Alt text describes only what the frame
- * shows: none of these people is presented as a OneVoice participant,
- * volunteer or member of staff.
+ * IMAGES. Each photograph was generated for its slot (prompts in
+ * `_source/generated/tools/make_prompts_community.py`) and cut to the slot's
+ * exact size; the originals are kept in `_source/generated/`. The five V.2
+ * document photographs that first filled the hero, Hub, "Professionals" and
+ * Community Voice were replaced at the user's request on 29 October 2026.
+ * No photograph here is used anywhere else on the site. Alt text describes
+ * only what the frame shows: none of these people is presented as a OneVoice
+ * participant, volunteer or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
-const photo = {
-  gathering: {
-    src: "/images/community/community-gathering.jpg",
-    alt: "Residents of different ages sharing a table and talking together at a busy community gathering in a hall",
-    position: "38% 50%",
-  },
-  conversation: {
-    src: "/images/community/women-conversation.jpg",
-    alt: "A group of women, several in headscarves, laughing and talking together in a warm sitting room",
-    position: "40% 50%",
-  },
-  familyGathering: {
-    src: "/images/community/family-gathering.jpg",
-    alt: "Three generations of a family talking and passing round food in a bright living room",
-    position: "45% 55%",
-  },
-  outreachVolunteers: {
-    src: "/images/community/outreach-volunteers.jpg",
-    alt: "Volunteers in high-visibility vests chatting with residents outside beside a rail of donated clothes",
-    position: "55% 45%",
-  },
-  familyCelebration: {
-    src: "/images/community/family-celebration.jpg",
-    alt: "A smiling older woman in a blue and gold outfit sharing tea with her family on a sofa at home",
-    position: "60% 40%",
-  },
-  workshop: {
-    src: "/images/community/community-workshop.jpg",
-    alt: "A facilitator at a whiteboard leading a workshop for adults seated at tables in a bright, modern community space",
-    position: "45% 50%",
-  },
-  professionals: {
-    src: "/images/community/professionals-collaborating.jpg",
-    alt: "Professionals gathered round a table of laptops and printed charts, talking and smiling together",
-    position: "55% 50%",
-  },
-  peerSupport: {
-    src: "/images/community/peer-support-circle.jpg",
-    alt: "Adults of different ages sitting in a circle and talking warmly at a peer support group",
-    position: "40% 50%",
-  },
-  /* Existing photographs from the home and About pages, standing in below. */
-  communityPantry: {
-    src: "/images/HomePageHeroSection2.png",
-    alt: "Volunteers handing a box of groceries to a woman at a community food distribution",
-    position: "40% 40%",
-  },
-  foodSupport: {
-    src: "/images/HomePageHeroSection1.png",
-    alt: "A smiling volunteer handing a box of food and clothing across a counter",
-    position: "45% 40%",
-  },
-  shopTablet: {
-    src: "/images/about/What-we-do/What-we-Do-image-5.png",
-    alt: "Two women looking at a tablet together at a counter of small handmade products in a shop",
-    position: "55% 50%",
-  },
-  adviserDesk: {
-    src: "/images/about/What-we-do/what-we-do-image-2.png",
-    alt: "An adviser showing a printed document to a man seated across a desk from her, a laptop open between them",
-    position: "45% 50%",
-  },
-  teamDocuments: {
-    src: "/images/OurWorkPageHeroSection3.png",
-    alt: "Colleagues standing around a table, reviewing printed documents together",
-    position: "50% 40%",
-  },
-  youngLaptops: {
-    src: "/images/OurWorkHeroSection1.png",
-    alt: "Young adults working together on laptops around an office table",
-    position: "50% 35%",
-  },
-  speaker: {
-    src: "/images/about/What-we-do/What-we-do-image-9.png",
-    alt: "A speaker with a microphone addressing a seated audience in a conference hall",
-    position: "35% 50%",
-  },
-  trainer: {
-    src: "/images/about/What-we-do/what-we-do-image-1.png",
-    alt: "A trainer at a whiteboard explaining a diagram to five people seated around a table with notebooks and laptops",
-    position: "50% 50%",
-  },
-  teamPlanning: {
-    src: "/images/OurWorkHeroSection2.png",
-    alt: "A small team leaning over a table of plans and notes in a bright office",
-    position: "62% 40%",
-  },
-} satisfies Record<string, HomeImage>;
+/** A photograph generated for its slot, saved under /images/community/ by the slot's file name. */
+const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
+  src: `/images/community/${file}.jpg`,
+  alt,
+  position,
+});
 
-/** A stand-in for a slot still waiting for its own photograph. */
-const standIn = (image: HomeImage, pending: string): HomeImage => ({ ...image, pending });
+const photo = {
+  gathering: shot(
+    "community-hero",
+    "An older woman in a teal shawl and a young woman walking arm in arm and laughing along a path through a community garden",
+  ),
+  familyGathering: shot(
+    "community-hero-family",
+    "A grandfather, a woman in a navy hijab and two young children laughing over a board game at a table",
+  ),
+  workshop: shot(
+    "community-hub",
+    "A woman in a navy hijab working at a laptop in a busy room, a small class around a table and people chatting in a café corner behind her",
+  ),
+  professionals: shot(
+    "network-professionals",
+    "A young woman and an older man in glasses discussing something on a tablet at a high table",
+  ),
+  peerSupport: shot(
+    "community-voice",
+    "A young woman with a tablet listening as an older woman speaks beside her husband at a library table",
+  ),
+  /* Photographs generated for their slots, saved under /images/community/. */
+  heroConversation: shot(
+    "community-hero-conversation",
+    "A young father with a baby asleep in a sling laughing with an older Sikh man and an older woman over cups of tea at a café counter",
+  ),
+  outreach: shot(
+    "community-outreach",
+    "A woman at a stall in a busy street market talking with a young couple with a pram and an older man in a white cap",
+  ),
+  integration: shot(
+    "community-integration",
+    "Four neighbours of different backgrounds cooking side by side in a large kitchen, tasting from each other's pots and laughing",
+  ),
+  entrepreneurs: shot(
+    "network-entrepreneurs",
+    "A young man showing his laptop to an older man in a navy blazer over cups of coffee, both smiling",
+  ),
+  employers: shot(
+    "network-employers",
+    "A man in a navy polo shirt behind a table talking with a woman in a teal hijab and an older man at a busy fair",
+  ),
+  jobseekers: shot(
+    "network-jobseekers",
+    "A woman in a navy coat holding a folder outside an office building as an older woman beside her smiles encouragingly",
+  ),
+  students: shot(
+    "network-students",
+    "A young man and a young woman in a navy hijab laughing as they work with a laptop and notebooks on a campus lawn",
+  ),
+  communityLeaders: shot(
+    "network-community-leaders",
+    "A man in a white kufi, a woman in a patterned headwrap and a man in a navy turban talking and laughing over cups of tea in a hall",
+  ),
+  trainingProviders: shot(
+    "network-training-providers",
+    "A trainer guiding a woman's hands on a first-aid training mannequin as an older man kneels beside them watching",
+  ),
+  business: shot(
+    "network-business",
+    "Four people with blank name badges laughing together over coffee at a breakfast event",
+  ),
+  volunteering: shot(
+    "community-volunteering",
+    "An older woman in a teal jumper showing a teenage girl how to fold donated clothes into a box, other volunteers sorting behind them",
+    "50% 12%",
+  ),
+  cta: shot(
+    "community-cta",
+    "Families and neighbours of all ages among small stalls in a sunny courtyard, children with face paint and balloons",
+  ),
+} satisfies Record<string, HomeImage>;
 
 /* -------------------------------------------------------------------------
    HERO
@@ -135,7 +124,7 @@ export const communityHero = {
   badge: "Stronger Communities. Greater Opportunity. Lasting Change.",
   images: {
     main: photo.gathering,
-    top: standIn(photo.conversation, "community-hero-conversation.jpg"),
+    top: photo.heroConversation,
     foot: photo.familyGathering,
   },
 } as const;
@@ -178,7 +167,7 @@ export const communityOutreach = {
     { label: "Partner organisations", icon: "partner" },
   ] satisfies { label: string; icon: OutreachIcon }[],
   closing: "This helps us reach people who may be isolated or less likely to access mainstream services.",
-  image: standIn(photo.outreachVolunteers, "community-outreach.jpg"),
+  image: photo.outreach,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -203,7 +192,7 @@ export const communityIntegration = {
     "Local events",
     "Information sessions",
   ],
-  image: standIn(photo.familyCelebration, "community-integration.jpg"),
+  image: photo.integration,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -250,13 +239,13 @@ export const communityNetwork = {
   /** The brief's eight, in its order, each with a photograph. */
   groups: [
     { label: "Professionals", image: photo.professionals },
-    { label: "Entrepreneurs", image: standIn(photo.shopTablet, "network-entrepreneurs.jpg") },
-    { label: "Employers", image: standIn(photo.teamDocuments, "network-employers.jpg") },
-    { label: "Jobseekers", image: standIn(photo.adviserDesk, "network-jobseekers.jpg") },
-    { label: "Students", image: standIn(photo.youngLaptops, "network-students.jpg") },
-    { label: "Community leaders", image: standIn(photo.speaker, "network-community-leaders.jpg") },
-    { label: "Training providers", image: standIn(photo.trainer, "network-training-providers.jpg") },
-    { label: "Business organisations", image: standIn(photo.teamPlanning, "network-business.jpg") },
+    { label: "Entrepreneurs", image: photo.entrepreneurs },
+    { label: "Employers", image: photo.employers },
+    { label: "Jobseekers", image: photo.jobseekers },
+    { label: "Students", image: photo.students },
+    { label: "Community leaders", image: photo.communityLeaders },
+    { label: "Training providers", image: photo.trainingProviders },
+    { label: "Business organisations", image: photo.business },
   ] satisfies { label: string; image: HomeImage }[],
   /** "The objective: Knowledge → Connections → Opportunities → Progress" */
   objective: {
@@ -310,7 +299,7 @@ export const communityVolunteering = {
     line: "Share your professional knowledge, mentoring skills or local experience.",
     note: "Appropriate recruitment, safeguarding and role-specific procedures will apply.",
     cta: { label: "Volunteer", href: `${routes.getInvolved}#volunteer` },
-    image: standIn(photo.communityPantry, "community-volunteering.jpg"),
+    image: photo.volunteering,
   },
 } as const;
 
@@ -355,5 +344,5 @@ export const communityCta = {
     "Together, we can help build communities where people feel heard, supported and equipped to shape their own futures.",
   primaryCta: { label: "Volunteer", href: `${routes.getInvolved}#volunteer` },
   secondaryCta: ctas.partner,
-  image: standIn(photo.foodSupport, "community-cta.jpg"),
+  image: photo.cta,
 } as const;
