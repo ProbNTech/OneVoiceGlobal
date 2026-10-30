@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
-import { CircleAlert, CircleCheck, Info, Phone, type LucideIcon } from "lucide-react";
+import { CircleAlert, CircleCheck, Phone, type LucideIcon } from "lucide-react";
 import { sendEnquiry, type EnquiryState } from "@/app/(site)/contact/actions";
 import { contactEnquiry } from "@/data/contact";
 import type { EnquiryTopic } from "@/data/site";
@@ -15,7 +15,6 @@ const initialState: EnquiryState = { status: "idle" };
 const statusLook: Record<Exclude<EnquiryState["status"], "idle">, { icon: LucideIcon; tone: string }> = {
   invalid: { icon: CircleAlert, tone: "text-red-700" },
   sent: { icon: CircleCheck, tone: "text-lagoon-700" },
-  unavailable: { icon: Info, tone: "text-saffron-ink" },
   failed: { icon: CircleAlert, tone: "text-red-700" },
 };
 
@@ -186,7 +185,7 @@ export function EnquiryForm({ initialTopic = "support" }: { initialTopic?: Enqui
       <p className="flex items-center gap-3.5 rounded-b-panel bg-saffron-50 px-6 py-4 text-[0.9375rem] leading-snug text-ink sm:px-9 lg:px-10">
         <span
           aria-hidden="true"
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-saffron-500 text-ink"
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-saffron-500 text-white"
         >
           <Phone className="h-4 w-4" strokeWidth={2} />
         </span>

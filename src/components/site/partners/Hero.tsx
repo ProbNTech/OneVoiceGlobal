@@ -1,47 +1,60 @@
+"use client";
+
 import Image from "next/image";
-import type { CSSProperties } from "react";
-import { ShieldCheck } from "lucide-react";
+import { useRef, type CSSProperties } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { Handshake, ShieldCheck } from "lucide-react";
 import { cx } from "@/lib/cx";
 import { partnersHero } from "@/data/partners";
 import { Cta, Kicker, Shell } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
 
-/* The last word of each line takes a light tint of the logo's colours, as
-   the other dark heroes set theirs. */
-const accentColours = ["text-ocean-300", "text-saffron-400"];
+/* The last word of each line takes one of the logo's colours, as the other
+   inner heroes set theirs on cream. */
+const accentColours = ["text-lagoon-600", "text-ocean-600"];
 
 /**
- * Partners hero, on navy: the page speaks to organisations, so it opens in
- * the site's most formal tone. The brief's line is the headline, with the
- * two calls to act beneath; on large screens a photograph of partners at
- * work runs off the right edge of the screen, rounded only on the side that
- * faces the copy. The brief's promise about how partnerships are governed
- * sits on a card across the photograph's lower edge. Phones set the
- * photograph under the copy.
+ * Partners hero, on cream like the other inner pages: the brief's "From
+ * Shared Challenges to Shared Solutions" as the headline, its line beneath
+ * and the two calls to act. On the right, two photographs of people working
+ * together overlap on a diagonal, a wide one cut with a leaf corner and a
+ * tall one with its own leaf at the opposite corner, and a teal disc with a
+ * handshake sits where the two meet; they drift apart a little as the page
+ * scrolls. The brief's promise about how partnerships are governed sits on
+ * a card in the room the two frames leave at the lower left.
  *
- * The band is dark, so the header keeps its white logo and links over it
- * until the page moves (see DARK_HERO in SiteHeader).
+ * The header keeps its dark logo and links over this band (it is not in
+ * SiteHeader's DARK_HERO).
  */
 export function Hero() {
-  const { image } = partnersHero;
+  const collageRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: collageRef, offset: ["start start", "end start"] });
+  const wideY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, -30]);
+  const tallY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, 50]);
+  const { images } = partnersHero;
 
   return (
-    <section aria-labelledby="partners-hero-title" className="relative isolate overflow-clip bg-navy-950 text-white">
-      {/* Light gathers in the corner, as it does behind the logo's globe. */}
+    <section
+      aria-labelledby="partners-hero-title"
+      className="relative isolate overflow-clip bg-cream pb-band pt-32 lg:pt-40"
+    >
+      {/* Soft light in the logo's colours behind the collage. */}
       <div
         aria-hidden="true"
-        className="absolute -left-48 -top-56 -z-10 h-[40rem] w-[40rem] rounded-full bg-ocean-600/25 blur-[150px]"
+        className="absolute -right-24 -top-48 -z-10 h-[38rem] w-[38rem] rounded-full bg-navy-100/70 blur-[120px]"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-56 left-1/3 -z-10 h-[30rem] w-[30rem] rounded-full bg-lagoon-600/15 blur-[140px]"
+        className="absolute -bottom-48 right-1/3 -z-10 h-[26rem] w-[26rem] rounded-full bg-lagoon-100/70 blur-[110px]"
       />
 
       <Shell>
-        <div className="grid lg:min-h-[44rem] lg:grid-cols-12 lg:items-center">
-          <div className="pb-10 pt-32 lg:col-span-6 lg:pb-20 lg:pt-36">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          {/* Copy */}
+          <div className="lg:col-span-6">
             <Reveal variant="fade" delay={80} margin="0px">
-              <Kicker tone="dark">{partnersHero.kicker}</Kicker>
+              <Kicker>{partnersHero.kicker}</Kicker>
             </Reveal>
             <Reveal
               as="h1"
@@ -49,7 +62,7 @@ export function Hero() {
               variant="lines"
               delay={180}
               margin="0px"
-              className="mt-6 font-display text-title font-normal text-white [font-variation-settings:'SOFT'_100]"
+              className="mt-6 font-display text-title font-normal text-ink [font-variation-settings:'SOFT'_100]"
             >
               {partnersHero.title.map((line, lineIndex) => {
                 const words = line.split(" ");
@@ -64,57 +77,113 @@ export function Hero() {
               })}
             </Reveal>
             <Reveal delay={420} margin="0px">
-              <p className="mt-7 max-w-xl text-lead text-white/80">{partnersHero.description}</p>
+              <p className="mt-7 max-w-xl text-lead text-slate">{partnersHero.description}</p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <Cta href={partnersHero.primaryCta.href} variant="saffron">
-                  {partnersHero.primaryCta.label}
-                </Cta>
-                <Cta href={partnersHero.secondaryCta.href} variant="outline-light">
+                <Cta href={partnersHero.primaryCta.href}>{partnersHero.primaryCta.label}</Cta>
+                <Cta href={partnersHero.secondaryCta.href} variant="outline">
                   {partnersHero.secondaryCta.label}
                 </Cta>
               </div>
             </Reveal>
           </div>
+
+          {/* Collage. The wide frame sits at the top left, the tall one rises
+              into its lower right corner, and the card takes the room left
+              below the wide one (on phones it sits under the two instead,
+              clear of the people in them). Past 38rem it stops growing, so wide
+              screens keep the hero to its usual height. */}
+          <div ref={collageRef} className="relative w-full lg:col-span-6 lg:ml-auto lg:max-w-[38rem]">
+            <motion.div style={{ y: wideY }} className="w-[72%]">
+              <Reveal variant="image" delay={120} margin="0px">
+                {/* The shadow is a filter on a wrapper: a box-shadow on the
+                    clip would be cut off at its square box. */}
+                <div className="drop-shadow-[0_30px_36px_rgb(10_37_64/0.2)]">
+                  <div className="reveal-clip relative aspect-[4/3] overflow-hidden rounded-[6rem_1.75rem_1.75rem_1.75rem] bg-sand">
+                    <div className="reveal-media absolute inset-0">
+                      <Image
+                        src={images.wide.src}
+                        alt={images.wide.alt}
+                        fill
+                        preload
+                        sizes="(min-width: 1760px) 440px, (min-width: 1024px) 34vw, 72vw"
+                        className="object-cover"
+                        style={{ objectPosition: images.wide.position }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </motion.div>
+
+            <motion.div style={{ y: tallY }} className="relative -mt-[18%] ml-auto w-[50%]">
+              <Reveal variant="image" delay={300} margin="0px">
+                {/* The cream frame is padding, not a ring: a ring is a
+                    box-shadow, which the clip would cut away. */}
+                <div className="rounded-[1.9rem_1.9rem_6.5rem_1.9rem] bg-cream p-2 drop-shadow-[0_24px_30px_rgb(10_37_64/0.25)] sm:p-2.5">
+                  <div className="reveal-clip relative aspect-[4/5] overflow-hidden rounded-[1.5rem_1.5rem_6rem_1.5rem] bg-sand">
+                    <div className="reveal-media absolute inset-0">
+                      <Image
+                        src={images.tall.src}
+                        alt={images.tall.alt}
+                        fill
+                        sizes="(min-width: 1760px) 310px, (min-width: 1024px) 24vw, 50vw"
+                        className="object-cover"
+                        style={{ objectPosition: images.tall.position }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* Where the two frames meet. */}
+              <Reveal
+                variant="scale"
+                delay={700}
+                margin="0px"
+                className="absolute -left-7 -top-7 z-10 sm:-left-9 sm:-top-9"
+              >
+                <span
+                  aria-hidden="true"
+                  className="relative grid h-14 w-14 place-items-center rounded-full bg-lagoon-600 text-white shadow-[0_18px_36px_-16px_rgb(14_122_118/0.8)] sm:h-18 sm:w-18"
+                >
+                  <svg
+                    viewBox="0 0 100 100"
+                    className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] -rotate-90 text-lagoon-600/45"
+                  >
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="48"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      pathLength={100}
+                      strokeDasharray="100"
+                      vectorEffect="non-scaling-stroke"
+                      className="ring-draw"
+                    />
+                  </svg>
+                  <Handshake className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={1.6} />
+                </span>
+              </Reveal>
+            </motion.div>
+
+            <Reveal
+              variant="up"
+              delay={560}
+              margin="0px"
+              className="relative z-10 mt-5 sm:absolute sm:bottom-[10%] sm:left-0 sm:mt-0 sm:w-[46%]"
+            >
+              <p className="flex items-start gap-3 rounded-card bg-white p-4 text-[0.8125rem] leading-relaxed text-slate shadow-[0_24px_50px_-24px_rgb(10_37_64/0.45)] sm:gap-4 sm:p-5 sm:text-[0.875rem]">
+                <span className="hidden h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-white sm:grid">
+                  <ShieldCheck aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
+                </span>
+                {partnersHero.card}
+              </p>
+            </Reveal>
+          </div>
         </div>
       </Shell>
-
-      {/* The photograph. Below the copy on phones (the padding at the foot is
-          the room the card hangs into); from large screens it stands beside
-          the copy and runs off the right edge. */}
-      <div className="relative px-(--gutter) pb-16 lg:absolute lg:bottom-14 lg:right-0 lg:top-28 lg:w-[46%] lg:p-0">
-        <Reveal variant="image" delay={150} margin="0px" className="h-full">
-          <div className="reveal-clip relative aspect-[4/3] overflow-hidden rounded-panel bg-navy-900 lg:aspect-auto lg:h-full lg:rounded-l-[3rem] lg:rounded-r-none">
-            <div className="reveal-media absolute inset-0">
-              <div className="parallax absolute inset-x-0 -inset-y-[8%]">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  preload
-                  quality={80}
-                  sizes="(min-width: 1024px) 46vw, 100vw"
-                  className="object-cover"
-                  style={{ objectPosition: image.position }}
-                />
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal
-          variant="up"
-          delay={520}
-          margin="0px"
-          className="absolute bottom-6 left-[calc(var(--gutter)+0.75rem)] z-10 max-w-[20rem] sm:max-w-[24rem] lg:-left-12 lg:bottom-10"
-        >
-          <p className="flex items-start gap-4 rounded-card bg-white p-5 text-[0.875rem] leading-relaxed text-slate shadow-[0_24px_50px_-24px_rgb(0_0_0/0.6)]">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-white">
-              <ShieldCheck aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
-            </span>
-            {partnersHero.card}
-          </p>
-        </Reveal>
-      </div>
     </section>
   );
 }

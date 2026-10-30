@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { legalLinks } from "@/data/legal";
 import { brand, contact, copyrightYear, footerColumns, routes } from "@/data/site";
 import { Shell } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
@@ -24,7 +25,7 @@ export function SiteFooter() {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.3fr] lg:gap-10">
           {/* Brand */}
           <Reveal>
-            <Logo tone="light" className="h-14" />
+            <Logo tone="light" className="h-[9.125rem]" />
             <p className="mt-6 max-w-sm text-[0.9375rem] leading-relaxed">{brand.headline}</p>
             <p className="mt-3 max-w-sm text-[0.875rem] leading-relaxed text-white/45">{brand.initiative}</p>
           </Reveal>
@@ -81,7 +82,7 @@ export function SiteFooter() {
                     <a
                       href={item.href}
                       aria-label={item.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-white/8 text-white ring-1 ring-white/10 transition-colors hover:bg-saffron-500 hover:text-ink"
+                      className="grid h-10 w-10 place-items-center rounded-full bg-white/8 text-white ring-1 ring-white/10 transition-colors hover:bg-saffron-500 hover:text-white"
                     >
                       <SocialIcon platform={item.platform} className="h-4 w-4" />
                     </a>
@@ -101,10 +102,23 @@ export function SiteFooter() {
           </Reveal>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-[0.8125rem] text-white/50 sm:flex-row sm:items-center">
-          <p>
-            © {copyrightYear} {brand.name}. All rights reserved.
-          </p>
+        {/* Copyright and the legal pages on the left, the tagline on the
+            right; one row from 1280px up, stacking below that. */}
+        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-[0.8125rem] text-white/50 xl:flex-row xl:items-center">
+          <div className="flex flex-col gap-x-8 gap-y-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <p>
+              © {copyrightYear} {brand.name}. All rights reserved.
+            </p>
+            <ul aria-label="Legal" className="flex flex-wrap gap-x-5 gap-y-2">
+              {Object.values(legalLinks).map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="whitespace-nowrap transition-colors hover:text-white">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <p className="uppercase tracking-[0.14em]">{brand.tagline}</p>
         </div>
       </Shell>

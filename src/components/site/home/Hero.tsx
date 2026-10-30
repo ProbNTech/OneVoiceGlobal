@@ -5,7 +5,7 @@ import { useRef, useState, type CSSProperties } from "react";
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { cx } from "@/lib/cx";
 import { brand, logo } from "@/data/site";
-import { homeHero } from "@/data/home";
+import { homeHero, type HomeImage } from "@/data/home";
 import { Cta, Kicker, Shell } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
 
@@ -51,6 +51,7 @@ export function Hero() {
       <motion.div aria-hidden="true" style={{ y: backdropY }} className="absolute inset-0 -z-20">
         {slides.map((slide, slideIndex) => {
           const active = slideIndex === index;
+          const image: HomeImage = slide.image;
           return (
             <div
               key={slide.word}
@@ -60,16 +61,23 @@ export function Hero() {
               )}
             >
               <Image
-                src={slide.image.src}
+                src={image.src}
                 alt=""
                 fill
                 preload={slideIndex === 0}
                 sizes="100vw"
                 quality={80}
-                className={cx("object-cover", active && "animate-kenburns", paused && "[animation-play-state:paused]")}
+                /* Phones see a tall slice of a wide photograph, so a slide
+                   can steer that slice separately (`positionMobile`). */
+                className={cx(
+                  "object-cover [object-position:var(--position-mobile)] md:[object-position:var(--position)]",
+                  active && "animate-kenburns",
+                  paused && "[animation-play-state:paused]",
+                )}
                 style={
                   {
-                    objectPosition: slide.image.position,
+                    "--position": image.position ?? "50% 50%",
+                    "--position-mobile": image.positionMobile ?? image.position ?? "50% 50%",
                     "--slide-duration": `${SLIDE_MS + FADE_MS}ms`,
                   } as CSSProperties
                 }
@@ -95,7 +103,7 @@ export function Hero() {
 
       <motion.div
         style={{ y: copyY, opacity: copyOpacity }}
-        className="flex flex-1 items-center pb-44 pt-32 sm:pb-40 lg:pt-36"
+        className="flex flex-1 items-center pb-44 pt-36 sm:pb-40 lg:pt-44"
       >
         <Shell>
           <div className="max-w-3xl">

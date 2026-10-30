@@ -9,7 +9,7 @@ import { Reveal } from "../ui/Reveal";
  * sharing tea at home fills the band edge to edge and drifts as the page
  * scrolls, shaded only on the left where the title sits. The activities the
  * brief lists are set on a white card over the right of the picture, each
- * beside an amber tick, as the home page's partnership card sets its list.
+ * beside an orange tick, as the home page's partnership card sets its list.
  */
 export function Integration() {
   const { image } = communityIntegration;
@@ -70,7 +70,7 @@ export function Integration() {
               <ul className="mt-6 grid gap-x-6 gap-y-3.5 sm:grid-cols-2">
                 {communityIntegration.activities.map((activity) => (
                   <li key={activity} className="flex items-center gap-3 text-[1rem] font-medium text-ink">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-navy-950">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
                       <Check className="h-3.5 w-3.5" strokeWidth={2.6} />
                     </span>
                     {activity}

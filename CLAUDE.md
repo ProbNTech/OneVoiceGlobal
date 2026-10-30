@@ -1,12 +1,12 @@
 @AGENTS.md
 
-# OneVoice Community Foundation website: how we design and build it
+# OneVoice Global Foundation website: how we design and build it
 
 This file is the playbook for every page on this site. Read it before designing or coding anything, and follow it unless the person you are working with tells you otherwise. The home page is built and its design is approved. It is the reference for everything that follows, so open `src/app/(site)/page.tsx` and the files under `src/components/site/` and reuse them before inventing anything new.
 
 ## 1. What we are building
 
-- **Client:** OneVoice Community Foundation (the source documents call it "OneVoice Global Foundation"; the client renamed it on 27 October 2026), a London community empowerment, skills and social-inclusion charity. Its delivery arm is "OneVoice Skill Development Centre".
+- **Client:** OneVoice Global Foundation (the name the source documents use; the client tried "OneVoice Community Foundation" from 27 October 2026 and returned to the original name and logo on 30 October), a London community empowerment, skills and social-inclusion charity. Its delivery arm is "OneVoice Skill Development Centre".
 - **Feel:** clean, soft and elegant, a little premium, media-rich (lots of real-looking photographs), with smooth, premium motion. It should be calmer and sleeker than our full-premium event sites (ASBS, CWEF) but built the same way.
 - **Style references:** elaflooring.co.uk (its section patterns are the user's favourites), asianresource.org.uk, reachvolunteering.org.uk. **Motion references:** innovatorpathway.co.uk, asianresource.org.uk.
 - The intern's first design (everything under `src/components/{layout,shared,work}`, `src/data/{navigation,services,work,programmes,legacy-home}.ts` and the `(legacy)` route group) was rejected. Never copy its look or reuse its components for new pages.
@@ -16,9 +16,9 @@ This file is the playbook for every page on this site. Read it before designing 
 - **All copy comes from the client's source document:** `_source/OneVoice Global Foundation - Website (Draft01).docx`. `_source/` is gitignored, so ask the user for the file if it is missing. The document gives every page's content and the full menu.
 - You may reshape copy to fit a design: split a paragraph, shorten a list, or use one of the document's own lines as a title or label. You may not add new ideas, claims or promises.
 - When a section needs a title the document does not give, borrow a line the document uses elsewhere, and note its source in a comment in the data file (see `src/data/home.ts`).
-- **Never invent** statistics, testimonials, partner names or logos, contact details, social links, dates or venues. The document's contact block is blank. `src/data/site.ts → contact` stays empty until the client supplies values, and empty values are simply not rendered. The four social platforms show as icons without links until URLs arrive.
+- **Never invent** statistics, testimonials, partner names or logos, contact details, social links, dates or venues. The document's contact block is blank. `src/data/site.ts → contact` holds only values the user or client has supplied (interim address, telephone and email given on 30 October 2026); empty values, such as the website, are simply not rendered. The four social platforms show as icons without links until URLs arrive.
 - Keep card copy short: a card shows the document's title and one line. Don't pile on bullet lists, chips or sub-headings unless the user asks.
-- British English. Write the names exactly: "OneVoice Community Foundation" (never the documents' old "OneVoice Global Foundation"; take it from `brand.name` in `src/data/site.ts`), "OneVoice Skill Development Centre". The logo files are `logo` in the same file.
+- British English. Write the names exactly: "OneVoice Global Foundation" (never "OneVoice Community Foundation", the name used briefly in October 2026; take it from `brand.name` in `src/data/site.ts`), "OneVoice Skill Development Centre". The logo is `logo` in the same file: the client's `public/OneVoiceGlobak_logo_.png`, used exactly as supplied. Never crop, recolour or rearrange it (the user rejected an edited lockup on 30 October 2026); on dark bands it sits on a white plate.
 
 ## 3. Design rules from the user's reviews (follow these)
 
@@ -30,7 +30,7 @@ This file is the playbook for every page on this site. Read it before designing 
 
 **Section design**
 - **Vary the sections.** Every section on a page takes a different design approach; repeating one card pattern reads as monotonous.
-- **No sticky or pinned scroll effects.** No sticky left columns, scrollytelling or pinned horizontal galleries: the user rejected all of them. The About page's OneVoice Journey was pinned briefly on 2026-10-22 and the user had it unpinned the same day; it now draws its path against the panel's own climb up the screen instead (`src/components/site/about/Journey.tsx`).
+- **No sticky or pinned scroll effects.** No sticky left columns, scrollytelling or pinned horizontal galleries: the user rejected all of them. The About page's OneVoice Journey was pinned briefly on 2026-10-22 and the user had it unpinned the same day.
 - **Simple items stay simple.** An icon list is just an icon circle with text beside it, with no card, tile or background behind it. An image card is a photo with its title and line underneath, with no card background.
 - **No decorative hairlines.** None beside or under headings, and none between list rows.
 - **Shapes never crop text.** Organic shapes (arches, leaf corners) are welcome on photos, but keep the corners under any text small.
@@ -47,18 +47,18 @@ This file is the playbook for every page on this site. Read it before designing 
 
 **Photographs**
 - Show the activity (learning, mentoring, an interview), not posed portraits. Avoid heavy tints: shade only where text sits.
+- **Every image is used once across the whole site (strict rule, 28 October 2026).** No photograph may appear on two slots or two pages, even for the same subject: each slot gets its own image. Before reporting, check the whole site for repeated `src` values, not just the page in hand. Brand marks are not photographs and may repeat.
 - **One shape per slot.** Each slot keeps the same aspect ratio at every breakpoint, so one image fits everywhere without heavy cropping.
-- **Generated images.** The user makes the photographs with GPT from prompts we write:
-  1. Every slot still waiting for its own photo uses the closest existing image as a stand-in and is marked `pending: "<file>.jpg"` in the page's data file.
-  2. List each pending slot in a media brief (the home page's is `_source/home-media-brief.md`) with its file name, exact pixel size, where text sits on it, and a prompt. Every prompt ends with the shared style block from that file.
-  3. Delivered files go in `public/images/<page>/`, and swapping one in is a one-line change to `src`.
+- **Generated images.** Photographs are generated in ChatGPT for each slot, cut to the slot's exact size and saved under `public/images/<page>/`; the originals, prompts and scripts are in `_source/generated/`.
+  1. List each slot in the page's media brief (the home page's is `_source/home-media-brief.md`) with its file name, exact pixel size, where text sits on it, and a prompt. Every prompt ends with the shared style block.
+  2. A slot with no image of its own yet is marked `pending: "<file>.jpg"` in the page's data file; until it arrives it may not borrow a photo already used elsewhere.
 
 ## 4. Design system (`src/styles/site.css`)
 
 - **Colours** (taken from the logo):
   - `ink`/`navy-900` (#0a2540) is the text and anchor colour; `navy-950` is for dark bands.
-  - `ocean-600` (#0b5394) is the logo blue; `lagoon-600` (#0e7a76) is the logo teal; `saffron-500` (#de9c2e) is the logo amber.
-  - Use `saffron-ink` for amber text on light backgrounds (it passes contrast), and the light tints `ocean-300`, `lagoon-300` and `saffron-300/400` for accents on dark backgrounds.
+  - `ocean-600` (#0b5394) is the logo blue; `lagoon-600` (#0e7a76) is the logo teal; `saffron-500` (#ff8c1a) is the bright, vivid orange accent (the user's choice, brighter than the logo's own orange). Use it as one solid colour: the user rejected gradients on it. Anything set on an orange background (button text, icons, numbers, ticks) is white. The scale kept the name `saffron` from the interim logo's amber.
+  - Use `saffron-ink` for orange text on light backgrounds (it passes contrast), and the light tints `ocean-300`, `lagoon-300` and `saffron-300/400` for accents on dark backgrounds.
   - Neutrals: `cream` (the page paper), `sand`, `mist`, `slate` (body text), `ink-muted`, `line`. The quiet text colour is `ink-muted`, not `muted`: `--color-muted` belongs to the legacy shadcn scale in `globals.css`, whose `@theme` is declared after `site.css` is imported, so `text-muted` comes out near-white.
 - **Type:**
   - **Display face:** Fraunces (`font-display`). Always add `[font-variation-settings:'SOFT'_100]` and use normal weight. The accent half of a title is italic, light, and coloured: lagoon on light backgrounds, saffron-400 on dark.
@@ -77,8 +77,8 @@ This file is the playbook for every page on this site. Read it before designing 
 - `Reveal`: the scroll entrance. Variants: `up`, `left`, `right`, `scale`, `fade`, `lines`, `image`. Use `delay` to stagger (70–120ms steps), and `margin="0px"` for anything sitting at the foot of the first screen.
 - `Magnetic`, `GlideTrack` (a marquee that eases to a stop on hover) and `SocialIcon`.
 - **Layout pieces** (`src/components/site/layout/`):
-  - `SiteHeader`: white over the home hero, cream once scrolled; hides on scroll down; reading-progress line; dropdowns; full menu overlay.
-  - `SiteFooter`, `Logo` (`tone="light"` on dark backgrounds), and `SmoothScroll` (Lenis).
+  - `SiteHeader`: white over the home hero, cream once scrolled; after the CWEF header, the logo hangs large below the bar at the top of every page (128px desktop, 88px phones) and shrinks into the bar on scroll, so every hero keeps `pt-32 lg:pt-40` of top room; hides on scroll down; reading-progress line; dropdowns; full menu overlay.
+  - `SiteFooter`, `Logo` (`tone="light"` puts it on a white plate for dark backgrounds), and `SmoothScroll` (Lenis).
 
 ## 6. Motion toolkit (premium, smooth, never flashy)
 
@@ -110,5 +110,5 @@ This file is the playbook for every page on this site. Read it before designing 
 4. **Verify before reporting:**
    - `npx tsc --noEmit`, `npx eslint src`, and `npx next build`.
    - Look at the page in a browser at 1440px, 1920px and 390px wide, scrolling all the way down so every reveal fires.
-   - Check that no text is clipped, no image appears twice, and nothing overflows the screen.
+   - Check that no text is clipped, nothing overflows the screen, and no image is used anywhere else on the site.
 5. **Ask first** for anything the client must supply (photos, contact details, social links), and for any design decision that contradicts this file. Don't commit or push unless asked.

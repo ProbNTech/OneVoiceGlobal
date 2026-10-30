@@ -37,15 +37,21 @@
   --color-lagoon-600: #0e7a76; /* logo teal */
   --color-lagoon-700: #0b5f5c;
 
-  --color-saffron-50: #fcf6ea;
-  --color-saffron-100: #f8ead0;
-  --color-saffron-300: #f0c97f;
-  --color-saffron-400: #e9b04f;
-  --color-saffron-500: #de9c2e; /* logo amber */
-  --color-saffron-600: #c2821c;
-  /* Amber at text weight. The logo amber is about 2.3:1 on cream, so labels
-     on light bands use this darker cut, which clears 4.5:1. */
-  --color-saffron-ink: #8a5b0c;
+  /* A bright, vivid orange, one solid colour with no gradient (the user's
+     choice on 30 October 2026, a step brighter than britononetech.com's
+     button hover). Anything set on it (button text, icons, numbers) is
+     white. The scale keeps its first name, saffron, from the interim logo's
+     amber, so every class that uses it follows without a rename. */
+  --color-saffron-50: #fff5eb;
+  --color-saffron-100: #ffe5cc;
+  --color-saffron-300: #ffb264;
+  --color-saffron-400: #ff9f3f;
+  --color-saffron-500: #ff8c1a;
+  --color-saffron-600: #ec7600;
+  /* Orange at text weight, for labels on light bands only. The bright
+     orange is about 2.2:1 on cream, so these use a darker cut of the same
+     hue, which clears 4.5:1 on cream, white and sand. */
+  --color-saffron-ink: #ad5200;
 
   --color-cream: #faf7f1;
   --color-sand: #f3ede3;
@@ -329,6 +335,19 @@
     stroke-dashoffset: 0;
   }
 
+  /* An arc that draws itself to its own length (`--arc`, out of 100) as its
+     block arrives: the Seminars page's ten signs, each a tenth further round
+     than the last. Drawn in full without motion or JavaScript. */
+  .js-reveal [data-reveal] .arc-draw {
+    stroke-dashoffset: var(--arc);
+    transition: stroke-dashoffset 1.6s var(--ease-in-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 250ms);
+  }
+
+  .js-reveal [data-reveal].is-in .arc-draw {
+    stroke-dashoffset: 0;
+  }
+
   /* A rule that draws itself across a block as the block arrives: the line
      treatment the reference sites set over their numbered cards. Drawn in
      full without motion or JavaScript. */
@@ -372,6 +391,28 @@
 
   .js-reveal [data-reveal="phrases"].is-in .phrase {
     opacity: 1;
+  }
+
+  /* A bar that grows into place as its block arrives (the About page's
+     Theory of Change): across from its start on phones, where the bars lie
+     flat, and up from its foot on large screens, where they stand. Drawn in
+     full without motion or JavaScript. */
+  .js-reveal [data-reveal] .rise-draw {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.3s var(--ease-in-out-soft);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 200ms);
+  }
+
+  @media (min-width: 64rem) {
+    .js-reveal [data-reveal] .rise-draw {
+      transform: scaleY(0);
+      transform-origin: center bottom;
+    }
+  }
+
+  .js-reveal [data-reveal].is-in .rise-draw {
+    transform: none;
   }
 }
 

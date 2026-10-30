@@ -72,7 +72,7 @@ export function Safety() {
               <ul aria-labelledby="abuse-support" className="mt-5 grid grid-cols-1 gap-x-6 gap-y-3.5 sm:grid-cols-2">
                 {abuse.support.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-[0.9375rem] leading-snug text-white">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-navy-950">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
                       <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.6} />
                     </span>
                     {item}
@@ -96,7 +96,7 @@ export function Safety() {
                     <Icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.5} />
                     <span
                       aria-hidden="true"
-                      className="absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-saffron-500 text-[0.6875rem] font-bold tabular-nums text-ink"
+                      className="absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-saffron-500 text-[0.6875rem] font-bold tabular-nums text-white"
                     >
                       {index + 1}
                     </span>

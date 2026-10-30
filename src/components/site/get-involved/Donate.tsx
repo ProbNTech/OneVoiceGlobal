@@ -28,7 +28,7 @@ const icons: Record<DonationIcon, LucideIcon> = {
 
 /**
  * Donate. The eight things a donation can help provide, as an icon list two
- * to a row, beside the page's one amber card: a photograph of a volunteer
+ * to a row, beside the page's one orange card: a photograph of a volunteer
  * handing over a parcel, the brief's line on what every contribution can do,
  * and its [Donate Now] call.
  */
@@ -67,7 +67,7 @@ export function Donate() {
                     delay={200 + index * 60}
                     className="group flex items-center gap-4"
                   >
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-saffron-ink shadow-[0_10px_24px_-14px_rgb(10_37_64/0.45)] transition-colors duration-500 group-hover:bg-saffron-500 group-hover:text-navy-950">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-saffron-ink shadow-[0_10px_24px_-14px_rgb(10_37_64/0.45)] transition-colors duration-500 group-hover:bg-saffron-500 group-hover:text-white">
                       <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                     </span>
                     <span className="text-[1rem] font-semibold leading-snug text-ink">{item.label}</span>
@@ -78,7 +78,7 @@ export function Donate() {
           </div>
 
           <Reveal variant="up" delay={150} className="lg:col-span-5">
-            <div className="relative isolate overflow-hidden rounded-panel bg-saffron-500 p-4 text-navy-950 shadow-[0_40px_80px_-50px_rgb(138_91_12/0.9)] sm:p-5">
+            <div className="relative isolate overflow-hidden rounded-panel bg-saffron-500 p-4 text-white shadow-[0_40px_80px_-50px_rgb(138_91_12/0.9)] sm:p-5">
               <div
                 aria-hidden="true"
                 className="absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-saffron-300/70 blur-[80px]"
@@ -96,8 +96,8 @@ export function Donate() {
                 </div>
               </div>
               <div className="px-3 pb-4 pt-7 sm:px-5 sm:pb-5">
-                <HandHeart aria-hidden="true" className="h-8 w-8 text-navy-950" strokeWidth={1.4} />
-                <p className="mt-4 font-display text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.2] text-navy-950 [font-variation-settings:'SOFT'_100]">
+                <HandHeart aria-hidden="true" className="h-8 w-8 text-white" strokeWidth={1.4} />
+                <p className="mt-4 font-display text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.2] text-white [font-variation-settings:'SOFT'_100]">
                   {getInvolvedDonate.closing}
                 </p>
                 <Cta href={cta.href} className="mt-7">

@@ -6,7 +6,7 @@ import { Reveal } from "../ui/Reveal";
 
 /**
  * Research & Community Voice. A photograph of people listening to one
- * another on the left, with a quotation mark on an amber disc at its corner
+ * another on the left, with a quotation mark on an orange disc at its corner
  * and the brief's note on anonymised findings on a card across its foot;
  * on the right the eight things community insight can help OneVoice
  * understand, as an index under large outlined numerals.
@@ -47,7 +47,7 @@ export function Voice() {
             <Reveal variant="scale" delay={250} className="absolute -right-3 top-8 z-10 sm:-right-5">
               <span
                 aria-hidden="true"
-                className="grid h-16 w-16 place-items-center rounded-full bg-saffron-500 font-display text-[3rem] leading-none text-navy-950 shadow-[0_18px_36px_-18px_rgb(10_37_64/0.6)] [font-variation-settings:'SOFT'_100] sm:h-20 sm:w-20 sm:text-[3.75rem]"
+                className="grid h-16 w-16 place-items-center rounded-full bg-saffron-500 font-display text-[3rem] leading-none text-white shadow-[0_18px_36px_-18px_rgb(10_37_64/0.6)] [font-variation-settings:'SOFT'_100] sm:h-20 sm:w-20 sm:text-[3.75rem]"
               >
                 <span className="translate-y-[0.18em]">{"“"}</span>
               </span>

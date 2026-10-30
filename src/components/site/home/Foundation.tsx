@@ -12,7 +12,7 @@ import { Reveal } from "../ui/Reveal";
  * Beneath, the brief's outline of the main pages as four plain links, each a
  * round photograph beside the page's name in spaced capitals and its line,
  * with no card behind them. On sand, between the white Work With Us band
- * and the cream closing banner.
+ * and the white Our Team band.
  */
 export function Foundation() {
   return (

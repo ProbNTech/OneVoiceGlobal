@@ -14,72 +14,74 @@
  * id is the anchor the menu builds from its label (and that the home page's
  * Work With Us links already point at).
  *
- * IMAGES. A slot marked `pending` is waiting for a generated image (file
- * name, pixel size and prompt are in `_source/partners-media-brief.md`);
- * until it arrives `src` is the closest existing photograph, and swapping it
- * is a one-line change to `src`. Alt text describes only what the frame
- * shows: none of these people is presented as a OneVoice partner,
- * participant or member of staff.
+ * IMAGES. Each photograph was generated for its slot (prompts in
+ * `_source/generated/tools/make_prompts_partners.py`) and cut to the slot's
+ * exact size; the originals are kept in `_source/generated/`. The hero's wide
+ * frame first held the V.2 document's photograph, replaced at the user's
+ * request on 29 October 2026. No photograph here is used anywhere else on the
+ * site, and none shows a logo or anything that could suggest a real partner.
+ * Alt text describes only what the frame shows: none of these people is
+ * presented as a OneVoice partner, participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
-const photo = {
-  professionals: {
-    src: "/images/community/professionals-collaborating.jpg",
-    alt: "Professionals gathered round a table of laptops and printed charts, talking and smiling together",
-    position: "55% 45%",
-  },
-  international: {
-    src: "/images/home/international-meeting.jpg",
-    alt: "Delegates from different countries around a meeting table with a presentation screen",
-    position: "50% 55%",
-  },
-  adviserDesk: {
-    src: "/images/about/What-we-do/what-we-do-image-2.png",
-    alt: "An adviser showing a printed document to a man seated across a desk from her, a laptop open between them",
-    position: "45% 50%",
-  },
-  digitalClass: {
-    src: "/images/home/digital-skills-class.jpg",
-    alt: "A tutor helping two women at computers in a learning room",
-    position: "40% 45%",
-  },
-  communityForum: {
-    src: "/images/home/community-forum.jpg",
-    alt: "People of different ages and backgrounds talking together around tables at a community meeting",
-    position: "45% 40%",
-  },
-  consultation: {
-    src: "/images/home/community-consultation.jpg",
-    alt: "Community members seated along a long table during a consultation session",
-    position: "50% 55%",
-  },
-  womenGroup: {
-    src: "/images/home/women-learning-group.jpg",
-    alt: "A group of young women with laptops listening to a facilitator",
-    position: "50% 45%",
-  },
-  parkGathering: {
-    src: "/images/about/What-we-do/What-we-do-image-10.png",
-    alt: "A large group of people of different ages and backgrounds sitting and talking together outdoors in a city park",
-    position: "50% 45%",
-  },
-  workshop: {
-    src: "/images/community/community-workshop.jpg",
-    alt: "A facilitator at a whiteboard leading a workshop for adults seated at tables in a bright, modern community space",
-    position: "50% 45%",
-  },
-  enterprise: {
-    src: "/images/about/What-we-do/What-we-Do-image-5.png",
-    alt: "Two women looking at a tablet together at a counter of small handmade products in a shop",
-    position: "50% 45%",
-  },
-} satisfies Record<string, HomeImage>;
+/** A photograph generated for its slot, saved under /images/partners/ by the slot's file name. */
+const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
+  src: `/images/partners/${file}.jpg`,
+  alt,
+  position,
+});
 
-/** A stand-in for a slot still waiting for its own photograph. */
-const standIn = (image: HomeImage, pending: string): HomeImage => ({ ...image, pending });
+const photo = {
+  hero: shot(
+    "partners-hero",
+    "A woman in a navy hijab explaining a plan pinned to a wall while three colleagues laugh and listen in a bright meeting room",
+  ),
+  heroSide: shot(
+    "partners-hero-side",
+    "A man in a navy jumper and a woman in a teal cardigan reviewing printed plans together at a high table",
+  ),
+  training: shot(
+    "partners-collaboration-training",
+    "A smiling mentor and a young apprentice in safety glasses looking at a piece of wood at a workbench",
+  ),
+  enterprise: shot(
+    "partners-collaboration-enterprise",
+    "A young woman in a teal hijab arranging jars on a shop counter beside a smiling man in a blazer",
+  ),
+  knowledge: shot(
+    "partners-collaboration-knowledge",
+    "Three people leaning over printed reports spread across a table, one pointing to a page",
+  ),
+  employers: shot(
+    "partners-employers",
+    "A man in a navy polo shirt explaining a machine to a group of adult learners on a bright workshop floor",
+  ),
+  college: shot(
+    "partners-training",
+    "Adult learners wiring practice boards at workbenches while a tutor checks one woman's work",
+    "50% 20%",
+  ),
+  communityOrgs: shot(
+    "partners-community-organisations",
+    "Volunteers carrying boxes and folding tables to a van outside a community centre, laughing as they work",
+  ),
+  publicSector: shot(
+    "partners-public-sector",
+    "A nurse in a navy uniform taking an older man's blood pressure at a table while a woman beside him smiles",
+  ),
+  funders: shot(
+    "partners-funders",
+    "Two seated visitors applauding as four young people stand beside a board of pictures at the end of a presentation",
+    "50% 8%",
+  ),
+  cta: shot(
+    "partners-cta",
+    "Visitors of all ages moving between information stands and chatting in a large, bright hall",
+  ),
+} satisfies Record<string, HomeImage>;
 
 /* -------------------------------------------------------------------------
    HERO
@@ -94,9 +96,12 @@ export const partnersHero = {
     "Discover how partnerships, community-led programmes and practical support can help create more inclusive opportunities.",
   primaryCta: ctas.partner,
   secondaryCta: { label: "Contact Us", href: routes.contact },
-  /** The card over the photograph: the closing sentence of the brief's Our Partnerships block. */
+  /** The card beside the photographs: the closing sentence of the brief's Our Partnerships block. */
   card: "We aim to develop partnerships around clear objectives, appropriate governance and outcomes that can be assessed.",
-  image: photo.professionals,
+  images: {
+    wide: photo.hero,
+    tall: photo.heroSide,
+  },
 } as const;
 
 /**
@@ -137,19 +142,19 @@ export const partnersOverview = {
     {
       text: "Providing training, mentoring and professional expertise.",
       icon: "expertise",
-      image: standIn(photo.workshop, "partners-collaboration-training.jpg"),
+      image: photo.training,
     },
     { text: "Sponsoring local initiatives and community events.", icon: "sponsorship" },
     {
       text: "Supporting employment and enterprise pathways.",
       icon: "pathways",
-      image: standIn(photo.enterprise, "partners-collaboration-enterprise.jpg"),
+      image: photo.enterprise,
     },
     { text: "Developing joint projects with public and voluntary-sector organisations.", icon: "projects" },
     {
       text: "Sharing research, knowledge and resources.",
       icon: "knowledge",
-      image: standIn(photo.international, "partners-collaboration-knowledge.jpg"),
+      image: photo.knowledge,
     },
     { text: "Building referral networks for people requiring specialist support.", icon: "referrals" },
   ] satisfies { text: string; icon: CollaborationIcon; image?: HomeImage }[],
@@ -189,7 +194,7 @@ export const partnersEmployers = {
     label: "Become an Employer Partner",
     href: ctas.partner.href,
   },
-  image: standIn(photo.adviserDesk, "partners-employers.jpg"),
+  image: photo.employers,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -216,7 +221,7 @@ export const partnersTraining = {
       "Apprenticeships",
       "Higher education",
     ],
-    image: standIn(photo.digitalClass, "partners-training.jpg"),
+    image: photo.college,
   },
   collaborators: {
     heading: "Training & Education Partners",
@@ -259,7 +264,7 @@ export const partnersCommunity = {
     { label: "Specialist referral pathways", icon: "pathways" },
     { label: "Community research", icon: "research" },
   ] satisfies { label: string; icon: OpportunityIcon }[],
-  image: standIn(photo.communityForum, "partners-community-organisations.jpg"),
+  image: photo.communityOrgs,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -285,7 +290,7 @@ export const partnersPublic = {
   ] satisfies { label: string; icon: PublicIcon }[],
   closing:
     "Our community-based approach can help partners engage people who may be underrepresented in mainstream programmes.",
-  image: standIn(photo.consultation, "partners-public-sector.jpg"),
+  image: photo.publicSector,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -367,7 +372,7 @@ export const partnersFunders = {
       "Youth Development",
     ],
     cta: { label: "Partner With Us", href: ctas.partner.href },
-    image: standIn(photo.womenGroup, "partners-funders.jpg"),
+    image: photo.funders,
   },
 } as const;
 
@@ -385,5 +390,5 @@ export const partnersCta = {
     "OneVoice welcomes strategic partners who share our commitment to skills development, employment, enterprise, digital inclusion, education, wellbeing, community development and social inclusion.",
   primaryCta: ctas.partner,
   secondaryCta: { label: "Sponsor a Programme", href: `${routes.getInvolved}#sponsor-a-programme` },
-  image: standIn(photo.parkGathering, "partners-cta.jpg"),
+  image: photo.cta,
 } as const;

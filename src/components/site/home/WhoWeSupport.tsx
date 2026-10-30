@@ -62,7 +62,7 @@ export function WhoWeSupport() {
 
 function Row({ groups, offset, reverse = false }: { groups: readonly Group[]; offset: number; reverse?: boolean }) {
   return (
-    <div className="mask-fade-x overflow-hidden motion-reduce:overflow-x-auto">
+    <div className="overflow-hidden motion-reduce:overflow-x-auto">
       <GlideTrack
         className={cx("flex w-max", reverse ? "animate-marquee-reverse" : "animate-marquee")}
         style={{ "--marquee-duration": "64s" } as CSSProperties}

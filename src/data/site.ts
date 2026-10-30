@@ -7,23 +7,24 @@
  * Programmes (see below). V.2 renames SERVICES to OUR WORK and adds SEMINARS &
  * WORKSHOPS and EVENTS 2027. Each top-level item points at the route its
  * page lives on, and each sub-item at a section anchor on that page. Until a
- * page exists the link lands on the site's not-found page; Our Work still
- * opens the first design's page at /our-work until it is redesigned.
+ * page exists the link lands on the site's not-found page.
  *
  * Contact details: the brief's CONTACT US block gives the labels (Address,
  * Telephone, Email, Website) with no values, and names four social platforms
- * without links. Nothing is filled in until the client supplies it; empty
- * values are simply not rendered.
+ * without links. The address, telephone and email were supplied by the user
+ * on 30 October 2026 as interim details; the website and social links stay
+ * blank until the client gives them, and empty values are simply not
+ * rendered.
  */
 
 export type NavLink = { label: string; href: string };
 export type NavItem = NavLink & { children?: NavLink[] };
 
 export const brand = {
-  /* The brief says "OneVoice Global Foundation"; on 27 October 2026 the
-     client renamed the organisation, with a new logo. Every page takes the
-     name from here, including lines the brief writes with the old one. */
-  name: "OneVoice Community Foundation",
+  /* The brief's own name. The client tried "OneVoice Community Foundation"
+     from 27 October 2026 and returned to this one, with its original logo,
+     on 30 October. Every page takes the name from here. */
+  name: "OneVoice Global Foundation",
   centre: "OneVoice Skill Development Centre",
   tagline: "Stronger Communities, Shared Opportunities, One World",
   initiative: "Community Empowerment, Skills and Social Inclusion Initiative",
@@ -33,16 +34,18 @@ export const brand = {
 } as const;
 
 /**
- * The logo files, made from the client's OneVoice Community Foundation logo
- * (27 October 2026): the colour version and the reversed one for dark bands
- * leave off the logo's tagline line, which is too small to read at header
- * size, and the mark is its figures alone. The client's file is 547 pixels
- * wide; swap in larger versions here when the original arrives.
+ * The client's OneVoice Global Foundation logo, used exactly as supplied
+ * (30 October 2026): never cropped, recoloured or rearranged. It is one
+ * stacked file, emblem over wordmark, on a transparent ground, so on dark
+ * bands it sits on a white plate rather than in a reversed version. `mark`
+ * is the same file, kept as its own name for the small brand seals on cards
+ * and badges.
  */
+const logoFile = { src: "/OneVoiceGlobak_logo_.png", width: 1080, height: 804 } as const;
+
 export const logo = {
-  colour: { src: "/images/brand/community-logo.png", width: 469, height: 103 },
-  light: { src: "/images/brand/community-logo-white.png", width: 469, height: 103 },
-  mark: { src: "/images/brand/community-mark.png", width: 106, height: 103 },
+  colour: logoFile,
+  mark: logoFile,
 } as const;
 
 export const routes = {
@@ -58,6 +61,9 @@ export const routes = {
   news: "/news-resources",
   getInvolved: "/get-involved",
   contact: "/contact",
+  privacy: "/privacy-policy",
+  terms: "/terms-and-conditions",
+  cookies: "/cookie-policy",
 } as const;
 
 /** Turns a menu label into the anchor id it will have on its page. */
@@ -203,10 +209,12 @@ export const ctas = {
 export type SocialPlatform = "linkedin" | "facebook" | "instagram" | "youtube";
 
 export const contact = {
-  /** All four are blank in the brief. Empty values are not rendered. */
-  address: "",
-  telephone: "",
-  email: "",
+  /* Interim details supplied by the user on 30 October 2026 ("use these as
+     contact details for now"); the brief leaves all four blank. Empty values
+     are not rendered. */
+  address: "134-136 Westbourne Terrace, London W2 6QB",
+  telephone: "+44 7920 550000",
+  email: "info@ukpaktrade.org.uk",
   website: "",
   social: [
     { platform: "linkedin", label: "LinkedIn", href: "" },

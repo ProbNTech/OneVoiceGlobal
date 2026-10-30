@@ -81,7 +81,7 @@ function Panel({ line, index, total }: { line: Line; index: number; total: numbe
   );
 }
 
-/* The line's key phrase, picked out in italic amber. */
+/* The line's key phrase, picked out in italic orange. */
 function Highlight({ text, phrase }: { text: string; phrase: string }) {
   const at = text.indexOf(phrase);
   if (at < 0) return <>{text}</>;

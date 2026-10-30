@@ -8,7 +8,7 @@ import { Reveal } from "../ui/Reveal";
  * Training Providers. The brief's two blocks face each other across the
  * band: on the left, over a photograph of a class, the routes participants
  * can be connected with; on the right, on white, the providers OneVoice can
- * collaborate with. An amber disc with an exchange arrow sits on the seam
+ * collaborate with. An orange disc with an exchange arrow sits on the seam
  * between them. The brief's closing line, where those partnerships lead,
  * runs beneath.
  */
@@ -61,7 +61,7 @@ export function Training() {
               <ul className="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                 {participants.items.map((item) => (
                   <li key={item} className="flex items-center gap-3 text-[1rem] text-white">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-navy-950">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
                       <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.6} />
                     </span>
                     {item}
@@ -98,7 +98,7 @@ export function Training() {
           >
             <span
               aria-hidden="true"
-              className="grid h-16 w-16 place-items-center rounded-full bg-saffron-500 text-navy-950 shadow-[0_18px_36px_-18px_rgb(10_37_64/0.7)] ring-8 ring-cream"
+              className="grid h-16 w-16 place-items-center rounded-full bg-saffron-500 text-white shadow-[0_18px_36px_-18px_rgb(10_37_64/0.7)] ring-8 ring-cream"
             >
               <ArrowLeftRight className="h-6 w-6" strokeWidth={1.8} />
             </span>

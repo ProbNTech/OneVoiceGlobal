@@ -16,47 +16,46 @@
  * workshops. The form's field labels and messages are the only words not
  * taken from the brief.
  *
- * IMAGES. A slot marked `pending` is waiting for a generated image (file
- * name, pixel size and prompt are in `_source/contact-media-brief.md`); until
- * it arrives `src` is the closest existing photograph, and swapping it is a
- * one-line change to `src`. Alt text describes only what the frame shows:
- * none of these people is presented as a OneVoice participant or member of
- * staff.
+ * IMAGES. Each photograph was generated for its slot (prompts in
+ * `_source/generated/tools/make_prompts_contact.py`) and cut to the slot's
+ * exact size; the originals are kept in `_source/generated/`. No photograph
+ * here is used anywhere else on the site. Alt text describes only what the
+ * frame shows: none of these people is presented as a OneVoice participant
+ * or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, enquiryHref, routes, type EnquiryTopic } from "@/data/site";
 
-const photo = {
-  adviserListening: {
-    src: "/images/about/What-we-do/What-we-do-image-8.png",
-    alt: "A woman taking notes while talking with another woman in armchairs, shelves of donated goods behind them",
-    position: "30% 50%",
-  },
-  womenTalking: {
-    src: "/images/community/women-conversation.jpg",
-    alt: "A group of women, several in headscarves, laughing and talking together in a warm sitting room",
-    position: "40% 45%",
-  },
-  adviserDocument: {
-    src: "/images/about/What-we-do/what-we-do-image-2.png",
-    alt: "An adviser showing a printed document to a man seated across a desk from her, a laptop open between them",
-    position: "50% 45%",
-  },
-  adviserLeaflet: {
-    src: "/images/about/What-we-do/What-we-Do-image-6.png",
-    alt: "An adviser pointing to a printed leaflet on a low table while a woman seated beside her looks on",
-    position: "50% 50%",
-  },
-  communityMeeting: {
-    src: "/images/home/community-meeting.jpg",
-    alt: "A woman speaking while others listen around tables in a library meeting room",
-    position: "45% 45%",
-  },
-} satisfies Record<string, HomeImage>;
+/** A photograph generated for its slot, saved under /images/contact/ by the slot's file name. */
+const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
+  src: `/images/contact/${file}.jpg`,
+  alt,
+  position,
+});
 
-/** A stand-in for a slot still waiting for its own photograph. */
-const standIn = (image: HomeImage, pending: string): HomeImage => ({ ...image, pending });
+const photo = {
+  hero: shot(
+    "contact-hero",
+    "A woman in a teal head wrap smiling as she talks on her phone in a bright lounge, a notepad on her knee",
+  ),
+  reply: shot(
+    "contact-hero-reply",
+    "An older man with a cup of tea and a young woman in a teal scarf laughing together on a sofa",
+  ),
+  enquiry: shot(
+    "contact-enquiry",
+    "A young man with a backpack shaking hands with a smiling woman in a teal cardigan just inside an open doorway",
+  ),
+  signposting: shot(
+    "contact-signposting",
+    "A man in a navy jacket walking beside an older man along a sunny high street, pointing the way ahead",
+  ),
+  cta: shot(
+    "contact-cta",
+    "People arriving, waiting on soft chairs and talking with staff at a long wooden desk in a bright reception area",
+  ),
+} satisfies Record<string, HomeImage>;
 
 /* -------------------------------------------------------------------------
    HERO
@@ -75,8 +74,8 @@ export const contactHero = {
   secondaryCta: { label: "Refer Someone", href: enquiryHref("refer") },
   card: "You don't have to have everything figured out.",
   images: {
-    main: standIn(photo.adviserListening, "contact-hero.jpg"),
-    reply: standIn(photo.womenTalking, "contact-hero-reply.jpg"),
+    main: photo.hero,
+    reply: photo.reply,
   },
 } as const;
 
@@ -108,7 +107,7 @@ export const contactEnquiry = {
   /** The brief's labels. Their values are `contact` in site.ts. */
   labels: { address: "Address", telephone: "Telephone", email: "Email", website: "Website" },
   socialLabel: "Social media",
-  image: standIn(photo.adviserDocument, "contact-enquiry.jpg"),
+  image: photo.enquiry,
   form: {
     topicsLabel: "What is your enquiry about?",
     /** The calls to act that lead to this form, each with a line from its own block in the brief. */
@@ -148,9 +147,9 @@ export const contactEnquiry = {
       message: "Message",
       optional: "Optional",
     },
-    /** The first line of the brief's Confidentiality & Privacy block, linked to the whole block below. */
+    /** The first line of the brief's Confidentiality & Privacy block, linked to the privacy policy it promises. */
     privacy: "We respect the privacy of people using our services.",
-    privacyLink: { label: "Confidentiality & Privacy", href: "#confidentiality-and-privacy" },
+    privacyLink: { label: "Privacy Policy", href: routes.privacy },
     emergency: "If someone is in immediate danger in the UK, they should call 999.",
     submit: "Send Enquiry",
     sending: "Sending",
@@ -163,9 +162,6 @@ export const contactEnquiry = {
     },
     status: {
       sent: "Thank you. Your enquiry has been sent.",
-      /* Shown until the client confirms where enquiries should go (see
-         deliverEnquiry in src/app/(site)/contact/actions.ts). */
-      unavailable: "Online enquiries are not connected yet, so this message has not been sent.",
       failed: "Your enquiry could not be sent. Please try again.",
     },
   },
@@ -214,7 +210,7 @@ export const contactSignposting = {
     { label: "Specialist charities", icon: "charities" },
   ] satisfies { label: string; icon: SignpostIcon }[],
   note: "OneVoice does not replace regulated professional advice and will refer participants to appropriate specialist providers.",
-  image: standIn(photo.adviserLeaflet, "contact-signposting.jpg"),
+  image: photo.signposting,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -289,5 +285,5 @@ export const contactCta = {
     "OneVoice Skill Development Centre supports people from ethnic minority, disadvantaged and underserved communities across London to develop skills, build confidence, access employment, explore enterprise, improve digital capability, strengthen wellbeing and connect with their communities.",
   primaryCta: { label: "Explore Programmes", href: routes.programmes },
   secondaryCta: { label: "Volunteer", href: `${routes.getInvolved}#volunteer` },
-  image: standIn(photo.communityMeeting, "contact-cta.jpg"),
+  image: photo.cta,
 } as const;

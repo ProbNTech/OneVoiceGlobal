@@ -46,7 +46,7 @@ export function Employers() {
                   delay={200 + index * 45}
                   className="flex items-center gap-3 text-[1rem] font-medium text-ink"
                 >
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-navy-950">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-saffron-500 text-white">
                     <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.6} />
                   </span>
                   {item}
