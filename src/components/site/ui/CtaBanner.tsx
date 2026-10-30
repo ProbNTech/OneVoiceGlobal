@@ -9,15 +9,22 @@ import { Photo } from "./Photo";
 import { Cta, Kicker, Shell, Title } from "./primitives";
 import { Reveal } from "./Reveal";
 
+/* The shade over the photograph, on trial (30 October 2026). "orange" is
+   the brand orange gradient; "blue" the earlier blue-to-teal shade with its
+   glows; "none" the bare photograph, which the user found left the text
+   unreadable. The copy's colours follow the shade, since orange lettering
+   and an orange button would vanish on the orange one. */
+const SHADE: "orange" | "blue" | "none" = "orange";
+
 /**
  * The closing call to action, as a photographic banner inside the page
  * measure (after the CWEF sponsorship banner). The copy is centred and runs
  * the full width of the banner, so it stays a few lines tall; the photograph
  * fills the banner behind it and drifts a little slower than the page.
  *
- * The shade over the photograph is the logo's own blue running into its
- * teal, bright rather than near-black, lifted by a soft light at the top.
- * Two dotted rings, after the circle of dots round the logo's emblem, turn
+ * The shade over the photograph is set by `SHADE` above: on trial, a light
+ * wash of the brand orange gradient, with white lettering (the accent in
+ * white italic) on a soft shadow, and a navy button. Two dotted rings, after the circle of dots round the logo's emblem, turn
  * slowly at the sides on wider screens (and hold still under reduced
  * motion), and the main button carries a soft orange glow.
  */
@@ -45,6 +52,7 @@ export function CtaBanner({
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], reduceMotion ? ["0%", "0%"] : ["-10%", "10%"]);
+  const onOrange = SHADE === "orange";
 
   return (
     <section aria-labelledby={id} className="relative isolate bg-cream py-band">
@@ -52,27 +60,39 @@ export function CtaBanner({
         <Reveal variant="scale">
           <div
             ref={ref}
-            className="relative isolate overflow-hidden rounded-panel bg-ocean-700 px-6 py-12 text-center text-white shadow-[0_50px_90px_-45px_rgb(11_83_148/0.8)] ring-1 ring-inset ring-white/15 sm:px-12 lg:py-16"
+            className={cx(
+              "relative isolate overflow-hidden rounded-panel px-6 py-12 text-center text-white ring-1 ring-inset ring-white/15 sm:px-12 lg:py-16",
+              onOrange
+                ? "bg-navy-900 shadow-[0_50px_90px_-50px_rgb(10_37_64/0.55)] [text-shadow:0_1px_20px_rgb(6_26_48/0.7)]"
+                : "bg-ocean-700 shadow-[0_50px_90px_-45px_rgb(11_83_148/0.8)]",
+            )}
           >
             <motion.div aria-hidden="true" style={{ y }} className="absolute inset-x-0 -inset-y-[14%] -z-20">
               <Photo image={image} decorative sizes="(min-width: 1920px) 1760px, 100vw" quality={80} />
             </motion.div>
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 -z-10 bg-[linear-gradient(115deg,rgb(10_70_125/0.9)_0%,rgb(11_83_148/0.8)_45%,rgb(14_122_118/0.86)_100%)]"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute -top-48 left-1/2 -z-10 h-[24rem] w-[44rem] -translate-x-1/2 rounded-full bg-ocean-300/30 blur-[110px]"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-40 -left-24 -z-10 h-[24rem] w-[24rem] rounded-full bg-lagoon-300/35 blur-[110px]"
-            />
+            {/* Only a light wash of the orange gradient, so the banner sits quietly with the rest of the page;
+                a soft shadow under the lettering keeps it readable on the photograph. */}
+            {onOrange ? <div aria-hidden="true" className="absolute inset-0 -z-10 bg-orange opacity-35" /> : null}
+            {SHADE === "blue" ? (
+              <>
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 -z-10 bg-[linear-gradient(115deg,rgb(10_70_125/0.9)_0%,rgb(11_83_148/0.8)_45%,rgb(14_122_118/0.86)_100%)]"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute -top-48 left-1/2 -z-10 h-[24rem] w-[44rem] -translate-x-1/2 rounded-full bg-ocean-300/30 blur-[110px]"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute -bottom-40 -left-24 -z-10 h-[24rem] w-[24rem] rounded-full bg-lagoon-300/35 blur-[110px]"
+                />
+              </>
+            ) : null}
             <DotRing className="-right-28 -top-28 hidden h-[22rem] w-[22rem] motion-safe:animate-orbit sm:block lg:-right-20 lg:h-[28rem] lg:w-[28rem]" />
             <DotRing className="-bottom-36 -left-36 hidden h-[18rem] w-[18rem] motion-safe:animate-orbit-counter sm:block lg:h-[22rem] lg:w-[22rem]" />
 
-            <Kicker tone="dark" className="justify-center">
+            <Kicker tone={onOrange ? "white" : "dark"} className="justify-center">
               {kicker}
             </Kicker>
             <Title
@@ -80,20 +100,24 @@ export function CtaBanner({
               lead={titleLead}
               accent={titleAccent}
               tone="dark"
-              accentTone="saffron-light"
+              accentTone={onOrange ? "white-solid" : "saffron-light"}
               inline
               className="mx-auto mt-5 max-w-5xl"
             />
             <Reveal delay={200}>
               <p className="mx-auto mt-6 max-w-3xl text-lead text-white/90">{description}</p>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <Cta
-                  href={primaryCta.href}
-                  variant="saffron"
-                  className="rounded-full shadow-[0_18px_40px_-14px_color-mix(in_srgb,var(--orange-bright-2)_80%,transparent)]"
-                >
-                  {primaryCta.label}
-                </Cta>
+                {onOrange ? (
+                  <Cta href={primaryCta.href}>{primaryCta.label}</Cta>
+                ) : (
+                  <Cta
+                    href={primaryCta.href}
+                    variant="saffron"
+                    className="rounded-full shadow-[0_18px_40px_-14px_color-mix(in_srgb,var(--orange-bright-2)_80%,transparent)]"
+                  >
+                    {primaryCta.label}
+                  </Cta>
+                )}
                 <Cta href={secondaryCta.href} variant="outline-light">
                   {secondaryCta.label}
                 </Cta>
