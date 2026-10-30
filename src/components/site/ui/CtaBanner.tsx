@@ -9,12 +9,13 @@ import { Photo } from "./Photo";
 import { Cta, Kicker, Shell, Title } from "./primitives";
 import { Reveal } from "./Reveal";
 
-/* The shade over the photograph, on trial (30 October 2026). "orange" is
-   the brand orange gradient; "blue" the earlier blue-to-teal shade with its
-   glows; "none" the bare photograph, which the user found left the text
-   unreadable. The copy's colours follow the shade, since orange lettering
-   and an orange button would vanish on the orange one. */
-const SHADE: "orange" | "blue" | "none" = "orange";
+/* The shade over the photograph, on trial (30 October 2026). "dark" is a
+   plain black layer at 10%; "orange" the brand orange gradient at 90%;
+   "blue" the earlier blue-to-teal shade with its glows; "none" the bare
+   photograph, which the user found left the text unreadable. The copy's
+   colours follow the shade: white lettering on "dark" and "orange" (on the
+   orange one the main button turns navy, as an orange one would vanish). */
+const SHADE: "dark" | "orange" | "blue" | "none" = "dark";
 
 /**
  * The closing call to action, as a photographic banner inside the page
@@ -22,10 +23,9 @@ const SHADE: "orange" | "blue" | "none" = "orange";
  * the full width of the banner, so it stays a few lines tall; the photograph
  * fills the banner behind it and drifts a little slower than the page.
  *
- * The shade over the photograph is set by `SHADE` above: on trial, the
- * brand orange gradient at 90%, the photograph just showing through, with
- * white lettering (the accent in white italic) on a soft shadow and a navy
- * button. Two dotted rings, after the circle of dots round the logo's
+ * The shade over the photograph is set by `SHADE` above: on trial, a plain
+ * black layer at 10%, with white lettering (the accent in white italic) on
+ * a soft shadow. Two dotted rings, after the circle of dots round the logo's
  * emblem, turn slowly at the sides on wider screens (and hold still under
  * reduced motion).
  */
@@ -54,6 +54,8 @@ export function CtaBanner({
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], reduceMotion ? ["0%", "0%"] : ["-10%", "10%"]);
   const onOrange = SHADE === "orange";
+  /* White lettering on a soft shadow, for every shade but the blue one. */
+  const whiteCopy = SHADE !== "blue";
 
   return (
     <section aria-labelledby={id} className="relative isolate bg-cream py-band">
@@ -63,7 +65,7 @@ export function CtaBanner({
             ref={ref}
             className={cx(
               "relative isolate overflow-hidden rounded-panel px-6 py-12 text-center text-white ring-1 ring-inset ring-white/15 sm:px-12 lg:py-16",
-              onOrange
+              whiteCopy
                 ? "bg-navy-900 shadow-[0_50px_90px_-50px_rgb(10_37_64/0.55)] [text-shadow:0_1px_20px_rgb(6_26_48/0.7)]"
                 : "bg-ocean-700 shadow-[0_50px_90px_-45px_rgb(11_83_148/0.8)]",
             )}
@@ -71,8 +73,7 @@ export function CtaBanner({
             <motion.div aria-hidden="true" style={{ y }} className="absolute inset-x-0 -inset-y-[14%] -z-20">
               <Photo image={image} decorative sizes="(min-width: 1920px) 1760px, 100vw" quality={80} />
             </motion.div>
-            {/* The orange gradient at 90%, so the photograph only shows through as a hint; a soft shadow
-                under the lettering keeps it crisp. */}
+            {SHADE === "dark" ? <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/10" /> : null}
             {onOrange ? <div aria-hidden="true" className="absolute inset-0 -z-10 bg-orange opacity-90" /> : null}
             {SHADE === "blue" ? (
               <>
@@ -93,7 +94,7 @@ export function CtaBanner({
             <DotRing className="-right-28 -top-28 hidden h-[22rem] w-[22rem] motion-safe:animate-orbit sm:block lg:-right-20 lg:h-[28rem] lg:w-[28rem]" />
             <DotRing className="-bottom-36 -left-36 hidden h-[18rem] w-[18rem] motion-safe:animate-orbit-counter sm:block lg:h-[22rem] lg:w-[22rem]" />
 
-            <Kicker tone={onOrange ? "white" : "dark"} className="justify-center">
+            <Kicker tone={whiteCopy ? "white" : "dark"} className="justify-center">
               {kicker}
             </Kicker>
             <Title
@@ -101,7 +102,7 @@ export function CtaBanner({
               lead={titleLead}
               accent={titleAccent}
               tone="dark"
-              accentTone={onOrange ? "white-solid" : "saffron-light"}
+              accentTone={whiteCopy ? "white-solid" : "saffron-light"}
               inline
               className="mx-auto mt-5 max-w-5xl"
             />
@@ -110,12 +111,16 @@ export function CtaBanner({
               <div className="mt-9 flex flex-wrap justify-center gap-3">
                 {onOrange ? (
                   <Cta href={primaryCta.href}>{primaryCta.label}</Cta>
-                ) : (
+                ) : SHADE === "blue" ? (
                   <Cta
                     href={primaryCta.href}
                     variant="saffron"
                     className="rounded-full shadow-[0_18px_40px_-14px_color-mix(in_srgb,var(--orange-bright-2)_80%,transparent)]"
                   >
+                    {primaryCta.label}
+                  </Cta>
+                ) : (
+                  <Cta href={primaryCta.href} variant="saffron">
                     {primaryCta.label}
                   </Cta>
                 )}
