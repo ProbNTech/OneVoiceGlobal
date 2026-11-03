@@ -13,22 +13,36 @@
  * pairs the Hub with the Network ("Community Hub & Networks"), so the Network
  * follows the Hub here rather than Volunteering as it does in the block.
  *
- * IMAGES. Each photograph was generated for its slot (prompts in
- * `_source/generated/tools/make_prompts_community.py`) and cut to the slot's
- * exact size; the originals are kept in `_source/generated/`. The five V.2
- * document photographs that first filled the hero, Hub, "Professionals" and
- * Community Voice were replaced at the user's request on 29 October 2026.
- * No photograph here is used anywhere else on the site. Alt text describes
- * only what the frame shows: none of these people is presented as a OneVoice
- * participant, volunteer or member of staff.
+ * IMAGES. Each photograph was generated for its slot and cut to the slot's
+ * exact size (first-set prompts in
+ * `_source/generated/tools/make_prompts_community.py`; the V.2 document
+ * photographs were replaced on 29 October 2026). Most come from the second
+ * set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2_pages2.py`), with varied
+ * settings, clothes and faces and mostly Pakistani and South Asian people,
+ * saved under /images/community/ as `<slot>-v2.jpg` (originals in
+ * `_source/generated/v2-pages2/`); about a quarter keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. No photograph
+ * here is used anywhere else on the site. Alt text describes only what the
+ * frame shows: none of these people is presented as a OneVoice participant,
+ * volunteer or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/community/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set([
+  "community-hero-conversation",
+  "community-integration",
+  "network-community-leaders",
+  "network-training-providers",
+]);
+
+/** A photograph generated for its slot, saved under /images/community/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/community/${file}.jpg`,
+  src: `/images/community/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -36,19 +50,19 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   gathering: shot(
     "community-hero",
-    "An older woman in a teal shawl and a young woman walking arm in arm and laughing along a path through a community garden",
+    "An older woman in a mustard shalwar kameez and a young woman in a denim jacket walking arm in arm and laughing through a community garden",
   ),
   familyGathering: shot(
     "community-hero-family",
-    "A grandfather, a woman in a navy hijab and two young children laughing over a board game at a table",
+    "A grandfather, a woman in a pink hijab and two young children laughing over a board game at a table",
   ),
   workshop: shot(
     "community-hub",
-    "A woman in a navy hijab working at a laptop in a busy room, a small class around a table and people chatting in a café corner behind her",
+    "A woman in a lavender hijab working at a laptop in a busy room, a small class around a table and people chatting in a cafe corner behind her",
   ),
   professionals: shot(
     "network-professionals",
-    "A young woman and an older man in glasses discussing something on a tablet at a high table",
+    "A woman in a rust blazer and an older man discussing something on a tablet at a high table",
   ),
   peerSupport: shot(
     "community-voice",
@@ -61,7 +75,7 @@ const photo = {
   ),
   outreach: shot(
     "community-outreach",
-    "A woman at a stall in a busy street market talking with a young couple with a pram and an older man in a white cap",
+    "A volunteer in an orange fleece at a market stall talking with a young couple with a pram and an older man in a white cap",
   ),
   integration: shot(
     "community-integration",
@@ -69,19 +83,19 @@ const photo = {
   ),
   entrepreneurs: shot(
     "network-entrepreneurs",
-    "A young man showing his laptop to an older man in a navy blazer over cups of coffee, both smiling",
+    "A young woman in a coral kameez showing her laptop to an older man over cups of coffee, both smiling",
   ),
   employers: shot(
     "network-employers",
-    "A man in a navy polo shirt behind a table talking with a woman in a teal hijab and an older man at a busy fair",
+    "An employer behind a table talking with a young man in a kurta and an older woman in an olive hijab at a busy fair",
   ),
   jobseekers: shot(
     "network-jobseekers",
-    "A woman in a navy coat holding a folder outside an office building as an older woman beside her smiles encouragingly",
+    "A young woman in a camel coat holding a folder outside an office building as an older woman beside her smiles encouragingly",
   ),
   students: shot(
     "network-students",
-    "A young man and a young woman in a navy hijab laughing as they work with a laptop and notebooks on a campus lawn",
+    "Two students, one in a mustard hijab, laughing as they work with a laptop and notebooks on a campus lawn",
   ),
   communityLeaders: shot(
     "network-community-leaders",
@@ -97,12 +111,12 @@ const photo = {
   ),
   volunteering: shot(
     "community-volunteering",
-    "An older woman in a teal jumper showing a teenage girl how to fold donated clothes into a box, other volunteers sorting behind them",
+    "An older woman in a lilac shalwar kameez showing a teenager how to fold donated clothes into a box, other volunteers sorting behind them",
     "50% 12%",
   ),
   cta: shot(
     "community-cta",
-    "Families and neighbours of all ages among small stalls in a sunny courtyard, children with face paint and balloons",
+    "Families and neighbours of all ages among small stalls in a courtyard under festoon lights, children with face paint and balloons",
   ),
 } satisfies Record<string, HomeImage>;
 

@@ -17,20 +17,29 @@
  * open the Contact page's form, with their own kind of enquiry chosen,
  * until it arrives.
  *
- * IMAGES. Each photograph was generated for its slot (prompts in
- * `_source/get-involved-media-brief.md`) and cut to the slot's exact size;
- * the originals are kept in `_source/generated/`. No photograph here is used
- * anywhere else on the site. Alt text describes only what the frame shows:
- * none of these people is presented as a OneVoice participant, volunteer or
- * member of staff.
+ * IMAGES. Each photograph was generated for its slot and cut to the slot's
+ * exact size (first-set prompts in `_source/get-involved-media-brief.md`).
+ * Most come from the second set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2_pages2.py`), with varied
+ * settings, clothes and faces and mostly Pakistani and South Asian people,
+ * saved under /images/get-involved/ as `<slot>-v2.jpg` (originals in
+ * `_source/generated/v2-pages2/`); about a quarter keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. No photograph
+ * here is used anywhere else on the site. Alt text describes only what the
+ * frame shows: none of these people is presented as a OneVoice participant,
+ * volunteer or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, enquiryHref, navigation, routes } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/get-involved/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set(["donate", "young-people", "support-reach"]);
+
+/** A photograph generated for its slot, saved under /images/get-involved/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/get-involved/${file}.jpg`,
+  src: `/images/get-involved/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -38,24 +47,27 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   hero: shot(
     "get-involved-hero",
-    "A young woman in a teal jumper handing a box of groceries to an older woman in a patterned headscarf, a volunteer carrying boxes behind",
+    "A young woman in a mustard hijab handing a box of groceries to an older woman in a maroon shawl, a volunteer stacking boxes behind",
   ),
-  heroInset: shot("get-involved-hero-inset", "A teenage girl and an older man laughing as they repot herbs together"),
+  heroInset: shot(
+    "get-involved-hero-inset",
+    "A teenage girl in a lilac hijab and an older man in a flat cap laughing as they repot herbs together",
+  ),
   partner: shot(
     "support-partner",
     "A man and a woman smiling as they sign papers at a table while two colleagues behind them clap",
   ),
   volunteer: shot(
     "support-volunteer",
-    "A woman with a notepad and a young woman in a teal hijab going through receipts with a calculator at a table",
+    "A woman in reading glasses and a young woman in a mustard hijab going through receipts with a calculator at a table",
   ),
   programme: shot(
     "support-programme",
-    "A tutor helping a woman in a navy hijab guide fabric through a sewing machine, other learners sewing behind them",
+    "A tutor helping a young woman in a black hijab guide fabric through a sewing machine, other learners sewing behind them",
   ),
   network: shot(
     "support-network",
-    "A young man and an older woman in a navy blazer laughing across a small table, other pairs talking behind them",
+    "A young man in a rust jumper and an older woman in a burgundy blazer laughing across a small table, other pairs talking behind them",
   ),
   reach: shot(
     "support-reach",
@@ -63,7 +75,7 @@ const photo = {
   ),
   refer: shot(
     "refer-someone",
-    "A woman shaking hands with a woman in a navy hijab at a reception desk, the woman's young son beside her",
+    "An adviser shaking hands with a woman in a blue hijab at a reception desk, her young son beside her and a teacher looking on",
   ),
   youngPeople: shot(
     "young-people",
@@ -72,7 +84,7 @@ const photo = {
   ),
   homework: shot(
     "volunteer",
-    "A young woman reading a picture book with two young children who point at the page, smiling",
+    "A young woman in a coral hijab reading a picture book with two young children who point at the page, smiling",
   ),
   donate: shot(
     "donate",
@@ -84,7 +96,7 @@ const photo = {
   ),
   cta: shot(
     "get-involved-cta",
-    "People of all ages sitting in a wide circle of chairs with cups of tea, laughing as a young woman standing introduces herself",
+    "People of all ages sitting in a wide circle of chairs with cups of tea, laughing as a young woman introduces herself",
   ),
 } satisfies Record<string, HomeImage>;
 

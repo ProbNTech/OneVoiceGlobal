@@ -28,9 +28,15 @@
  * pages rather than those notes' card grids (the user's direction, 29
  * October 2026): plain items, running text and photographs.
  *
- * IMAGES. Each photograph was generated for its slot (prompts in
- * `_source/generated/tools/make_prompts_seminars.py`) and cut to the slot's
- * exact size; the originals are kept in `_source/generated/`. No photograph
+ * IMAGES. Each photograph was generated for its slot and cut to the slot's
+ * exact size (first-set prompts in
+ * `_source/generated/tools/make_prompts_seminars.py`). Most come from the
+ * second set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
+ * settings, clothes and faces and mostly Pakistani and South Asian people,
+ * saved under /images/seminars/ as `<slot>-v2.jpg` (originals in
+ * `_source/generated/v2-pages3/`); about a quarter keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. No photograph
  * here is used anywhere else on the site. Alt text describes only what the
  * frame shows: none of these people is presented as a OneVoice participant
  * or member of staff.
@@ -39,9 +45,18 @@
 import type { HomeImage } from "@/data/home";
 import { brand, enquiryHref, navigation, routes } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/seminars/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set([
+  "seminars-hero-circle",
+  "seminars-workshop-finance",
+  "seminars-mh-languages",
+  "seminars-relationships",
+]);
+
+/** A photograph generated for its slot, saved under /images/seminars/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/seminars/${file}.jpg`,
+  src: `/images/seminars/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -49,12 +64,12 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   heroMain: shot(
     "seminars-hero",
-    "Adults of different ages seated in a bright, plant-filled room, an older man in a navy turban raising his hand to ask a question",
+    "Adults of different ages seated in a semicircle, an older man in a black cap raising his hand to ask a question",
   ),
   heroCircle: shot("seminars-hero-circle", "An older man and a young woman smiling at each other mid-conversation"),
   approach: shot(
     "seminars-approach",
-    "A woman with a notebook listening as an older man in a flat cap speaks at a round table, others taking notes",
+    "A woman in a lavender hijab with a notebook listening as an older man speaks at a round table, others taking notes",
   ),
   workshopFinance: shot(
     "seminars-workshop-finance",
@@ -62,11 +77,11 @@ const photo = {
   ),
   workshopFamilyLaw: shot(
     "seminars-workshop-family-law",
-    "A woman in a navy blazer talking a small group through a printed booklet at a table",
+    "A woman in a charcoal blazer talking a small group through a printed booklet at a table",
   ),
   workshopSafety: shot(
     "seminars-workshop-safety",
-    "A woman speaking gently to a small group of adults seated round a low table, among them a woman in a hijab",
+    "A woman speaking gently to a small group of adults seated round a low table, among them a woman in a blue hijab",
   ),
   mhLanguages: shot(
     "seminars-mh-languages",
@@ -74,30 +89,36 @@ const photo = {
   ),
   mhExpectations: shot(
     "seminars-mh-expectations",
-    "A young woman in a navy hijab speaking thoughtfully as the woman beside her listens",
+    "A young woman in a maroon hijab speaking thoughtfully as the older woman beside her listens",
   ),
   mhCreative: shot("seminars-mh-creative", "Two women smiling as they write and arrange cut-paper collages at a table"),
   mhStress: shot(
     "seminars-mh-stress",
     "A young man with his eyes closed and a hand on his chest doing a breathing exercise, a woman doing the same behind him",
   ),
-  mhFamily: shot("seminars-mh-family", "A mother and her teenage son talking at a table, listening to one another"),
+  mhFamily: shot(
+    "seminars-mh-family",
+    "A mother in a pink hijab and her teenage son talking at a table, listening to one another",
+  ),
   mhSupport: shot(
     "seminars-mh-support",
-    "A woman listening closely as a man in a scarf talks beside her on a park bench in autumn",
+    "A woman in a camel coat listening closely as a man in a scarf talks beside her on a park bench in autumn",
   ),
   rights: shot(
     "seminars-rights",
-    "A young woman in a teal scarf explaining a point to an older woman over notes at a table",
+    "A young woman in a mustard hijab explaining a point to an older woman over notes at a table",
   ),
   relationships: shot(
     "seminars-relationships",
     "A woman laughing as the man beside her listens on a bench in a quiet garden",
   ),
-  workWithUs: shot("seminars-work-with-us", "A woman and a man planning together over notes at a table, both smiling"),
+  workWithUs: shot(
+    "seminars-work-with-us",
+    "A man in a rust jumper and a woman in a plum blazer planning together over notes at a table, both smiling",
+  ),
   cta: shot(
     "seminars-cta",
-    "Small groups of adults talking and writing on clipboards on benches and folding chairs in a garden",
+    "Small groups of adults talking and writing on clipboards on benches and folding chairs in a garden at golden hour",
   ),
 } satisfies Record<string, HomeImage>;
 

@@ -16,10 +16,14 @@
  * Policies holds the brief's Governance and Accountability block with
  * Confidentiality & Privacy.
  *
- * IMAGES. Every photograph on the page was generated for its slot
- * (28 October 2026) and saved under /images/about/ by the slot's file name,
- * cut to the slot's exact size; the originals and prompts are kept in
- * `_source/generated/`. No photograph here is used anywhere else on the
+ * IMAGES. Every photograph on the page was generated for its slot and cut
+ * to the slot's exact size. Most come from the second set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2.py`), with varied settings,
+ * clothes and faces and mostly Pakistani and South Asian trainees and
+ * audiences, saved under /images/about/ as `<slot>-v2.jpg` (originals in
+ * `_source/generated/v2/`); about a quarter keep their first-set photograph
+ * (FIRST_SET below), so the page mixes both sets. The team portraits are the members'
+ * own photographs. No photograph here is used anywhere else on the
  * site. Alt text describes only what the frame shows: none of these people
  * is presented as a OneVoice participant or member of staff.
  */
@@ -27,9 +31,19 @@
 import type { HomeImage } from "@/data/home";
 import { brand, navigation, routes } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/about/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set([
+  "about-hero-learning",
+  "about-service-digital",
+  "about-service-wellbeing",
+  "about-service-guidance",
+  "about-policies",
+]);
+
+/** A photograph generated for its slot, saved under /images/about/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/about/${file}.jpg`,
+  src: `/images/about/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -37,11 +51,11 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   heroNetwork: shot(
     "about-hero-network",
-    "A woman in a navy hijab speaking at a meeting table while three other people listen",
+    "A woman in a plum hijab speaking at a meeting table while three other people listen",
   ),
   heroCommunity: shot(
     "about-hero-community",
-    "A grandmother in a teal headscarf and her granddaughter planting herbs in a raised bed with a smiling volunteer",
+    "A grandmother and her granddaughter in a yellow raincoat planting herbs in a raised bed with a smiling volunteer",
   ),
   heroLearning: shot(
     "about-hero-learning",
@@ -49,7 +63,7 @@ const photo = {
   ),
   heroOutreach: shot(
     "about-hero-outreach",
-    "Two volunteers in teal tabards handing a leaflet to an older man with a shopping bag outside a community centre",
+    "Two volunteers handing a leaflet to an older man with a shopping bag on a street of brick houses",
   ),
   whoWeAre: shot(
     "about-who-we-are",
@@ -57,7 +71,7 @@ const photo = {
   ),
   mission: shot(
     "about-mission",
-    "Young volunteers carrying boxes and arranging tables as they set up a community skills fair in a bright hall",
+    "Young volunteers carrying boxes and arranging tables as they set up a community skills fair in a sports hall",
   ),
   approach: shot(
     "about-approach",
@@ -65,15 +79,15 @@ const photo = {
   ),
   serviceEducation: shot(
     "about-service-education",
-    "A tutor at a whiteboard explaining a point to adults at tables with notebooks, one learner raising her hand",
+    "A tutor in a mustard kameez at a whiteboard explaining a point to adults at tables, one learner raising her hand",
   ),
   serviceEmployment: shot(
     "about-service-employment",
-    "A young woman smiling and pointing at a laptop as a careers adviser beside her looks on",
+    "A young woman in a peach hijab smiling and pointing at a laptop as a careers adviser beside her looks on",
   ),
   serviceEnglish: shot(
     "about-service-english",
-    "A young man reading aloud from a picture book as a tutor beside him smiles, flashcards on the table",
+    "A young man reading aloud from a picture book as a tutor in a red cardigan smiles, flashcards on the table",
   ),
   serviceDigital: shot(
     "about-service-digital",
@@ -81,7 +95,7 @@ const photo = {
   ),
   serviceEnterprise: shot(
     "about-service-enterprise",
-    "A woman arranging jars of homemade chutney on her market stall as a mentor takes notes",
+    "A woman in a pink shalwar kameez arranging jars of homemade chutney on her market stall as a mentor takes notes",
   ),
   serviceGuidance: shot(
     "about-service-guidance",
@@ -94,11 +108,11 @@ const photo = {
   serviceSafety: shot("about-service-safety", "Two women talking quietly over cups of tea in a calm, softly lit room"),
   serviceMentoring: shot(
     "about-service-mentoring",
-    "A mentor looking through a young woman's design portfolio with her at a cafe table",
+    "A mentor in a camel blazer looking through a young woman's design portfolio with her at a cafe table",
   ),
   serviceCommunity: shot(
     "about-service-community",
-    "Neighbours of all ages planting a community garden together outside the centre on a sunny day",
+    "Neighbours of all ages planting a community garden together on a sunny day",
   ),
   safeguarding: shot(
     "about-safeguarding",
@@ -110,7 +124,7 @@ const photo = {
   ),
   accessibility: shot(
     "about-accessibility",
-    "A sign language interpreter signing for a smiling man during a small group discussion",
+    "A sign language interpreter signing for a smiling young man during a small group discussion",
   ),
   cta: shot(
     "about-cta",

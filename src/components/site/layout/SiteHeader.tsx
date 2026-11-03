@@ -320,7 +320,7 @@ function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClose: () =
               style={{ transitionDelay: open ? "360ms" : "0ms" }}
             >
               {/* The menu's own photograph, used nowhere else on the site. */}
-              <Image src="/images/home/menu-feature.jpg" alt="" fill sizes="20vw" className="object-cover" />
+              <Image src="/images/home/menu-feature-v2.jpg" alt="" fill sizes="20vw" className="object-cover" />
               <div className="absolute inset-0 bg-linear-to-t from-navy-950/75 via-navy-950/10 to-transparent" />
               <p className="absolute inset-x-6 bottom-6 font-display text-[1.375rem] leading-snug text-white [font-variation-settings:'SOFT'_100]">
                 {brand.motto.join(". ")}.
