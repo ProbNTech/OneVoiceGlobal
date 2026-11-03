@@ -19,20 +19,26 @@
  * photographs were replaced on 29 October 2026). Most come from the second
  * set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages2.py`), with varied
- * settings, clothes and faces and mostly Pakistani and South Asian people,
- * saved under /images/community/ as `<slot>-v2.jpg` (originals in
- * `_source/generated/v2-pages2/`); about a quarter keep their first-set
- * photograph (FIRST_SET below), so the page mixes both sets. No photograph
- * here is used anywhere else on the site. Alt text describes only what the
- * frame shows: none of these people is presented as a OneVoice participant,
- * volunteer or member of staff.
+ * settings, clothes and faces, saved under /images/community/ as
+ * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages2/`); about a
+ * quarter keep their first-set photograph (FIRST_SET below), so the page
+ * mixes both sets. The slots in THIRD_SET show a third set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg` and cast towards the
+ * client's mix of people across the site, counted by each photo's main
+ * person: about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other. No photograph here is used anywhere else
+ * on the site. Alt text describes only what the frame shows: none of these
+ * people is presented as a OneVoice participant, volunteer or member of
+ * staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
 /* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET,
+   `<slot>-v3.jpg`. */
 const FIRST_SET = new Set([
   "community-hero-conversation",
   "community-integration",
@@ -40,9 +46,14 @@ const FIRST_SET = new Set([
   "network-training-providers",
 ]);
 
-/** A photograph generated for its slot, saved under /images/community/ (see FIRST_SET for which file it shows). */
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`) cast towards that mix. */
+const THIRD_SET = new Set(["community-hero", "community-cta"]);
+
+/** A photograph generated for its slot, saved under /images/community/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/community/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/community/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -50,7 +61,7 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   gathering: shot(
     "community-hero",
-    "An older woman in a mustard shalwar kameez and a young woman in a denim jacket walking arm in arm and laughing through a community garden",
+    "An older woman in a mustard cardigan and a young woman in a denim jacket and red scarf walking arm in arm along an allotment path, laughing",
   ),
   familyGathering: shot(
     "community-hero-family",
@@ -116,7 +127,7 @@ const photo = {
   ),
   cta: shot(
     "community-cta",
-    "Families and neighbours of all ages among small stalls in a courtyard under festoon lights, children with face paint and balloons",
+    "Families and neighbours of all ages among stalls in a courtyard under festoon lights, children holding red and yellow balloons",
   ),
 } satisfies Record<string, HomeImage>;
 

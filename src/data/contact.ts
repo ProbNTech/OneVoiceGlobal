@@ -21,25 +21,35 @@
  * `_source/generated/tools/make_prompts_contact.py`). Most come from the
  * second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
- * settings, clothes and faces and mostly Pakistani and South Asian people,
- * saved under /images/contact/ as `<slot>-v2.jpg` (originals in
- * `_source/generated/v2-pages3/`); about a quarter keep their first-set
- * photograph (FIRST_SET below), so the page mixes both sets. No photograph
- * here is used anywhere else on the site. Alt text describes only what the
- * frame shows: none of these people is presented as a OneVoice participant
- * or member of staff.
+ * settings, clothes and faces, saved under /images/contact/ as
+ * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages3/`); about a
+ * quarter keep their first-set photograph (FIRST_SET below), so the page
+ * mixes both sets. The slots in THIRD_SET show a third set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg` and cast towards the
+ * client's mix of people across the site, counted by each photo's main
+ * person: about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other. No photograph here is used anywhere else
+ * on the site. Alt text describes only what the frame shows: none of these
+ * people is presented as a OneVoice participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, enquiryHref, routes, type EnquiryTopic } from "@/data/site";
 
 /* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET,
+   `<slot>-v3.jpg`. */
 const FIRST_SET = new Set(["contact-hero-reply"]);
 
-/** A photograph generated for its slot, saved under /images/contact/ (see FIRST_SET for which file it shows). */
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`) cast towards that mix. */
+const THIRD_SET = new Set(["contact-signposting"]);
+
+/** A photograph generated for its slot, saved under /images/contact/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/contact/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/contact/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -59,7 +69,7 @@ const photo = {
   ),
   signposting: shot(
     "contact-signposting",
-    "A young man in a camel coat walking beside an older man along a sunny high street, pointing the way ahead",
+    "A young man in a camel coat walking beside an older man in a brown jacket along a sunny high street as the older man points the way ahead",
   ),
   cta: shot(
     "contact-cta",
