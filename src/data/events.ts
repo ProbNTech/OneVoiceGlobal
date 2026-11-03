@@ -14,20 +14,29 @@
  * venues are provisional until confirmed, and the page says so beside the
  * calendar.
  *
- * IMAGES. Each photograph was generated for its slot (prompts in
- * `_source/events-media-brief.md`) and cut to the slot's exact size; the
- * originals and prompts are kept in `_source/generated/`. No photograph here
- * is used anywhere else on the site. Alt text describes only what the frame
- * shows: none of these people is presented as a OneVoice participant or
- * member of staff.
+ * IMAGES. Each photograph was generated for its slot and cut to the slot's
+ * exact size (first-set prompts in `_source/events-media-brief.md`). Most
+ * come from the second set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2_pages2.py`), with varied
+ * settings, clothes and faces and mostly Pakistani and South Asian people,
+ * saved under /images/events/ as `<slot>-v2.jpg` (originals in
+ * `_source/generated/v2-pages2/`); about a quarter keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. No photograph
+ * here is used anywhere else on the site. Alt text describes only what the
+ * frame shows: none of these people is presented as a OneVoice participant
+ * or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, enquiryHref, navigation, routes } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/events/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set(["events-iftar", "events-heritage", "events-identity"]);
+
+/** A photograph generated for its slot, saved under /images/events/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/events/${file}.jpg`,
+  src: `/images/events/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -35,11 +44,11 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   heroMain: shot(
     "events-hero",
-    "An older woman in a teal headwrap and a young man laughing and clapping along to live music among neighbours in a bright hall",
+    "An older woman in a magenta shalwar kameez and a young man in a mustard kurta laughing and clapping along to live music among neighbours in a festive hall",
   ),
   heroSide: shot(
     "events-hero-side",
-    "A woman in a teal hijab carrying a stack of chairs as volunteers lay tablecloths in a hall before an event",
+    "A young woman in a coral hijab carrying a stack of chairs as volunteers lay tablecloths in a hall before an event",
   ),
   iftar: shot(
     "events-iftar",
@@ -47,11 +56,11 @@ const photo = {
   ),
   womensDay: shot(
     "events-womens-day",
-    "A woman speaking into a microphone as an audience of women of different ages smiles and applauds",
+    "A woman in a purple kameez speaking into a microphone as an audience of women of different ages smiles and applauds",
   ),
   eidBazaar: shot(
     "events-eid-bazaar",
-    "Women in hijabs looking at embroidered clothing at a stall in a hall strung with warm lights, two children with gift bags beside them",
+    "Women in bright shalwar kameez and hijabs browsing embroidered clothing and bangles at a stall in a hall strung with lights, two children with gift bags nearby",
   ),
   heritage: shot(
     "events-heritage",
@@ -63,20 +72,17 @@ const photo = {
   ),
   futures: shot(
     "events-futures",
-    "A young woman explaining an idea to an older man over cups of tea at a busy reception",
+    "A young woman in a mustard blazer explaining an idea to an older man over cups of tea at a reception",
   ),
   walk: shot(
     "events-walk",
-    "People of all ages, many in teal T-shirts and one in a wheelchair, walking together along a tree-lined canal path",
+    "People of all ages in brightly coloured T-shirts, one in a wheelchair, walking together along a tree-lined canal path",
   ),
   awards: shot(
     "events-awards",
-    "A woman in a navy hijab holding a glass award on stage beside a clapping host as guests at round tables applaud",
+    "A woman in a green embroidered kameez holding a glass award on stage beside a clapping host as guests at round tables applaud",
   ),
-  cta: shot(
-    "events-cta",
-    "Families and neighbours of all ages picnicking on blankets in a sunny park, children playing football behind them",
-  ),
+  cta: shot("events-cta", "Families and neighbours of all ages picnicking on blankets in a park in warm evening light"),
 } satisfies Record<string, HomeImage>;
 
 /** The anchors the menu builds for this page's events. */

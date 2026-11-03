@@ -11,21 +11,31 @@
  * page of the site that already carries it. Section titles are lines of the
  * block itself, as noted beside each.
  *
- * IMAGES. Each photograph was generated for its slot (prompts in
- * `_source/generated/tools/make_prompts_news.py`) and cut to the slot's exact
- * size; the originals are kept in `_source/generated/`. No photograph here
- * is used anywhere else on the site. Alt text describes only what the frame
- * shows: none of these people is presented as a OneVoice participant or
- * member of staff.
+ * IMAGES. Each photograph was generated for its slot and cut to the slot's
+ * exact size (first-set prompts in
+ * `_source/generated/tools/make_prompts_news.py`). Most come from the second
+ * set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
+ * settings, clothes and faces and mostly Pakistani and South Asian people,
+ * saved under /images/news/ as `<slot>-v2.jpg` (originals in
+ * `_source/generated/v2-pages3/`); about a quarter keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. No photograph
+ * here is used anywhere else on the site. Alt text describes only what the
+ * frame shows: none of these people is presented as a OneVoice participant
+ * or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { eventsCalendar } from "@/data/events";
 import { brand, enquiryHref, navigation, routes } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/news/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set(["news-overview"]);
+
+/** A photograph generated for its slot, saved under /images/news/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/news/${file}.jpg`,
+  src: `/images/news/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -33,7 +43,7 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   hero: shot(
     "news-hero",
-    "A young woman and an older man smiling as they look at a noticeboard of cards and photographs in a bright entrance hall",
+    "A young woman and an older man in a flat cap smiling as they look at a noticeboard of cards and photographs",
   ),
   overview: shot(
     "news-overview",
@@ -41,7 +51,7 @@ const photo = {
   ),
   cta: shot(
     "news-cta",
-    "People of different ages browsing bookshelves and studying at long tables with laptops in a bright resource room",
+    "People of different ages browsing bookshelves and studying at long tables with laptops in a lamp-lit resource room",
   ),
 } satisfies Record<string, HomeImage>;
 

@@ -20,9 +20,14 @@
  * Lists are kept whole: the page sets the longest of them as running text
  * rather than as bullet lists, so they stay compact.
  *
- * IMAGES. Each photograph was generated for its slot (prompts in
- * `_source/programmes-media-brief.md`) and cut to the slot's exact size; the
- * originals and prompts are kept in `_source/generated/`. No photograph here
+ * IMAGES. Each photograph was generated for its slot and cut to the slot's
+ * exact size. Most come from the second set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2_pages.py`), with varied settings,
+ * clothes and faces and mostly Pakistani and South Asian trainees and
+ * audiences, saved under /images/programmes/ as `<slot>-v2.jpg` (originals
+ * in `_source/generated/v2-pages/`); about a quarter keep their first-set
+ * photograph (FIRST_SET below, prompts in `_source/programmes-media-brief.md`),
+ * so the page mixes both sets. No photograph here
  * is used anywhere else on the site. Alt text describes only what the frame
  * shows: none of these people is presented as a OneVoice participant or
  * member of staff.
@@ -31,9 +36,18 @@
 import type { HomeImage } from "@/data/home";
 import { brand, enquiryHref, navigation, routes } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/programmes/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set([
+  "programmes-digital",
+  "programmes-digital-business",
+  "programmes-young-people",
+  "programmes-mens-development",
+]);
+
+/** A photograph generated for its slot, saved under /images/programmes/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/programmes/${file}.jpg`,
+  src: `/images/programmes/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -41,15 +55,15 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   hero: shot(
     "programmes-hero",
-    "A woman in a teal head wrap holding a notebook and talking to a smiling man and two seated women at a table",
+    "A woman in a green kameez holding a notebook and talking to a tutor and two seated classmates at a table",
   ),
   heroSide: shot(
     "programmes-hero-side",
-    "A young woman, an older man and a woman in a navy hijab laughing together over their folders, holding cups of tea",
+    "Three adults laughing together over their folders at a window-side bench, holding cups of tea",
   ),
   education: shot(
     "programmes-education",
-    "A young man behind a reception counter greeting an older man while a woman with a notepad and two seated learners look on",
+    "A young man in a shirt and tie practising greeting a visitor at a reception counter while a tutor and two learners look on",
   ),
   digital: shot(
     "programmes-digital",
@@ -57,7 +71,7 @@ const photo = {
   ),
   digitalWork: shot(
     "programmes-digital-work",
-    "A smiling man in a headset talking during an online meeting at a laptop",
+    "A smiling woman in a pink hijab wearing a headset during an online meeting at a laptop",
   ),
   digitalBusiness: shot(
     "programmes-digital-business",
@@ -65,31 +79,31 @@ const photo = {
   ),
   employability: shot(
     "programmes-employability",
-    "A woman in a navy hijab leaning in to help an older man at a laptop, with other adults working at laptops along the table",
+    "An adviser crouching to help a man at a laptop, with other jobseekers working at laptops along the table",
   ),
   careersGuidance: shot(
     "programmes-careers-guidance",
-    "A young woman pointing to a printed chart of options while an older man beside her looks on at a round table",
+    "A young woman in a peach hijab pointing to a printed chart of options while a careers adviser beside her looks on",
   ),
   careerDevelopment: shot(
     "programmes-career-development",
-    "A woman in a navy blazer listening closely as a man talks with his hands across a café table, other pairs talking behind them",
+    "A woman in a mustard blazer listening closely as a man explains his goals across a small table, other pairs talking behind them",
   ),
   enterprise: shot(
     "programmes-enterprise",
-    "A young man and a young woman at a tall workbench with plain product boxes and a laptop, the woman explaining with her hands",
+    "Two young founders at a workbench with plain product boxes and a laptop, the woman explaining with her hands",
   ),
   businessNetwork: shot(
     "programmes-business-network",
-    "Stallholders showing handmade soaps, plants, bread and jewellery to visitors along a row of tables in a sunlit hall",
+    "Stallholders showing handmade soaps, plants, baked goods and jewellery to visitors along a row of tables in a hall",
   ),
   mentoring: shot(
     "programmes-mentoring",
-    "A young woman sketching boxes and arrows on a whiteboard while an older woman beside her watches and smiles",
+    "A young woman sketching boxes and arrows on a whiteboard while her mentor beside her watches and smiles",
   ),
   women: shot(
     "programmes-women",
-    "A woman in a teal hijab smiling beside a poster on the wall as the seated women around her smile and one claps",
+    "A woman in a blue hijab smiling beside a poster on the wall as the seated women around her smile and one claps",
   ),
   youngPeople: shot(
     "programmes-young-people",
@@ -97,7 +111,7 @@ const photo = {
   ),
   youngMen: shot(
     "programmes-young-men",
-    "Young men sitting in a circle of chairs, one talking with his hands while an older man and the others listen",
+    "Young men sitting in a circle of chairs, one talking with confidence while a mentor and the others listen",
   ),
   mensDevelopment: shot(
     "programmes-mens-development",
@@ -105,11 +119,11 @@ const photo = {
   ),
   wellbeing: shot(
     "programmes-wellbeing",
-    "A father and two young children making a fruit salad at a kitchen counter with a smiling woman in a teal apron",
+    "A father and two young children making a fruit salad at a kitchen counter with a smiling volunteer in an orange apron",
   ),
   cta: shot(
     "programmes-cta",
-    "People of all ages chatting over cups of tea at tables and on sofas in a bright, busy community lounge",
+    "Families and neighbours of all ages chatting in small groups in a courtyard under warm evening lights",
   ),
 } satisfies Record<string, HomeImage>;
 

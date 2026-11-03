@@ -17,9 +17,15 @@
  * and its success stories are the brief's own examples of the journeys a
  * story may describe. Reports says plainly that none has been published.
  *
- * IMAGES. Each photograph was generated for its slot (prompts in
- * `_source/generated/tools/make_prompts_impact.py`) and cut to the slot's
- * exact size; the originals are kept in `_source/generated/`. No photograph
+ * IMAGES. Each photograph was generated for its slot and cut to the slot's
+ * exact size (first-set prompts in
+ * `_source/generated/tools/make_prompts_impact.py`). Most come from the
+ * second set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
+ * settings, clothes and faces and mostly Pakistani and South Asian people,
+ * saved under /images/impact/ as `<slot>-v2.jpg` (originals in
+ * `_source/generated/v2-pages3/`); about a quarter keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. No photograph
  * here is used anywhere else on the site. Alt text describes only what the
  * frame shows: none of these people is presented as a OneVoice participant
  * or member of staff.
@@ -28,9 +34,13 @@
 import type { HomeImage } from "@/data/home";
 import { ctas, enquiryHref, navigation, routes } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/impact/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set(["impact-hero-progress"]);
+
+/** A photograph generated for its slot, saved under /images/impact/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/impact/${file}.jpg`,
+  src: `/images/impact/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -38,7 +48,7 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   heroEngage: shot(
     "impact-hero-engage",
-    "A smiling woman holding open the front door of a bright community centre for a young woman arriving",
+    "A smiling woman holding open the front door of a community centre for a young woman in a mustard hijab arriving",
   ),
   heroDevelop: shot(
     "impact-hero-develop",
@@ -54,9 +64,12 @@ const photo = {
   ),
   reports: shot(
     "impact-reports",
-    "A young woman with a clipboard listening as an older man in a flat cap talks on a bench outside a building",
+    "A young woman with a clipboard listening as an older man talks on a bench outside a brick building",
   ),
-  cta: shot("impact-cta", "People of different ages and backgrounds talking in small groups in a bright hall"),
+  cta: shot(
+    "impact-cta",
+    "People of different ages and backgrounds talking in small groups in a warmly lit hall, some holding certificates",
+  ),
 } satisfies Record<string, HomeImage>;
 
 /** The anchors the menu builds for this page's sections. */

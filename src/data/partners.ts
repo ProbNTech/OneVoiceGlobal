@@ -14,22 +14,32 @@
  * id is the anchor the menu builds from its label (and that the home page's
  * Work With Us links already point at).
  *
- * IMAGES. Each photograph was generated for its slot (prompts in
- * `_source/generated/tools/make_prompts_partners.py`) and cut to the slot's
- * exact size; the originals are kept in `_source/generated/`. The hero's wide
+ * IMAGES. Each photograph was generated for its slot and cut to the slot's
+ * exact size (first-set prompts in
+ * `_source/generated/tools/make_prompts_partners.py`). Most come from the
+ * second set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
+ * settings, clothes and faces and mostly Pakistani and South Asian people,
+ * saved under /images/partners/ as `<slot>-v2.jpg` (originals in
+ * `_source/generated/v2-pages3/`); about a quarter keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. The hero's wide
  * frame first held the V.2 document's photograph, replaced at the user's
- * request on 29 October 2026. No photograph here is used anywhere else on the
- * site, and none shows a logo or anything that could suggest a real partner.
- * Alt text describes only what the frame shows: none of these people is
- * presented as a OneVoice partner, participant or member of staff.
+ * request on 29 October 2026. No photograph here is used anywhere else on
+ * the site, and none shows a logo or anything that could suggest a real
+ * partner. Alt text describes only what the frame shows: none of these
+ * people is presented as a OneVoice partner, participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/partners/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set(["partners-training", "partners-community-organisations", "partners-public-sector"]);
+
+/** A photograph generated for its slot, saved under /images/partners/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/partners/${file}.jpg`,
+  src: `/images/partners/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -37,11 +47,11 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   hero: shot(
     "partners-hero",
-    "A woman in a navy hijab explaining a plan pinned to a wall while three colleagues laugh and listen in a bright meeting room",
+    "A woman in a burgundy hijab explaining a plan pinned to a wall while three colleagues laugh and listen",
   ),
   heroSide: shot(
     "partners-hero-side",
-    "A man in a navy jumper and a woman in a teal cardigan reviewing printed plans together at a high table",
+    "A man in a charcoal blazer and a woman in a mustard hijab reviewing printed plans together at a high table",
   ),
   training: shot(
     "partners-collaboration-training",
@@ -49,7 +59,7 @@ const photo = {
   ),
   enterprise: shot(
     "partners-collaboration-enterprise",
-    "A young woman in a teal hijab arranging jars on a shop counter beside a smiling man in a blazer",
+    "A young woman in an emerald hijab arranging jars of spices on a shop counter beside a smiling adviser",
   ),
   knowledge: shot(
     "partners-collaboration-knowledge",
@@ -57,7 +67,7 @@ const photo = {
   ),
   employers: shot(
     "partners-employers",
-    "A man in a navy polo shirt explaining a machine to a group of adult learners on a bright workshop floor",
+    "A manager in a white coat explaining a machine to a small group of adult learners in a bright workshop",
   ),
   college: shot(
     "partners-training",
@@ -74,13 +84,10 @@ const photo = {
   ),
   funders: shot(
     "partners-funders",
-    "Two seated visitors applauding as four young people stand beside a board of pictures at the end of a presentation",
+    "Two seated visitors applauding as young people stand beside a board of pictures at the end of a presentation",
     "50% 8%",
   ),
-  cta: shot(
-    "partners-cta",
-    "Visitors of all ages moving between information stands and chatting in a large, bright hall",
-  ),
+  cta: shot("partners-cta", "Visitors of all ages moving between information stands and chatting in a warmly lit hall"),
 } satisfies Record<string, HomeImage>;
 
 /* -------------------------------------------------------------------------

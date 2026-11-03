@@ -16,9 +16,15 @@
  * workshops. The form's field labels and messages are the only words not
  * taken from the brief.
  *
- * IMAGES. Each photograph was generated for its slot (prompts in
- * `_source/generated/tools/make_prompts_contact.py`) and cut to the slot's
- * exact size; the originals are kept in `_source/generated/`. No photograph
+ * IMAGES. Each photograph was generated for its slot and cut to the slot's
+ * exact size (first-set prompts in
+ * `_source/generated/tools/make_prompts_contact.py`). Most come from the
+ * second set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
+ * settings, clothes and faces and mostly Pakistani and South Asian people,
+ * saved under /images/contact/ as `<slot>-v2.jpg` (originals in
+ * `_source/generated/v2-pages3/`); about a quarter keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. No photograph
  * here is used anywhere else on the site. Alt text describes only what the
  * frame shows: none of these people is presented as a OneVoice participant
  * or member of staff.
@@ -27,9 +33,13 @@
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, enquiryHref, routes, type EnquiryTopic } from "@/data/site";
 
-/** A photograph generated for its slot, saved under /images/contact/ by the slot's file name. */
+/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+const FIRST_SET = new Set(["contact-hero-reply"]);
+
+/** A photograph generated for its slot, saved under /images/contact/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/contact/${file}.jpg`,
+  src: `/images/contact/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -37,7 +47,7 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   hero: shot(
     "contact-hero",
-    "A woman in a teal head wrap smiling as she talks on her phone in a bright lounge, a notepad on her knee",
+    "A woman in a mustard kameez smiling as she talks on her phone in a cosy lounge, a notepad on her knee",
   ),
   reply: shot(
     "contact-hero-reply",
@@ -45,15 +55,15 @@ const photo = {
   ),
   enquiry: shot(
     "contact-enquiry",
-    "A young man with a backpack shaking hands with a smiling woman in a teal cardigan just inside an open doorway",
+    "A young man with a backpack shaking hands with a smiling woman in a plum cardigan just inside an open doorway",
   ),
   signposting: shot(
     "contact-signposting",
-    "A man in a navy jacket walking beside an older man along a sunny high street, pointing the way ahead",
+    "A young man in a camel coat walking beside an older man along a sunny high street, pointing the way ahead",
   ),
   cta: shot(
     "contact-cta",
-    "People arriving, waiting on soft chairs and talking with staff at a long wooden desk in a bright reception area",
+    "People arriving, waiting on soft chairs and talking with staff at a long wooden desk in a warmly lit reception area",
   ),
 } satisfies Record<string, HomeImage>;
 

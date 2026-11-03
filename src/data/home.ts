@@ -10,11 +10,16 @@
  * borrows one of the brief's own lines from the matching page (noted beside
  * it).
  *
- * IMAGES. Every photograph on the page was generated for its slot to the
- * media brief (28 October 2026) and saved under /images/home/ by the slot's
- * file name, cut to the slot's exact size; the originals and the prompts
- * are kept in `_source/generated/`. No photograph here is used anywhere
- * else on the site. Alt text
+ * IMAGES. Every photograph on the page was generated for its slot and cut
+ * to the slot's exact size. Most come from the second set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v2.py`), made after the client found
+ * the first too alike: each scene has its own setting and colours, people
+ * wear varied clothes, and most trainees and audiences are Pakistani and
+ * wider South Asian. They are saved under /images/home/ as `<slot>-v2.jpg`,
+ * with the originals in `_source/generated/v2/`. About a quarter of the
+ * slots keep their first-set photograph (FIRST_SET below), so the page
+ * mixes both sets. No photograph here is used anywhere else on the site.
+ * Alt text
  * describes only what the frame shows: none of these people is presented as
  * a OneVoice participant, volunteer or member of staff.
  */
@@ -33,9 +38,25 @@ export type HomeImage = {
   pending?: string;
 };
 
-/** A photograph generated for its slot, saved under /images/home/ by the slot's file name. */
+/* The user keeps about a quarter of each page's first-set photographs among the new ones (3 November
+   2026), so the page mixes both sets rather than swapping every picture. These slots show their first-set
+   file (`<slot>.jpg`); every other slot shows its second-set file (`<slot>-v2.jpg`). */
+const FIRST_SET = new Set([
+  "hero-connect",
+  "intro-partnership",
+  "why-digital",
+  "why-english",
+  "programme-mentoring",
+  "programme-community",
+  "support-young-people",
+  "support-families",
+  "support-barriers",
+  "door-about",
+]);
+
+/** A photograph generated for its slot, saved under /images/home/ (see FIRST_SET for which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%", positionMobile?: string): HomeImage => ({
-  src: `/images/home/${file}.jpg`,
+  src: `/images/home/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
   alt,
   position,
   ...(positionMobile ? { positionMobile } : {}),
@@ -47,13 +68,13 @@ const photo = {
      onto the people instead. */
   heroLearn: shot(
     "hero-learn",
-    "A tutor in a navy cardigan pointing at a laptop as an older man beside her smiles, other learners at the next table in a bright learning centre",
+    "An older man with a white beard, in a grey waistcoat over a cream kurta, smiling at a laptop as a young woman in a mustard kameez points at the screen, two learners at the next table",
     "0% 45%",
     "62% 45%",
   ),
   heroDevelop: shot(
     "hero-develop",
-    "A young woman presenting her plan at a flip chart while a mentor and two other learners listen and smile around an oak table",
+    "A young woman in a burgundy hijab presenting her plan at a flip chart while a mentor and two learners listen and smile at a wooden table in a brick-walled room",
     "0% 30%",
     "60% 30%",
   ),
@@ -65,14 +86,14 @@ const photo = {
   ),
   heroProgress: shot(
     "hero-progress",
-    "A young woman in a navy blazer shaking hands with an employer in a bright reception, a woman in a teal cardigan smiling beside her",
+    "A young woman in a camel coat shaking hands with an employer in a bright reception, an older woman in a maroon shawl smiling behind her",
     "0% 40%",
     "56% 40%",
   ),
   /* Introduction collage. */
   introCommunity: shot(
     "intro-community",
-    "Residents of different ages sitting in a circle in a bright hall, listening as an older man speaks, a facilitator taking notes on a clipboard",
+    "Residents of different ages in a circle of chairs in a wood-panelled hall, listening as an older man in a black cap speaks, a facilitator taking notes",
   ),
   introPartnership: shot(
     "intro-partnership",
@@ -81,7 +102,7 @@ const photo = {
   /* Why OneVoice: one for each line. */
   whyJob: shot(
     "why-job",
-    "A man holding a printed CV as an adviser beside him points to a list of job openings on the table",
+    "A man in a maroon polo shirt holding a printed CV as an adviser in a green cardigan points to a list of job openings",
   ),
   whyDigital: shot(
     "why-digital",
@@ -93,40 +114,40 @@ const photo = {
   ),
   whyConfidence: shot(
     "why-confidence",
-    "A woman standing to speak to a small seated group that smiles back at her, a facilitator beside her",
+    "A woman in a coral kameez standing to speak to a small seated group that smiles back at her",
   ),
   whyListen: shot(
     "why-listen",
-    "A young man talking while a support worker in a teal jumper listens closely, mugs of tea on a low table",
+    "A young man in a grey hoodie talking while a support worker in a mustard jumper listens on a green sofa, mugs of tea on a low table",
   ),
   whyEnterprise: shot(
     "why-enterprise",
-    "A young woman showing a handmade candle to a business mentor at a table of samples and paper sketches",
+    "A young woman in a green embroidered kameez showing handmade candles to a business mentor at a table of samples and sketches",
   ),
   whySpecialist: shot(
     "why-specialist",
-    "An adviser on the phone taking notes as an older man beside her holds a folder of letters and looks on",
+    "An adviser in a lavender hijab on the phone taking notes as an older man beside her holds a folder of letters",
   ),
   /* Our Core Programmes. */
   programmesFeature: shot(
     "programmes-feature",
-    "Small groups of adults working at tables with laptops and notebooks in a bright learning centre, a tutor kneeling beside one group",
+    "Small groups of adult learners in colourful clothes working at tables with laptops and notebooks in a bright classroom, a tutor kneeling beside one group",
   ),
   programmeSkills: shot(
     "programme-skills",
-    "A tutor in a teal jumper explaining a household budget to adults with calculators and notebooks around a table",
+    "A tutor in a pink cardigan explaining a household budget to learners with calculators and notebooks around a table",
   ),
   programmeEmployability: shot(
     "programme-employability",
-    "A young man in a shirt and tie answering questions across a table from two interviewers at a mock interview",
+    "A young man in a white shirt and maroon tie answering questions across a table from two interviewers at a mock interview",
   ),
   programmeDigital: shot(
     "programme-digital",
-    "A tutor leaning in to help a young man and an older woman at desktop computers in a digital skills class",
+    "A tutor in a blue hijab leaning in to help an older man and an older woman at desktop computers in a digital skills class",
   ),
   programmeEnterprise: shot(
     "programme-enterprise",
-    "A young woman presenting her business idea to others around a table of sticky notes, sketches and laptops",
+    "A woman in a pink hijab presenting her business idea to two others around a table of sticky notes, sketches and a laptop",
   ),
   programmeEnglish: shot(
     "programme-english",
@@ -138,35 +159,44 @@ const photo = {
   ),
   programmeWellbeing: shot(
     "programme-wellbeing",
-    "Women of different ages sitting in a circle with cups of tea, talking and laughing in a bright room",
+    "Women of different ages in colourful clothes sitting in a circle with cups of tea, talking and laughing in a sunlit room",
   ),
   programmeCommunity: shot(
     "programme-community",
     "Neighbours of all ages sharing food and laughing at a long table as a volunteer pours tea",
   ),
   /* Who We Support: one series. */
-  supportWomen: shot("support-women", "Two women, one in a hijab, laughing together over a notebook at a table"),
-  supportMen: shot("support-men", "A man thinking at a laptop as a tutor leans in and points at the screen"),
+  supportWomen: shot(
+    "support-women",
+    "Two women, one in a mustard hijab, laughing together over a notebook at a table",
+  ),
+  supportMen: shot(
+    "support-men",
+    "A bearded man in a checked shirt concentrating at a laptop as a tutor leans in and points at the screen",
+  ),
   supportYoungPeople: shot(
     "support-young-people",
     "Three teenagers smiling around a laptop, one pointing at the screen",
   ),
   supportJobseekers: shot(
     "support-jobseekers",
-    "A young woman holding a printed CV and practising her answers with an adviser",
+    "A young woman in a grey blazer holding a printed CV and practising her answers with an adviser in a turban",
   ),
   supportCareerChangers: shot(
     "support-career-changers",
-    "A man in glasses learning workplace software at a laptop with a younger tutor beside him",
+    "A man in glasses and a burgundy jumper learning workplace software at a laptop with a tutor beside him",
   ),
-  supportEntrepreneurs: shot("support-entrepreneurs", "A young woman smiling as she packs an order into a box"),
+  supportEntrepreneurs: shot(
+    "support-entrepreneurs",
+    "A young woman in a coral kameez smiling as she packs handmade jewellery into a box",
+  ),
   supportProfessionals: shot(
     "support-professionals",
-    "A woman in a blazer leading a small workshop beside a flip chart",
+    "A woman in a green blazer leading a small workshop beside a flip chart",
   ),
   supportNewCommunities: shot(
     "support-new-communities",
-    "A volunteer handing an information pack to a family with a young child at a help desk",
+    "A volunteer in an orange fleece handing an information pack to a family with a young boy at a help desk",
   ),
   supportFamilies: shot(
     "support-families",
@@ -178,7 +208,10 @@ const photo = {
   ),
   /* Work With Us and the closing banner. */
   workWithUs: shot("work-with-us", "Two people shaking hands across a table while colleagues smile behind them"),
-  finalCta: shot("final-cta", "A busy, bright community centre with people of all ages talking in small groups"),
+  finalCta: shot(
+    "final-cta",
+    "A busy community hall in the evening with people of all ages in colourful clothes talking in small groups",
+  ),
 } satisfies Record<string, HomeImage>;
 
 /* -------------------------------------------------------------------------
@@ -493,9 +526,9 @@ const doorPhoto = {
     "door-about",
     "Two smiling women of different generations greeting each other warmly in a bright entrance",
   ),
-  work: shot("door-work", "A tutor and a learner smiling over a notebook during a lesson"),
-  partnerships: shot("door-partnerships", "Two people from different organisations shaking hands across a table"),
-  support: shot("door-support", "A smiling volunteer in a teal tabard carrying a box of donated books"),
+  work: shot("door-work", "A tutor and a learner in a lilac hijab smiling over a notebook"),
+  partnerships: shot("door-partnerships", "Two people from different organisations shaking hands and smiling"),
+  support: shot("door-support", "A smiling volunteer in an orange fleece carrying a box of donated books"),
 } satisfies Record<string, HomeImage>;
 
 export const homeFoundation = {
