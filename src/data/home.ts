@@ -42,6 +42,7 @@ export type HomeImage = {
    2026), so the page mixes both sets rather than swapping every picture. These slots show their first-set
    file (`<slot>.jpg`); every other slot shows its second-set file (`<slot>-v2.jpg`). */
 const FIRST_SET = new Set([
+  "hero-learn",
   "hero-connect",
   "intro-partnership",
   "why-digital",
@@ -65,19 +66,22 @@ const shot = (file: string, alt: string, position = "50% 50%", positionMobile?: 
 const photo = {
   /* Hero slides. Wide screens show the photograph's own left edge, which
      keeps the people clear of the headline; phones steer their tall slice
-     onto the people instead. */
+     onto the people instead. The first set's Learn photograph leads again
+     (the user's choice, 3 November 2026), and the second set's, which led
+     until then, moves to the second slide in place of its own Develop
+     photograph. */
   heroLearn: shot(
     "hero-learn",
-    "An older man with a white beard, in a grey waistcoat over a cream kurta, smiling at a laptop as a young woman in a mustard kameez points at the screen, two learners at the next table",
+    "A tutor in a navy cardigan pointing at a laptop as an older man beside her smiles, other learners at the next table in a bright learning centre",
     "0% 45%",
     "62% 45%",
   ),
-  heroDevelop: shot(
-    "hero-develop",
-    "A young woman in a burgundy hijab presenting her plan at a flip chart while a mentor and two learners listen and smile at a wooden table in a brick-walled room",
-    "0% 30%",
-    "60% 30%",
-  ),
+  heroDevelop: {
+    src: "/images/home/hero-learn-v2.jpg",
+    alt: "An older man with a white beard, in a grey waistcoat over a cream kurta, smiling at a laptop as a young woman in a mustard kameez points at the screen, two learners at the next table",
+    position: "0% 45%",
+    positionMobile: "62% 45%",
+  },
   heroConnect: shot(
     "hero-connect",
     "A young man in a navy jumper laughing with a woman in a teal blouse at a busy networking afternoon, leaflets on a table beside them",

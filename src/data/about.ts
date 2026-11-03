@@ -16,23 +16,29 @@
  * Policies holds the brief's Governance and Accountability block with
  * Confidentiality & Privacy.
  *
- * IMAGES. Every photograph on the page was generated for its slot and cut
- * to the slot's exact size. Most come from the second set (3 November 2026,
+ * IMAGES. Every photograph on the page was generated for its slot and cut to
+ * the slot's exact size. Most come from the second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2.py`), with varied settings,
- * clothes and faces and mostly Pakistani and South Asian trainees and
- * audiences, saved under /images/about/ as `<slot>-v2.jpg` (originals in
- * `_source/generated/v2/`); about a quarter keep their first-set photograph
- * (FIRST_SET below), so the page mixes both sets. The team portraits are the members'
- * own photographs. No photograph here is used anywhere else on the
- * site. Alt text describes only what the frame shows: none of these people
- * is presented as a OneVoice participant or member of staff.
+ * clothes and faces, saved under /images/about/ as `<slot>-v2.jpg`
+ * (originals in `_source/generated/v2/`); about a quarter keep their
+ * first-set photograph (FIRST_SET below), so the page mixes both sets. The
+ * slots in THIRD_SET show a third set (3 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg` and cast towards the
+ * client's mix of people across the site, counted by each photo's main
+ * person: about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other. The team portraits are the members' own
+ * photographs. No photograph here is used anywhere else on the site. Alt
+ * text describes only what the frame shows: none of these people is
+ * presented as a OneVoice participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, navigation, routes } from "@/data/site";
 
 /* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET,
+   `<slot>-v3.jpg`. */
 const FIRST_SET = new Set([
   "about-hero-learning",
   "about-service-digital",
@@ -41,9 +47,22 @@ const FIRST_SET = new Set([
   "about-policies",
 ]);
 
-/** A photograph generated for its slot, saved under /images/about/ (see FIRST_SET for which file it shows). */
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`) cast towards that mix. */
+const THIRD_SET = new Set([
+  "about-hero-network",
+  "about-who-we-are",
+  "about-mission",
+  "about-service-employment",
+  "about-service-english",
+  "about-service-community",
+  "about-cta",
+]);
+
+/** A photograph generated for its slot, saved under /images/about/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/about/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/about/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -51,7 +70,7 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   heroNetwork: shot(
     "about-hero-network",
-    "A woman in a plum hijab speaking at a meeting table while three other people listen",
+    "A woman with short silver hair in a green blazer speaking at a meeting table as a young man in a grey hoodie, an older man in a white kurta and a woman in a plum hijab listen",
   ),
   heroCommunity: shot(
     "about-hero-community",
@@ -67,11 +86,11 @@ const photo = {
   ),
   whoWeAre: shot(
     "about-who-we-are",
-    "Residents of different ages along a long table in a library meeting room, listening as an older man speaks with his hands",
+    "Residents along a table in a library meeting room as an older man with a white beard and a tweed jacket speaks with his hands and a woman in a mustard cardigan takes notes",
   ),
   mission: shot(
     "about-mission",
-    "Young volunteers carrying boxes and arranging tables as they set up a community skills fair in a sports hall",
+    "A young man in a red T-shirt carrying a box across a sports hall as a young woman in a lilac sweatshirt sets out a table and a coordinator in a green bomber jacket directs them",
   ),
   approach: shot(
     "about-approach",
@@ -83,11 +102,11 @@ const photo = {
   ),
   serviceEmployment: shot(
     "about-service-employment",
-    "A young woman in a peach hijab smiling and pointing at a laptop as a careers adviser beside her looks on",
+    "A young woman with a red plait smiling and pointing at a laptop as a careers adviser in a lilac shirt looks on",
   ),
   serviceEnglish: shot(
     "about-service-english",
-    "A young man reading aloud from a picture book as a tutor in a red cardigan smiles, flashcards on the table",
+    "A young man with dark curly hair reading aloud from a picture book as an older tutor in a red cardigan smiles, picture cards on the table",
   ),
   serviceDigital: shot(
     "about-service-digital",
@@ -112,7 +131,7 @@ const photo = {
   ),
   serviceCommunity: shot(
     "about-service-community",
-    "Neighbours of all ages planting a community garden together on a sunny day",
+    "A father and his young son planting flowers in a raised bed beside an older woman in a straw hat and a woman in an olive hijab, all laughing",
   ),
   safeguarding: shot(
     "about-safeguarding",
@@ -128,7 +147,7 @@ const photo = {
   ),
   cta: shot(
     "about-cta",
-    "People of all ages sharing food and laughing at long tables under string lights at an evening celebration",
+    "Neighbours of all ages sharing food and laughing at long tables in a hall with deep-red walls and strings of lights",
   ),
 } satisfies Record<string, HomeImage>;
 
