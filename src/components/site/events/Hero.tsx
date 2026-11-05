@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRef, type CSSProperties } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { ArrowDownRight, CalendarDays } from "lucide-react";
+import { ArrowUpRight, CalendarDays } from "lucide-react";
 import { cx } from "@/lib/cx";
 import { eventsHero } from "@/data/events";
 import { Photo } from "../ui/Photo";
@@ -20,7 +20,7 @@ const accentColours = ["text-lagoon-600", "text-ocean-600", "text-lagoon-600"];
  * act. On the right two tall photographs stand side by side, one under an
  * arched top and one cut as a capsule and set lower; they drift apart a
  * little as the page scrolls. A card across their foot names the event the
- * calendar opens with and leads down to it.
+ * calendar opens with and leads to its own page.
  *
  * The header keeps its dark logo and links over this band (it is not in
  * SiteHeader's DARK_HERO).
@@ -147,9 +147,9 @@ export function Hero() {
                   </span>
                   <span className="mt-0.5 block text-[0.8125rem] text-slate">{card.event.when}</span>
                 </span>
-                <ArrowDownRight
+                <ArrowUpRight
                   aria-hidden="true"
-                  className="h-5 w-5 shrink-0 text-lagoon-600 transition-transform duration-500 ease-out-soft group-hover:translate-x-0.5 group-hover:translate-y-0.5"
+                  className="h-5 w-5 shrink-0 text-lagoon-600 transition-transform duration-500 ease-out-soft group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
               </Link>
             </Reveal>

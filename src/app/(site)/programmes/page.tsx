@@ -9,6 +9,7 @@ import { NetworkMentoring } from "@/components/site/programmes/NetworkMentoring"
 import { People } from "@/components/site/programmes/People";
 import { Wellbeing } from "@/components/site/programmes/Wellbeing";
 import { Safety } from "@/components/site/programmes/Safety";
+import { Scholarships } from "@/components/site/programmes/Scholarships";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
 import { programmesCta, programmesHero, programmesSections } from "@/data/programmes-page";
@@ -24,7 +25,8 @@ export const metadata: Metadata = {
  * themes in the order of the Programmes sub-menu: Education & English,
  * Digital OneVoice, Employment & Careers (with Return to Work), Enterprise &
  * Mentoring (with the OneVoice Business Network), Women, Men & Youth,
- * Wellbeing & Family, and Safety & Advice. It closes on
+ * Wellbeing & Family, and Safety & Advice, then the client's Scholarships &
+ * Educational Grants programme, which has a page of its own. It closes on
  * the brief's call for referrals. Copy and images live in
  * src/data/programmes-page.ts.
  */
@@ -42,6 +44,7 @@ export default function ProgrammesPage() {
       <People />
       <Wellbeing />
       <Safety />
+      <Scholarships />
       <CtaBanner
         id="programmes-cta-title"
         kicker={programmesCta.kicker}

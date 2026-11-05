@@ -19,27 +19,46 @@
  * `_source/generated/tools/make_prompts_partners.py`). Most come from the
  * second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
- * settings, clothes and faces and mostly Pakistani and South Asian people,
- * saved under /images/partners/ as `<slot>-v2.jpg` (originals in
- * `_source/generated/v2-pages3/`); about a quarter keep their first-set
- * photograph (FIRST_SET below), so the page mixes both sets. The hero's wide
- * frame first held the V.2 document's photograph, replaced at the user's
- * request on 29 October 2026. No photograph here is used anywhere else on
- * the site, and none shows a logo or anything that could suggest a real
- * partner. Alt text describes only what the frame shows: none of these
- * people is presented as a OneVoice partner, participant or member of staff.
+ * settings, clothes and faces, saved under /images/partners/ as
+ * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages3/`); some keep
+ * their first-set photograph (FIRST_SET below), so the page mixes both sets.
+ * The slots in THIRD_SET show a third set (3 and 4 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. The hero's wide frame first held the V.2 document's photograph,
+ * replaced at the user's request on 29 October 2026. No photograph here is
+ * used anywhere else on the site, and none shows a logo or anything that
+ * could suggest a real partner. Alt text describes only what the frame
+ * shows: none of these people is presented as a OneVoice partner,
+ * participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
-const FIRST_SET = new Set(["partners-training", "partners-community-organisations", "partners-public-sector"]);
+/* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
+   2026; those that shared one bright room moved to new places on 4 November). These slots show their
+   first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
+const FIRST_SET = new Set(["partners-training", "partners-community-organisations"]);
 
-/** A photograph generated for its slot, saved under /images/partners/ (see FIRST_SET for which file it shows). */
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`), cast towards that mix and set in its own relevant place. */
+const THIRD_SET = new Set([
+  "partners-hero",
+  "partners-hero-side",
+  "partners-public-sector",
+  "partners-funders",
+  "partners-cta",
+]);
+
+/** A photograph generated for its slot, saved under /images/partners/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/partners/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/partners/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -47,11 +66,11 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   hero: shot(
     "partners-hero",
-    "A woman in a burgundy hijab explaining a plan pinned to a wall while three colleagues laugh and listen",
+    "A woman in a cream blazer explaining a point at a table of plans as three colleagues laugh and listen in an innovation lab",
   ),
   heroSide: shot(
     "partners-hero-side",
-    "A man in a charcoal blazer and a woman in a mustard hijab reviewing printed plans together at a high table",
+    "A man in a charcoal blazer and a woman in a mustard hijab reviewing printed plans together at a table in a factory office",
   ),
   training: shot(
     "partners-collaboration-training",
@@ -80,14 +99,17 @@ const photo = {
   ),
   publicSector: shot(
     "partners-public-sector",
-    "A nurse in a navy uniform taking an older man's blood pressure at a table while a woman beside him smiles",
+    "A pharmacist taking an older man's blood pressure in a pharmacy consultation room as his wife smiles beside him",
   ),
   funders: shot(
     "partners-funders",
-    "Two seated visitors applauding as young people stand beside a board of pictures at the end of a presentation",
+    "Two visitors applauding as young people stand beside a board of pictures at the end of a presentation in a glass-roofed atrium",
     "50% 8%",
   ),
-  cta: shot("partners-cta", "Visitors of all ages moving between information stands and chatting in a warmly lit hall"),
+  cta: shot(
+    "partners-cta",
+    "Visitors moving between information stands and chatting in the atrium of a college building",
+  ),
 } satisfies Record<string, HomeImage>;
 
 /* -------------------------------------------------------------------------

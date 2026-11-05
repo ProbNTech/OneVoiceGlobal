@@ -16,26 +16,38 @@
  * `_source/generated/tools/make_prompts_news.py`). Most come from the second
  * set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
- * settings, clothes and faces and mostly Pakistani and South Asian people,
- * saved under /images/news/ as `<slot>-v2.jpg` (originals in
- * `_source/generated/v2-pages3/`); about a quarter keep their first-set
- * photograph (FIRST_SET below), so the page mixes both sets. No photograph
- * here is used anywhere else on the site. Alt text describes only what the
- * frame shows: none of these people is presented as a OneVoice participant
- * or member of staff.
+ * settings, clothes and faces, saved under /images/news/ as `<slot>-v2.jpg`
+ * (originals in `_source/generated/v2-pages3/`); some keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. The slots in
+ * THIRD_SET show a third set (3 and 4 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. No photograph here is used anywhere else on the site. Alt text
+ * describes only what the frame shows: none of these people is presented as
+ * a OneVoice participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { eventsCalendar } from "@/data/events";
 import { brand, enquiryHref, navigation, routes } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+/* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
+   2026; those that shared one bright room moved to new places on 4 November). These slots show their
+   first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
 const FIRST_SET = new Set(["news-overview"]);
 
-/** A photograph generated for its slot, saved under /images/news/ (see FIRST_SET for which file it shows). */
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`), cast towards that mix and set in its own relevant place. */
+const THIRD_SET = new Set(["news-cta"]);
+
+/** A photograph generated for its slot, saved under /images/news/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/news/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/news/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -51,7 +63,7 @@ const photo = {
   ),
   cta: shot(
     "news-cta",
-    "People of different ages browsing bookshelves and studying at long tables with laptops in a lamp-lit resource room",
+    "People reading and studying with laptops at long tables under green reading lamps in a historic library reading room",
   ),
 } satisfies Record<string, HomeImage>;
 

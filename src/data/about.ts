@@ -20,43 +20,43 @@
  * the slot's exact size. Most come from the second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2.py`), with varied settings,
  * clothes and faces, saved under /images/about/ as `<slot>-v2.jpg`
- * (originals in `_source/generated/v2/`); about a quarter keep their
- * first-set photograph (FIRST_SET below), so the page mixes both sets. The
- * slots in THIRD_SET show a third set (3 November 2026,
+ * (originals in `_source/generated/v2/`); some keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. The slots in
+ * THIRD_SET show a third set (3 and 4 November 2026,
  * `_source/generated/tools/make_prompts_v3.py`, originals in
- * `_source/generated/v3/`), saved as `<slot>-v3.jpg` and cast towards the
- * client's mix of people across the site, counted by each photo's main
- * person: about 40% White British and European, 30% South Asian, 15% Black,
- * 10% Arab and 5% mixed or other. The team portraits are the members' own
- * photographs. No photograph here is used anywhere else on the site. Alt
- * text describes only what the frame shows: none of these people is
- * presented as a OneVoice participant or member of staff.
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. The team portraits are the members' own photographs. No
+ * photograph here is used anywhere else on the site. Alt text describes only
+ * what the frame shows: none of these people is presented as a OneVoice
+ * participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, navigation, routes } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET,
-   `<slot>-v3.jpg`. */
-const FIRST_SET = new Set([
-  "about-hero-learning",
-  "about-service-digital",
-  "about-service-wellbeing",
-  "about-service-guidance",
-  "about-policies",
-]);
+/* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
+   2026; those that shared one bright room moved to new places on 4 November). These slots show their
+   first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
+const FIRST_SET = new Set(["about-service-wellbeing"]);
 
 /* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
    South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
-   show a third-set photograph (`<slot>-v3.jpg`) cast towards that mix. */
+   show a third-set photograph (`<slot>-v3.jpg`) cast towards that mix and set in its own relevant place. */
 const THIRD_SET = new Set([
   "about-hero-network",
+  "about-hero-learning",
   "about-who-we-are",
   "about-mission",
   "about-service-employment",
   "about-service-english",
+  "about-service-digital",
+  "about-service-guidance",
   "about-service-community",
+  "about-policies",
   "about-cta",
 ]);
 
@@ -78,7 +78,7 @@ const photo = {
   ),
   heroLearning: shot(
     "about-hero-learning",
-    "A young man and an older woman laughing as they study together at a library table with notebooks and a dictionary",
+    "A young man in an orange jumper and an older woman in a green cardigan laughing over notebooks at a riverside cafe table",
   ),
   heroOutreach: shot(
     "about-hero-outreach",
@@ -110,7 +110,7 @@ const photo = {
   ),
   serviceDigital: shot(
     "about-service-digital",
-    "An older man laughing as a young volunteer shows him how to use his smartphone",
+    "An older man in a flat cap laughing as a young volunteer in a yellow hoodie shows him how to make a video call in a barbershop",
   ),
   serviceEnterprise: shot(
     "about-service-enterprise",
@@ -118,7 +118,7 @@ const photo = {
   ),
   serviceGuidance: shot(
     "about-service-guidance",
-    "An adviser pointing to a leaflet on a low table for a young mother holding her toddler",
+    "An adviser in a plum jumper pointing to a leaflet as a young mother with a toddler on her lap listens in a children's centre",
   ),
   serviceWellbeing: shot(
     "about-service-wellbeing",
@@ -139,7 +139,7 @@ const photo = {
   ),
   policies: shot(
     "about-policies",
-    "Two people reviewing printed papers together at a desk, one pointing at a page while the other listens",
+    "Two trustees reviewing printed papers at a boardroom table high above the city, one pointing at a page",
   ),
   accessibility: shot(
     "about-accessibility",

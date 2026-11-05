@@ -1,7 +1,7 @@
 import { CalendarDays, Check, MapPin } from "lucide-react";
 import { eventsIftar } from "@/data/events";
 import { Photo } from "../ui/Photo";
-import { Shell, Title } from "../ui/primitives";
+import { Cta, Shell, Title } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
 import { EventKicker } from "./EventKicker";
 import { EventMeta } from "./EventMeta";
@@ -13,7 +13,8 @@ import { EventMeta } from "./EventMeta";
  * to edge and drifts as the page scrolls, shaded only on the left where the
  * title, date, venue and the brief's description sit. Its proposed
  * highlights are set on a white card over the right of the picture, each
- * beside an orange tick.
+ * beside an orange tick. The event has a page of its own, which the call
+ * under the description leads to.
  */
 export function Iftar() {
   const { image, venue } = eventsIftar;
@@ -63,6 +64,9 @@ export function Iftar() {
                 ]}
               />
               <p className="mt-6 max-w-xl text-lead text-white/85">{eventsIftar.lead}</p>
+              <Cta href={eventsIftar.page.href} variant="saffron" className="mt-8">
+                {eventsIftar.page.label}
+              </Cta>
             </Reveal>
           </div>
 

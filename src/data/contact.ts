@@ -22,30 +22,30 @@
  * second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
  * settings, clothes and faces, saved under /images/contact/ as
- * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages3/`); about a
- * quarter keep their first-set photograph (FIRST_SET below), so the page
- * mixes both sets. The slots in THIRD_SET show a third set (3 November 2026,
+ * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages3/`). The slots
+ * in THIRD_SET show a third set (3 and 4 November 2026,
  * `_source/generated/tools/make_prompts_v3.py`, originals in
- * `_source/generated/v3/`), saved as `<slot>-v3.jpg` and cast towards the
- * client's mix of people across the site, counted by each photo's main
- * person: about 40% White British and European, 30% South Asian, 15% Black,
- * 10% Arab and 5% mixed or other. No photograph here is used anywhere else
- * on the site. Alt text describes only what the frame shows: none of these
- * people is presented as a OneVoice participant or member of staff.
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. No photograph here is used anywhere else on the site. Alt text
+ * describes only what the frame shows: none of these people is presented as
+ * a OneVoice participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, enquiryHref, routes, type EnquiryTopic } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET,
-   `<slot>-v3.jpg`. */
-const FIRST_SET = new Set(["contact-hero-reply"]);
+/* None of the page's first-set photographs is left: the last one moved to a new place on 4 November 2026.
+   Every slot shows `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
+const FIRST_SET = new Set<string>();
 
 /* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
    South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
-   show a third-set photograph (`<slot>-v3.jpg`) cast towards that mix. */
-const THIRD_SET = new Set(["contact-signposting"]);
+   show a third-set photograph (`<slot>-v3.jpg`) cast towards that mix and set in its own relevant place. */
+const THIRD_SET = new Set(["contact-hero-reply", "contact-enquiry", "contact-signposting", "contact-cta"]);
 
 /** A photograph generated for its slot, saved under /images/contact/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
@@ -61,11 +61,11 @@ const photo = {
   ),
   reply: shot(
     "contact-hero-reply",
-    "An older man with a cup of tea and a young woman in a teal scarf laughing together on a sofa",
+    "An older man with a white beard holding a mug of tea and laughing with a young woman in a green scarf on a garden bench",
   ),
   enquiry: shot(
     "contact-enquiry",
-    "A young man with a backpack shaking hands with a smiling woman in a plum cardigan just inside an open doorway",
+    "A young man with a backpack shaking hands with a smiling woman in a plum cardigan just inside the glass door of a high-street advice office",
   ),
   signposting: shot(
     "contact-signposting",
@@ -73,7 +73,7 @@ const photo = {
   ),
   cta: shot(
     "contact-cta",
-    "People arriving, waiting on soft chairs and talking with staff at a long wooden desk in a warmly lit reception area",
+    "People of all ages waiting on soft chairs and talking with staff at service desks in a warmly lit reception area",
   ),
 } satisfies Record<string, HomeImage>;
 

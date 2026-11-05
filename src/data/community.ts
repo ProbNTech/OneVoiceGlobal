@@ -20,36 +20,42 @@
  * set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages2.py`), with varied
  * settings, clothes and faces, saved under /images/community/ as
- * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages2/`); about a
- * quarter keep their first-set photograph (FIRST_SET below), so the page
- * mixes both sets. The slots in THIRD_SET show a third set (3 November 2026,
+ * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages2/`); some keep
+ * their first-set photograph (FIRST_SET below), so the page mixes both sets.
+ * The slots in THIRD_SET show a third set (3 and 4 November 2026,
  * `_source/generated/tools/make_prompts_v3.py`, originals in
- * `_source/generated/v3/`), saved as `<slot>-v3.jpg` and cast towards the
- * client's mix of people across the site, counted by each photo's main
- * person: about 40% White British and European, 30% South Asian, 15% Black,
- * 10% Arab and 5% mixed or other. No photograph here is used anywhere else
- * on the site. Alt text describes only what the frame shows: none of these
- * people is presented as a OneVoice participant, volunteer or member of
- * staff.
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. No photograph here is used anywhere else on the site. Alt text
+ * describes only what the frame shows: none of these people is presented as
+ * a OneVoice participant, volunteer or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET,
-   `<slot>-v3.jpg`. */
-const FIRST_SET = new Set([
-  "community-hero-conversation",
-  "community-integration",
-  "network-community-leaders",
-  "network-training-providers",
-]);
+/* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
+   2026; those that shared one bright room moved to new places on 4 November). These slots show their
+   first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
+const FIRST_SET = new Set(["community-integration"]);
 
 /* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
    South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
-   show a third-set photograph (`<slot>-v3.jpg`) cast towards that mix. */
-const THIRD_SET = new Set(["community-hero", "community-cta"]);
+   show a third-set photograph (`<slot>-v3.jpg`) cast towards that mix and set in its own relevant place. */
+const THIRD_SET = new Set([
+  "community-hero",
+  "community-hub",
+  "community-hero-conversation",
+  "network-entrepreneurs",
+  "network-employers",
+  "network-jobseekers",
+  "network-community-leaders",
+  "network-training-providers",
+  "community-cta",
+]);
 
 /** A photograph generated for its slot, saved under /images/community/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
@@ -69,7 +75,7 @@ const photo = {
   ),
   workshop: shot(
     "community-hub",
-    "A woman in a lavender hijab working at a laptop in a busy room, a small class around a table and people chatting in a cafe corner behind her",
+    "A young man in round glasses and a lavender sweatshirt working at a laptop by the window of a busy neighbourhood cafe",
   ),
   professionals: shot(
     "network-professionals",
@@ -82,7 +88,7 @@ const photo = {
   /* Photographs generated for their slots, saved under /images/community/. */
   heroConversation: shot(
     "community-hero-conversation",
-    "A young father with a baby asleep in a sling laughing with an older Sikh man and an older woman over cups of tea at a café counter",
+    "A young father with a baby in a sling, an older man in a mustard turban and a woman in a patterned headwrap laughing over cups of tea at a market stall",
   ),
   outreach: shot(
     "community-outreach",
@@ -94,15 +100,15 @@ const photo = {
   ),
   entrepreneurs: shot(
     "network-entrepreneurs",
-    "A young woman in a coral kameez showing her laptop to an older man over cups of coffee, both smiling",
+    "A young woman in a coral jumper showing a business plan on a laptop to a smiling older woman in a mustard jumper over coffee in a food hall",
   ),
   employers: shot(
     "network-employers",
-    "An employer behind a table talking with a young man in a kurta and an older woman in an olive hijab at a busy fair",
+    "A young man in a denim jacket holding his CV as he talks with an employer in a burgundy blazer at a recruitment fair, a woman in an olive hijab beside him",
   ),
   jobseekers: shot(
     "network-jobseekers",
-    "A young woman in a camel coat holding a folder outside an office building as an older woman beside her smiles encouragingly",
+    "A young woman with long auburn hair holding a folder and taking a breath outside a red-brick office as a mentor in a green coat smiles beside her",
   ),
   students: shot(
     "network-students",
@@ -110,11 +116,11 @@ const photo = {
   ),
   communityLeaders: shot(
     "network-community-leaders",
-    "A man in a white kufi, a woman in a patterned headwrap and a man in a navy turban talking and laughing over cups of tea in a hall",
+    "A minister in a plum jacket talking warmly with an imam and a man in a saffron turban over cups of tea in a church cloister garden",
   ),
   trainingProviders: shot(
     "network-training-providers",
-    "A trainer guiding a woman's hands on a first-aid training mannequin as an older man kneels beside them watching",
+    "A first-aid instructor in a red polo shirt showing a woman how to do chest compressions on a training mannequin as an older man watches",
   ),
   business: shot(
     "network-business",
