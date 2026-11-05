@@ -1,7 +1,7 @@
 "use server";
 
 import { contactEnquiry } from "@/data/contact";
-import type { EnquiryTopic } from "@/data/site";
+import { enquiryContexts, type EnquiryTopic } from "@/data/site";
 import { FORMS } from "@/lib/forms";
 import { sendNotification } from "@/lib/notify";
 import { saveSubmission } from "@/lib/sheets";
@@ -10,6 +10,8 @@ export type EnquiryField = "topic" | "name" | "email" | "message";
 
 export type Enquiry = {
   topic: EnquiryTopic;
+  /** The page the form was sent from, when it is not the Contact page (see `enquiryContexts`). */
+  context: string;
   name: string;
   email: string;
   telephone: string;
@@ -52,6 +54,9 @@ export async function sendEnquiry(_previous: EnquiryState, formData: FormData): 
     organisation: read(formData, "organisation", 200),
     message: read(formData, "message", 5000),
   };
+  // Only the pages that carry the form name themselves; anything else is ignored.
+  const sentFrom = read(formData, "context", 60);
+  const context = (enquiryContexts as readonly string[]).includes(sentFrom) ? sentFrom : "";
 
   const messages = contactEnquiry.form.errors;
   const errors: EnquiryState["errors"] = {};
@@ -61,7 +66,7 @@ export async function sendEnquiry(_previous: EnquiryState, formData: FormData): 
   if (!values.message) errors.message = messages.message;
   if (!isTopic(values.topic) || Object.keys(errors).length) return { status: "invalid", errors, values };
 
-  const outcome = await deliverEnquiry({ ...values, topic: values.topic });
+  const outcome = await deliverEnquiry({ ...values, topic: values.topic, context });
   return outcome === "sent" ? { status: "sent" } : { status: outcome, values };
 }
 
@@ -73,8 +78,11 @@ export async function sendEnquiry(_previous: EnquiryState, formData: FormData): 
  */
 async function deliverEnquiry(enquiry: Enquiry): Promise<"sent" | "failed"> {
   const def = FORMS.enquiry;
-  const topic = contactEnquiry.form.topics.find((item) => item.id === enquiry.topic)?.label ?? enquiry.topic;
-  const values: Record<string, string> = { ...enquiry, topic };
+  const label = contactEnquiry.form.topics.find((item) => item.id === enquiry.topic)?.label ?? enquiry.topic;
+  // An enquiry from the Iftar or Scholarships page carries the page's name: "Volunteer (Community Iftar 2027)".
+  const { context, ...rest } = enquiry;
+  const topic = context ? `${label} (${context})` : label;
+  const values: Record<string, string> = { ...rest, topic };
 
   try {
     await saveSubmission(def, values);

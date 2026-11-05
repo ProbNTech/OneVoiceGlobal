@@ -23,31 +23,53 @@
  * IMAGES. Each photograph was generated for its slot and cut to the slot's
  * exact size. Most come from the second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages.py`), with varied settings,
- * clothes and faces and mostly Pakistani and South Asian trainees and
- * audiences, saved under /images/programmes/ as `<slot>-v2.jpg` (originals
- * in `_source/generated/v2-pages/`); about a quarter keep their first-set
- * photograph (FIRST_SET below, prompts in `_source/programmes-media-brief.md`),
- * so the page mixes both sets. No photograph here
- * is used anywhere else on the site. Alt text describes only what the frame
- * shows: none of these people is presented as a OneVoice participant or
- * member of staff.
+ * clothes and faces, saved under /images/programmes/ as `<slot>-v2.jpg`
+ * (originals in `_source/generated/v2-pages/`); some keep their first-set
+ * photograph (FIRST_SET below, prompts in
+ * `_source/programmes-media-brief.md`), so the page mixes both sets. The
+ * slots in THIRD_SET show a third set (3 and 4 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. The Scholarships section's photograph was generated on
+ * 5 November 2026 with the Scholarships page's set
+ * (`_source/scholarships-media-brief.md`) and saved without a suffix, as
+ * `programmes-scholarships.jpg`. No photograph here is used anywhere else on
+ * the site. Alt text
+ * describes only what the frame shows: none of these people is presented as
+ * a OneVoice participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
+import { scholarshipsGrants, scholarshipsHero } from "@/data/scholarships";
 import { brand, enquiryHref, navigation, routes } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
-const FIRST_SET = new Set([
+/* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
+   2026; those that shared one bright room moved to new places on 4 November). These slots show their
+   first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
+const FIRST_SET = new Set(["programmes-digital-business", "programmes-young-people"]);
+
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`), cast towards that mix and set in its own relevant place. */
+const THIRD_SET = new Set([
+  "programmes-education",
   "programmes-digital",
-  "programmes-digital-business",
-  "programmes-young-people",
+  "programmes-employability",
+  "programmes-careers-guidance",
+  "programmes-enterprise",
+  "programmes-business-network",
+  "programmes-young-men",
   "programmes-mens-development",
+  "programmes-cta",
 ]);
 
-/** A photograph generated for its slot, saved under /images/programmes/ (see FIRST_SET for which file it shows). */
+/** A photograph generated for its slot, saved under /images/programmes/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/programmes/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/programmes/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -63,11 +85,11 @@ const photo = {
   ),
   education: shot(
     "programmes-education",
-    "A young man in a shirt and tie practising greeting a visitor at a reception counter while a tutor and two learners look on",
+    "A young man in a shirt and tie greeting an older woman in a grey shawl across a hotel reception desk as a tutor and learners take notes",
   ),
   digital: shot(
     "programmes-digital",
-    "A young man pointing to a tablet as three older adults at a round table smile at their own tablets",
+    "An older woman smiling at a tablet as a young volunteer points at the screen, with two other residents at a table in a sheltered housing lounge",
   ),
   digitalWork: shot(
     "programmes-digital-work",
@@ -79,11 +101,11 @@ const photo = {
   ),
   employability: shot(
     "programmes-employability",
-    "An adviser crouching to help a man at a laptop, with other jobseekers working at laptops along the table",
+    "An adviser in a mustard cardigan helping an older man at a laptop at a job club overlooking a football pitch, other jobseekers working beside them",
   ),
   careersGuidance: shot(
     "programmes-careers-guidance",
-    "A young woman in a peach hijab pointing to a printed chart of options while a careers adviser beside her looks on",
+    "A young woman in a peach jumper pointing at a printed chart of career pathways as a careers adviser in a green jumper looks on",
   ),
   careerDevelopment: shot(
     "programmes-career-development",
@@ -91,11 +113,11 @@ const photo = {
   ),
   enterprise: shot(
     "programmes-enterprise",
-    "Two young founders at a workbench with plain product boxes and a laptop, the woman explaining with her hands",
+    "Two young founders reviewing product boxes beside a laptop at a workbench in a small trading-estate unit, the woman explaining with her hands",
   ),
   businessNetwork: shot(
     "programmes-business-network",
-    "Stallholders showing handmade soaps, plants, baked goods and jewellery to visitors along a row of tables in a hall",
+    "Visitors browsing stalls of handmade soaps, baked goods and cushions at a makers' market under brick railway arches",
   ),
   mentoring: shot(
     "programmes-mentoring",
@@ -111,11 +133,11 @@ const photo = {
   ),
   youngMen: shot(
     "programmes-young-men",
-    "Young men sitting in a circle of chairs, one talking with confidence while a mentor and the others listen",
+    "Young men in a circle of chairs in a boxing gym, listening as one in an orange hoodie speaks, a mentor in a burgundy jumper among them",
   ),
   mensDevelopment: shot(
     "programmes-mens-development",
-    "A man in a teal shirt pointing to papers on a table as three men of different ages work with notebooks and calculators",
+    "Four men of different ages talking over a notebook at a table in a rowing club boathouse, boats racked behind them",
   ),
   wellbeing: shot(
     "programmes-wellbeing",
@@ -123,12 +145,16 @@ const photo = {
   ),
   cta: shot(
     "programmes-cta",
-    "Families and neighbours of all ages chatting in small groups in a courtyard under warm evening lights",
+    "Families and neighbours chatting under festoon lights on a rooftop terrace at dusk, the city skyline behind them",
   ),
 } satisfies Record<string, HomeImage>;
 
 /** The anchors the menu builds for this page's themes. */
-const anchors = navigation.find((item) => item.label === "Programmes")?.children ?? [];
+/* The dropdown also leads to the Scholarships page; the strip under the hero
+   keeps to this page's own sections. */
+const anchors = (navigation.find((item) => item.label === "Programmes")?.children ?? []).filter((link) =>
+  link.href.startsWith(`${routes.programmes}#`),
+);
 const anchorFor = (label: string) => anchors.find((link) => link.label === label)?.href ?? routes.programmes;
 const idOf = (label: string) => anchorFor(label).split("#")[1] ?? "";
 
@@ -850,6 +876,35 @@ export const programmesSafety = {
     items: string[];
     closing: string;
   }[],
+} as const;
+
+/* -------------------------------------------------------------------------
+   SCHOLARSHIPS & EDUCATIONAL GRANTS
+   The client's scholarship programme (4 November 2026), introduced here as
+   one of the Foundation's programmes and set out in full on its own page.
+   Its lines and the six kinds of grant are read from src/data/scholarships.ts,
+   so the two pages never disagree. Its photograph has a slot of its own.
+   ------------------------------------------------------------------------- */
+
+export const programmesScholarships = {
+  id: "scholarships",
+  kicker: scholarshipsHero.kicker,
+  titleLead: scholarshipsHero.titleLead,
+  titleAccent: scholarshipsHero.titleAccent,
+  lead: scholarshipsHero.lead,
+  description: scholarshipsHero.description,
+  grantsLead: scholarshipsGrants.lead,
+  grants: scholarshipsGrants.grants.map(({ letter, name }) => ({ letter, name })),
+  /** The document's title line, on the card over the photograph. */
+  card: scholarshipsHero.card,
+  primaryCta: { label: "Explore Scholarships", href: routes.scholarships },
+  secondaryCta: { label: "Support a Student", href: `${routes.scholarships}#support-a-student` },
+  /** Generated with the Scholarships page's set, so it carries no -v2/-v3 suffix. */
+  image: {
+    src: "/images/programmes/programmes-scholarships.jpg",
+    alt: "A young woman in a lab coat taking notes beside a microscope in a university teaching laboratory",
+    position: "50% 50%",
+  },
 } as const;
 
 /* -------------------------------------------------------------------------

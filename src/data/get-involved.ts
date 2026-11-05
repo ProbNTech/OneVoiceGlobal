@@ -21,25 +21,44 @@
  * exact size (first-set prompts in `_source/get-involved-media-brief.md`).
  * Most come from the second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages2.py`), with varied
- * settings, clothes and faces and mostly Pakistani and South Asian people,
- * saved under /images/get-involved/ as `<slot>-v2.jpg` (originals in
- * `_source/generated/v2-pages2/`); about a quarter keep their first-set
- * photograph (FIRST_SET below), so the page mixes both sets. No photograph
- * here is used anywhere else on the site. Alt text describes only what the
- * frame shows: none of these people is presented as a OneVoice participant,
- * volunteer or member of staff.
+ * settings, clothes and faces, saved under /images/get-involved/ as
+ * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages2/`); some keep
+ * their first-set photograph (FIRST_SET below), so the page mixes both sets.
+ * The slots in THIRD_SET show a third set (3 and 4 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. No photograph here is used anywhere else on the site. Alt text
+ * describes only what the frame shows: none of these people is presented as
+ * a OneVoice participant, volunteer or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, enquiryHref, navigation, routes } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
-const FIRST_SET = new Set(["donate", "young-people", "support-reach"]);
+/* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
+   2026; those that shared one bright room moved to new places on 4 November). These slots show their
+   first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
+const FIRST_SET = new Set(["young-people", "support-reach"]);
 
-/** A photograph generated for its slot, saved under /images/get-involved/ (see FIRST_SET for which file it shows). */
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`), cast towards that mix and set in its own relevant place. */
+const THIRD_SET = new Set([
+  "get-involved-hero-inset",
+  "support-partner",
+  "support-network",
+  "donate",
+  "sponsor",
+  "get-involved-cta",
+]);
+
+/** A photograph generated for its slot, saved under /images/get-involved/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/get-involved/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/get-involved/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -51,11 +70,11 @@ const photo = {
   ),
   heroInset: shot(
     "get-involved-hero-inset",
-    "A teenage girl in a lilac hijab and an older man in a flat cap laughing as they repot herbs together",
+    "An older man in a flat cap and a teenage girl in a lavender jumper laughing as they repot herbs in a polytunnel",
   ),
   partner: shot(
     "support-partner",
-    "A man and a woman smiling as they sign papers at a table while two colleagues behind them clap",
+    "A man in a charcoal suit and a woman in a mustard blazer signing an agreement at a table as two colleagues clap behind them in a site office",
   ),
   volunteer: shot(
     "support-volunteer",
@@ -67,7 +86,7 @@ const photo = {
   ),
   network: shot(
     "support-network",
-    "A young man in a rust jumper and an older woman in a burgundy blazer laughing across a small table, other pairs talking behind them",
+    "A young man in a rust jumper and an older woman in a burgundy blazer laughing as they talk at a breakfast table in a cricket pavilion",
   ),
   reach: shot(
     "support-reach",
@@ -88,15 +107,15 @@ const photo = {
   ),
   donate: shot(
     "donate",
-    "A woman and a man lifting a laptop out of a cardboard box beside a stack of laptops and books",
+    "A woman lifting a cleaned laptop out of a box held by a smiling man in a green fleece in a laptop refurbishment workshop",
   ),
   sponsor: shot(
     "sponsor",
-    "Adult learners at laptops along rows of tables, one woman raising her hand as a trainer walks between the desks",
+    "Adult learners at laptops along rows of desks on a training floor, a young woman in a mustard jumper raising her hand as the trainer walks between them",
   ),
   cta: shot(
     "get-involved-cta",
-    "People of all ages sitting in a wide circle of chairs with cups of tea, laughing as a young woman introduces herself",
+    "Volunteers of all ages laughing in a wide circle of chairs under a brick railway arch as one of them introduces herself, mugs of tea in hand",
   ),
 } satisfies Record<string, HomeImage>;
 

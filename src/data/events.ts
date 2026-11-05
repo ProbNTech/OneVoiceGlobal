@@ -18,25 +18,37 @@
  * exact size (first-set prompts in `_source/events-media-brief.md`). Most
  * come from the second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages2.py`), with varied
- * settings, clothes and faces and mostly Pakistani and South Asian people,
- * saved under /images/events/ as `<slot>-v2.jpg` (originals in
- * `_source/generated/v2-pages2/`); about a quarter keep their first-set
- * photograph (FIRST_SET below), so the page mixes both sets. No photograph
- * here is used anywhere else on the site. Alt text describes only what the
- * frame shows: none of these people is presented as a OneVoice participant
- * or member of staff.
+ * settings, clothes and faces, saved under /images/events/ as
+ * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages2/`); some keep
+ * their first-set photograph (FIRST_SET below), so the page mixes both sets.
+ * The slots in THIRD_SET show a third set (3 and 4 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. No photograph here is used anywhere else on the site. Alt text
+ * describes only what the frame shows: none of these people is presented as
+ * a OneVoice participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, enquiryHref, navigation, routes } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+/* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
+   2026; those that shared one bright room moved to new places on 4 November). These slots show their
+   first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
 const FIRST_SET = new Set(["events-iftar", "events-heritage", "events-identity"]);
 
-/** A photograph generated for its slot, saved under /images/events/ (see FIRST_SET for which file it shows). */
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`), cast towards that mix and set in its own relevant place. */
+const THIRD_SET = new Set(["events-hero-side", "events-womens-day", "events-futures", "events-awards", "events-cta"]);
+
+/** A photograph generated for its slot, saved under /images/events/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/events/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/events/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -48,7 +60,7 @@ const photo = {
   ),
   heroSide: shot(
     "events-hero-side",
-    "A young woman in a coral hijab carrying a stack of chairs as volunteers lay tablecloths in a hall before an event",
+    "A young woman in a denim jacket carrying a stack of folding chairs inside a marquee as two volunteers lay tablecloths behind her",
   ),
   iftar: shot(
     "events-iftar",
@@ -56,7 +68,7 @@ const photo = {
   ),
   womensDay: shot(
     "events-womens-day",
-    "A woman in a purple kameez speaking into a microphone as an audience of women of different ages smiles and applauds",
+    "A woman in a purple wrap dress speaking with a microphone to an audience of women applauding in a small auditorium",
   ),
   eidBazaar: shot(
     "events-eid-bazaar",
@@ -72,7 +84,7 @@ const photo = {
   ),
   futures: shot(
     "events-futures",
-    "A young woman in a mustard blazer explaining an idea to an older man over cups of tea at a reception",
+    "A young woman in a mustard blazer explaining an idea to an older man in a tweed jacket over cups of tea at an evening reception, city lights behind",
   ),
   walk: shot(
     "events-walk",
@@ -80,9 +92,12 @@ const photo = {
   ),
   awards: shot(
     "events-awards",
-    "A woman in a green embroidered kameez holding a glass award on stage beside a clapping host as guests at round tables applaud",
+    "A young woman in an emerald dress holding a glass award on a low stage as a host in a red dress claps, guests applauding at round tables in a hotel ballroom",
   ),
-  cta: shot("events-cta", "Families and neighbours of all ages picnicking on blankets in a park in warm evening light"),
+  cta: shot(
+    "events-cta",
+    "Neighbours of all ages sharing food on picnic blankets beside a pond in a park in golden evening light",
+  ),
 } satisfies Record<string, HomeImage>;
 
 /** The anchors the menu builds for this page's events. */
@@ -118,8 +133,13 @@ const iftar = event("Community Iftar & Official Launch", "01", {
   name: "Community Iftar & Official Launch",
   date: { primary: "20", secondary: "February", detail: "Saturday" },
   when: "Saturday 20 February 2027",
-  line: "Queen Elizabeth Olympic Park, Stratford, East London",
+  // The venue as the client's Iftar document gives it (4 November 2026).
+  line: "Lee Valley Stadium, Queen Elizabeth Olympic Park, Stratford",
 });
+/* The Iftar has a page of its own (the client's Iftar document, 4 November
+   2026): the calendar and the hero's card lead there, while the menu still
+   lands on its section on this page, which links on to it. */
+const iftarPage = { ...iftar, href: routes.iftar };
 const womensDay = event("International Women's Day", "02", {
   name: "International Women's Day",
   date: { primary: "08", secondary: "March", detail: "Monday" },
@@ -175,7 +195,7 @@ export const eventsHero = {
   description: `In 2027, ${brand.name} aims to establish a programme of community events and activities that celebrate cultural diversity, empower women, promote wellbeing and recognise the positive contributions of individuals and organisations.`,
   primaryCta: register,
   secondaryCta: { label: "Become a Partner", href: enquiryHref("partner") },
-  card: { label: "Our proposed annual calendar begins with", event: iftar },
+  card: { label: "Our proposed annual calendar begins with", event: iftarPage },
   images: { main: photo.heroMain, side: photo.heroSide },
 } as const;
 
@@ -198,7 +218,7 @@ export const eventsCalendar = {
     "Throughout the year, we aim to create opportunities for residents, community organisations, businesses, public institutions, volunteers and supporters to connect, collaborate and contribute to a stronger and more inclusive society.",
   ],
   note: "Dates and venues are provisional until formally confirmed. Event details, registration information and partnership opportunities will be published as arrangements progress.",
-  events: [iftar, womensDay, eid, pakistan, walks, yearbook, awards],
+  events: [iftarPage, womensDay, eid, pakistan, walks, yearbook, awards],
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -209,7 +229,7 @@ export const eventsIftar = {
   ...iftar,
   titleLead: "Community Iftar",
   titleAccent: "& Official Launch",
-  venue: { label: "Proposed venue", text: "Queen Elizabeth Olympic Park, Stratford, East London" },
+  venue: { label: "Proposed venue", text: "Lee Valley Stadium, Queen Elizabeth Olympic Park, Stratford, East London" },
   lead: `A major community gathering aiming to welcome 2,000+ people to celebrate Ramadan, introduce ${brand.name} and bring together residents, community leaders, charities, businesses, public representatives and potential partners.`,
   highlightsLabel: "Proposed highlights",
   highlights: [
@@ -220,6 +240,8 @@ export const eventsIftar = {
     "Community partnership announcements",
     "Opportunities to volunteer or support future programmes",
   ],
+  /** The way on to the event's own page. */
+  page: { label: "View Event Details", href: routes.iftar },
   image: photo.iftar,
 } as const;
 

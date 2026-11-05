@@ -12,28 +12,41 @@
  * brief's sentences are lightly corrected where its wording breaks (noted
  * beside each), and "OneVoice Global" takes `brand.name`.
  *
- * IMAGES. Every photograph on the page was generated for its slot and cut
- * to the slot's exact size; they replace the brief's own photographs, which
- * are used on other pages. Most come from the second set (3 November 2026,
+ * IMAGES. Every photograph on the page was generated for its slot and cut to
+ * the slot's exact size; they replace the brief's own photographs, which are
+ * used on other pages. Most come from the second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages.py`), with varied settings,
- * clothes and faces and mostly Pakistani and South Asian trainees and
- * audiences, saved under /images/our-work/ as `<slot>-v2.jpg` (originals in
- * `_source/generated/v2-pages/`); about a quarter keep their first-set
- * photograph (FIRST_SET below), so the page mixes both sets. No photograph
- * here is used anywhere else on the site. Alt text describes only what the frame shows: none of these people
- * is presented as a OneVoice participant or member of staff.
+ * clothes and faces, saved under /images/our-work/ as `<slot>-v2.jpg`
+ * (originals in `_source/generated/v2-pages/`); some keep their first-set
+ * photograph (FIRST_SET below), so the page mixes both sets. The slots in
+ * THIRD_SET show a third set (3 and 4 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. No photograph here is used anywhere else on the site. Alt text
+ * describes only what the frame shows: none of these people is presented as
+ * a OneVoice participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
+/* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
+   2026; those that shared one bright room moved to new places on 4 November). These slots show their
+   first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
 const FIRST_SET = new Set(["our-work-hero-inset", "our-work-international"]);
 
-/** A photograph generated for its slot, saved under /images/our-work/ (see FIRST_SET for which file it shows). */
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`), cast towards that mix and set in its own relevant place. */
+const THIRD_SET = new Set(["our-work-hero", "our-work-education", "our-work-youth", "our-work-cta"]);
+
+/** A photograph generated for its slot, saved under /images/our-work/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/our-work/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/our-work/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -41,7 +54,7 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   hero: shot(
     "our-work-hero",
-    "A staff member in a green kameez showing three visitors the doorway of a busy classroom, the visitors smiling as they look in",
+    "A staff member in a sage-green dress showing three visitors a workshop through a glass wall in a college corridor",
   ),
   heroInset: shot(
     "our-work-hero-inset",
@@ -49,7 +62,7 @@ const photo = {
   ),
   education: shot(
     "our-work-education",
-    "Adult learners round a table of textbooks and notebooks, listening as a young woman in a pink hijab explains a point",
+    "A young woman with box braids explaining a point to three fellow learners over textbooks in a library study room",
   ),
   wellbeing: shot(
     "our-work-wellbeing",
@@ -61,7 +74,7 @@ const photo = {
   ),
   youth: shot(
     "our-work-youth",
-    "Young people and a youth worker around a table of maps and photographs, a girl in a lilac hijab leading the discussion",
+    "A teenage boy in a coral sweatshirt leading a discussion over maps with two girls and a youth worker in an orange container youth club beside a skate park",
   ),
   partnerships: shot(
     "our-work-partnerships",
@@ -73,7 +86,7 @@ const photo = {
   ),
   cta: shot(
     "our-work-cta",
-    "Residents, business people and charity staff talking in small groups over cups of tea in a warmly lit hall",
+    "Residents, business people and charity staff talking in small groups over cups of tea in a museum gallery with stone columns",
   ),
 } satisfies Record<string, HomeImage>;
 

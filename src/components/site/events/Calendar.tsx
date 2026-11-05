@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowDownRight, Info } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Info } from "lucide-react";
 import { cx } from "@/lib/cx";
 import { eventsCalendar } from "@/data/events";
 import { Kicker, Shell, Title } from "../ui/primitives";
@@ -74,7 +74,12 @@ export function Calendar() {
                   aria-hidden="true"
                   className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white text-ink ring-1 ring-ink/10 transition-colors duration-500 group-hover:bg-ink group-hover:text-white"
                 >
-                  <ArrowDownRight className="h-4 w-4" strokeWidth={2} />
+                  {/* Down to its section, or up and out to an event's own page. */}
+                  {event.href.includes("#") ? (
+                    <ArrowDownRight className="h-4 w-4" strokeWidth={2} />
+                  ) : (
+                    <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+                  )}
                 </span>
               </Link>
             </Reveal>

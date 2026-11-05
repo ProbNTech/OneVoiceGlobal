@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { CircleAlert, CircleCheck, Phone, type LucideIcon } from "lucide-react";
 import { sendEnquiry, type EnquiryState } from "@/app/(site)/contact/actions";
 import { contactEnquiry } from "@/data/contact";
-import type { EnquiryTopic } from "@/data/site";
+import type { EnquiryContext, EnquiryTopic } from "@/data/site";
 import { cx } from "@/lib/cx";
 import { CtaButton } from "../ui/primitives";
 
@@ -36,12 +36,17 @@ const showNote: Record<EnquiryTopic, string> = {
  * Opens the form with the kind of enquiry named in the address
  * (`?enquiry=donate`), which is how the site's calls to act arrive here
  * (`enquiryHref` in site.ts). It reads the address in the browser, so the
- * page around it stays static: until then the plain form stands in.
+ * page around it stays static: until then the plain form stands in. Pages
+ * that carry the form themselves pass their `context` and their own first
+ * choice of enquiry.
  */
-export function EnquiryFormFromQuery() {
+export function EnquiryFormFromQuery({
+  context,
+  defaultTopic,
+}: { context?: EnquiryContext; defaultTopic?: EnquiryTopic } = {}) {
   const requested = useSearchParams().get("enquiry");
-  const topic = form.topics.find((item) => item.id === requested)?.id;
-  return <EnquiryForm key={topic ?? "default"} initialTopic={topic} />;
+  const topic = form.topics.find((item) => item.id === requested)?.id ?? defaultTopic;
+  return <EnquiryForm key={topic ?? "default"} initialTopic={topic} context={context} />;
 }
 
 /**
@@ -51,7 +56,14 @@ export function EnquiryFormFromQuery() {
  * message sits under its field; what was entered stays in place when a try
  * does not go through. The brief's 999 advice runs along the panel's foot.
  */
-export function EnquiryForm({ initialTopic = "support" }: { initialTopic?: EnquiryTopic }) {
+export function EnquiryForm({
+  initialTopic = "support",
+  context,
+}: {
+  initialTopic?: EnquiryTopic;
+  /** The page the form sits on, when it is not the Contact page; recorded with the enquiry. */
+  context?: EnquiryContext;
+}) {
   const [state, formAction, pending] = useActionState(sendEnquiry, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const values = state.values ?? {};
@@ -148,6 +160,8 @@ export function EnquiryForm({ initialTopic = "support" }: { initialTopic?: Enqui
             className="sm:col-span-2"
           />
         </div>
+
+        {context ? <input type="hidden" name="context" value={context} /> : null}
 
         {/* Kept out of sight and out of the tab order: see actions.ts. */}
         <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-px w-px overflow-hidden">

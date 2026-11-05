@@ -53,8 +53,14 @@ export const routes = {
   about: "/about-us",
   ourWork: "/our-work",
   programmes: "/programmes",
+  /* The client's Scholarship & Educational Grants Programme (4 November
+     2026): its own page, in the full menu and the footer, not the top bar. */
+  scholarships: "/scholarships",
   seminars: "/seminars-and-workshops",
   events: "/events",
+  /* The client's Community Iftar 2027 document (4 November 2026): the
+     calendar's first event, on a page of its own under Events 2027. */
+  iftar: "/events/community-iftar-2027",
   community: "/community",
   partners: "/partners",
   impact: "/impact",
@@ -123,8 +129,14 @@ export const navigation: NavItem[] = [
       "Women, Men & Youth",
       "Wellbeing & Family",
       "Safety & Advice",
-    ]),
+    ]).concat(
+      /* The scholarship programme has a page of its own, which the Programmes
+         page introduces too, so the dropdown leads straight to it. */
+      { label: "Scholarships", href: routes.scholarships },
+    ),
   },
+  /* Listed in the full menu and the footer; the top bar keeps its six. */
+  { label: "Scholarships", href: routes.scholarships },
   {
     label: "Seminars & Workshops",
     href: routes.seminars,
@@ -195,6 +207,14 @@ export const navigation: NavItem[] = [
  */
 export type EnquiryTopic = "support" | "interest" | "refer" | "volunteer" | "partner" | "sponsor" | "donate";
 
+/**
+ * Pages that carry the enquiry form themselves. An enquiry sent from one is
+ * recorded under its kind and the page's name, e.g. "Volunteer (Community
+ * Iftar 2027)", so the team can tell where it came from.
+ */
+export const enquiryContexts = ["Community Iftar 2027", "Scholarship Programme"] as const;
+export type EnquiryContext = (typeof enquiryContexts)[number];
+
 /** The Contact page, scrolled to its form, with one kind of enquiry chosen. */
 export const enquiryHref = (topic: EnquiryTopic) => `${routes.contact}?enquiry=${topic}#contact-us`;
 
@@ -234,6 +254,7 @@ export const footerColumns: { heading: string; links: NavLink[] }[] = [
       "About Us",
       "Our Work",
       "Programmes",
+      "Scholarships",
       "Seminars & Workshops",
       "Events 2027",
       "Community",

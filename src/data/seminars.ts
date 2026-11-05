@@ -33,30 +33,49 @@
  * `_source/generated/tools/make_prompts_seminars.py`). Most come from the
  * second set (3 November 2026,
  * `_source/generated/tools/make_prompts_v2_pages3.py`), with varied
- * settings, clothes and faces and mostly Pakistani and South Asian people,
- * saved under /images/seminars/ as `<slot>-v2.jpg` (originals in
- * `_source/generated/v2-pages3/`); about a quarter keep their first-set
- * photograph (FIRST_SET below), so the page mixes both sets. No photograph
- * here is used anywhere else on the site. Alt text describes only what the
- * frame shows: none of these people is presented as a OneVoice participant
- * or member of staff.
+ * settings, clothes and faces, saved under /images/seminars/ as
+ * `<slot>-v2.jpg` (originals in `_source/generated/v2-pages3/`); some keep
+ * their first-set photograph (FIRST_SET below), so the page mixes both sets.
+ * The slots in THIRD_SET show a third set (3 and 4 November 2026,
+ * `_source/generated/tools/make_prompts_v3.py`, originals in
+ * `_source/generated/v3/`), saved as `<slot>-v3.jpg`: they are cast towards
+ * the client's mix of people across the site, counted by each photo's main
+ * person (about 40% White British and European, 30% South Asian, 15% Black,
+ * 10% Arab and 5% mixed or other), and each is set in its own relevant
+ * place, because the earlier photos looked as if they were all taken in one
+ * building. No photograph here is used anywhere else on the site. Alt text
+ * describes only what the frame shows: none of these people is presented as
+ * a OneVoice participant or member of staff.
  */
 
 import type { HomeImage } from "@/data/home";
 import { brand, enquiryHref, navigation, routes } from "@/data/site";
 
-/* About a quarter of the page's first-set photographs stay among the new ones, at the user's request
-   (3 November 2026). These slots show their first-set file; the rest show `<slot>-v2.jpg`. */
-const FIRST_SET = new Set([
+/* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
+   2026; those that shared one bright room moved to new places on 4 November). These slots show their
+   first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
+const FIRST_SET = new Set(["seminars-mh-languages", "seminars-relationships"]);
+
+/* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
+   South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
+   show a third-set photograph (`<slot>-v3.jpg`), cast towards that mix and set in its own relevant place. */
+const THIRD_SET = new Set([
+  "seminars-hero",
   "seminars-hero-circle",
+  "seminars-approach",
   "seminars-workshop-finance",
-  "seminars-mh-languages",
-  "seminars-relationships",
+  "seminars-mh-creative",
+  "seminars-mh-stress",
+  "seminars-mh-family",
+  "seminars-mh-support",
+  "seminars-rights",
+  "seminars-work-with-us",
+  "seminars-cta",
 ]);
 
-/** A photograph generated for its slot, saved under /images/seminars/ (see FIRST_SET for which file it shows). */
+/** A photograph generated for its slot, saved under /images/seminars/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
-  src: `/images/seminars/${file}${FIRST_SET.has(file) ? "" : "-v2"}.jpg`,
+  src: `/images/seminars/${file}${FIRST_SET.has(file) ? "" : THIRD_SET.has(file) ? "-v3" : "-v2"}.jpg`,
   alt,
   position,
 });
@@ -64,16 +83,19 @@ const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
 const photo = {
   heroMain: shot(
     "seminars-hero",
-    "Adults of different ages seated in a semicircle, an older man in a black cap raising his hand to ask a question",
+    "Adults seated in a semicircle in a bright community room, an older man in a flat cap raising his hand to ask a question",
   ),
-  heroCircle: shot("seminars-hero-circle", "An older man and a young woman smiling at each other mid-conversation"),
+  heroCircle: shot(
+    "seminars-hero-circle",
+    "A father with greying hair and his adult daughter turning to each other and smiling in a rose garden",
+  ),
   approach: shot(
     "seminars-approach",
-    "A woman in a lavender hijab with a notebook listening as an older man speaks at a round table, others taking notes",
+    "A facilitator in a sand-coloured hijab listening as an older man speaks at a round table, others taking notes",
   ),
   workshopFinance: shot(
     "seminars-workshop-finance",
-    "A woman in a teal top laughing with a group of adults as they share coins into glass jars at a table",
+    "A facilitator in a rust blouse laughing as two people sort coins into glass jars at a money workshop",
   ),
   workshopFamilyLaw: shot(
     "seminars-workshop-family-law",
@@ -91,22 +113,25 @@ const photo = {
     "seminars-mh-expectations",
     "A young woman in a maroon hijab speaking thoughtfully as the older woman beside her listens",
   ),
-  mhCreative: shot("seminars-mh-creative", "Two women smiling as they write and arrange cut-paper collages at a table"),
+  mhCreative: shot(
+    "seminars-mh-creative",
+    "Two women smiling as they write in journals and arrange paper collages at a table in an art studio",
+  ),
   mhStress: shot(
     "seminars-mh-stress",
-    "A young man with his eyes closed and a hand on his chest doing a breathing exercise, a woman doing the same behind him",
+    "A young man with his eyes closed and a hand on his chest doing a breathing exercise in a yoga studio, an older woman doing the same behind him",
   ),
   mhFamily: shot(
     "seminars-mh-family",
-    "A mother in a pink hijab and her teenage son talking at a table, listening to one another",
+    "A mother in a pink jumper and her teenage son talking as they walk along a canal towpath",
   ),
   mhSupport: shot(
     "seminars-mh-support",
-    "A woman in a camel coat listening closely as a man in a scarf talks beside her on a park bench in autumn",
+    "A man with a grey-flecked beard talking as a young woman in a camel coat listens beside him on a park bench in autumn",
   ),
   rights: shot(
     "seminars-rights",
-    "A young woman in a mustard hijab explaining a point to an older woman over notes at a table",
+    "A young woman in a mustard jumper explaining a point to an older woman in a maroon shawl over notes in a law library",
   ),
   relationships: shot(
     "seminars-relationships",
@@ -114,11 +139,11 @@ const photo = {
   ),
   workWithUs: shot(
     "seminars-work-with-us",
-    "A man in a rust jumper and a woman in a plum blazer planning together over notes at a table, both smiling",
+    "A man with a ginger beard and a woman in a plum blazer planning a workshop together over notes in a small office",
   ),
   cta: shot(
     "seminars-cta",
-    "Small groups of adults talking and writing on clipboards on benches and folding chairs in a garden at golden hour",
+    "Small groups of adults talking and writing on clipboards in the open-sided barn of a city farm at golden hour",
   ),
 } satisfies Record<string, HomeImage>;
 
