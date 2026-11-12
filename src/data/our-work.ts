@@ -29,9 +29,18 @@
  * building. No photograph here is used anywhere else on the site. Alt text
  * describes only what the frame shows: none of these people is presented as
  * a OneVoice participant or member of staff.
+ *
+ * REFUGEE & ASYLUM SEEKER SUPPORT. The client added this service on
+ * 11 November 2026 with a document of its own, and it has a page of its own
+ * (src/data/refugee-support.ts). The page here introduces it as an eighth
+ * area after the brief's seven, in that document's words, and its
+ * photograph (generated with the service page's set, see
+ * `_source/refugee-support-media-brief.md`) is saved without a suffix, as
+ * `our-work-refugee-support.jpg`.
  */
 
 import type { HomeImage } from "@/data/home";
+import { refugeeAsylum, refugeeEducation, refugeeHero, refugeeSponsorship } from "@/data/refugee-support";
 import { brand, ctas, navigation, routes } from "@/data/site";
 
 /* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
@@ -90,6 +99,9 @@ const photo = {
   ),
 } satisfies Record<string, HomeImage>;
 
+/** The new service's introduction on this page (its link in the sub-menu leads to its own page). */
+const REFUGEE_ID = "refugee-and-asylum-seeker-support";
+
 /** Each area's anchor, as the Our Work sub-menu builds it from the area's name. */
 const areas = navigation.find((item) => item.label === "Our Work")?.children ?? [];
 const idOf = (label: string) => areas.find((link) => link.label === label)?.href.split("#")[1] ?? "";
@@ -125,6 +137,8 @@ export const ourWorkSections = {
     { label: "Youth, Women & Family", href: areas[4]?.href ?? routes.ourWork },
     { label: "Partnerships & Diaspora", href: areas[5]?.href ?? routes.ourWork },
     { label: "International", href: areas[6]?.href ?? routes.ourWork },
+    // The new service's introduction below the seven areas.
+    { label: "Refugee Support", href: `${routes.ourWork}#${REFUGEE_ID}` },
   ],
 };
 
@@ -324,6 +338,38 @@ export const ourWorkInternational = {
     "International volunteer, youth leadership and women's empowerment initiatives.",
   ],
   image: photo.international,
+} as const;
+
+/* -------------------------------------------------------------------------
+   8. REFUGEE & ASYLUM SEEKER SUPPORT
+   The client's new service (11 November 2026), which has a page of its own:
+   its name as the kicker, its subtitle as the heading, its second opening
+   paragraph, and its three programmes, each with its subtitle, leading to
+   its part of the page. The three priorities sit on the photograph.
+   ------------------------------------------------------------------------- */
+
+export const ourWorkRefugee = {
+  id: REFUGEE_ID,
+  number: "08",
+  kicker: "Refugee & Asylum Seeker Support",
+  titleLead: refugeeHero.subtitle[0],
+  titleAccent: refugeeHero.subtitle[1],
+  lead: refugeeHero.description,
+  programmes: [refugeeAsylum, refugeeSponsorship, refugeeEducation].map((programme) => ({
+    number: programme.number,
+    name: programme.kicker,
+    line: `${programme.titleLead} ${programme.titleAccent}`,
+    href: `${routes.refugeeSupport}#${programme.id}`,
+  })),
+  priorities: refugeeHero.priorities.items,
+  primaryCta: { label: "Explore Refugee Support", href: routes.refugeeSupport },
+  secondaryCta: refugeeHero.secondaryCta,
+  /** Generated with the service page's set, so it carries no -v2/-v3 suffix. */
+  image: {
+    src: "/images/our-work/our-work-refugee-support.jpg",
+    alt: "A grandmother and her granddaughter going through a form with a man in a white shirt and lanyard at a marble town hall desk",
+    position: "50% 50%",
+  } satisfies HomeImage,
 } as const;
 
 /* -------------------------------------------------------------------------
