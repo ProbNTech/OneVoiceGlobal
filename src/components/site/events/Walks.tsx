@@ -35,7 +35,7 @@ const DISCS = ["bg-lagoon-600 text-white", "bg-ocean-600 text-white", "bg-orange
 const ACCENTS = ["text-lagoon-600", "text-ocean-600", "text-orange-ink"];
 
 /**
- * 5. OneVoice East London Community Marathon Walks, on cream: the event's
+ * 4. OneVoice East London Community Marathon Walks, on cream: the event's
  * theme as the title beside its date and the brief's description, then a
  * wide photograph of a community walk rounded into a pill, drifting a
  * little as the page scrolls. Its proposed highlights follow as one
