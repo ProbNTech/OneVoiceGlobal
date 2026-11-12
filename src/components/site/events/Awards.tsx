@@ -7,7 +7,7 @@ import { EventKicker } from "./EventKicker";
 import { EventMeta } from "./EventMeta";
 
 /**
- * 7. OneVoice Achievement Awards 2027, on sand: a photograph of an awards
+ * 6. OneVoice Achievement Awards 2027, on sand: a photograph of an awards
  * evening cut with a leaf corner, with Draft01's line on transparent
  * criteria and governance on a card over its foot. Beside it the event's
  * theme as the title, its date, the brief's two sentences, its proposed

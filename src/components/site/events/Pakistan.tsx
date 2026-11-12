@@ -16,7 +16,7 @@ const frames = [
 ];
 
 /**
- * 4. Pakistan Independence Day & Community Celebration, as the page's navy
+ * 3. Pakistan Independence Day & Community Celebration, as the page's navy
  * band, centred: the event's theme as the title, its date and the brief's
  * description. Then the theme's three parts, Heritage, Identity and Shared
  * Futures, each named in the display face under a photograph of its own;
