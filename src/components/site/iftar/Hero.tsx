@@ -124,11 +124,13 @@ export function Hero() {
                 <path
                   d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"
                   fill="none"
-                  strokeWidth="1.4"
+                  /* In the icon's 24 units: about 1.4px at the crescent's
+                     width. A non-scaling stroke would measure the dashes
+                     that draw it in screen pixels and leave gaps. */
+                  strokeWidth="0.22"
                   strokeLinejoin="round"
                   pathLength={100}
                   strokeDasharray="100"
-                  vectorEffect="non-scaling-stroke"
                   className="ring-draw stroke-orange"
                 />
               </svg>

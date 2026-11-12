@@ -52,6 +52,10 @@ export const routes = {
   home: "/",
   about: "/about-us",
   ourWork: "/our-work",
+  /* The client's Refugee & Asylum Seeker Support document (11 November
+     2026), a new service: its own page under Our Work, reached from the
+     Our Work menu, the Our Work page and the footer, not the top bar. */
+  refugeeSupport: "/our-work/refugee-and-asylum-seeker-support",
   programmes: "/programmes",
   /* The client's Scholarship & Educational Grants Programme (4 November
      2026): its own page, in the full menu and the footer, not the top bar. */
@@ -85,6 +89,9 @@ function anchor(base: string, label: string) {
 
 const sub = (base: string, labels: string[]) => labels.map((label) => anchor(base, label));
 
+/** The Refugee & Asylum Seeker Support page, named as its document names the service. */
+const refugeeSupportLink: NavLink = { label: "Refugee & Asylum Seeker Support", href: routes.refugeeSupport };
+
 export const navigation: NavItem[] = [
   { label: "Home", href: routes.home },
   {
@@ -112,7 +119,11 @@ export const navigation: NavItem[] = [
       "Youth, Women and Family Empowerment",
       "Community Partnerships and Diaspora Engagement",
       "International Network",
-    ]),
+    ]).concat(
+      /* The new service has a page of its own, which the Our Work page
+         introduces too, so the dropdown leads straight to it. */
+      refugeeSupportLink,
+    ),
   },
   {
     label: "Programmes",
@@ -212,7 +223,11 @@ export type EnquiryTopic = "support" | "interest" | "refer" | "volunteer" | "par
  * recorded under its kind and the page's name, e.g. "Volunteer (Community
  * Iftar 2027)", so the team can tell where it came from.
  */
-export const enquiryContexts = ["Community Iftar 2027", "Scholarship Programme"] as const;
+export const enquiryContexts = [
+  "Community Iftar 2027",
+  "Scholarship Programme",
+  "Refugee & Asylum Seeker Support",
+] as const;
 export type EnquiryContext = (typeof enquiryContexts)[number];
 
 /** The Contact page, scrolled to its form, with one kind of enquiry chosen. */
@@ -261,10 +276,13 @@ export const footerColumns: { heading: string; links: NavLink[] }[] = [
       "Partners",
       "Impact",
       "News & Resources",
-    ].map((label) => {
-      const { href } = byLabel(label);
-      return { label, href };
-    }),
+    ]
+      .map((label) => {
+        const { href } = byLabel(label);
+        return { label, href };
+      })
+      // The new service sits under Our Work in the menu, so it follows Our Work here.
+      .flatMap((link) => (link.label === "Our Work" ? [link, refugeeSupportLink] : [link])),
   },
   { heading: "Get Involved", links: byLabel("Get Involved").children ?? [] },
   {
