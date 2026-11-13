@@ -403,7 +403,9 @@ export const aboutTheory = {
    Dr Rabia Ishrat's and Shahid Nadeem Sandhu's from the profiles the client
    linked, and Mahi Zaal's the Instagram photo the user chose (sent as a
    screenshot, cropped clear of the app's controls). Originals are in
-   `_source/generated/team/`.
+   `_source/generated/team/`. Amina Chaudhry, her role, her email address
+   and her photograph were supplied by the client on 13 November 2026; the
+   email is the only one given, so only she shows one.
    ------------------------------------------------------------------------- */
 
 /** A team member's own photograph, saved under /images/about/team/. */
@@ -412,6 +414,9 @@ const portrait = (file: string, alt: string): HomeImage => ({
   alt,
   position: "50% 30%",
 });
+
+/** A member of the team; the email is shown only where the client has supplied one. */
+export type TeamMember = { name: string; role: string; email?: string; image: HomeImage };
 
 export const aboutTeam = {
   id: "our-team",
@@ -435,7 +440,13 @@ export const aboutTeam = {
       role: "Director, Marketing & PR",
       image: portrait("team-mahi-zaal-dubai", "Mahi Zaal, Director, Marketing & PR"),
     },
-  ],
+    {
+      name: "Amina Chaudhry",
+      role: "Director Media & PR",
+      email: "amina@onevoiceglobal.co.uk",
+      image: portrait("team-amina-chaudhry", "Amina Chaudhry, Director Media & PR"),
+    },
+  ] satisfies TeamMember[] as TeamMember[],
 } as const;
 
 /* -------------------------------------------------------------------------

@@ -3,7 +3,6 @@ import { Hero } from "@/components/site/events/Hero";
 import { Calendar } from "@/components/site/events/Calendar";
 import { Iftar } from "@/components/site/events/Iftar";
 import { WomensDay } from "@/components/site/events/WomensDay";
-import { Pakistan } from "@/components/site/events/Pakistan";
 import { Walks } from "@/components/site/events/Walks";
 import { Yearbook } from "@/components/site/events/Yearbook";
 import { Awards } from "@/components/site/events/Awards";
@@ -22,8 +21,8 @@ export const metadata: Metadata = {
  * Events 2027. The brief's V.2 EVENTS 2027 block: its subtitle and
  * introduction as the hero, its proposed annual calendar as an agenda, then
  * its events in its order, which is the order of the Events 2027 sub-menu,
- * each in a design of its own (six since the client withdrew the Eid Bazaar
- * on 12 November 2026). It closes on the block's
+ * each in a design of its own (five since the client withdrew the Eid Bazaar
+ * and Pakistan Independence Day on 12 and 13 November 2026). It closes on the block's
  * invitation to make 2027 a year of connection. Copy and images live in
  * src/data/events.ts.
  */
@@ -35,7 +34,6 @@ export default function EventsPage() {
       <Calendar />
       <Iftar />
       <WomensDay />
-      <Pakistan />
       <Walks />
       <Yearbook />
       <Awards />

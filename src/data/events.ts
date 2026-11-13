@@ -4,8 +4,9 @@
  * Every line comes from the brief's V.2 EVENTS 2027 block (24 October 2026):
  * its subtitle and introduction, its "Proposed annual calendar" of seven
  * events, and the potential award categories. The client withdrew the
- * calendar's third event, the Eid Bazaar, on 12 November 2026, so the page
- * shows six, numbered 01 to 06 in the brief's order. V.2 moved the Achievement
+ * calendar's third event, the Eid Bazaar, on 12 November 2026 and its fourth,
+ * Pakistan Independence Day, on 13 November, so the page shows five,
+ * numbered 01 to 05 in the brief's order. V.2 moved the Achievement
  * Awards here from Draft01's Community block; that block's subtitle for the
  * awards and its line on governance are borrowed, as noted beside them.
  * Each event's "Proposed highlights" sentence is set as a list, and the
@@ -41,12 +42,12 @@ import { brand, enquiryHref, navigation, routes } from "@/data/site";
 /* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
    2026; those that shared one bright room moved to new places on 4 November). These slots show their
    first-set file; the rest show `<slot>-v2.jpg` or, in THIRD_SET, `<slot>-v3.jpg`. */
-const FIRST_SET = new Set(["events-iftar", "events-heritage", "events-identity"]);
+const FIRST_SET = new Set(["events-iftar"]);
 
 /* The client's mix of people across the site (3 November 2026): about 40% White British and European, 30%
    South Asian, 15% Black, 10% Arab and 5% mixed or other, counted by each photo's main person. These slots
    show a third-set photograph (`<slot>-v3.jpg`), cast towards that mix and set in its own relevant place. */
-const THIRD_SET = new Set(["events-hero-side", "events-womens-day", "events-futures", "events-awards", "events-cta"]);
+const THIRD_SET = new Set(["events-hero-side", "events-womens-day", "events-awards", "events-cta"]);
 
 /** A photograph generated for its slot, saved under /images/events/ (FIRST_SET and THIRD_SET say which file it shows). */
 const shot = (file: string, alt: string, position = "50% 50%"): HomeImage => ({
@@ -71,18 +72,6 @@ const photo = {
   womensDay: shot(
     "events-womens-day",
     "A woman in a purple wrap dress speaking with a microphone to an audience of women applauding in a small auditorium",
-  ),
-  heritage: shot(
-    "events-heritage",
-    "Young women in embroidered shalwar kameez and flowing dupattas dancing on a stage in front of an audience",
-  ),
-  identity: shot(
-    "events-identity",
-    "A grandfather with his arm around his granddaughter, both laughing, as a woman in festive clothes smiles behind them",
-  ),
-  futures: shot(
-    "events-futures",
-    "A young woman in a mustard blazer explaining an idea to an older man in a tweed jacket over cups of tea at an evening reception, city lights behind",
   ),
   walk: shot(
     "events-walk",
@@ -144,26 +133,20 @@ const womensDay = event("International Women's Day", "02", {
   when: "Monday 8 March 2027",
   line: "Empowering Women, Inspiring Change",
 });
-const pakistan = event("Pakistan Independence Day & Community Celebration", "03", {
-  name: "Pakistan Independence Day & Community Celebration",
-  date: { primary: "14", secondary: "August", detail: "Saturday" },
-  when: "Saturday 14 August 2027",
-  line: "Heritage, Identity and Shared Futures",
-});
-const walks = event("East London Community Marathon Walks", "04", {
+const walks = event("East London Community Marathon Walks", "03", {
   name: "OneVoice East London Community Marathon Walks",
   date: { primary: "Sep", secondary: "2027", detail: "Date TBC" },
   when: "September 2027 · Date TBC",
   line: "Walk Together for Health and Community",
 });
-const yearbook = event("Yearbook 2027 – 100 Inspiring Personalities", "05", {
+const yearbook = event("Yearbook 2027 – 100 Inspiring Personalities", "04", {
   // The brief writes "Yearbook 2027-100"; the dash is spaced so it does not read as a range.
   name: "Yearbook 2027 – 100 Inspiring Personalities",
   date: { primary: "Year-end", secondary: "2027", detail: "Publication" },
   when: "Year-end 2027 · Publication",
   line: "A special annual publication",
 });
-const awards = event("OneVoice Achievement Awards 2027", "06", {
+const awards = event("OneVoice Achievement Awards 2027", "05", {
   name: "OneVoice Achievement Awards 2027",
   date: { primary: "Nov", secondary: "2027", detail: "Date TBC" },
   when: "November 2027 · Date TBC",
@@ -191,13 +174,13 @@ export const eventsHero = {
   images: { main: photo.heroMain, side: photo.heroSide },
 } as const;
 
-/** The strip under the hero: the six events, read from the navigation. */
+/** The strip under the hero: the five events, read from the navigation. */
 export const eventsSections = { label: "Events 2027", links: anchors };
 
 /* -------------------------------------------------------------------------
    PROPOSED ANNUAL CALENDAR
    The block's second and third paragraphs and its note on dates, then the
-   six events as an index, each leading to its own section.
+   five events as an index, each leading to its own section.
    ------------------------------------------------------------------------- */
 
 export const eventsCalendar = {
@@ -210,7 +193,7 @@ export const eventsCalendar = {
     "Throughout the year, we aim to create opportunities for residents, community organisations, businesses, public institutions, volunteers and supporters to connect, collaborate and contribute to a stronger and more inclusive society.",
   ],
   note: "Dates and venues are provisional until formally confirmed. Event details, registration information and partnership opportunities will be published as arrangements progress.",
-  events: [iftarPage, womensDay, pakistan, walks, yearbook, awards],
+  events: [iftarPage, womensDay, walks, yearbook, awards],
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -262,34 +245,7 @@ export const eventsWomensDay = {
 } as const;
 
 /* -------------------------------------------------------------------------
-   3. PAKISTAN INDEPENDENCE DAY & COMMUNITY CELEBRATION
-   Its theme as the title, and each of the theme's three parts under a
-   photograph of its own.
-   ------------------------------------------------------------------------- */
-
-export const eventsPakistan = {
-  ...pakistan,
-  titleLead: "Heritage, Identity",
-  titleAccent: "and Shared Futures",
-  lead: "A celebration of Pakistani heritage, culture, community contributions and the positive role of diaspora communities in the UK.",
-  theme: [
-    { word: "Heritage", image: photo.heritage },
-    { word: "Identity", image: photo.identity },
-    { word: "Shared Futures", image: photo.futures },
-  ],
-  highlightsLabel: "Proposed highlights",
-  highlights: [
-    "Cultural performances",
-    "Family activities",
-    "Community awards or acknowledgements",
-    "Local business stalls",
-    "Youth participation",
-    "Networking between community organisations and public institutions",
-  ],
-} as const;
-
-/* -------------------------------------------------------------------------
-   4. ONEVOICE EAST LONDON COMMUNITY MARATHON WALKS
+   3. ONEVOICE EAST LONDON COMMUNITY MARATHON WALKS
    Its theme as the title.
    ------------------------------------------------------------------------- */
 
@@ -314,7 +270,7 @@ export const eventsWalks = {
 } as const;
 
 /* -------------------------------------------------------------------------
-   5. YEARBOOK 2027 – 100 INSPIRING PERSONALITIES
+   4. YEARBOOK 2027 – 100 INSPIRING PERSONALITIES
    Its opening words ("A special annual publication") as the title; the
    rest of that sentence follows beneath. Its "Proposed content" lists the
    people it would profile, set as a list.
@@ -344,7 +300,7 @@ export const eventsYearbook = {
 } as const;
 
 /* -------------------------------------------------------------------------
-   6. ONEVOICE ACHIEVEMENT AWARDS 2027
+   5. ONEVOICE ACHIEVEMENT AWARDS 2027
    Its theme as the title, its two sentences, its highlights and its ten
    potential categories; the line on governance closes Draft01's
    ONEVOICE ACHIEVEMENT AWARDS block.

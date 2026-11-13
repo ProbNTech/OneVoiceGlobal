@@ -7,7 +7,7 @@ import { EventKicker } from "./EventKicker";
 import { EventMeta } from "./EventMeta";
 
 /**
- * 5. Yearbook 2027 – 100 Inspiring Personalities, on white and without a
+ * 4. Yearbook 2027 – 100 Inspiring Personalities, on white and without a
  * photograph: a publication, so it is set in type. On the left the number
  * the yearbook is named for, very large in outlined figures, with
  * "Inspiring Personalities" in the italic accent beneath; on the right the
