@@ -7,7 +7,7 @@ import { Reveal } from "../ui/Reveal";
 
 /**
  * Proposed Annual Calendar: the block's paragraphs on the year ahead and its
- * note that dates and venues are provisional, then the six events as an
+ * note that dates and venues are provisional, then the five events as an
  * agenda, two to a row on large screens. Each entry sets its date as the
  * brief writes it (the day or month large in the display face, the month or
  * year above it and the weekday or status beneath), beside the event's name

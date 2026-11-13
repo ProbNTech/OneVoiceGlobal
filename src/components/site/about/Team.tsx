@@ -12,15 +12,17 @@ const shapes = [
   "rounded-[7rem_2rem_2rem_2rem]",
   "[border-top-left-radius:50%_40%] [border-top-right-radius:50%_40%] rounded-b-[2rem]",
   "rounded-[2rem_2rem_7rem_2rem]",
+  "rounded-[2rem_7rem_2rem_2rem]",
 ];
 
 /**
- * Our Team: the people the client named, three portraits side by side on
- * sand, each with the name in the display face and the role in small
+ * Our Team: the people the client named, four portraits side by side on
+ * sand (two to a row on tablets), each with the name in the display face and the role in small
  * spaced capitals underneath, with no card behind them. The row is held to
  * a modest width so the portraits stay compact. A portrait still waiting
  * for its headshot shows the site's soft placeholder. The third frame's leaf
- * curve sits at its foot, clear of the head in that photograph.
+ * curve sits at its foot, clear of the head in that photograph. Where the
+ * client has given a member's email address it sits under the role.
  */
 export function Team() {
   return (
@@ -37,7 +39,7 @@ export function Team() {
           <Title id="team-title" lead={aboutTeam.titleLead} accent={aboutTeam.titleAccent} inline className="mt-5" />
         </div>
 
-        <ul className="mx-auto mt-8 grid max-w-5xl grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-3 lg:mt-10 lg:gap-x-12">
+        <ul className="mx-auto mt-8 grid max-w-6xl grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4 lg:gap-x-10">
           {aboutTeam.members.map((member, index) => (
             <Reveal as="li" key={member.name} variant="image" delay={index * 110} className="group text-center">
               <div className="mx-auto max-w-[19rem] drop-shadow-[0_30px_36px_rgb(10_37_64/0.18)]">
@@ -50,7 +52,7 @@ export function Team() {
                   <div className="reveal-media absolute inset-0">
                     <Photo
                       image={member.image}
-                      sizes="(min-width: 1024px) 304px, (min-width: 640px) 30vw, 304px"
+                      sizes="(min-width: 1024px) 270px, (min-width: 640px) 45vw, 304px"
                       className="transition-transform duration-[1.4s] ease-out-soft group-hover:scale-[1.07]"
                     />
                   </div>
@@ -60,6 +62,14 @@ export function Team() {
                 {member.name}
               </h3>
               <p className="mt-2 text-[0.75rem] font-bold uppercase tracking-[0.18em] text-lagoon-600">{member.role}</p>
+              {member.email ? (
+                <a
+                  href={`mailto:${member.email}`}
+                  className="mt-2 inline-block text-[0.9375rem] text-slate underline-offset-4 transition-colors hover:text-ink hover:underline"
+                >
+                  {member.email}
+                </a>
+              ) : null}
             </Reveal>
           ))}
         </ul>

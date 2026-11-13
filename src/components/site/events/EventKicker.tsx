@@ -1,7 +1,7 @@
 import { Kicker } from "../ui/primitives";
 
 /**
- * The label above each of the six events: the event's place in the
+ * The label above each of the five events: the event's place in the
  * calendar, then its name, so a reader always knows where they are in the
  * year.
  */

@@ -164,8 +164,7 @@ export const navigation: NavItem[] = [
     children: sub(routes.events, [
       "Community Iftar & Official Launch",
       "International Women's Day",
-      // The brief's Eid Bazaar came here; the client withdrew it on 12 November 2026.
-      "Pakistan Independence Day & Community Celebration",
+      // The brief's Eid Bazaar and Pakistan Independence Day came here; the client withdrew them on 12 and 13 November 2026.
       "East London Community Marathon Walks",
       // The brief writes "Yearbook 2027-100"; the dash is spaced so it does not read as a range.
       "Yearbook 2027 – 100 Inspiring Personalities",
