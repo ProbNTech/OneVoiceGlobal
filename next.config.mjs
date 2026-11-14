@@ -24,6 +24,18 @@
 const nextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  // The form's Google Sheets and email libraries are loaded by Node from node_modules rather than bundled.
+  // On Hostinger's build (webpack, WebAssembly compiler) the bundled copy of gaxios, which googleapis uses for
+  // its requests, came out broken ("Gaxios is not a constructor"), so every form submission failed with a
+  // server error (reported 14 November 2026).
+  serverExternalPackages: [
+    "googleapis",
+    "googleapis-common",
+    "google-auth-library",
+    "gaxios",
+    "gcp-metadata",
+    "nodemailer",
+  ],
   images: {
     // Next 16 only serves qualities that are declared here.
     qualities: [75, 80, 90],
