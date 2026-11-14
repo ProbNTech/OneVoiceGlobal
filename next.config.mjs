@@ -1,4 +1,5 @@
-import type { NextConfig } from "next";
+// Plain JavaScript rather than TypeScript: Hostinger's build servers have an old glibc, so Next.js falls back to
+// its WebAssembly compiler there, and that compiler cannot load a next.config.ts.
 
 /*
  * The site runs on shared Business Web Hosting, which caps how many
@@ -18,7 +19,9 @@ import type { NextConfig } from "next";
  *   for 30 days instead of 4 hours, so photographs are not remade all day.
  * - Builds use two workers rather than one per CPU core, for the same limit.
  */
-const nextConfig: NextConfig = {
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   images: {
@@ -33,14 +36,6 @@ const nextConfig: NextConfig = {
   experimental: {
     imgOptConcurrency: 1,
     cpus: 2,
-  },
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
   },
 };
 

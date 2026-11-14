@@ -101,7 +101,7 @@ This file is the playbook for every page on this site. Read it before designing 
 - **Content:** each page's copy and images go in `src/data/<page>.ts`, as one exported object per section, with source comments. Use the `HomeImage` shape from `src/data/home.ts` (`src`, `alt`, `position`, `pending`). Never write copy directly in JSX.
 - **Components:** sections go in `src/components/site/<page>/<Section>.tsx`; put shared pieces in `src/components/site/ui/`. Prefer server components, and add `"use client"` only for interaction or motion hooks.
 - **Class names:** join them with `cx` from `src/lib/cx.ts`, never `cn`, which runs tailwind-merge and drops our custom text sizes as if they were colours. Never pass two classes for the same property.
-- **Images:** use `next/image`. Pass `preload` (not the deprecated `priority`) for the first hero image, and give every image an accurate `sizes`. Only the qualities 75, 80 and 90 are allowed (`next.config.ts`).
+- **Images:** use `next/image`. Pass `preload` (not the deprecated `priority`) for the first hero image, and give every image an accurate `sizes`. Only the qualities 75, 80 and 90 are allowed (`next.config.mjs`).
 - **Cache Components is on:** no `new Date()` or other per-request values in server components (the footer year comes from `copyrightYear` in `site.ts`).
 - **Formatting:** `npx prettier --print-width 120 --write <files>`. Comments explain why, in plain sentences, matching the existing files.
 
