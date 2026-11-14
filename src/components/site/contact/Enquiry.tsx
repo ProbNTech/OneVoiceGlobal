@@ -11,9 +11,9 @@ import { EnquiryForm, EnquiryFormFromQuery } from "./EnquiryForm";
 /**
  * Contact Us: the brief's CONTACT US block beside the enquiry form. On the
  * left, the Centre's name and headline, its address, telephone, email and
- * website as each is supplied (none is yet, so none shows), the four social
- * platforms it names (unlinked until their addresses arrive) and a
- * photograph cut with a leaf corner. On the right, the form on a white
+ * website as each is supplied, the social platforms whose links have been
+ * supplied (a platform without a link is not shown) and a photograph cut
+ * with a leaf corner. On the right, the form on a white
  * panel. On phones the form comes straight after the heading, ahead of the
  * photograph, which keeps a 5:4 frame there; on large screens its frame
  * grows or shrinks to end level with the form (the media brief asks for
@@ -32,6 +32,7 @@ export function Enquiry() {
     { label: labels.email, value: contact.email, href: `mailto:${contact.email}`, icon: Mail },
     { label: labels.website, value: contact.website, href: contact.website, icon: Globe },
   ].filter((item) => item.value);
+  const social = contact.social.filter((item) => item.href);
 
   return (
     <section
@@ -86,33 +87,26 @@ export function Enquiry() {
                 </ul>
               ) : null}
 
-              <p className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-ink-muted">
-                {contactEnquiry.socialLabel}
-              </p>
-              <ul className="mt-3 flex gap-2.5" aria-label={contactEnquiry.socialLabel}>
-                {contact.social.map((item) => (
-                  <li key={item.platform}>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        aria-label={item.label}
-                        className="grid h-11 w-11 place-items-center rounded-full bg-white text-ink shadow-[0_10px_24px_-14px_rgb(10_37_64/0.45)] transition-colors duration-500 hover:bg-ink hover:text-white"
-                      >
-                        <SocialIcon platform={item.platform} className="h-4 w-4" />
-                      </a>
-                    ) : (
-                      // Named in the brief; its link has not been supplied yet.
-                      <span
-                        title={item.label}
-                        className="grid h-11 w-11 place-items-center rounded-full bg-white text-ink shadow-[0_10px_24px_-14px_rgb(10_37_64/0.45)]"
-                      >
-                        <SocialIcon platform={item.platform} className="h-4 w-4" />
-                        <span className="sr-only">{item.label}</span>
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
+              {social.length ? (
+                <>
+                  <p className="mt-7 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-ink-muted">
+                    {contactEnquiry.socialLabel}
+                  </p>
+                  <ul className="mt-3 flex gap-2.5" aria-label={contactEnquiry.socialLabel}>
+                    {social.map((item) => (
+                      <li key={item.platform}>
+                        <a
+                          href={item.href}
+                          aria-label={item.label}
+                          className="grid h-11 w-11 place-items-center rounded-full bg-white text-ink shadow-[0_10px_24px_-14px_rgb(10_37_64/0.45)] transition-colors duration-500 hover:bg-ink hover:text-white"
+                        >
+                          <SocialIcon platform={item.platform} className="h-4 w-4" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
             </Reveal>
           </div>
 

@@ -3,15 +3,16 @@ import { cx } from "@/lib/cx";
 import { ArrowLink, Kicker, Shell, Title } from "../ui/primitives";
 import { Photo } from "../ui/Photo";
 import { Reveal } from "../ui/Reveal";
+import { TeamContact } from "../ui/TeamContact";
 
 /**
  * Our Team on the home page, on white between the sand Foundation band and
  * the cream closing banner. Laid out differently from the About page's
  * centred row: the title and a link to the full section sit on the left, and
  * the four portraits stand on the right with every second one stepped down,
- * each in a leaf frame with the name and role underneath and no card
- * behind. On phones each member becomes a compact row, a small portrait
- * beside the name, so the band stays short.
+ * each in a leaf frame with the name, role and contact (as on About)
+ * underneath and no card behind. On phones each member becomes a compact
+ * row, a small portrait beside the name, so the band stays short.
  */
 export function Team() {
   return (
@@ -30,7 +31,7 @@ export function Team() {
             </Reveal>
           </div>
 
-          <ul className="grid grid-cols-1 gap-5 sm:grid-cols-4 sm:gap-5 lg:col-span-9 lg:gap-7 lg:pb-14 2xl:w-full 2xl:max-w-[80rem] 2xl:justify-self-end">
+          <ul className="grid grid-cols-1 gap-5 sm:grid-cols-4 sm:gap-5 sm:pb-14 lg:col-span-9 lg:gap-7 2xl:w-full 2xl:max-w-[80rem] 2xl:justify-self-end">
             {homeTeam.members.map((member, index) => (
               <Reveal
                 as="li"
@@ -57,6 +58,7 @@ export function Team() {
                   <p className="mt-2 text-[0.75rem] font-bold uppercase tracking-[0.18em] text-lagoon-600">
                     {member.role}
                   </p>
+                  <TeamContact member={member} />
                 </div>
               </Reveal>
             ))}
