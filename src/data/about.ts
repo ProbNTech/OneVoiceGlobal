@@ -453,7 +453,7 @@ export const aboutTeam = {
     {
       name: "Mahi Zaal",
       role: "Director, Marketing & PR",
-      social: { platform: "instagram", label: "Instagram", href: "https://www.instagram.com/mahi_zaalc" },
+      social: { platform: "instagram", label: "Instagram", href: "https://www.instagram.com/mahi_zaal" },
       image: portrait("team-mahi-zaal-dubai", "Mahi Zaal, Director, Marketing & PR"),
     },
     {
