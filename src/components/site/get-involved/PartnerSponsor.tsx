@@ -27,7 +27,7 @@ export function PartnerSponsor() {
             >
               <div
                 aria-hidden="true"
-                className="absolute -right-24 -top-28 -z-10 h-80 w-80 rounded-full bg-ocean-600/30 blur-[110px]"
+                className="absolute -right-24 -top-28 -z-10 h-80 w-80 rounded-full bg-ocean-600/30 glow"
               />
               <Handshake aria-hidden="true" className="h-9 w-9 icon-orange" strokeWidth={1.3} />
               <p className="mt-6 text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange">

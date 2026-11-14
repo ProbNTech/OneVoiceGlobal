@@ -31,7 +31,7 @@ export function Digital() {
     >
       <div
         aria-hidden="true"
-        className="absolute -left-40 top-1/3 -z-10 h-[30rem] w-[30rem] rounded-full bg-ocean-600/25 blur-[130px]"
+        className="absolute -left-40 top-1/3 -z-10 h-[30rem] w-[30rem] rounded-full bg-ocean-600/25 glow"
       />
 
       <Shell>

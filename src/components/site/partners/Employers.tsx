@@ -88,7 +88,7 @@ export function Employers() {
             <figure className="relative isolate flex h-full flex-col justify-between overflow-hidden rounded-panel bg-navy-950 p-7 text-white sm:p-10">
               <div
                 aria-hidden="true"
-                className="absolute -right-24 -top-24 -z-10 h-64 w-64 rounded-full bg-ocean-600/30 blur-[90px]"
+                className="absolute -right-24 -top-24 -z-10 h-64 w-64 rounded-full bg-ocean-600/30 glow"
               />
               <Quote aria-hidden="true" className="h-9 w-9 icon-orange" strokeWidth={1.4} />
               <blockquote className="mt-6 font-display text-[clamp(1.375rem,1.8vw,1.75rem)] leading-[1.35] text-white [font-variation-settings:'SOFT'_100]">

@@ -50,11 +50,11 @@ export function Hero() {
       {/* Soft light in the logo's colours behind the collage. */}
       <div
         aria-hidden="true"
-        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-lagoon-100/80 blur-[120px]"
+        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-lagoon-100/80 glow"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-56 right-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-orange-soft opacity-80 blur-[110px]"
+        className="absolute -bottom-56 right-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-orange-soft opacity-80 glow"
       />
 
       <Shell>

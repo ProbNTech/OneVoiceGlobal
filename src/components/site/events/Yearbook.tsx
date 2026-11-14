@@ -24,7 +24,7 @@ export function Yearbook() {
     >
       <div
         aria-hidden="true"
-        className="absolute -left-32 top-1/4 -z-10 h-[30rem] w-[30rem] rounded-full bg-orange-soft blur-[110px]"
+        className="absolute -left-32 top-1/4 -z-10 h-[30rem] w-[30rem] rounded-full bg-orange-soft glow"
       />
 
       <Shell>

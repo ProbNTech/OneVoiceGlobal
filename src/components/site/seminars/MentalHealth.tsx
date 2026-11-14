@@ -53,11 +53,11 @@ export function MentalHealth() {
       {/* Soft teal light, for the section's calm register. */}
       <div
         aria-hidden="true"
-        className="absolute -left-40 -top-48 -z-10 h-[34rem] w-[34rem] rounded-full bg-lagoon-50 blur-[110px]"
+        className="absolute -left-40 -top-48 -z-10 h-[34rem] w-[34rem] rounded-full bg-lagoon-50 glow"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-40 -right-32 -z-10 h-[30rem] w-[30rem] rounded-full bg-lagoon-100/60 blur-[120px]"
+        className="absolute -bottom-40 -right-32 -z-10 h-[30rem] w-[30rem] rounded-full bg-lagoon-100/60 glow"
       />
 
       <Shell>

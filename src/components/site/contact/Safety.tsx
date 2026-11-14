@@ -45,7 +45,7 @@ export function Safety() {
             <div className="relative isolate flex flex-col gap-4 overflow-hidden rounded-panel bg-navy-950 p-7 text-white shadow-[0_40px_80px_-50px_rgb(6_26_48/0.8)] sm:flex-row sm:items-center sm:gap-8 sm:p-9">
               <div
                 aria-hidden="true"
-                className="absolute -left-16 -top-24 -z-10 h-64 w-64 rounded-full bg-orange opacity-20 blur-[80px]"
+                className="absolute -left-16 -top-24 -z-10 h-64 w-64 rounded-full bg-orange opacity-20 glow"
               />
               {/* The number is said in the sentence beside it. */}
               <p

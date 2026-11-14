@@ -25,11 +25,11 @@ export function Hero() {
       {/* Soft light in the logo's colours behind the photograph. */}
       <div
         aria-hidden="true"
-        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-ocean-100/70 blur-[120px]"
+        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-ocean-100/70 glow"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-48 right-1/4 -z-10 h-[26rem] w-[26rem] rounded-full bg-orange-soft opacity-80 blur-[110px]"
+        className="absolute -bottom-48 right-1/4 -z-10 h-[26rem] w-[26rem] rounded-full bg-orange-soft opacity-80 glow"
       />
 
       <Shell>

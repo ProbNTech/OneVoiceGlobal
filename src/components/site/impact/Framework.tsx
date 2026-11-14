@@ -38,7 +38,7 @@ export function Framework() {
     >
       <div
         aria-hidden="true"
-        className="absolute left-1/2 top-1/2 -z-10 h-[24rem] w-[48rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lagoon-50 blur-[120px]"
+        className="absolute left-1/2 top-1/2 -z-10 h-[24rem] w-[48rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lagoon-50 glow"
       />
       <Shell>
         <div className="text-center">

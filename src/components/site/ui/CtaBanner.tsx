@@ -83,11 +83,11 @@ export function CtaBanner({
                 />
                 <div
                   aria-hidden="true"
-                  className="absolute -top-48 left-1/2 -z-10 h-[24rem] w-[44rem] -translate-x-1/2 rounded-full bg-ocean-300/30 blur-[110px]"
+                  className="absolute -top-48 left-1/2 -z-10 h-[24rem] w-[44rem] -translate-x-1/2 rounded-full bg-ocean-300/30 glow"
                 />
                 <div
                   aria-hidden="true"
-                  className="absolute -bottom-40 -left-24 -z-10 h-[24rem] w-[24rem] rounded-full bg-lagoon-300/35 blur-[110px]"
+                  className="absolute -bottom-40 -left-24 -z-10 h-[24rem] w-[24rem] rounded-full bg-lagoon-300/35 glow"
                 />
               </>
             ) : null}

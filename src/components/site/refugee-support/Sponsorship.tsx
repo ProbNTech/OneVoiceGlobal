@@ -54,11 +54,11 @@ export function Sponsorship() {
       {/* Soft light in the logo's colours. */}
       <div
         aria-hidden="true"
-        className="absolute -left-40 top-1/3 -z-10 h-[30rem] w-[30rem] rounded-full bg-lagoon-600/20 blur-[120px]"
+        className="absolute -left-40 top-1/3 -z-10 h-[30rem] w-[30rem] rounded-full bg-lagoon-600/20 glow"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-40 right-0 -z-10 h-[26rem] w-[26rem] rounded-full bg-orange-soft opacity-30 blur-[120px]"
+        className="absolute -bottom-40 right-0 -z-10 h-[26rem] w-[26rem] rounded-full bg-orange-soft opacity-30 glow"
       />
 
       <Shell>

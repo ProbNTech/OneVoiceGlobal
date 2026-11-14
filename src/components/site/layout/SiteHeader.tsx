@@ -71,7 +71,7 @@ export function SiteHeader() {
       <header
         className={cx(
           "fixed inset-x-0 top-0 z-50 transition-[transform,background-color,box-shadow] duration-700 ease-out-soft",
-          atTop ? "bg-transparent" : "bg-cream/85 shadow-[0_1px_0_rgb(10_37_64/0.08)] backdrop-blur-xl",
+          atTop ? "bg-transparent" : "bg-cream/95 shadow-[0_1px_0_rgb(10_37_64/0.08)]",
           hidden && !menuOpen ? "-translate-y-full" : "translate-y-0",
         )}
       >

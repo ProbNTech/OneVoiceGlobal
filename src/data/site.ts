@@ -245,10 +245,10 @@ export type SocialPlatform = "linkedin" | "facebook" | "instagram" | "youtube";
 export const contact = {
   /* Interim details supplied by the user on 30 October 2026 ("use these as
      contact details for now"); the brief leaves all four blank. Empty values
-     are not rendered. */
+     are not rendered. The client changed the email on 14 November 2026. */
   address: "134-136 Westbourne Terrace, London W2 6QB",
   telephone: "+44 7920 550000",
-  email: "info@ukpaktrade.org.uk",
+  email: "info@onevoiceglobal.org.uk",
   website: "",
   social: [
     { platform: "linkedin", label: "LinkedIn", href: "" },

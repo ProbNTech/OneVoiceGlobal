@@ -32,7 +32,7 @@ export function Safety() {
         <div className="relative isolate overflow-hidden rounded-panel bg-navy-950 p-6 text-white sm:p-10 lg:p-14">
           <div
             aria-hidden="true"
-            className="absolute -right-24 -top-24 -z-10 h-[24rem] w-[24rem] rounded-full bg-lagoon-600/25 blur-[110px]"
+            className="absolute -right-24 -top-24 -z-10 h-[24rem] w-[24rem] rounded-full bg-lagoon-600/25 glow"
           />
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">

@@ -28,11 +28,11 @@ export function Values() {
       {/* Light gathers in a corner, as it does on the other navy bands. */}
       <div
         aria-hidden="true"
-        className="absolute -left-40 -top-48 -z-10 h-[34rem] w-[34rem] rounded-full bg-ocean-600/25 blur-[140px]"
+        className="absolute -left-40 -top-48 -z-10 h-[34rem] w-[34rem] rounded-full bg-ocean-600/25 glow"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-48 right-0 -z-10 h-[28rem] w-[28rem] rounded-full bg-lagoon-600/15 blur-[130px]"
+        className="absolute -bottom-48 right-0 -z-10 h-[28rem] w-[28rem] rounded-full bg-lagoon-600/15 glow"
       />
 
       <Shell>

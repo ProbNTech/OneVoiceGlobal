@@ -14,7 +14,9 @@ import "lenis/dist/lenis.css";
 export function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lenis = new Lenis({ autoRaf: true, lerp: 0.085, wheelMultiplier: 0.95 });
+    /* Tuned to follow the wheel closely: the client found the earlier, floatier
+       setting (lerp 0.085, 0.95) slow to scroll (14 November 2026). */
+    const lenis = new Lenis({ autoRaf: true, lerp: 0.14, wheelMultiplier: 1.1 });
     return () => lenis.destroy();
   }, []);
 

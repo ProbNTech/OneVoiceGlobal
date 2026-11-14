@@ -44,7 +44,7 @@ export function Hero() {
       {/* Soft light in the logo's colours behind the sun. */}
       <div
         aria-hidden="true"
-        className="absolute -right-40 -top-32 -z-10 h-[34rem] w-[34rem] rounded-full bg-lagoon-100/70 blur-[120px]"
+        className="absolute -right-40 -top-32 -z-10 h-[34rem] w-[34rem] rounded-full bg-lagoon-100/70 glow"
       />
 
       <Shell>
@@ -102,7 +102,7 @@ export function Hero() {
             <motion.div
               aria-hidden="true"
               style={{ opacity: glow }}
-              className="absolute inset-x-[6%] top-[8%] -z-10 aspect-square rounded-full bg-orange-soft blur-3xl"
+              className="absolute inset-x-[6%] top-[8%] -z-10 aspect-square rounded-full bg-orange-soft glow"
             />
 
             <motion.div style={{ y: rise }} className="relative">

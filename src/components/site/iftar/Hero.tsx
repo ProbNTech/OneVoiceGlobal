@@ -53,11 +53,11 @@ export function Hero() {
       {/* Soft evening light behind the collage. */}
       <div
         aria-hidden="true"
-        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-orange-soft blur-[120px]"
+        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-orange-soft glow"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-56 right-1/3 -z-10 h-[28rem] w-[28rem] rounded-full bg-lagoon-100/70 blur-[110px]"
+        className="absolute -bottom-56 right-1/3 -z-10 h-[28rem] w-[28rem] rounded-full bg-lagoon-100/70 glow"
       />
 
       <Shell>

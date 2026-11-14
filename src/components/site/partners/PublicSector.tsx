@@ -63,7 +63,7 @@ export function PublicSector() {
             <div className="relative isolate p-7 text-white sm:p-10 lg:col-span-7 lg:p-12">
               <div
                 aria-hidden="true"
-                className="absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full bg-lagoon-400/20 blur-[100px]"
+                className="absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full bg-lagoon-400/20 glow"
               />
               <Kicker tone="dark">{partnersPublic.kicker}</Kicker>
               <Title

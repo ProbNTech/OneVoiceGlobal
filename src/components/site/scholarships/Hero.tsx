@@ -43,11 +43,11 @@ export function Hero() {
       {/* Soft light in the logo's colours behind the doorway. */}
       <div
         aria-hidden="true"
-        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-lagoon-100/70 blur-[120px]"
+        className="absolute -right-32 -top-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-lagoon-100/70 glow"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-56 right-1/3 -z-10 h-[28rem] w-[28rem] rounded-full bg-orange-soft blur-[110px]"
+        className="absolute -bottom-56 right-1/3 -z-10 h-[28rem] w-[28rem] rounded-full bg-orange-soft glow"
       />
 
       <Shell>
@@ -90,7 +90,7 @@ export function Hero() {
               <motion.div
                 aria-hidden="true"
                 style={{ opacity: glow }}
-                className="absolute inset-y-[12%] left-1/2 -z-10 w-1/3 -translate-x-1/2 rounded-full bg-orange-soft blur-2xl"
+                className="absolute inset-y-[12%] left-1/2 -z-10 w-1/3 -translate-x-1/2 rounded-full bg-orange-soft glow"
               />
               <div className="flex h-full gap-[4%]">
                 {[images.left, images.right].map((image, index) => (

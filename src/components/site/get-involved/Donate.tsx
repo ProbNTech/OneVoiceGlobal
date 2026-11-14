@@ -81,7 +81,7 @@ export function Donate() {
             <div className="relative isolate overflow-hidden rounded-panel bg-orange p-4 text-white shadow-[0_40px_80px_-50px_color-mix(in_srgb,var(--orange-ink-3)_90%,transparent)] sm:p-5">
               <div
                 aria-hidden="true"
-                className="absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-orange-light opacity-70 blur-[80px]"
+                className="absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-orange-light opacity-70 glow"
               />
               <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] bg-orange">
                 <div className="parallax absolute inset-x-0 -inset-y-[8%]">

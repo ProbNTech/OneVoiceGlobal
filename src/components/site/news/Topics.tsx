@@ -44,11 +44,11 @@ export function Topics() {
     >
       <div
         aria-hidden="true"
-        className="absolute -left-32 -top-48 -z-10 h-[30rem] w-[30rem] rounded-full bg-ocean-600/25 blur-[140px]"
+        className="absolute -left-32 -top-48 -z-10 h-[30rem] w-[30rem] rounded-full bg-ocean-600/25 glow"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-48 -right-24 -z-10 h-[26rem] w-[26rem] rounded-full bg-lagoon-600/20 blur-[130px]"
+        className="absolute -bottom-48 -right-24 -z-10 h-[26rem] w-[26rem] rounded-full bg-lagoon-600/20 glow"
       />
 
       <Shell>

@@ -84,8 +84,9 @@ This file is the playbook for every page on this site. Read it before designing 
 
 ## 6. Motion toolkit (premium, smooth, never flashy)
 
-- **Smooth scrolling:** Lenis, mounted in the site layout. Anything that must scroll on its own gets `data-lenis-prevent` (the menu overlay does).
-- **Reveals:** CSS-driven. `<Reveal>` only adds `.is-in`. Blocks rise and sharpen out of a soft blur, and headline lines rise one after another.
+- **Smooth scrolling:** Lenis, mounted in the site layout, tuned to follow the wheel closely (lerp 0.14; the client found the floatier setting slow, 14 November 2026). Anything that must scroll on its own gets `data-lenis-prevent` (the menu overlay does).
+- **Keep scrolling light (the client's complaint, 14 November 2026).** Never use CSS `filter: blur()` or `backdrop-filter` for glows, reveals or the header: they are redrawn on every scroll frame. Soft coloured light is the `glow` utility (a radial mask) on a `rounded-full` tinted circle.
+- **Reveals:** CSS-driven. `<Reveal>` only adds `.is-in`. Blocks rise and fade in (opacity and movement only, no blur), and headline lines rise one after another.
   - **Photo reveal markup:** `<Reveal variant="image"><div className="reveal-clip …"><div className="reveal-media absolute inset-0">…</div></div></Reveal>`.
   - Never put the clip on the observed element itself. Chrome treats a fully clipped element as off-screen, so it would never reveal.
 - **Photo drift:** wrap a photo in `<div className="parallax absolute inset-x-0 -inset-y-[8%]">` inside an `overflow-hidden` frame. It runs on the browser's scroll timeline, with no JavaScript.

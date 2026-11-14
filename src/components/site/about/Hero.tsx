@@ -51,11 +51,11 @@ export function Hero() {
       {/* Soft light in the logo's colours behind the mosaic. */}
       <div
         aria-hidden="true"
-        className="absolute -right-24 -top-48 -z-10 h-[38rem] w-[38rem] rounded-full bg-orange-soft opacity-80 blur-[120px]"
+        className="absolute -right-24 -top-48 -z-10 h-[38rem] w-[38rem] rounded-full bg-orange-soft opacity-80 glow"
       />
       <div
         aria-hidden="true"
-        className="absolute -bottom-48 right-1/3 -z-10 h-[26rem] w-[26rem] rounded-full bg-lagoon-100/70 blur-[110px]"
+        className="absolute -bottom-48 right-1/3 -z-10 h-[26rem] w-[26rem] rounded-full bg-lagoon-100/70 glow"
       />
 
       <Shell>
