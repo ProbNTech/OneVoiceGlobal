@@ -1,8 +1,8 @@
 /**
  * Sends a sample notification email, made by src/lib/notify.ts just as a real
  * submission's is, to check the SMTP account and the template. It goes to
- * LEADS_NOTIFY_EMAIL unless another address is given, with "[Test]" before its
- * subject. The form defaults to the contact enquiry. Nothing is saved to the
+ * LEADS_NOTIFY_EMAIL, copied to LEADS_CC_EMAIL, unless another address is
+ * given (then only to that address), with "[Test]" before its subject. The form defaults to the contact enquiry. Nothing is saved to the
  * sheet.
  *
  *   npm run email:test
@@ -10,7 +10,7 @@
  */
 
 import { FORMS } from "../src/lib/forms.ts";
-import { notificationEmail, sendEmail } from "../src/lib/notify.ts";
+import { notificationEmail, notifyCc, sendEmail } from "../src/lib/notify.ts";
 
 const env = (name) => {
   let value = (process.env[name] ?? "").trim();
@@ -42,6 +42,7 @@ if (!to) {
   process.exit(1);
 }
 
+const cc = toArg ? "" : notifyCc();
 const email = notificationEmail(def, values);
-await sendEmail(to, { ...email, subject: `[Test] ${email.subject}` });
-console.log(`Sent the ${formId} sample to ${to}: "[Test] ${email.subject}"`);
+await sendEmail(to, { ...email, subject: `[Test] ${email.subject}` }, cc);
+console.log(`Sent the ${formId} sample to ${to}${cc ? ` (cc ${cc})` : ""}: "[Test] ${email.subject}"`);

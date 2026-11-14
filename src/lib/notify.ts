@@ -1,13 +1,15 @@
 /**
- * The email that tells the team a form came in, sent to LEADS_NOTIFY_EMAIL
- * (via Gmail SMTP) once the submission is saved to the sheet (lib/sheets.ts).
+ * The email that tells the team a form came in, sent to LEADS_NOTIFY_EMAIL,
+ * with a copy to LEADS_CC_EMAIL (via Gmail SMTP), once the submission is
+ * saved to the sheet (lib/sheets.ts).
  * It lays out every field in the sheet's column order, with a button to reply
  * to the sender and a link to the sheet. The same template as the
  * Commonwealth Entrepreneurs Forum site, in OneVoice's colours.
  *
  * Environment variables (.env.local):
  *   EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD,
- *   DEFAULT_FROM_EMAIL, LEADS_NOTIFY_EMAIL, and GOOGLE_SHEET_ID for the link
+ *   DEFAULT_FROM_EMAIL, LEADS_NOTIFY_EMAIL, LEADS_CC_EMAIL (optional; several
+ *   addresses may be given, separated by commas), and GOOGLE_SHEET_ID for the link
  *
  * Its only runtime import is nodemailer, so the test script
  * (scripts/test-email.mjs) can load it directly.
@@ -162,8 +164,8 @@ export function notificationEmail(def: FormDef, values: Record<string, string>, 
   return { subject, text, html, replyTo: email || undefined };
 }
 
-/** Sends one email through the EMAIL_* SMTP account. */
-export async function sendEmail(to: string, { subject, text, html, replyTo }: Email) {
+/** Sends one email through the EMAIL_* SMTP account, with an optional copy to `cc`. */
+export async function sendEmail(to: string, { subject, text, html, replyTo }: Email, cc?: string) {
   const host = envValue("EMAIL_HOST");
   const user = envValue("EMAIL_HOST_USER");
   const pass = envValue("EMAIL_HOST_PASSWORD");
@@ -179,6 +181,7 @@ export async function sendEmail(to: string, { subject, text, html, replyTo }: Em
   await transport.sendMail({
     from: { name: SITE, address: envValue("DEFAULT_FROM_EMAIL") || user },
     to,
+    cc: cc || undefined,
     replyTo,
     subject,
     text,
@@ -186,9 +189,12 @@ export async function sendEmail(to: string, { subject, text, html, replyTo }: Em
   });
 }
 
-/** Emails the team (LEADS_NOTIFY_EMAIL) the submission, laid out field by field. */
+/** The organisation's own inbox, copied on every notification (the user's request, 14 November 2026). */
+export const notifyCc = () => envValue("LEADS_CC_EMAIL");
+
+/** Emails the team (LEADS_NOTIFY_EMAIL, copying LEADS_CC_EMAIL) the submission, laid out field by field. */
 export async function sendNotification(def: FormDef, values: Record<string, string>) {
   const to = envValue("LEADS_NOTIFY_EMAIL");
   if (!to) throw new Error("Missing LEADS_NOTIFY_EMAIL.");
-  await sendEmail(to, notificationEmail(def, values));
+  await sendEmail(to, notificationEmail(def, values), notifyCc());
 }
