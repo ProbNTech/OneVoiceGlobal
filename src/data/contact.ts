@@ -4,7 +4,8 @@
  * The brief's CONTACT US block gives the Centre's name, its headline, four
  * labels (Address, Telephone, Email, Website) with no values, and four social
  * platforms without links. The values live in `contact` in site.ts and show
- * on this page, as in the footer, as soon as the client supplies them.
+ * on this page, as in the footer, as soon as the client supplies them; a
+ * social platform shows only once its link has been given.
  *
  * Everything else is the brief's own lines, borrowed from the blocks that
  * speak about getting in touch, as noted beside each: the close of its For

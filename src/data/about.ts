@@ -36,7 +36,7 @@
  */
 
 import type { HomeImage } from "@/data/home";
-import { brand, navigation, routes } from "@/data/site";
+import { brand, navigation, routes, type SocialPlatform } from "@/data/site";
 
 /* Some of the page's first-set photographs stay among the new ones, at the user's request (3 November
    2026; those that shared one bright room moved to new places on 4 November). These slots show their
@@ -405,7 +405,10 @@ export const aboutTheory = {
    screenshot, cropped clear of the app's controls). Originals are in
    `_source/generated/team/`. Amina Chaudhry, her role, her email address
    and her photograph were supplied by the client on 13 November 2026; the
-   email is the only one given, so only she shows one.
+   email is the only one given, so only she shows one. The user supplied one
+   profile link for each of the others on 14 November 2026 (Dr Rabia Ishrat's
+   LinkedIn, Shahid Nadeem Sandhu's Facebook and Mahi Zaal's Instagram), and
+   it sits where Amina's email does.
    ------------------------------------------------------------------------- */
 
 /** A team member's own photograph, saved under /images/about/team/. */
@@ -415,8 +418,14 @@ const portrait = (file: string, alt: string): HomeImage => ({
   position: "50% 30%",
 });
 
-/** A member of the team; the email is shown only where the client has supplied one. */
-export type TeamMember = { name: string; role: string; email?: string; image: HomeImage };
+/** A member of the team; the email and the profile link are shown only where they have been supplied. */
+export type TeamMember = {
+  name: string;
+  role: string;
+  email?: string;
+  social?: { platform: SocialPlatform; label: string; href: string };
+  image: HomeImage;
+};
 
 export const aboutTeam = {
   id: "our-team",
@@ -428,16 +437,23 @@ export const aboutTeam = {
     {
       name: "Dr Rabia Ishrat",
       role: "Chief Executive Officer",
+      social: {
+        platform: "linkedin",
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/in/dr-rabia-ishrat-ab4b98135/",
+      },
       image: portrait("team-rabia-ishrat", "Dr Rabia Ishrat, Chief Executive Officer"),
     },
     {
       name: "Shahid Nadeem Sandhu",
       role: "Vice President",
+      social: { platform: "facebook", label: "Facebook", href: "https://www.facebook.com/shahidnadeemsandhu/" },
       image: portrait("team-shahid-nadeem-sandhu", "Shahid Nadeem Sandhu, Vice President"),
     },
     {
       name: "Mahi Zaal",
       role: "Director, Marketing & PR",
+      social: { platform: "instagram", label: "Instagram", href: "https://www.instagram.com/mahi_zaalc" },
       image: portrait("team-mahi-zaal-dubai", "Mahi Zaal, Director, Marketing & PR"),
     },
     {

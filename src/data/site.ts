@@ -12,9 +12,9 @@
  * Contact details: the brief's CONTACT US block gives the labels (Address,
  * Telephone, Email, Website) with no values, and names four social platforms
  * without links. The address, telephone and email were supplied by the user
- * on 30 October 2026 as interim details; the website and social links stay
- * blank until the client gives them, and empty values are simply not
- * rendered.
+ * on 30 October 2026 as interim details, and the Instagram, LinkedIn and
+ * Facebook links on 14 November 2026. The website stays blank until the
+ * client gives it, and empty values are simply not rendered.
  */
 
 export type NavLink = { label: string; href: string };
@@ -250,11 +250,17 @@ export const contact = {
   telephone: "+44 7920 550000",
   email: "info@onevoiceglobal.org.uk",
   website: "",
+  /* Links supplied by the user on 14 November 2026. The brief also names
+     YouTube, but no account has been given, so it is left out: only platforms
+     with a link are shown. Add it back here, with its link, if one arrives. */
   social: [
-    { platform: "linkedin", label: "LinkedIn", href: "" },
-    { platform: "facebook", label: "Facebook", href: "" },
-    { platform: "instagram", label: "Instagram", href: "" },
-    { platform: "youtube", label: "YouTube", href: "" },
+    {
+      platform: "linkedin",
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/onevoice-global-foundation-18981844b/",
+    },
+    { platform: "facebook", label: "Facebook", href: "https://www.facebook.com/profile.php?id=61596220752927" },
+    { platform: "instagram", label: "Instagram", href: "https://www.instagram.com/onevoiceglobalfoundation/" },
   ] satisfies { platform: SocialPlatform; label: string; href: string }[],
 };
 

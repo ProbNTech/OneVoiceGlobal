@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { legalLinks } from "@/data/legal";
 import { brand, contact, copyrightYear, footerColumns, routes } from "@/data/site";
+import { PageLink } from "../ui/PageLink";
 import { Shell } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
 import { SocialIcon } from "../ui/SocialIcon";
@@ -9,7 +9,9 @@ import { Logo } from "./Logo";
 /**
  * Site footer, after ELA Flooring's: one dark band with the logo and a short
  * line, the link columns, and a Get in Touch column, then a thin bar with
- * the copyright and the tagline.
+ * the copyright and the tagline. Its links are PageLinks, so one that points
+ * at the page already open (Contact Us, on the Contact page) scrolls back to
+ * the top rather than doing nothing.
  */
 export function SiteFooter() {
   const details = [
@@ -18,6 +20,8 @@ export function SiteFooter() {
     { label: "Email", value: contact.email, href: `mailto:${contact.email}` },
     { label: "Website", value: contact.website, href: contact.website },
   ].filter((item) => item.value);
+  // Only platforms whose link has been supplied get an icon.
+  const social = contact.social.filter((item) => item.href);
 
   return (
     <footer className="bg-navy-950 text-white/65">
@@ -40,9 +44,9 @@ export function SiteFooter() {
                 <ul className="mt-5 space-y-3">
                   {column.links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="text-[0.9375rem] transition-colors hover:text-white">
+                      <PageLink href={link.href} className="text-[0.9375rem] transition-colors hover:text-white">
                         {link.label}
-                      </Link>
+                      </PageLink>
                     </li>
                   ))}
                 </ul>
@@ -69,16 +73,16 @@ export function SiteFooter() {
                 ))}
               </ul>
             ) : null}
-            <Link
+            <PageLink
               href={routes.contact}
               className="mt-4 inline-block text-[0.9375rem] underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
             >
               Contact Us
-            </Link>
-            <ul className="mt-6 flex gap-2.5" aria-label="Social media">
-              {contact.social.map((item) => (
-                <li key={item.platform}>
-                  {item.href ? (
+            </PageLink>
+            {social.length ? (
+              <ul className="mt-6 flex gap-2.5" aria-label="Social media">
+                {social.map((item) => (
+                  <li key={item.platform}>
                     <a
                       href={item.href}
                       aria-label={item.label}
@@ -86,19 +90,10 @@ export function SiteFooter() {
                     >
                       <SocialIcon platform={item.platform} className="h-4 w-4" />
                     </a>
-                  ) : (
-                    // Platform named in the brief; its link has not been supplied yet.
-                    <span
-                      title={item.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-white/8 text-white/80 ring-1 ring-white/10"
-                    >
-                      <SocialIcon platform={item.platform} className="h-4 w-4" />
-                      <span className="sr-only">{item.label}</span>
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </Reveal>
         </div>
 
@@ -112,9 +107,9 @@ export function SiteFooter() {
             <ul aria-label="Legal" className="flex flex-wrap gap-x-5 gap-y-2">
               {Object.values(legalLinks).map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="whitespace-nowrap transition-colors hover:text-white">
+                  <PageLink href={link.href} className="whitespace-nowrap transition-colors hover:text-white">
                     {link.label}
-                  </Link>
+                  </PageLink>
                 </li>
               ))}
             </ul>

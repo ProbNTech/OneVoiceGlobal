@@ -3,6 +3,7 @@ import { aboutTeam } from "@/data/about";
 import { Kicker, Shell, Title } from "../ui/primitives";
 import { Photo } from "../ui/Photo";
 import { Reveal } from "../ui/Reveal";
+import { TeamContact } from "../ui/TeamContact";
 
 /* Each portrait takes its own organic shape, like the people rows on the home
    page. The arch is a true semicircle written as 50%/40% for the 4:5 frame:
@@ -21,8 +22,9 @@ const shapes = [
  * spaced capitals underneath, with no card behind them. The row is held to
  * a modest width so the portraits stay compact. A portrait still waiting
  * for its headshot shows the site's soft placeholder. The third frame's leaf
- * curve sits at its foot, clear of the head in that photograph. Where the
- * client has given a member's email address it sits under the role.
+ * curve sits at its foot, clear of the head in that photograph. Under the
+ * role sits the one contact given for each member: an email address or a
+ * profile link, the latter with its platform's mark.
  */
 export function Team() {
   return (
@@ -62,14 +64,7 @@ export function Team() {
                 {member.name}
               </h3>
               <p className="mt-2 text-[0.75rem] font-bold uppercase tracking-[0.18em] text-lagoon-600">{member.role}</p>
-              {member.email ? (
-                <a
-                  href={`mailto:${member.email}`}
-                  className="mt-2 inline-block text-[0.9375rem] text-slate underline-offset-4 transition-colors hover:text-ink hover:underline"
-                >
-                  {member.email}
-                </a>
-              ) : null}
+              <TeamContact member={member} />
             </Reveal>
           ))}
         </ul>
