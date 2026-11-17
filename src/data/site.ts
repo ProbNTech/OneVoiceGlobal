@@ -38,15 +38,17 @@ export const brand = {
 
 /**
  * The client's OneVoice logo, used exactly as supplied: never cropped,
- * recoloured or rearranged. This is the updated file of 17 November 2026,
- * whose wordmark reads "Global Organization" (it replaced the 30 October
- * file, which read "Global Foundation"); it has a new file name so cached
- * copies of the old one are not served. It is one stacked file, emblem over
+ * recoloured or rearranged. This is the client's final file of 17 November
+ * 2026, whose wordmark reads "Global Organisation" in British English, as
+ * the site's text does. It replaced a same-day version spelt "Organization"
+ * and the 30 October file, which read "Global Foundation"; each new logo
+ * gets a new file name so cached copies of the old one are not served. It
+ * is one stacked file, emblem over
  * wordmark, on a transparent ground, so on dark bands it sits on a white
  * plate rather than in a reversed version. `mark` is the same file, kept as
  * its own name for the small brand seals on cards and badges.
  */
-const logoFile = { src: "/onevoice-global-organization-logo.png", width: 1080, height: 804 } as const;
+const logoFile = { src: "/onevoice-global-organisation-logo.png", width: 1080, height: 804 } as const;
 
 export const logo = {
   colour: logoFile,
