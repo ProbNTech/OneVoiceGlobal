@@ -362,7 +362,7 @@ export const scholarshipsInternational = {
   titleAccent: "Global Education Opportunities",
   paragraphs: [
     `${brand.name} also aims to support talented and deserving international students who face financial barriers to accessing quality education and professional qualifications.`,
-    "Through the International Students Scholarship Initiative, the Foundation seeks to encourage educational excellence, international academic exchange and equal access to learning opportunities.",
+    "Through the International Students Scholarship Initiative, the Organisation seeks to encourage educational excellence, international academic exchange and equal access to learning opportunities.",
   ],
   card: {
     label:
@@ -468,7 +468,7 @@ export const scholarshipsProcess = {
       "Grants are used for their approved educational purposes.",
       "Donors receive appropriate reports on the impact of their contributions.",
     ],
-    note: "Scholarship awards will be subject to available funding and the Foundation's charitable purposes and governing arrangements.",
+    note: "Scholarship awards will be subject to available funding and the Organisation's charitable purposes and governing arrangements.",
   },
 } as const;
 
@@ -572,7 +572,7 @@ export const scholarshipsNamed = {
       line: "Providing supplementary financial assistance to students experiencing unexpected hardship.",
     },
   ],
-  note: "Named scholarship arrangements will be agreed with donors and administered under the Foundation's charitable governance and grant-making policies.",
+  note: "Named scholarship arrangements will be agreed with donors and administered under the Organisation's charitable governance and grant-making policies.",
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -689,11 +689,11 @@ export const scholarshipsFaq = {
     },
     {
       q: "When can I apply?",
-      a: "Application dates and funding rounds will be announced once the programme has been formally launched. Please contact the Foundation to register your interest.",
+      a: "Application dates and funding rounds will be announced once the programme has been formally launched. Please contact the Organisation to register your interest.",
     },
     {
       q: "Will every applicant receive funding?",
-      a: "No. Awards depend on eligibility, the strength of applications, available funds and the Foundation's grant-making decisions.",
+      a: "No. Awards depend on eligibility, the strength of applications, available funds and the Organisation's grant-making decisions.",
     },
   ],
 } as const;

@@ -1,4 +1,4 @@
-import { brand, contact, routes, type NavLink } from "./site";
+import { brand, company, contact, routes, type NavLink } from "./site";
 
 /**
  * The three legal documents (Privacy Policy, Terms & Conditions, Cookie
@@ -21,8 +21,8 @@ import { brand, contact, routes, type NavLink } from "./site";
  *
  * Nothing here names an address, telephone number, registration number or
  * date that has not been supplied. Contact details come from `contact` in
- * site.ts, and each document lists the ones on file beside a link to the
- * Contact page. The pages carry no effective date until the
+ * site.ts and the registered company and its number from `company`, and each
+ * document lists them beside a link to the Contact page. The pages carry no effective date until the
  * client sets one. These are drafts for the client to approve, ideally with
  * their own adviser, before the site goes live.
  */
@@ -56,8 +56,9 @@ export const legalLinks = {
 const contactPage: NavLink = { label: "Contact us", href: routes.contact };
 const safeguarding: NavLink = { label: "Safeguarding", href: `${routes.about}#safeguarding` };
 
-/** The Foundation's contact details that have been supplied; blank ones are left out. */
+/** The registered company, then the contact details that have been supplied; blank ones are left out. */
 const details = [
+  `${company.name}, ${company.numberLabel.toLowerCase()} ${company.number}`,
   contact.address && `Address: ${contact.address}`,
   contact.telephone && `Telephone: ${contact.telephone}`,
   contact.email && `Email: ${contact.email}`,
