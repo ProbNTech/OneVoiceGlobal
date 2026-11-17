@@ -4,7 +4,7 @@ import { cx } from "@/lib/cx";
 import { brand, logo } from "@/data/site";
 
 /**
- * The OneVoice Global Foundation logo, exactly as the client supplied it.
+ * The OneVoice logo, exactly as the client supplied it.
  * On dark bands (`light`) it sits on a white plate, since the logo is navy
  * on a transparent ground and is never recoloured. The file carries its own
  * transparent margin, which becomes the plate's padding.

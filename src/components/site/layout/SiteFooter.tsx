@@ -1,5 +1,5 @@
 import { legalLinks } from "@/data/legal";
-import { brand, contact, copyrightYear, footerColumns, routes } from "@/data/site";
+import { brand, company, contact, copyrightYear, footerColumns, routes } from "@/data/site";
 import { PageLink } from "../ui/PageLink";
 import { Shell } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
@@ -9,7 +9,7 @@ import { Logo } from "./Logo";
 /**
  * Site footer, after ELA Flooring's: one dark band with the logo and a short
  * line, the link columns, and a Get in Touch column, then a thin bar with
- * the copyright and the tagline. Its links are PageLinks, so one that points
+ * the copyright, the registered company and its number, and the tagline. Its links are PageLinks, so one that points
  * at the page already open (Contact Us, on the Contact page) scrolls back to
  * the top rather than doing nothing.
  */
@@ -97,13 +97,19 @@ export function SiteFooter() {
           </Reveal>
         </div>
 
-        {/* Copyright and the legal pages on the left, the tagline on the
-            right; one row from 1280px up, stacking below that. */}
+        {/* Copyright (with the registered company under it) and the legal
+            pages on the left, the tagline on the right; one row from 1280px
+            up, stacking below that. */}
         <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-[0.8125rem] text-white/50 xl:flex-row xl:items-center">
           <div className="flex flex-col gap-x-8 gap-y-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <p>
-              © {copyrightYear} {brand.name}. All rights reserved.
-            </p>
+            <div className="space-y-1">
+              <p>
+                © {copyrightYear} {brand.name}. All rights reserved.
+              </p>
+              <p>
+                {company.name} · {company.numberLabel} {company.number}
+              </p>
+            </div>
             <ul aria-label="Legal" className="flex flex-wrap gap-x-5 gap-y-2">
               {Object.values(legalLinks).map((link) => (
                 <li key={link.href}>

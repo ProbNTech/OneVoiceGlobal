@@ -21,10 +21,13 @@ export type NavLink = { label: string; href: string };
 export type NavItem = NavLink & { children?: NavLink[] };
 
 export const brand = {
-  /* The brief's own name. The client tried "OneVoice Community Foundation"
-     from 27 October 2026 and returned to this one, with its original logo,
-     on 30 October. Every page takes the name from here. */
-  name: "OneVoice Global Foundation",
+  /* The brief calls it "OneVoice Global Foundation". On 17 November 2026 the
+     client asked for "Foundation" to become "Organisation" everywhere, after
+     the registered company (`company` below), spelt in British English as
+     Companies House spells it. (Before that, the client tried "OneVoice
+     Community Foundation" from 27 to 30 October.) Every page takes the name
+     from here. */
+  name: "OneVoice Global Organisation",
   centre: "OneVoice Skill Development Centre",
   tagline: "Stronger Communities, Shared Opportunities, One World",
   initiative: "Community Empowerment, Skills and Social Inclusion Initiative",
@@ -34,14 +37,16 @@ export const brand = {
 } as const;
 
 /**
- * The client's OneVoice Global Foundation logo, used exactly as supplied
- * (30 October 2026): never cropped, recoloured or rearranged. It is one
- * stacked file, emblem over wordmark, on a transparent ground, so on dark
- * bands it sits on a white plate rather than in a reversed version. `mark`
- * is the same file, kept as its own name for the small brand seals on cards
- * and badges.
+ * The client's OneVoice logo, used exactly as supplied: never cropped,
+ * recoloured or rearranged. This is the updated file of 17 November 2026,
+ * whose wordmark reads "Global Organization" (it replaced the 30 October
+ * file, which read "Global Foundation"); it has a new file name so cached
+ * copies of the old one are not served. It is one stacked file, emblem over
+ * wordmark, on a transparent ground, so on dark bands it sits on a white
+ * plate rather than in a reversed version. `mark` is the same file, kept as
+ * its own name for the small brand seals on cards and badges.
  */
-const logoFile = { src: "/OneVoiceGlobak_logo_.png", width: 1080, height: 804 } as const;
+const logoFile = { src: "/onevoice-global-organization-logo.png", width: 1080, height: 804 } as const;
 
 export const logo = {
   colour: logoFile,
@@ -263,6 +268,13 @@ export const contact = {
     { platform: "instagram", label: "Instagram", href: "https://www.instagram.com/onevoiceglobalfoundation/" },
   ] satisfies { platform: SocialPlatform; label: string; href: string }[],
 };
+
+/** The registered company, as Companies House lists it (supplied by the client on 17 November 2026). */
+export const company = {
+  name: "One Voice Global Organisation Limited",
+  numberLabel: "Company number",
+  number: "17585475",
+} as const;
 
 /** Footer columns, drawn from the same menu so the two never disagree. */
 const byLabel = (label: string) => navigation.find((item) => item.label === label)!;

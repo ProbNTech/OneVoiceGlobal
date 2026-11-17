@@ -1,5 +1,5 @@
 /**
- * OneVoice Global Foundation — content type definitions.
+ * OneVoice Global Organisation — content type definitions.
  *
  * These interfaces describe the *shape* of the site's content. For now the
  * data lives in local TypeScript files under `src/data`, but these types

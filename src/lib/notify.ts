@@ -20,7 +20,7 @@ import type { FormDef } from "./forms";
 import { orange } from "../styles/brand-colours.ts";
 
 // `brand.name` in data/site.ts, written out so the test script can load this file.
-const SITE = "OneVoice Global Foundation";
+const SITE = "OneVoice Global Organisation";
 
 // The brand colours of styles/site.css: navy-900, navy-950, ocean-600 and the neutrals; the orange comes from styles/brand-colours.ts.
 const NAVY = "#0a2540";

@@ -1,12 +1,12 @@
 @AGENTS.md
 
-# OneVoice Global Foundation website: how we design and build it
+# OneVoice Global Organisation website: how we design and build it
 
 This file is the playbook for every page on this site. Read it before designing or coding anything, and follow it unless the person you are working with tells you otherwise. The home page is built and its design is approved. It is the reference for everything that follows, so open `src/app/(site)/page.tsx` and the files under `src/components/site/` and reuse them before inventing anything new.
 
 ## 1. What we are building
 
-- **Client:** OneVoice Global Foundation (the name the source documents use; the client tried "OneVoice Community Foundation" from 27 October 2026 and returned to the original name and logo on 30 October), a London community empowerment, skills and social-inclusion charity. Its delivery arm is "OneVoice Skill Development Centre".
+- **Client:** OneVoice Global Organisation, registered as One Voice Global Organisation Limited, company number 17585475 (`company` in `src/data/site.ts`). The source documents say "OneVoice Global Foundation"; on 17 November 2026 the client asked for "Foundation" to become "Organisation" everywhere. (Earlier, the client tried "OneVoice Community Foundation" from 27 to 30 October 2026.) It is a London community empowerment, skills and social-inclusion charity. Its delivery arm is "OneVoice Skill Development Centre".
 - **Feel:** clean, soft and elegant, a little premium, media-rich (lots of real-looking photographs), with smooth, premium motion. It should be calmer and sleeker than our full-premium event sites (ASBS, CWEF) but built the same way.
 - **Style references:** elaflooring.co.uk (its section patterns are the user's favourites), asianresource.org.uk, reachvolunteering.org.uk. **Motion references:** innovatorpathway.co.uk, asianresource.org.uk.
 - The intern's first design (everything under `src/components/{layout,shared,work}`, `src/data/{navigation,services,work,programmes,legacy-home}.ts` and the `(legacy)` route group) was rejected. Never copy its look or reuse its components for new pages.
@@ -18,7 +18,7 @@ This file is the playbook for every page on this site. Read it before designing 
 - When a section needs a title the document does not give, borrow a line the document uses elsewhere, and note its source in a comment in the data file (see `src/data/home.ts`).
 - **Never invent** statistics, testimonials, partner names or logos, contact details, social links, dates or venues. The document's contact block is blank. `src/data/site.ts → contact` holds only values the user or client has supplied (interim address, telephone and email given on 30 October 2026); empty values, such as the website, are simply not rendered. Social icons show only for platforms with a link: the user supplied Instagram, LinkedIn and Facebook on 14 November 2026, so the brief's fourth platform, YouTube, is hidden until its URL arrives.
 - Keep card copy short: a card shows the document's title and one line. Don't pile on bullet lists, chips or sub-headings unless the user asks.
-- British English. Write the names exactly: "OneVoice Global Foundation" (never "OneVoice Community Foundation", the name used briefly in October 2026; take it from `brand.name` in `src/data/site.ts`), "OneVoice Skill Development Centre". The logo is `logo` in the same file: the client's `public/OneVoiceGlobak_logo_.png`, used exactly as supplied. Never crop, recolour or rearrange it (the user rejected an edited lockup on 30 October 2026); on dark bands it sits on a white plate.
+- British English. Write the names exactly: "OneVoice Global Organisation" (spelt with an s, as Companies House spells it; never "Foundation", even where the source documents use it, and never "OneVoice Community Foundation"; take it from `brand.name` in `src/data/site.ts`), "OneVoice Skill Development Centre". Where the documents say "the Foundation", write "the Organisation". Lower-case "foundations" as a kind of funder (charitable foundations, trusts and foundations) is an ordinary word and stays. The logo is `logo` in the same file: the client's `public/onevoice-global-organization-logo.png` (updated 17 November 2026; its wordmark reads "Global Organization"), used exactly as supplied. Never crop, recolour or rearrange it (the user rejected an edited lockup on 30 October 2026); on dark bands it sits on a white plate. When the client sends a new logo, save it under a new file name so cached copies of the old one are not served.
 
 ## 3. Design rules from the user's reviews (follow these)
 
