@@ -1,5 +1,6 @@
 import { legalLinks } from "@/data/legal";
-import { brand, company, contact, copyrightYear, footerColumns, routes } from "@/data/site";
+import { brand, company, contact, copyrightYear, footerColumns, footerDisclaimer, routes } from "@/data/site";
+import { cx } from "@/lib/cx";
 import { PageLink } from "../ui/PageLink";
 import { Shell } from "../ui/primitives";
 import { Reveal } from "../ui/Reveal";
@@ -8,9 +9,12 @@ import { Logo } from "./Logo";
 
 /**
  * Site footer, after ELA Flooring's: one dark band with the logo and a short
- * line, the link columns, and a Get in Touch column, then a thin bar with
- * the copyright, the registered company and its number, and the tagline. Its links are PageLinks, so one that points
- * at the page already open (Contact Us, on the Contact page) scrolls back to
+ * line, the link columns, and a Get in Touch column. Its close follows the
+ * Commonwealth Entrepreneurs Forum footer: the tagline as a large outlined
+ * wordmark, a thin bar with the copyright, the registered company and its
+ * number beside the legal pages, and last the disclaimer, centred. Its
+ * links are PageLinks, so one that points at
+ * the page already open (Contact Us, on the Contact page) scrolls back to
  * the top rather than doing nothing.
  */
 export function SiteFooter() {
@@ -26,7 +30,10 @@ export function SiteFooter() {
   return (
     <footer className="bg-navy-950 text-white/65">
       <Shell className="pb-8 pt-12 md:pt-14">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.3fr] lg:gap-10">
+        {/* Five columns from 1280px. Between 1024 and 1279px five are too
+            narrow, so the brand and the wide Explore column share the first
+            row and the other three the second. */}
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10 xl:grid-cols-[1.3fr_2.1fr_1fr_1fr_1.3fr]">
           {/* Brand */}
           <Reveal>
             <Logo tone="light" className="h-[9.125rem]" />
@@ -34,25 +41,45 @@ export function SiteFooter() {
             <p className="mt-3 max-w-sm text-[0.875rem] leading-relaxed text-white/45">{brand.initiative}</p>
           </Reveal>
 
-          {/* Link columns */}
-          {footerColumns.map((column, index) => (
-            <Reveal key={column.heading} delay={(index + 1) * 90}>
-              <nav aria-label={column.heading}>
-                <h3 className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange">
-                  {column.heading}
-                </h3>
-                <ul className="mt-5 space-y-3">
-                  {column.links.map((link) => (
-                    <li key={link.href}>
-                      <PageLink href={link.href} className="text-[0.9375rem] transition-colors hover:text-white">
-                        {link.label}
-                      </PageLink>
-                    </li>
+          {/* Link columns. A long one (Explore's eleven pages) is split into
+              two side by side, the first half on the left, so it stands no
+              taller than its neighbours and leaves no empty space under them.
+              Each half carries the heading (the user's request); the second
+              copy is hidden from screen readers, which hear one Explore menu. */}
+          {footerColumns.map((column, index) => {
+            const split = column.links.length > 6 ? Math.ceil(column.links.length / 2) : column.links.length;
+            const parts = [column.links.slice(0, split), column.links.slice(split)].filter((part) => part.length);
+            const wide = parts.length > 1;
+            return (
+              <Reveal
+                key={column.heading}
+                delay={(index + 1) * 90}
+                className={wide ? "lg:col-span-2 xl:col-span-1" : undefined}
+              >
+                <nav aria-label={column.heading} className={cx(wide && "grid grid-cols-2 gap-x-6")}>
+                  {parts.map((links, part) => (
+                    <div key={part}>
+                      <h3
+                        aria-hidden={part > 0 || undefined}
+                        className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-orange"
+                      >
+                        {column.heading}
+                      </h3>
+                      <ul className="mt-5 space-y-3">
+                        {links.map((link) => (
+                          <li key={link.href}>
+                            <PageLink href={link.href} className="text-[0.9375rem] transition-colors hover:text-white">
+                              {link.label}
+                            </PageLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
-              </nav>
-            </Reveal>
-          ))}
+                </nav>
+              </Reveal>
+            );
+          })}
 
           {/* Get in Touch */}
           <Reveal delay={(footerColumns.length + 1) * 90}>
@@ -97,31 +124,51 @@ export function SiteFooter() {
           </Reveal>
         </div>
 
-        {/* Copyright (with the registered company under it) and the legal
-            pages on the left, the tagline on the right; one row from 1280px
-            up, stacking below that. */}
-        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-[0.8125rem] text-white/50 xl:flex-row xl:items-center">
-          <div className="flex flex-col gap-x-8 gap-y-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <div className="space-y-1">
-              <p>
-                © {copyrightYear} {brand.name}. All rights reserved.
-              </p>
-              <p>
-                {company.name} · {company.numberLabel} {company.number}
-              </p>
-            </div>
-            <ul aria-label="Legal" className="flex flex-wrap gap-x-5 gap-y-2">
-              {Object.values(legalLinks).map((link) => (
-                <li key={link.href}>
-                  <PageLink href={link.href} className="whitespace-nowrap transition-colors hover:text-white">
-                    {link.label}
-                  </PageLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <p className="uppercase tracking-[0.14em]">{brand.tagline}</p>
+        {/* The tagline as an outlined wordmark across the measure, like the
+            Commonwealth Entrepreneurs Forum footer's "Connect. Collaborate.
+            Grow." It is sized to the footer's own width (cqw). Fraunces'
+            optical size is held at its display cut (opsz 144): left to
+            follow the font size, the letters widen as the line shrinks and
+            it overflows. Held, the line runs 21.3 times its font size at any
+            width, so 4.6cqw fills about 98% of the footer. Below 640px one
+            line would be too small to read, so its three phrases stack,
+            sized for the longest ("Stronger Communities,", 8.66 times). */}
+        <div className="@container mt-10">
+          <p className="select-none font-display text-[length:11.3cqw] leading-[1.05] tracking-[-0.02em] text-transparent [-webkit-text-stroke:1px_rgb(255_255_255/0.24)] [font-variation-settings:'SOFT'_100,'opsz'_144] sm:whitespace-nowrap sm:text-[length:4.6cqw] sm:leading-none">
+            {brand.tagline.split(", ").map((phrase, index, phrases) => (
+              <span key={phrase} className="block sm:inline">
+                {phrase}
+                {index < phrases.length - 1 ? ", " : ""}
+              </span>
+            ))}
+          </p>
         </div>
+
+        {/* As on that site: the copyright and the registered company, one
+            line (the user's request), on the left and the legal pages on the
+            right. The line is too long to share a row with the links below
+            1280px, so there the links sit under it. */}
+        <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-6 text-[0.8125rem] text-white/50 xl:flex-row xl:items-center xl:justify-between xl:gap-6">
+          <p>
+            © {copyrightYear} {brand.name}. All rights reserved. {company.name} · {company.numberLabel} {company.number}
+          </p>
+          <ul aria-label="Legal" className="flex flex-wrap gap-x-5 gap-y-2">
+            {Object.values(legalLinks).map((link) => (
+              <li key={link.href}>
+                <PageLink href={link.href} className="whitespace-nowrap transition-colors hover:text-white">
+                  {link.label}
+                </PageLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* The disclaimer closes the footer, small and centred, as on the
+            Commonwealth Entrepreneurs Forum site; on phones it is set left,
+            like the bar above, since a long centred paragraph reads poorly. */}
+        <p className="mx-auto mt-6 max-w-5xl text-left text-[0.75rem] leading-relaxed text-white/40 sm:text-center">
+          <span className="font-semibold text-white/60">{footerDisclaimer.label}:</span> {footerDisclaimer.text}
+        </p>
       </Shell>
     </footer>
   );

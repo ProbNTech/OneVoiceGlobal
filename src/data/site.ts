@@ -314,4 +314,22 @@ export const footerColumns: { heading: string; links: NavLink[] }[] = [
   },
 ];
 
+/**
+ * The footer's disclaimer, as the Commonwealth Entrepreneurs Forum's and the
+ * Asia Swiss Business Summit's footers carry one (the user's request, 18
+ * November 2026). Where those state what the organisation is not, this one
+ * states what OneVoice's help is not, in the brief's own sentences: the close
+ * of its Information & Signposting block (contact.ts), its Safeguarding,
+ * Confidentiality & Professional Support note on the workshops (seminars.ts)
+ * and its emergency line.
+ */
+export const footerDisclaimer = {
+  label: "Disclaimer",
+  text: [
+    "OneVoice does not replace regulated professional advice and will refer participants to appropriate specialist providers.",
+    "Our workshops provide general education and awareness. They do not replace individual legal advice, regulated financial advice, specialist domestic abuse support or emergency services.",
+    "If someone is in immediate danger in the UK, they should call 999.",
+  ].join(" "),
+} as const;
+
 export const copyrightYear = 2026;
