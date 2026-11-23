@@ -9,13 +9,12 @@ import { Corporate } from "@/components/site/partners/Corporate";
 import { Funders } from "@/components/site/partners/Funders";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
-import { partnersCta, partnersHero, partnersSections } from "@/data/partners";
+import { partnersCta, partnersSections } from "@/data/partners";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
+import { routes } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Partners",
-  description: partnersHero.description,
-  alternates: { canonical: "/partners" },
-};
+export const metadata: Metadata = pageMetadata(routes.partners);
 
 /**
  * Partners. The Foundation's introduction to its partnerships, then one
@@ -26,6 +25,7 @@ export const metadata: Metadata = {
 export default function PartnersPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.partners)} />
       <Hero />
       <SectionNav label={partnersSections.label} links={partnersSections.links} />
       <Overview />

@@ -8,6 +8,12 @@ import { WorkWithUs } from "@/components/site/home/WorkWithUs";
 import { Foundation } from "@/components/site/home/Foundation";
 import { Team } from "@/components/site/home/Team";
 import { FinalCta } from "@/components/site/home/FinalCta";
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
+import { routes } from "@/data/site";
+
+export const metadata: Metadata = pageMetadata(routes.home);
 
 /**
  * Home page, in the brief's order: HOMEPAGE HERO (the hero and its opening
@@ -20,6 +26,7 @@ import { FinalCta } from "@/components/site/home/FinalCta";
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.home)} />
       <Hero />
       <Intro />
       <WhyOneVoice />

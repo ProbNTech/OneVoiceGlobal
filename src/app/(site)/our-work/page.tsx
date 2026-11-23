@@ -10,13 +10,12 @@ import { International } from "@/components/site/our-work/International";
 import { Refugee } from "@/components/site/our-work/Refugee";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
-import { ourWorkCta, ourWorkHero, ourWorkSections } from "@/data/our-work";
+import { ourWorkCta, ourWorkSections } from "@/data/our-work";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
+import { routes } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Our Work",
-  description: ourWorkHero.description,
-  alternates: { canonical: "/our-work" },
-};
+export const metadata: Metadata = pageMetadata(routes.ourWork);
 
 /**
  * Our Work. The brief's V.2 "Our Work" block: its subtitle and opening
@@ -31,6 +30,7 @@ export const metadata: Metadata = {
 export default function OurWorkPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.ourWork)} />
       <Hero />
       <SectionNav label={ourWorkSections.label} links={ourWorkSections.links} />
       <Education />

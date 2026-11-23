@@ -8,13 +8,11 @@ import { Reports } from "@/components/site/impact/Reports";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
 import { routes } from "@/data/site";
-import { impactCta, impactHero, impactSections } from "@/data/impact";
+import { impactCta, impactSections } from "@/data/impact";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Impact",
-  description: impactHero.description[0],
-  alternates: { canonical: routes.impact },
-};
+export const metadata: Metadata = pageMetadata(routes.impact);
 
 /**
  * Impact. The brief's IMPACT block in the order of its sub-menu: Our Impact
@@ -26,6 +24,7 @@ export const metadata: Metadata = {
 export default function ImpactPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.impact)} />
       <Hero />
       <SectionNav label={impactSections.label} links={impactSections.links} />
       <Tracking />

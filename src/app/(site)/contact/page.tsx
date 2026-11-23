@@ -5,13 +5,12 @@ import { Signposting } from "@/components/site/contact/Signposting";
 import { Safety } from "@/components/site/contact/Safety";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
-import { contactCta, contactHero, contactSections } from "@/data/contact";
+import { contactCta, contactSections } from "@/data/contact";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
+import { routes } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: contactHero.description,
-  alternates: { canonical: "/contact" },
-};
+export const metadata: Metadata = pageMetadata(routes.contact);
 
 /**
  * Contact. The brief's CONTACT US block beside an enquiry form that takes
@@ -24,6 +23,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.contact)} />
       <Hero />
       <SectionNav label={contactSections.label} links={contactSections.links} />
       <Enquiry />

@@ -6,13 +6,11 @@ import { Topics } from "@/components/site/news/Topics";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
 import { routes } from "@/data/site";
-import { newsCta, newsHero, newsSections } from "@/data/news";
+import { newsCta, newsSections } from "@/data/news";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "News & Resources",
-  description: newsHero.description,
-  alternates: { canonical: routes.news },
-};
+export const metadata: Metadata = pageMetadata(routes.news);
 
 /**
  * News & Resources. The brief's short NEWS & RESOURCES block: the five kinds
@@ -25,6 +23,7 @@ export const metadata: Metadata = {
 export default function NewsResourcesPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.news)} />
       <Hero />
       <SectionNav label={newsSections.label} links={newsSections.links} />
       <Overview />

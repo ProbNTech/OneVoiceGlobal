@@ -9,13 +9,11 @@ import { Supporter } from "@/components/site/refugee-support/Supporter";
 import { Commitment } from "@/components/site/refugee-support/Commitment";
 import { SectionNav } from "@/components/site/ui/SectionNav";
 import { routes } from "@/data/site";
-import { refugeeHero, refugeeSections } from "@/data/refugee-support";
+import { refugeeSections } from "@/data/refugee-support";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Refugee & Asylum Seeker Support",
-  description: refugeeHero.description,
-  alternates: { canonical: routes.refugeeSupport },
-};
+export const metadata: Metadata = pageMetadata(routes.refugeeSupport);
 
 /**
  * Refugee & Asylum Seeker Support, a service under Our Work on a page of its
@@ -29,6 +27,7 @@ export const metadata: Metadata = {
 export default function RefugeeSupportPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.refugeeSupport)} />
       <Hero />
       <SectionNav label={refugeeSections.label} links={refugeeSections.links} />
       <Asylum />

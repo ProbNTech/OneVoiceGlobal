@@ -16,13 +16,18 @@ import { Contact } from "@/components/site/scholarships/Contact";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
 import { routes } from "@/data/site";
-import { scholarshipsCta, scholarshipsHero, scholarshipsSections } from "@/data/scholarships";
+import { scholarshipsCta, scholarshipsFaq, scholarshipsSections } from "@/data/scholarships";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Scholarships & Educational Grants",
-  description: scholarshipsHero.lead,
-  alternates: { canonical: routes.scholarships },
-};
+export const metadata: Metadata = pageMetadata(routes.scholarships);
+
+/* The page's Frequently Asked Questions, exactly as the accordion shows them, for search engines. */
+const faqJsonLd = scholarshipsFaq.questions.map(({ q, a }) => ({
+  "@type": "Question",
+  name: q,
+  acceptedAnswer: { "@type": "Answer", text: a },
+}));
 
 /**
  * Scholarships. The client's OneVoice Scholarship & Educational Grants
@@ -38,6 +43,7 @@ export const metadata: Metadata = {
 export default function ScholarshipsPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.scholarships, { mainEntity: faqJsonLd })} />
       <Hero />
       <SectionNav label={scholarshipsSections.label} links={scholarshipsSections.links} />
       <About />

@@ -8,13 +8,12 @@ import { Volunteering } from "@/components/site/community/Volunteering";
 import { Voice } from "@/components/site/community/Voice";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
-import { communityCta, communityHero, communitySections } from "@/data/community";
+import { communityCta, communitySections } from "@/data/community";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
+import { routes } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Community",
-  description: communityHero.description,
-  alternates: { canonical: "/community" },
-};
+export const metadata: Metadata = pageMetadata(routes.community);
 
 /**
  * Community. The brief's V.2 Community block, in the order of its sub-menu:
@@ -26,6 +25,7 @@ export const metadata: Metadata = {
 export default function CommunityPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.community)} />
       <Hero />
       <SectionNav label={communitySections.label} links={communitySections.links} />
       <Outreach />

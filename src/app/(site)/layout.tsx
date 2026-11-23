@@ -2,6 +2,8 @@ import { SiteHeader } from "@/components/site/layout/SiteHeader";
 import { SiteFooter } from "@/components/site/layout/SiteFooter";
 import { SmoothScroll } from "@/components/site/layout/SmoothScroll";
 import { OrangeGradients } from "@/components/site/ui/OrangeGradients";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { siteJsonLd } from "@/lib/seo";
 
 /**
  * The new design's chrome. `data-design="site"` scopes the new base styles
@@ -10,6 +12,8 @@ import { OrangeGradients } from "@/components/site/ui/OrangeGradients";
 export default function SiteLayout({ children }: LayoutProps<"/">) {
   return (
     <div data-design="site" className="contents">
+      {/* Who runs the site, for search engines: the organisation and the website, on every page. */}
+      <JsonLd data={siteJsonLd()} />
       <SmoothScroll />
       <OrangeGradients />
       <a

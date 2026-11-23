@@ -55,6 +55,14 @@ export const logo = {
   mark: logoFile,
 } as const;
 
+/**
+ * The one public address of the site (supplied by the user on 23 November
+ * 2026). Canonical links, the sitemap, social cards and structured data all
+ * point here, without "www", whichever host serves the page: the Vercel copy
+ * and any other address must never compete with it in search results.
+ */
+export const siteUrl = "https://onevoiceglobal.org.uk";
+
 export const routes = {
   home: "/",
   about: "/about-us",
@@ -254,6 +262,13 @@ export const contact = {
      contact details for now"); the brief leaves all four blank. Empty values
      are not rendered. The client changed the email on 14 November 2026. */
   address: "134-136 Westbourne Terrace, London W2 6QB",
+  /** The same address in parts, for search engines' structured data. Keep it in step with `address`. */
+  postalAddress: {
+    streetAddress: "134-136 Westbourne Terrace",
+    addressLocality: "London",
+    postalCode: "W2 6QB",
+    addressCountry: "GB",
+  },
   telephone: "+44 7920 550000",
   email: "info@onevoiceglobal.org.uk",
   website: "",

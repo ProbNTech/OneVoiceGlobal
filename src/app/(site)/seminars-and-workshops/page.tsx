@@ -12,13 +12,11 @@ import { WorkWithUs } from "@/components/site/seminars/WorkWithUs";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
 import { routes } from "@/data/site";
-import { seminarsCta, seminarsHero, seminarsSections } from "@/data/seminars";
+import { seminarsCta, seminarsSections } from "@/data/seminars";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Seminars & Workshops",
-  description: seminarsHero.description,
-  alternates: { canonical: routes.seminars },
-};
+export const metadata: Metadata = pageMetadata(routes.seminars);
 
 /**
  * Seminars & Workshops. The brief's V.2 SEMINARS & WORKSHOPS block: its
@@ -33,6 +31,7 @@ export const metadata: Metadata = {
 export default function SeminarsPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.seminars)} />
       <Hero />
       <SectionNav label={seminarsSections.label} links={seminarsSections.links} />
       <Approach />

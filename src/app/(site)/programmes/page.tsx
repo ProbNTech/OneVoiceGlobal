@@ -12,13 +12,12 @@ import { Safety } from "@/components/site/programmes/Safety";
 import { Scholarships } from "@/components/site/programmes/Scholarships";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
-import { programmesCta, programmesHero, programmesSections } from "@/data/programmes-page";
+import { programmesCta, programmesSections } from "@/data/programmes-page";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
+import { routes } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Programmes",
-  description: programmesHero.description,
-  alternates: { canonical: "/programmes" },
-};
+export const metadata: Metadata = pageMetadata(routes.programmes);
 
 /**
  * Programmes. The brief's twenty-three programme blocks, grouped into seven
@@ -33,6 +32,7 @@ export const metadata: Metadata = {
 export default function ProgrammesPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.programmes)} />
       <Hero />
       <SectionNav label={programmesSections.label} links={programmesSections.links} />
       <Education />

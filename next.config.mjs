@@ -20,6 +20,25 @@
  * - Builds use two workers rather than one per CPU core, for the same limit.
  */
 
+/*
+ * Search engines (23 November 2026). The site lives at
+ * https://onevoiceglobal.org.uk, without "www". The same code is also
+ * deployed on Vercel at one-voice-global.vercel.app, and Hostinger can serve
+ * it on a temporary *.hostingersite.com address. Those copies must not
+ * compete with the real site:
+ *
+ * - www.onevoiceglobal.org.uk redirects permanently (308) to the same page
+ *   without "www". The rule matches the Host header only, so if a host never
+ *   sends that name it simply never fires.
+ * - Every response from a Vercel deployment, or from a *.vercel.app or
+ *   *.hostingersite.com address, carries "X-Robots-Tag: noindex", which also
+ *   covers images. The pages there carry a noindex meta tag too, and every
+ *   page's canonical link points at onevoiceglobal.org.uk (src/lib/seo.ts).
+ *   Positive matches only: a rule keyed to "any host but the real one" could
+ *   noindex the live site if the hosting proxy ever rewrote the Host header.
+ */
+const noindex = [{ key: "X-Robots-Tag", value: "noindex, nofollow" }];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   cacheComponents: true,
@@ -44,6 +63,23 @@ const nextConfig = {
     deviceSizes: [640, 828, 1080, 1280, 1600, 1920],
     imageSizes: [96, 128, 256, 384],
     minimumCacheTTL: 2592000,
+  },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.onevoiceglobal.org.uk" }],
+        destination: "https://onevoiceglobal.org.uk/:path*",
+        permanent: true,
+      },
+    ];
+  },
+  async headers() {
+    if (process.env.VERCEL) return [{ source: "/:path*", headers: noindex }];
+    return [
+      { source: "/:path*", has: [{ type: "host", value: "(?<vercel>.+)\\.vercel\\.app" }], headers: noindex },
+      { source: "/:path*", has: [{ type: "host", value: "(?<temporary>.+)\\.hostingersite\\.com" }], headers: noindex },
+    ];
   },
   experimental: {
     imgOptConcurrency: 1,

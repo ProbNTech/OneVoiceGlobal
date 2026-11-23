@@ -9,13 +9,11 @@ import { Awards } from "@/components/site/events/Awards";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
 import { routes } from "@/data/site";
-import { eventsCta, eventsHero, eventsSections } from "@/data/events";
+import { eventsCta, eventsSections } from "@/data/events";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Events 2027",
-  description: eventsHero.description,
-  alternates: { canonical: routes.events },
-};
+export const metadata: Metadata = pageMetadata(routes.events);
 
 /**
  * Events 2027. The brief's V.2 EVENTS 2027 block: its subtitle and
@@ -29,6 +27,7 @@ export const metadata: Metadata = {
 export default function EventsPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.events)} />
       <Hero />
       <SectionNav label={eventsSections.label} links={eventsSections.links} />
       <Calendar />

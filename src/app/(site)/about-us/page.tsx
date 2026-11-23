@@ -10,13 +10,12 @@ import { Centre } from "@/components/site/about/Centre";
 import { Trust } from "@/components/site/about/Trust";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
-import { aboutCta, aboutHero, aboutSections } from "@/data/about";
+import { aboutCta, aboutSections } from "@/data/about";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
+import { routes } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description: aboutHero.description,
-  alternates: { canonical: "/about-us" },
-};
+export const metadata: Metadata = pageMetadata(routes.about);
 
 /**
  * About Us. The Foundation's own V.2 block in the order of the About Us
@@ -29,6 +28,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.about)} />
       <Hero />
       <SectionNav label={aboutSections.label} links={aboutSections.links} />
       <WhoWeAre />

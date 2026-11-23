@@ -9,13 +9,12 @@ import { Donate } from "@/components/site/get-involved/Donate";
 import { PartnerSponsor } from "@/components/site/get-involved/PartnerSponsor";
 import { CtaBanner } from "@/components/site/ui/CtaBanner";
 import { SectionNav } from "@/components/site/ui/SectionNav";
-import { getInvolvedCta, getInvolvedHero, getInvolvedSections } from "@/data/get-involved";
+import { getInvolvedCta, getInvolvedSections } from "@/data/get-involved";
+import { JsonLd } from "@/components/site/seo/JsonLd";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
+import { routes } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Get Involved",
-  description: getInvolvedHero.description,
-  alternates: { canonical: "/get-involved" },
-};
+export const metadata: Metadata = pageMetadata(routes.getInvolved);
 
 /**
  * Get Involved. The Foundation's five ways to support its work, then a
@@ -28,6 +27,7 @@ export const metadata: Metadata = {
 export default function GetInvolvedPage() {
   return (
     <>
+      <JsonLd data={pageJsonLd(routes.getInvolved)} />
       <Hero />
       <SectionNav label={getInvolvedSections.label} links={getInvolvedSections.links} />
       <Ways />

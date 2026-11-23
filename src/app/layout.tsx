@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, Manrope, Plus_Jakarta_Sans } from "next/font/google";
-import { siteConfig } from "@/config/site";
+import { brand, siteUrl } from "@/data/site";
+import { seo } from "@/data/seo";
+import { isIndexable, pageMetadata } from "@/lib/seo";
 import { orangeCssVariables } from "@/styles/brand-colours";
 import "./globals.css";
 
@@ -29,23 +31,27 @@ const jakarta = Plus_Jakarta_Sans({
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap", preload: false });
 const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], display: "swap", preload: false });
 
+/*
+ * Site-wide defaults. Every page sets its own title, description, canonical
+ * address and social cards through `pageMetadata` (src/lib/seo.ts); these
+ * cover anything without them, such as the not-found page. Relative
+ * addresses resolve against the real domain, onevoiceglobal.org.uk, on every
+ * host, so the Vercel copy points search engines there too.
+ */
+const home = pageMetadata("/");
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteConfig.name} | Empowering People. Building Skills. Creating Opportunities.`,
-    template: `%s | ${siteConfig.name}`,
+    default: seo["/"].absoluteTitle,
+    template: `%s | ${brand.name}`,
   },
-  description:
-    "OneVoice Skill Development Centre supports people from ethnic minority, disadvantaged and underserved communities across London to develop skills, build confidence, access employment and connect with their communities.",
-  applicationName: siteConfig.name,
-  openGraph: {
-    title: siteConfig.name,
-    description: "Stronger Communities, Shared Opportunities, One World.",
-    siteName: siteConfig.name,
-    locale: "en_GB",
-    type: "website",
-  },
-  robots: { index: true, follow: true },
+  description: home.description,
+  applicationName: brand.name,
+  openGraph: { ...home.openGraph, url: undefined },
+  twitter: home.twitter,
+  // Only the real site may be indexed; the Vercel copy and other staging hosts are not (see src/lib/seo.ts).
+  robots: isIndexable ? { index: true, follow: true } : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

@@ -95,13 +95,17 @@ const sections = {
 /** The page's own enquiry form, opened with one kind of enquiry chosen. */
 const formHref = (topic: EnquiryTopic) => `${routes.iftar}?enquiry=${topic}#${sections.register.id}`;
 
-const facts = {
+/** The event's facts, shared with its structured data for search engines (src/lib/seo.ts). */
+export const iftarFacts = {
   name: "OneVoice Community Iftar 2027",
   date: "Saturday, 20 February 2027",
+  /** The same date in ISO 8601, for search engines. Keep it in step with `date`. */
+  isoDate: "2027-02-20",
   place: "Stratford, East London",
   venue: "Lee Valley Stadium, Queen Elizabeth Olympic Park, Stratford, East London",
   attendance: "2,000+ people",
 } as const;
+const facts = iftarFacts;
 
 /* -------------------------------------------------------------------------
    HERO

@@ -53,8 +53,8 @@ export const siteConfig: SiteConfig = {
   differentiator: "One Organisation. Many Pathways.",
   description:
     "OneVoice Global Organisation connects communities across London with education, skills, employment, enterprise and opportunities for participation.",
-  // Provisional. Replace with the approved production domain before launch.
-  url: "https://www.onevoice.example",
+  // The live domain (23 November 2026); the redesigned pages take it from `siteUrl` in src/data/site.ts.
+  url: "https://onevoiceglobal.org.uk",
 
   contact: {
     confirmed: false,
