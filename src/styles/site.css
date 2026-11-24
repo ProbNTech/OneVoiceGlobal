@@ -418,6 +418,16 @@
 
 /* A panel that eases up into place each time it is shown (the Programmes
    page's tabs): the animation replays whenever `hidden` comes off. */
+/* The shade behind the Join page's thank-you panel, eased in. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;
