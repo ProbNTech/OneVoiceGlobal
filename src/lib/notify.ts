@@ -164,6 +164,125 @@ export function notificationEmail(def: FormDef, values: Record<string, string>, 
   return { subject, text, html, replyTo: email || undefined };
 }
 
+/* -------------------------------------------------------------------------
+   The welcome and greeting sent to the person who signed up on the Join
+   page (app/(site)/join). The team's notification above goes to OneVoice;
+   this one goes to the visitor. Every line is the brief's own: the headline,
+   tagline and closing line of `brand` in data/site.ts, and the eight
+   support lines of the home page's "What We Deliver", written out here so
+   the test script can load this file on its own.
+   ------------------------------------------------------------------------- */
+
+const TAGLINE = "Stronger Communities, Shared Opportunities, One World";
+const HEADLINE = "Empowering People. Building Skills. Creating Opportunities.";
+const CLOSING = "One Person. One Voice. One Opportunity at a Time.";
+
+/** The eight areas of support, as the home page lists them. */
+const SUPPORT: { title: string; line: string }[] = [
+  { title: "Skills Development", line: "Develop practical skills for life and work." },
+  { title: "Employability", line: "Become job ready and access employment opportunities." },
+  { title: "Digital OneVoice", line: "Build confidence in the digital world." },
+  { title: "OneVoice Enterprise", line: "Turn ideas into opportunities." },
+  { title: "English & Communication", line: "Develop English and communication skills." },
+  { title: "Mentoring", line: "Get guidance and support from experienced people." },
+  { title: "Wellbeing", line: "Build resilience, confidence and social connection." },
+  { title: "Community", line: "Connect, participate and build relationships." },
+];
+
+/**
+ * The welcome email, plain text and HTML; split out so it can be previewed.
+ * `group` is the WhatsApp group link (`whatsappGroup` in data/site.ts),
+ * passed in rather than imported so this file keeps nodemailer as its only
+ * runtime import.
+ */
+export function welcomeEmail(values: Record<string, string>, group: string, telephone: string, email: string): Email {
+  const first = (senderName(values).split(/\s+/)[0] ?? "").trim();
+  const hello = first ? `Welcome to OneVoice, ${first}` : "Welcome to OneVoice";
+  const subject = `${hello} — ${TAGLINE}`;
+  const thanks = `Thank you for joining ${SITE}. We are glad to have your voice with us.`;
+  const intro =
+    "We help people access opportunities, build skills and connect with their community. Our support covers:";
+  const next =
+    "Your next step is to join our community WhatsApp group, where we share programmes, workshops and events.";
+  const touch = "Our team will be in touch about programmes near you.";
+
+  const text = [
+    hello,
+    "",
+    thanks,
+    "",
+    intro,
+    ...SUPPORT.map((item) => `- ${item.title}: ${item.line}`),
+    "",
+    next,
+    group,
+    "",
+    touch,
+    "",
+    TAGLINE,
+    CLOSING,
+    "",
+    [telephone, email].filter(Boolean).join(" · "),
+  ].join("\n");
+
+  const items = SUPPORT.map(
+    (item) =>
+      `<tr><td style="padding:9px 0;border-bottom:1px solid ${RULE}">
+        <span style="color:${TEXT};font-size:14px;font-weight:bold">${escapeHtml(item.title)}</span>
+        <span style="color:${MUTED};font-size:14px"> — ${escapeHtml(item.line)}</span>
+      </td></tr>`,
+  ).join("");
+
+  const html = `<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeHtml(hello)}</title></head>
+<body style="margin:0;padding:0;background:${BACKDROP}">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0">${escapeHtml(thanks)}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${BACKDROP};padding:24px 12px">
+<tr><td align="center">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border-radius:14px;overflow:hidden;font-family:Arial,Helvetica,sans-serif">
+    <tr><td style="background:${NAVY};padding:24px 28px;border-bottom:4px solid ${SAFFRON}">
+      <div style="color:${SAFFRON};font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase">${escapeHtml(TAGLINE)}</div>
+      <div style="margin-top:6px;color:#ffffff;font-size:19px;font-weight:bold">${SITE}</div>
+      <div style="margin-top:4px;color:#ffffff;opacity:0.75;font-size:13px">${escapeHtml(HEADLINE)}</div>
+    </td></tr>
+    <tr><td style="padding:28px 28px 0">
+      <h1 style="margin:0 0 10px;color:${NAVY_DEEP};font-size:25px;line-height:1.25;font-weight:bold">${escapeHtml(hello)}</h1>
+      <p style="margin:0;color:${TEXT};font-size:15px;line-height:1.7">${escapeHtml(thanks)}</p>
+      <p style="margin:16px 0 0;color:${MUTED};font-size:14px;line-height:1.7">${escapeHtml(intro)}</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px">${items}</table>
+    </td></tr>
+    <tr><td style="padding:24px 28px 0">
+      <div style="padding:18px 20px;background:${SAFFRON_TINT};border-radius:12px">
+        <p style="margin:0;color:${TEXT};font-size:14px;line-height:1.7">${escapeHtml(next)}</p>
+        <a href="${escapeHtml(group)}" style="display:inline-block;margin-top:14px;padding:11px 22px;border-radius:999px;background:${NAVY};color:#ffffff;font-size:14px;font-weight:bold;text-decoration:none">Join our WhatsApp group</a>
+      </div>
+      <p style="margin:18px 0 0;color:${MUTED};font-size:14px;line-height:1.7">${escapeHtml(touch)}</p>
+    </td></tr>
+    <tr><td style="padding:22px 28px 26px">
+      <p style="margin:0;color:${SAFFRON_INK};font-size:14px;font-weight:bold;line-height:1.6">${escapeHtml(CLOSING)}</p>
+    </td></tr>
+    <tr><td style="background:${PANEL};padding:16px 28px;color:${MUTED};font-size:12px;line-height:1.7">
+      ${SITE}${telephone ? `<br>${escapeHtml(telephone)}` : ""}${email ? `<br><a href="mailto:${escapeHtml(email)}" style="color:${LINK}">${escapeHtml(email)}</a>` : ""}
+    </td></tr>
+  </table>
+</td></tr>
+</table>
+</body></html>`;
+
+  return { subject, text, html };
+}
+
+/** Sends the welcome email to the person who signed up, copying nobody. */
+export async function sendWelcome(
+  to: string,
+  values: Record<string, string>,
+  group: string,
+  telephone: string,
+  email: string,
+) {
+  await sendEmail(to, welcomeEmail(values, group, telephone, email));
+}
+
 /** Sends one email through the EMAIL_* SMTP account, with an optional copy to `cc`. */
 export async function sendEmail(to: string, { subject, text, html, replyTo }: Email, cc?: string) {
   const host = envValue("EMAIL_HOST");

@@ -49,6 +49,26 @@ export const FORMS = {
     ],
     subject: (v) => `New enquiry (${v.topic}): ${v.name}`,
   },
+  /**
+   * The Join page's sign-up form (app/(site)/join), which the client's
+   * WhatsApp link opens. It asks only for what the client named on 24
+   * November 2026: name, mobile and WhatsApp number. Email is asked for too,
+   * because the welcome and greeting is sent by email (lib/notify.ts), and
+   * it is marked optional so nobody is turned away for want of one.
+   */
+  join: {
+    tab: "Community Sign-ups",
+    label: "sign-up",
+    fields: [
+      { key: "name", header: "Name", required: true, max: 200 },
+      { key: "mobile", header: "Mobile Number", required: true, max: 40 },
+      { key: "whatsapp", header: "WhatsApp Number", max: 40 },
+      { key: "email", header: "Email", kind: "email", max: 320 },
+      { key: "interest", header: "Interested In", max: 120 },
+      { key: "consent", header: "Consent", max: 60 },
+    ],
+    subject: (v) => `New community sign-up: ${v.name}`,
+  },
 } satisfies Record<string, FormDef>;
 
 export type FormId = keyof typeof FORMS;
