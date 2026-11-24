@@ -77,6 +77,10 @@ export const routes = {
   impact: "/impact",
   news: "/news-resources",
   getInvolved: "/get-involved",
+  /* The short landing page the client sends round on WhatsApp (24 November
+     2026): people leave their name and numbers, then join the community
+     group. Not in the menu, so the link can be shared on its own. */
+  join: "/join",
   contact: "/contact",
   privacy: "/privacy-policy",
   terms: "/terms-and-conditions",
@@ -256,7 +260,8 @@ export const contact = {
   address: "134-136 Westbourne Terrace, London W2 6QB",
   telephone: "+44 7920 550000",
   email: "info@onevoiceglobal.org.uk",
-  website: "",
+  /* Supplied by the user on 24 November 2026. */
+  website: "https://onevoiceglobal.org.uk/",
   /* Links supplied by the user on 14 November 2026. The brief also names
      YouTube, but no account has been given, so it is left out: only platforms
      with a link are shown. Add it back here, with its link, if one arrives. */
@@ -270,6 +275,16 @@ export const contact = {
     { platform: "instagram", label: "Instagram", href: "https://www.instagram.com/onevoiceglobalfoundation/" },
   ] satisfies { platform: SocialPlatform; label: string; href: string }[],
 };
+
+/**
+ * The community WhatsApp group, supplied by the client on 24 November 2026.
+ * WhatsApp lets nobody but the person themselves join a group, so the Join
+ * page shows this as a link once their details are in (app/(site)/join).
+ */
+export const whatsappGroup = {
+  href: "https://chat.whatsapp.com/DD2me331DeZI7CCKyHrBuK",
+  label: "Join our WhatsApp group",
+} as const;
 
 /** The registered company, as Companies House lists it (supplied by the client on 17 November 2026). */
 export const company = {
