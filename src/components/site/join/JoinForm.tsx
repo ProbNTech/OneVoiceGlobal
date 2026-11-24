@@ -17,9 +17,10 @@ const initialState: JoinState = { status: "idle" };
  * message sits under its field; what was entered stays in place when a try
  * does not go through.
  *
- * Once the details are in, the panel turns into the thank-you and the link
- * to the WhatsApp group: WhatsApp lets nobody but the person themselves
- * join a group, so it has to be a link they tap.
+ * Once the details are in, the thank-you opens as a panel in the middle of
+ * the screen, over an even shade that covers the page behind it, so the
+ * only thing left to do is join the group: WhatsApp lets nobody but the
+ * person themselves join a group, so it has to be a link they tap.
  */
 export function JoinForm() {
   const [state, formAction, pending] = useActionState(joinOneVoice, initialState);
@@ -33,128 +34,140 @@ export function JoinForm() {
     formRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
   }, [state]);
 
-  if (state.status === "sent") return <Thanks name={values.name ?? ""} />;
+  const sent = state.status === "sent";
 
   return (
-    <form ref={formRef} action={formAction} noValidate className="relative">
-      <div className="p-6 sm:p-9 lg:p-10">
-        {/* The panel carries its own heading: it stands in the hero, beside
+    <>
+      {sent ? <Thanks name={values.name ?? ""} /> : null}
+      <form ref={formRef} action={formAction} noValidate className="relative" aria-hidden={sent || undefined}>
+        <div className="p-6 sm:p-9 lg:p-10">
+          {/* The panel carries its own heading: it stands in the hero, beside
             the page's headline, with no band heading of its own above it. */}
-        <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">{joinForm.kicker}</p>
-        <p className="mt-3 font-display text-[1.75rem] font-normal leading-tight text-ink [font-variation-settings:'SOFT'_100]">
-          {joinForm.titleLead} <span className="font-light italic text-lagoon-600">{joinForm.titleAccent}</span>
-        </p>
-        <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate">{joinForm.lead}</p>
+          <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-orange-ink">{joinForm.kicker}</p>
+          <p className="mt-3 font-display text-[1.75rem] font-normal leading-tight text-ink [font-variation-settings:'SOFT'_100]">
+            {joinForm.titleLead} <span className="font-light italic text-lagoon-600">{joinForm.titleAccent}</span>
+          </p>
+          <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate">{joinForm.lead}</p>
 
-        <div className="mt-7 grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-2">
-          <Field
-            name="name"
-            label={joinForm.fields.name}
-            autoComplete="name"
-            defaultValue={values.name}
-            error={errors.name}
-            className="sm:col-span-2"
-          />
-          <Field
-            name="mobile"
-            type="tel"
-            label={joinForm.fields.mobile}
-            autoComplete="tel"
-            defaultValue={values.mobile}
-            error={errors.mobile}
-          />
-          <Field name="whatsapp" type="tel" label={joinForm.fields.whatsapp} defaultValue={values.whatsapp} optional />
-          <div className="sm:col-span-2 -mt-1">
-            <Tick name="sameNumber" defaultChecked={false}>
-              {joinForm.fields.whatsappSame}
+          <div className="mt-7 grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-2">
+            <Field
+              name="name"
+              label={joinForm.fields.name}
+              autoComplete="name"
+              defaultValue={values.name}
+              error={errors.name}
+              className="sm:col-span-2"
+            />
+            <Field
+              name="mobile"
+              type="tel"
+              label={joinForm.fields.mobile}
+              autoComplete="tel"
+              defaultValue={values.mobile}
+              error={errors.mobile}
+            />
+            <Field
+              name="whatsapp"
+              type="tel"
+              label={joinForm.fields.whatsapp}
+              defaultValue={values.whatsapp}
+              optional
+            />
+            <div className="sm:col-span-2 -mt-1">
+              <Tick name="sameNumber" defaultChecked={false}>
+                {joinForm.fields.whatsappSame}
+              </Tick>
+            </div>
+            <Field
+              name="email"
+              type="email"
+              label={joinForm.fields.email}
+              autoComplete="email"
+              defaultValue={values.email}
+              error={errors.email}
+              optional
+            />
+            <div>
+              <label
+                htmlFor="join-interest"
+                className="flex items-baseline justify-between gap-3 text-[0.875rem] font-semibold text-ink"
+              >
+                {joinForm.fields.interest}
+                <span className="text-[0.75rem] font-medium uppercase tracking-[0.14em] text-ink-muted">
+                  {joinForm.fields.optional}
+                </span>
+              </label>
+              <select
+                id="join-interest"
+                name="interest"
+                defaultValue={values.interest ?? ""}
+                className="mt-2 h-13 w-full cursor-pointer rounded-2xl bg-cream px-4 text-[1rem] text-ink ring-1 ring-inset ring-line transition-[background-color,box-shadow] duration-300 hover:ring-ink/25 focus:bg-white focus:outline-none focus:ring-2 focus:ring-lagoon-600"
+              >
+                <option value="">{joinForm.fields.choose}</option>
+                {joinForm.interests.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="mt-7">
+            <Tick name="consent" error={errors.consent} defaultChecked={Boolean(values.consent)}>
+              {joinForm.consent}
             </Tick>
           </div>
-          <Field
-            name="email"
-            type="email"
-            label={joinForm.fields.email}
-            autoComplete="email"
-            defaultValue={values.email}
-            error={errors.email}
-            optional
-          />
-          <div>
-            <label
-              htmlFor="join-interest"
-              className="flex items-baseline justify-between gap-3 text-[0.875rem] font-semibold text-ink"
-            >
-              {joinForm.fields.interest}
-              <span className="text-[0.75rem] font-medium uppercase tracking-[0.14em] text-ink-muted">
-                {joinForm.fields.optional}
-              </span>
+
+          {/* Kept out of sight and out of the tab order: see actions.ts. */}
+          <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-px w-px overflow-hidden">
+            <label>
+              Website
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" />
             </label>
-            <select
-              id="join-interest"
-              name="interest"
-              defaultValue={values.interest ?? ""}
-              className="mt-2 h-13 w-full cursor-pointer rounded-2xl bg-cream px-4 text-[1rem] text-ink ring-1 ring-inset ring-line transition-[background-color,box-shadow] duration-300 hover:ring-ink/25 focus:bg-white focus:outline-none focus:ring-2 focus:ring-lagoon-600"
-            >
-              <option value="">{joinForm.fields.choose}</option>
-              {joinForm.interests.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
           </div>
-        </div>
 
-        <div className="mt-7">
-          <Tick name="consent" error={errors.consent} defaultChecked={Boolean(values.consent)}>
-            {joinForm.consent}
-          </Tick>
-        </div>
+          <div className="mt-7 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-sm text-[0.875rem] leading-relaxed text-ink-muted">
+              {joinForm.privacy}{" "}
+              <a
+                href={joinForm.privacyLink.href}
+                className="font-semibold text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink"
+              >
+                {joinForm.privacyLink.label}
+              </a>
+            </p>
+            <CtaButton disabled={pending} className="shrink-0">
+              {pending ? joinForm.sending : joinForm.submit}
+            </CtaButton>
+          </div>
 
-        {/* Kept out of sight and out of the tab order: see actions.ts. */}
-        <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-px w-px overflow-hidden">
-          <label>
-            Website
-            <input type="text" name="website" tabIndex={-1} autoComplete="off" />
-          </label>
-        </div>
-
-        <div className="mt-7 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-sm text-[0.875rem] leading-relaxed text-ink-muted">
-            {joinForm.privacy}{" "}
-            <a
-              href={joinForm.privacyLink.href}
-              className="font-semibold text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink"
-            >
-              {joinForm.privacyLink.label}
-            </a>
+          <p role="status" className={cx("text-[0.9375rem] font-medium", state.status !== "idle" && "mt-5")}>
+            {state.status === "invalid" ? (
+              <span className="flex items-start gap-2.5 text-red-700">
+                <CircleAlert aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0" />
+                {joinForm.errors.summary}
+              </span>
+            ) : state.status === "failed" ? (
+              <span className="flex items-start gap-2.5 text-red-700">
+                <CircleAlert aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0" />
+                {joinForm.status.failed}
+              </span>
+            ) : null}
           </p>
-          <CtaButton disabled={pending} className="shrink-0">
-            {pending ? joinForm.sending : joinForm.submit}
-          </CtaButton>
         </div>
 
-        <p role="status" className={cx("text-[0.9375rem] font-medium", state.status !== "idle" && "mt-5")}>
-          {state.status === "invalid" ? (
-            <span className="flex items-start gap-2.5 text-red-700">
-              <CircleAlert aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0" />
-              {joinForm.errors.summary}
-            </span>
-          ) : state.status === "failed" ? (
-            <span className="flex items-start gap-2.5 text-red-700">
-              <CircleAlert aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0" />
-              {joinForm.status.failed}
-            </span>
-          ) : null}
+        <p className="flex items-center gap-3.5 rounded-b-panel bg-orange-soft px-6 py-4 text-[0.9375rem] leading-snug text-ink sm:px-9 lg:px-10">
+          <span
+            aria-hidden="true"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-orange text-white"
+          >
+            <Phone className="h-4 w-4" strokeWidth={2} />
+          </span>
+          {joinForm.emergency}
         </p>
-      </div>
-
-      <p className="flex items-center gap-3.5 rounded-b-panel bg-orange-soft px-6 py-4 text-[0.9375rem] leading-snug text-ink sm:px-9 lg:px-10">
-        <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-orange text-white">
-          <Phone className="h-4 w-4" strokeWidth={2} />
-        </span>
-        {joinForm.emergency}
-      </p>
-    </form>
+      </form>
+    </>
   );
 }
 
@@ -163,63 +176,92 @@ export function JoinForm() {
  * and the WhatsApp group as a large button. The group link opens WhatsApp
  * itself, so it is a plain link, not one of the site's page links.
  */
+/**
+ * The thank-you, as a panel in the middle of the screen over an even shade
+ * that covers the page behind it. It opens as soon as the details are in,
+ * so the group button is the only thing left to tap and nothing behind it
+ * can draw the eye away. The shade is a flat colour, not a blur, because a
+ * blur is redrawn on every scroll frame.
+ *
+ * The group link opens WhatsApp itself, so it is a plain link, not one of
+ * the site's page links.
+ */
 function Thanks({ name }: { name: string }) {
   const first = name.split(/\s+/)[0] ?? "";
-  const panelRef = useRef<HTMLDivElement>(null);
+  const groupRef = useRef<HTMLAnchorElement>(null);
 
-  /* The thank-you is shorter than the form it replaces, so on a small
-     screen, or after a scroll, it can end up off-screen or under the
-     header. Bring it into the middle of the screen once it appears. */
+  /* The panel cannot be dismissed: the group link is the only way out, so
+     the page behind it does not scroll while it is up, and focus starts on
+     that link. */
   useEffect(() => {
-    panelRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+    const { body } = document;
+    const kept = body.style.overflow;
+    body.style.overflow = "hidden";
+    groupRef.current?.focus();
+    return () => {
+      body.style.overflow = kept;
+    };
   }, []);
 
   return (
     <div
-      ref={panelRef}
-      role="status"
-      className="animate-[rise-in_0.8s_cubic-bezier(0.16,1,0.3,1)_both] p-6 motion-reduce:animate-none sm:p-9 lg:p-10"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="join-thanks-title"
+      data-lenis-prevent
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto overscroll-contain p-5 sm:p-8"
     >
-      <Title
-        lead={joinThanks.titleLead}
-        accent={first ? `${joinThanks.titleAccent}, ${first}` : joinThanks.titleAccent}
-        inline
+      {/* The shade over the page. Not clickable: the group link is the only way out. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 w-full bg-navy-950/75 animate-[fade-in_0.5s_ease-out_both] motion-reduce:animate-none"
       />
-      <p className="mt-5 text-lead text-slate">{joinThanks.lead}</p>
 
-      <ol className="mt-8 space-y-6">
-        {joinThanks.steps.map((step, index) => (
-          <li key={step.title} className="flex items-start gap-4">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-lagoon-600 text-[0.875rem] font-bold text-white">
-              {index + 1}
-            </span>
-            <span>
-              <span className="block text-[0.8125rem] font-bold uppercase tracking-[0.16em] text-ink">
-                {step.title}
+      <div className="relative w-full max-w-xl animate-[rise-in_0.7s_cubic-bezier(0.16,1,0.3,1)_both] rounded-panel bg-white p-6 shadow-[0_60px_120px_-50px_rgb(0_0_0/0.7)] motion-reduce:animate-none sm:p-9 lg:p-10">
+        <Title
+          id="join-thanks-title"
+          lead={joinThanks.titleLead}
+          accent={first ? `${joinThanks.titleAccent}, ${first}` : joinThanks.titleAccent}
+          inline
+        />
+        <p className="mt-5 text-lead text-slate">{joinThanks.lead}</p>
+
+        {/* The group button first: it is what the panel is for. */}
+        <a
+          ref={groupRef}
+          href={joinThanks.group.href}
+          target="_blank"
+          rel="noreferrer"
+          className="group/cta mt-7 inline-flex h-13 w-full items-center justify-center gap-3 rounded-full bg-orange px-6 text-[0.9375rem] font-semibold text-white sm:w-auto sm:justify-start sm:pl-6 sm:pr-2"
+        >
+          <MessageCircle aria-hidden="true" className="h-[1.125rem] w-[1.125rem]" strokeWidth={2} />
+          <span>{joinThanks.group.label}</span>
+          <span className="relative hidden h-9 w-9 place-items-center overflow-hidden rounded-full bg-white/20 sm:grid">
+            <ArrowRight className="h-4 w-4 transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-[150%]" />
+            <ArrowRight className="absolute h-4 w-4 -translate-x-[150%] transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-0" />
+          </span>
+        </a>
+
+        <ol className="mt-8 space-y-5">
+          {joinThanks.steps.map((step, index) => (
+            <li key={step.title} className="flex items-start gap-4">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lagoon-600 text-[0.8125rem] font-bold text-white">
+                {index + 1}
               </span>
-              <span className="mt-1.5 block text-[0.9375rem] leading-relaxed text-slate">{step.line}</span>
-            </span>
-          </li>
-        ))}
-      </ol>
+              <span>
+                <span className="block text-[0.75rem] font-bold uppercase tracking-[0.16em] text-ink">
+                  {step.title}
+                </span>
+                <span className="mt-1 block text-[0.9375rem] leading-relaxed text-slate">{step.line}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
 
-      <a
-        href={joinThanks.group.href}
-        target="_blank"
-        rel="noreferrer"
-        className="group/cta mt-8 inline-flex h-13 items-center gap-3 rounded-full bg-orange pl-6 pr-2 text-[0.9375rem] font-semibold text-white"
-      >
-        <MessageCircle aria-hidden="true" className="h-[1.125rem] w-[1.125rem]" strokeWidth={2} />
-        <span>{joinThanks.group.label}</span>
-        <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-white/20">
-          <ArrowRight className="h-4 w-4 transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-[150%]" />
-          <ArrowRight className="absolute h-4 w-4 -translate-x-[150%] transition-transform duration-500 ease-out-soft group-hover/cta:translate-x-0" />
-        </span>
-      </a>
-
-      <p className="mt-8 font-display text-[1.1875rem] font-light italic leading-snug text-lagoon-600 [font-variation-settings:'SOFT'_100]">
-        {joinThanks.closing}
-      </p>
+        <p className="mt-7 font-display text-[1.125rem] font-light italic leading-snug text-lagoon-600 [font-variation-settings:'SOFT'_100]">
+          {joinThanks.closing}
+        </p>
+      </div>
     </div>
   );
 }

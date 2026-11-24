@@ -102,7 +102,7 @@ export const joinThanks = {
   steps: [
     {
       title: "Join the group",
-      line: "Tap below to join our community WhatsApp group.",
+      line: "Tap the button above to join our community WhatsApp group.",
     },
     {
       title: "Watch for your welcome",
@@ -114,6 +114,7 @@ export const joinThanks = {
     },
   ],
   group: whatsappGroup,
+  close: "Close",
   explore: { label: "Explore Our Services", href: routes.ourWork },
   closing: brand.closing,
 } as const;
